@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" data-era="gta6">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CHANNEL SURF — Unofficial Rockstar Universe Arcade</title>
+  <meta name="description" content="A fan-made, zero-backend arcade for the Rockstar universe. Trivia, puzzles, an era atlas, a timeline, and a heist splitter — with a UI that changes era with every signal.">
+  <meta name="theme-color" content="#050914">
+  <meta property="og:title" content="CHANNEL SURF — Unofficial Rockstar Universe Arcade">
+  <meta property="og:description" content="Tune the era. Play the city. An original fan-made arcade and portfolio project.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CHANNEL SURF">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CHANNEL SURF — Unofficial Rockstar Universe Arcade">
+  <meta name="twitter:description" content="Tune the era. Play the city. An original fan-made arcade and portfolio project.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="ambient" id="ambient" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-top">
+      <a class="brand" href="#arcade" aria-label="CHANNEL SURF — Unofficial Rockstar-universe arcade, home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="22" r="18.5" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M12 22h4.5M27.5 22H32" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M17 18.5v7l6-3.5-6-3.5Z" fill="currentColor"/>
+            <path d="M16 10.5c3.8-2.4 8.2-2.4 12 0M9.5 14.5c6.9-4.7 15.1-4.7 22 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">CHANNEL <em>SURF</em></span>
+          <span class="brand-sub">Unofficial Rockstar-universe arcade</span>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <button class="streak-chip" id="streakChip" type="button" title="Daily streak — jump to the Daily Signal">
+          <svg class="icon" aria-hidden="true"><use href="#i-bolt"></use></svg>
+          <b id="streakCount">0</b>
+          <span>day streak</span>
+        </button>
+        <button class="icon-btn" id="soundToggle" type="button" aria-label="Mute sound" aria-pressed="false" title="Toggle sound">
+          <svg class="icon sound-on-icon" aria-hidden="true"><use href="#i-sound-on"></use></svg>
+          <svg class="icon sound-off-icon hidden" aria-hidden="true"><use href="#i-sound-off"></use></svg>
+        </button>
+        <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primaryNav">
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="container tuner" aria-label="Era tuner">
+      <div class="tuner-id"><span class="onair-dot"></span><span>RECEIVER</span></div>
+      <button class="tuner-step" id="prevStation" type="button" aria-label="Previous signal">‹</button>
+      <div class="station-rail" id="stationRail" role="tablist" aria-label="Era signals"></div>
+      <button class="tuner-step" id="nextStation" type="button" aria-label="Next signal">›</button>
+      <div class="tuner-readout" aria-live="polite">
+        <span id="tunerFreq">98.7</span>
+        <span id="tunerStation">LEONIDA WAVE</span>
+      </div>
+      <label class="auto-switch" title="Let each trivia question change the site theme">
+        <input type="checkbox" id="autoMorph">
+        <span class="switch-track" aria-hidden="true"></span>
+        <span class="auto-label">Auto-morph</span>
+      </label>
+    </div>
+
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <div class="container nav-inner">
+        <button class="nav-link" data-route="arcade" type="button">Arcade</button>
+        <button class="nav-link" data-route="trivia" type="button">Trivia</button>
+        <button class="nav-link" data-route="puzzles" type="button">Puzzles</button>
+        <button class="nav-link" data-route="atlas" type="button">Atlas</button>
+        <button class="nav-link" data-route="timeline" type="button">Timeline</button>
+        <button class="nav-link" data-route="toolkit" type="button">Field Kit</button>
+        <button class="nav-link" data-route="about" type="button">About</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+
+    <!-- ==================================================================
+         ARCADE / HOME
+         ================================================================== -->
+    <section class="view is-active" id="view-arcade" data-view="arcade" aria-labelledby="home-title">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot"></span> A fan-made arcade dossier</p>
+          <h1 id="home-title">Tune the era.<br><em>Play the city.</em></h1>
+          <p class="lede">Eight signals. One archive. A playable tribute to the cities, crews, frontiers, and radio static of the Rockstar universe — built as a zero-backend portfolio piece with original trivia, custom vector art, and a UI that changes its whole personality on demand.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="heroDailyBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg>
+              Start the daily signal
+            </button>
+            <button class="btn btn-ghost" id="heroRandomBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-shuffle"></use></svg>
+              Spin the dial
+            </button>
+          </div>
+          <div class="hero-meta">
+            <div><b id="metaEras">08</b><span>era skins</span></div>
+            <div><b>06</b><span>play modes</span></div>
+            <div><b>00</b><span>servers required</span></div>
+          </div>
+        </div>
+
+        <aside class="on-air-card" id="onAirCard" aria-label="Now tuned">
+          <div class="onair-top">
+            <span class="signal-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span>Now broadcasting</span>
+            <span class="onair-code" id="onairCode">VI</span>
+          </div>
+          <div class="onair-main">
+            <div class="onair-freq" id="onairFreq">98.7</div>
+            <div class="onair-station" id="onairStation">LEONIDA WAVE</div>
+            <p class="onair-tagline" id="onairTagline">Neon, salt, and trouble.</p>
+          </div>
+          <div class="equalizer" id="onairEq" aria-hidden="true"></div>
+          <div class="onair-foot">
+            <span id="onairEra">GTA VI</span>
+            <span id="onairYear">2026</span>
+            <button class="text-link" id="onairAtlas" type="button">Open atlas →</button>
+          </div>
+        </aside>
+      </div>
+
+      <div class="signal-ticker" aria-hidden="true">
+        <div class="ticker-track" id="tickerTrack"></div>
+      </div>
+
+      <div class="home-grid">
+        <article class="panel daily-card" id="dailyCard">
+          <div>
+            <p class="eyebrow">Daily signal</p>
+            <div class="daily-date" id="dailyDate">—</div>
+            <h2>One seed. Five questions.</h2>
+            <p>Everyone gets the same UTC-seeded run. Come back tomorrow for a fresh mix from across the archive.</p>
+          </div>
+          <div class="daily-actions">
+            <button class="btn btn-primary" id="dailyStartBtn" type="button">Play daily trivia</button>
+            <button class="btn btn-ghost" id="dailyVaultBtn" type="button">Daily vault</button>
+          </div>
+          <div class="daily-progress">
+            <span class="progress-track" aria-hidden="true"><span class="progress-fill" id="dailyProgressFill" style="width:0%"></span></span>
+            <span id="dailyProgressText">0-day streak</span>
+          </div>
+        </article>
+
+        <article class="panel stat-card">
+          <div>
+            <p class="eyebrow">Your dossier</p>
+            <h3>Local. Private. Persistent.</h3>
+            <p>Everything you earn stays in this browser. No account, no tracking, no server-side personality test.</p>
+          </div>
+          <dl class="stat-list">
+            <div class="stat-row"><dt>Daily streak</dt><dd id="statStreak">0 days</dd></div>
+            <div class="stat-row"><dt>Accuracy</dt><dd id="statAccuracy">—</dd></div>
+            <div class="stat-row"><dt>Badges</dt><dd id="statBadges">0 / 8</dd></div>
+            <div class="stat-row"><dt>Runs logged</dt><dd id="statRuns">0</dd></div>
+          </dl>
+        </article>
+
+        <article class="panel spotlight-card" id="spotlightCard">
+          <div>
+            <p class="eyebrow" id="spotlightKicker">Signal spotlight</p>
+            <h3 class="spotlight-name" id="spotlightName">Vice City, reborn.</h3>
+            <p class="spotlight-weather" id="spotlightMeta">Leonida / Vice City · 2026</p>
+          </div>
+          <p id="spotlightNote">The main stage: causeways, condo towers, club queues, and a skyline that treats every sunset like a premiere.</p>
+          <div class="chip-row" id="spotlightTags"></div>
+          <button class="text-link" id="spotlightBtn" type="button">Explore the atlas →</button>
+        </article>
+      </div>
+
+      <section class="section" aria-labelledby="games-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Pick a frequency</p>
+            <h2 id="games-title">Six ways to waste a perfectly good evening.</h2>
+          </div>
+          <p>Fast trivia, a safe-cracking loop, a route puzzle, and a heist calculator. All client-side, all replayable.</p>
+        </div>
+        <div class="game-grid" id="homeGameGrid"></div>
+      </section>
+
+      <section class="section" aria-labelledby="kit-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Field kit</p>
+            <h2 id="kit-title">Useful little gadgets.</h2>
+          </div>
+          <p>Built for the fantasy: split a score, browse the era atlas, or scrub the archive timeline.</p>
+        </div>
+        <div class="tool-grid" id="toolGrid"></div>
+      </section>
+
+      <section class="section" aria-labelledby="eras-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">The era rack</p>
+            <h2 id="eras-title">Eight ways to look out a windshield.</h2>
+          </div>
+          <p>Every tile is a full site reskin. Visit them all to earn <strong>Tuned In</strong>.</p>
+        </div>
+        <div class="era-rack" id="eraRack"></div>
+      </section>
+
+      <section class="panel badge-panel" aria-labelledby="badges-title">
+        <div class="section-head" style="margin-bottom:0">
+          <div>
+            <p class="eyebrow">Badge shelf</p>
+            <h2 id="badges-title" style="font-size:clamp(1.5rem,2.5vw,2rem)">Proof of a misspent evening.</h2>
+          </div>
+          <p>Stored only in localStorage. Earned badges light up.</p>
+        </div>
+        <div class="badge-shelf" id="badgeShelf"></div>
+      </section>
+    </section>
+
+    <!-- ==================================================================
+         TRIVIA
+         ================================================================== -->
+    <section class="view" id="view-trivia" data-view="trivia" aria-labelledby="trivia-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Know the streets</p>
+          <h2 id="trivia-title">Trivia Arena</h2>
+          <p>Six formats. Eight signals. Written from public franchise knowledge, with a lore note after every answer. No copied script dialogue — just the good stuff.</p>
+        </div>
+        <div class="page-head-side">
+          <b id="triviaBankCount">0</b>
+          questions in the bank
+        </div>
+      </div>
+
+      <div class="trivia-layout" id="triviaSetup">
+        <div class="panel setup-panel">
+          <div class="setup-step">
+            <div class="setup-label">01. Pick your signal <span id="filterLabel">All eras</span></div>
+            <div class="chip-row" id="triviaFilters" role="group" aria-label="Filter questions by era"></div>
+          </div>
+          <div class="setup-step">
+            <div class="setup-label">02. Pick a format</div>
+            <div class="mode-grid" id="triviaModes" role="group" aria-label="Trivia mode"></div>
+          </div>
+          <button class="btn btn-primary btn-wide" id="triviaStart" type="button">
+            <svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg>
+            Start run
+          </button>
+          <p class="small muted" style="margin:0.75rem 0 0">Daily and Channel Surf modes ignore the era filter and pull from the whole archive.</p>
+        </div>
+
+        <aside class="panel">
+          <p class="eyebrow">House rules</p>
+          <h3>How scoring works</h3>
+          <ul class="house-rules">
+            <li>Correct answers earn <strong>100 points</strong> plus a streak bonus.</li>
+            <li>Blitz gives you 60 seconds. The clock pauses while you read the lore.</li>
+            <li>Sudden Death ends on the first wrong answer.</li>
+            <li>Mythbuster shows four statements; one is the planted lie.</li>
+            <li>Channel Surf morphs the whole site to match each question's era.</li>
+          </ul>
+          <div class="divider"></div>
+          <p class="eyebrow" style="margin-bottom:0.4rem">Your best runs</p>
+          <div class="best-list" id="triviaBest"></div>
+        </aside>
+      </div>
+
+      <div class="trivia-game hidden" id="triviaGame" aria-live="polite"></div>
+      <div class="hidden" id="triviaResult"></div>
+    </section>
+
+    <!-- ==================================================================
+         PUZZLES
+         ================================================================== -->
+    <section class="view" id="view-puzzles" data-view="puzzles" aria-labelledby="puzzles-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Side jobs</p>
+          <h2 id="puzzles-title">Puzzles &amp; safehouses</h2>
+          <p>Two quick loops with real logic underneath: crack a four-digit safe, or plot a route through patrols to the safehouse. Deterministic daily variants included.</p>
+        </div>
+        <div class="page-head-side">
+          <b id="vaultSolveCount">0</b>
+          safes cracked
+          <br>
+          <b id="gridSolveCount" style="margin-top:0.3rem">0</b>
+          routes cleared
+        </div>
+      </div>
+
+      <div class="puzzle-tabs" role="tablist" aria-label="Puzzle type">
+        <button class="puzzle-tab" data-puzzle-tab="vault" role="tab" aria-selected="true" type="button">Vault Cracker</button>
+        <button class="puzzle-tab" data-puzzle-tab="grid" role="tab" aria-selected="false" type="button">Heat Grid</button>
+      </div>
+
+      <div class="puzzle-layout">
+        <div>
+          <section class="panel puzzle-main" id="vaultPanel" aria-labelledby="vault-title">
+            <div class="puzzle-head">
+              <div>
+                <p class="eyebrow">Safehouse side job</p>
+                <h2 id="vault-title">Vault Cracker</h2>
+                <p>Crack the four-digit combination. No repeats. Every guess tells you something.</p>
+              </div>
+              <span class="attempts-display" id="vaultAttempts">6 tries</span>
+            </div>
+            <div class="vault-scenario" id="vaultScenario">
+              <svg class="icon" aria-hidden="true"><use href="#i-lock"></use></svg>
+              <span>Loading the job brief…</span>
+            </div>
+            <div class="vault-display" id="vaultDisplay" aria-live="polite"></div>
+            <div class="vault-keypad" id="vaultKeypad" aria-label="Vault keypad"></div>
+            <div class="vault-actions">
+              <button class="btn btn-primary btn-sm" id="vaultSubmit" type="button">Submit guess</button>
+              <button class="btn btn-ghost btn-sm" id="vaultNew" type="button">New vault</button>
+              <button class="btn btn-quiet btn-sm" id="vaultDaily" type="button">Daily vault</button>
+            </div>
+            <div class="vault-status" id="vaultStatus">Enter four digits to begin.</div>
+            <div class="vault-hint">
+              <span><i class="legend-dot good"></i>right digit, right slot</span>
+              <span><i class="legend-dot near"></i>right digit, wrong slot</span>
+              <span><i class="legend-dot bad"></i>not in the code</span>
+            </div>
+            <div class="vault-history" id="vaultHistory"></div>
+          </section>
+
+          <section class="panel puzzle-main hidden" id="gridPanel" aria-labelledby="grid-title">
+            <div class="puzzle-head">
+              <div>
+                <p class="eyebrow">Getaway route</p>
+                <h2 id="grid-title">Heat Grid</h2>
+                <p>Move orthogonally from your position to the safehouse. Patrols block the street. Plan the clean line.</p>
+              </div>
+              <span class="attempts-display" id="heatTries">Par —</span>
+            </div>
+            <div class="heat-toolbar">
+              <div class="heat-difficulties" id="heatDifficulties" role="group" aria-label="Heat Grid difficulty"></div>
+              <div class="heat-meta">
+                <span class="score-pill">Moves <b id="heatMoves">0</b></span>
+                <span class="score-pill">Par <b id="heatPar">—</b></span>
+              </div>
+            </div>
+            <div class="heat-grid" id="heatGrid" role="grid" aria-label="Heat Grid board"></div>
+            <div class="heat-status" id="heatStatus">Pick a difficulty, then move with the arrow keys or click a neighboring cell.</div>
+            <div class="heat-legend">
+              <span><i class="legend-dot" style="background:var(--accent)"></i>you</span>
+              <span><i class="legend-dot" style="background:var(--accent-2)"></i>safehouse</span>
+              <span><i class="legend-dot" style="background:color-mix(in srgb,var(--accent) 35%,transparent)"></i>patrol</span>
+              <span><i class="legend-dot" style="background:var(--accent-2);opacity:.55"></i>your route</span>
+            </div>
+            <div class="heat-actions">
+              <button class="btn btn-primary btn-sm" id="gridNew" type="button">New route</button>
+              <button class="btn btn-ghost btn-sm" id="gridReset" type="button">Reset route</button>
+            </div>
+          </section>
+        </div>
+
+        <aside class="puzzle-side">
+          <div class="panel">
+            <p class="eyebrow">Side job notes</p>
+            <h3>Small loops, real logic.</h3>
+            <div class="side-note">
+              <h4>Vault Cracker</h4>
+              <p>Each guess reports exact positions and misplaced digits. Six tries, unique digits. Daily vaults use a UTC date seed.</p>
+            </div>
+            <div class="side-note" style="margin-top:0.5rem">
+              <h4>Heat Grid</h4>
+              <p>Every board is generated with a guaranteed path. Beat par to earn the Ghost Run badge. Arrow keys work too.</p>
+            </div>
+          </div>
+          <div class="panel">
+            <p class="eyebrow">Local record</p>
+            <div class="side-stats">
+              <div class="side-stat"><b id="sideVaultSolves">0</b><span>vaults</span></div>
+              <div class="side-stat"><b id="sideGridSolves">0</b><span>routes</span></div>
+              <div class="side-stat"><b id="sideVaultStreak">0</b><span>vault streak</span></div>
+              <div class="side-stat"><b id="sideGridBest">—</b><span>best par</span></div>
+            </div>
+            <p class="small muted" style="margin:0.8rem 0 0">Records live in this browser only. Clear them from the About page.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         ATLAS
+         ================================================================== -->
+    <section class="view" id="view-atlas" data-view="atlas" aria-labelledby="atlas-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">The era atlas</p>
+          <h2 id="atlas-title">Every city has a tell.</h2>
+          <p>A stylized, original fan atlas of districts, landmarks, and moods. The Leonida map is custom SVG; every other signal gets a district dossier. None of it is official cartography.</p>
+        </div>
+        <div class="page-head-side">
+          <b id="atlasEraCount">08</b>
+          eras mapped
+        </div>
+      </div>
+      <div id="atlasContent"></div>
+    </section>
+
+    <!-- ==================================================================
+         TIMELINE
+         ================================================================== -->
+    <section class="view" id="view-timeline" data-view="timeline" aria-labelledby="timeline-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">The archive</p>
+          <h2 id="timeline-title">A timeline with road noise.</h2>
+          <p>From top-down mayhem in 1997 to the neon return of Vice City. Filter by franchise, pick an entry, and tune the site to that era.</p>
+        </div>
+        <div class="page-head-side">
+          <b id="timelineCount">0</b>
+          milestones
+        </div>
+      </div>
+      <div class="timeline-toolbar">
+        <div class="chip-row" id="timelineFilters" role="group" aria-label="Filter timeline"></div>
+        <span class="small muted mono">Scroll the rail →</span>
+      </div>
+      <div class="timeline-wrap">
+        <div class="timeline-track" id="timelineTrack"></div>
+      </div>
+      <div class="panel timeline-detail" id="timelineDetail"></div>
+    </section>
+
+    <!-- ==================================================================
+         FIELD KIT
+         ================================================================== -->
+    <section class="view" id="view-toolkit" data-view="toolkit" aria-labelledby="toolkit-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Field kit</p>
+          <h2 id="toolkit-title">Crew &amp; Heist Splitter</h2>
+          <p>A very serious calculator for a very fictional score. Set the take, subtract the prep costs, then weight each crew member's share. Percentages normalize automatically — no spreadsheet arguments required.</p>
+        </div>
+        <div class="page-head-side">
+          <b id="resetDate">—</b>
+          next daily reset
+        </div>
+      </div>
+
+      <div class="tool-layout">
+        <section class="panel splitter-panel" aria-labelledby="splitter-subtitle">
+          <div class="field-grid">
+            <div class="field">
+              <label for="heistTake">Total take</label>
+              <input id="heistTake" type="number" min="0" step="10000" value="1250000" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="heistCost">Prep &amp; expenses</label>
+              <input id="heistCost" type="number" min="0" step="5000" value="150000" inputmode="numeric">
+            </div>
+          </div>
+
+          <div class="crew-controls">
+            <div>
+              <span class="field-label">Crew size</span>
+              <div class="chip-row" id="crewCountRow" role="group" aria-label="Crew size">
+                <button class="chip" type="button" data-crew-count="1">Solo</button>
+                <button class="chip" type="button" data-crew-count="2">2</button>
+                <button class="chip is-active" type="button" data-crew-count="3">3</button>
+                <button class="chip" type="button" data-crew-count="4">4</button>
+              </div>
+            </div>
+            <div>
+              <span class="field-label">Presets</span>
+              <div class="preset-row">
+                <button class="chip" type="button" data-crew-preset="even">Even split</button>
+                <button class="chip" type="button" data-crew-preset="leader">Leader's cut</button>
+                <button class="chip" type="button" data-crew-preset="specialist">Specialist-heavy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="crew-list" id="crewList"></div>
+          <div class="split-bar" id="splitBar" aria-hidden="true"></div>
+          <div class="split-summary" id="splitSummary"></div>
+          <div class="splitter-actions">
+            <button class="btn btn-primary btn-sm" id="heistCopy" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-copy"></use></svg>
+              Copy split
+            </button>
+            <button class="btn btn-ghost btn-sm" id="heistReset" type="button">Reset</button>
+          </div>
+          <p class="small muted" style="margin:0.8rem 0 0">The math is illustrative. The percentages are normalized by share weight; payouts are rounded to the nearest whole currency unit.</p>
+        </section>
+
+        <aside class="puzzle-side">
+          <div class="panel">
+            <p class="eyebrow">Daily reset</p>
+            <h3>UTC clock</h3>
+            <div class="reset-clock">
+              <b id="resetClock">—</b>
+              <span>until the next daily seed</span>
+            </div>
+            <p class="small muted" style="margin-bottom:0">Daily trivia and the daily vault both use the UTC date as their seed, so everyone gets the same run for that day.</p>
+          </div>
+          <div class="panel">
+            <p class="eyebrow">Shortcuts</p>
+            <div class="side-note">
+              <h4>Trivia</h4>
+              <p>Press <strong>1–4</strong> to answer, <strong>Enter</strong> to continue. The tuner arrows cycle signals.</p>
+            </div>
+            <div class="side-note" style="margin-top:0.5rem">
+              <h4>Heat Grid</h4>
+              <p>Use the <strong>arrow keys</strong> or <strong>WASD</strong> to move. Clicking a valid neighbor also works.</p>
+            </div>
+            <div class="side-note" style="margin-top:0.5rem">
+              <h4>Privacy</h4>
+              <p>No analytics, no cookies, no network calls. Stats are in <code>localStorage</code> and can be wiped from About.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         ABOUT
+         ================================================================== -->
+    <section class="view" id="view-about" data-view="about" aria-labelledby="about-title">
+      <div class="about-hero">
+        <div>
+          <p class="eyebrow">About the project</p>
+          <h2 id="about-title">A fan archive with its own frequency.</h2>
+          <p class="lede">CHANNEL SURF is an independent, non-commercial fan project and front-end portfolio piece. It celebrates the worlds, radio stations, and heist fantasies of the Rockstar catalog with original writing and code.</p>
+          <div class="about-stats">
+            <div class="side-stat"><b id="aboutRuns">0</b><span>runs logged</span></div>
+            <div class="side-stat"><b id="aboutCorrect">0</b><span>correct answers</span></div>
+            <div class="side-stat"><b id="aboutBadges">0</b><span>badges earned</span></div>
+            <div class="side-stat"><b id="aboutBest">—</b><span>best trivia score</span></div>
+          </div>
+        </div>
+        <div class="disclaimer-box" id="aboutDisclaimer">An unofficial fan project and portfolio arcade. Not affiliated with Rockstar Games or Take-Two Interactive. All game names, characters, and trademarks belong to their respective owners. This site uses original writing, code, CSS, and vector art — no extracted game assets, audio, or ripped artwork.</div>
+      </div>
+
+      <div class="about-grid">
+        <article class="panel prose">
+          <p class="eyebrow">The idea</p>
+          <h3>One skeleton, eight personalities.</h3>
+          <p>The entire visual system is driven by CSS custom properties and a single <code>data-era</code> attribute. Switching signals swaps colors, type, corner radii, shadows, ambient SVG art, and even the sound palette.</p>
+          <p>During a Channel Surf run, the theme follows each question. In normal play, the Auto-morph toggle in the tuner does the same. Everything else is manual.</p>
+          <ul>
+            <li><strong>Original content:</strong> all trivia, fake facts, lore notes, radio chatter, and map copy were written for this project.</li>
+            <li><strong>Original visuals:</strong> inline SVG, CSS gradients, and code-drawn icons. No ripped textures, models, screenshots, or audio.</li>
+            <li><strong>Zero backend:</strong> static HTML, CSS, and JavaScript. Scores and badges stay in your browser.</li>
+          </ul>
+        </article>
+
+        <article class="panel prose">
+          <p class="eyebrow">The IP note</p>
+          <h3>Fan project, clearly labeled.</h3>
+          <p>Game titles, character names, locations, and related marks belong to Rockstar Games and Take-Two Interactive. This project does not claim affiliation, sponsorship, or endorsement.</p>
+          <p>To keep the fan-project boundary clear, the site avoids extracted assets, game audio, copied dialogue, and official logos. It is non-commercial, has no ads or store, and credits the source universe prominently.</p>
+          <p>If a rights holder asks for a change, the right move is to comply. That is the practical fan-project rule: celebrate the work, don't repackage it.</p>
+          <p class="small muted">This is a design/portfolio project, not legal advice. If you plan to monetize a fan project, talk to an actual entertainment lawyer first.</p>
+        </article>
+      </div>
+
+      <div class="about-grid">
+        <article class="panel prose">
+          <p class="eyebrow">Build notes</p>
+          <h3>Portfolio-shaped by design.</h3>
+          <p>No framework, no build step, no external APIs. The interesting engineering is the theme engine, deterministic seeding, accessible keyboard play, generated puzzle boards, and the small Web Audio SFX layer.</p>
+          <ul>
+            <li>CSS custom-property theming across eight complete era skins.</li>
+            <li>Date-seeded daily runs using a small deterministic RNG.</li>
+            <li>localStorage persistence for bests, streaks, seen eras, and badges.</li>
+            <li>Inline SVG art and synthesized audio — no binary asset pipeline.</li>
+            <li>Reduced-motion support and keyboard controls for trivia and Heat Grid.</li>
+          </ul>
+        </article>
+
+        <article class="panel prose">
+          <p class="eyebrow">Local data</p>
+          <h3>Your browser, your dossier.</h3>
+          <p>This project stores only game progress and UI preferences under <code>channelsurf.*</code> keys. There is no account, tracking pixel, or remote logging.</p>
+          <p>You can wipe everything and start fresh. Exporting a text summary is also available if you want a shareable run report.</p>
+          <div class="data-actions">
+            <button class="btn btn-ghost btn-sm" id="copySummary" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-copy"></use></svg>
+              Copy dossier summary
+            </button>
+            <button class="btn btn-quiet btn-sm" id="resetData" type="button">Wipe local data</button>
+          </div>
+          <div class="divider"></div>
+          <p class="small muted" style="margin-bottom:0">Fan disclaimer: not affiliated with Rockstar Games or Take-Two Interactive. All trademarks remain with their owners.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <strong>CHANNEL SURF</strong>
+          <p id="footerDisclaimer">An unofficial fan project and portfolio arcade. Not affiliated with Rockstar Games or Take-Two Interactive. All game names, characters, and trademarks belong to their respective owners. Original writing, code, CSS, and vector art only.</p>
+        </div>
+        <div class="footer-links" aria-label="Footer navigation">
+          <button type="button" data-route="arcade">Arcade</button>
+          <button type="button" data-route="trivia">Trivia</button>
+          <button type="button" data-route="puzzles">Puzzles</button>
+          <button type="button" data-route="atlas">Atlas</button>
+          <button type="button" data-route="timeline">Timeline</button>
+          <button type="button" data-route="toolkit">Field Kit</button>
+          <button type="button" data-route="about">About / IP</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Zero backend · zero trackers · zero ripped assets</span>
+        <span>Built for the love of the signal</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript>CHANNEL SURF is a client-side arcade; please enable JavaScript to play.</noscript>
+
+  <!-- Inline icon sprite. Everything is original line art. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></symbol>
+    <symbol id="i-sound-on" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></symbol>
+    <symbol id="i-sound-off" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="m16 9 5 5m0-5-5 5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 7h3.5c4 0 5 10 9 10H21M18 14l3 3-3 3M3 17h3.5c1.2 0 2.2-.9 3.1-2.2M14 8.5C14.8 7 15.8 6 17 6h4M18 3l3 3-3 3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-trivia" viewBox="0 0 24 24"><path d="M9.2 9a3 3 0 1 1 5.2 2c-1.3 1-1.9 1.5-1.9 3"/><path d="M12 18.2v.1"/><circle cx="12" cy="12" r="9"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h3a3 3 0 0 0 3-3v-5a3 3 0 0 1 3-3h1"/></symbol>
+    <symbol id="i-atlas" viewBox="0 0 24 24"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v14M15 6v14"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5.5M17 14a5 5 0 0 1 4 4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22V5.5Z"/><path d="M4 5.5A3.5 3.5 0 0 0 7.5 9H20"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.7M20 5v6h-6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 22V3M5 4h12l-2.5 4L17 12H5"/></symbol>
+  </svg>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
