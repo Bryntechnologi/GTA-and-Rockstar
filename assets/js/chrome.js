@@ -41,6 +41,28 @@
     }
   }
 
+  function applyContrast(value) {
+    const high = value === "high";
+    if (high) root.dataset.contrast = "high";
+    else root.removeAttribute("data-contrast");
+    const button = $("#contrastToggle");
+    if (button) {
+      button.setAttribute("aria-pressed", String(high));
+      button.setAttribute("title", high ? "Use standard contrast" : "Toggle high contrast");
+      button.setAttribute("aria-label", high ? "Use standard contrast" : "Toggle high contrast");
+    }
+  }
+
+  function initContrast() {
+    const saved = readSettings().contrast;
+    applyContrast(saved === "high" ? "high" : "normal");
+    $("#contrastToggle")?.addEventListener("click", () => {
+      const next = root.dataset.contrast === "high" ? "normal" : "high";
+      applyContrast(next);
+      saveSettings({ contrast: next });
+    });
+  }
+
   function currentEra() {
     return root.dataset.era && eras[root.dataset.era] ? root.dataset.era : eraOrder[0];
   }
@@ -233,6 +255,7 @@
   window.addEventListener("unhandledrejection", () => showError("A background request failed. The page content is still available."));
 
   initTuner();
+  initContrast();
   initMenu();
   initSearch();
 })();

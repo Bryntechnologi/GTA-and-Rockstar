@@ -20,6 +20,7 @@ const CORE = [
   "assets/fonts/fonts.css",
   "assets/js/services.js",
   "assets/js/data.js",
+  "assets/js/markdown-core.js",
   "assets/js/chrome.js",
   "assets/js/engagement.js",
   "assets/js/search-index.js",

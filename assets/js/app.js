@@ -25,7 +25,8 @@
     sound: false,
     autoMorph: false,
     storySpoilers: false,
-    storyFollowEra: true
+    storyFollowEra: true,
+    contrast: "normal"
   };
 
   const DEFAULT_STATS = {
@@ -204,6 +205,25 @@
       .replaceAll("'", "&#39;");
   }
 
+  function resolveWikiLink(name) {
+    const needle = String(name || "").trim().toLowerCase();
+    const hit = (state.lore || []).find((item) =>
+      item.title.toLowerCase() === needle ||
+      (item.tags || []).some((tag) => tag.toLowerCase() === needle) ||
+      item.title.toLowerCase().includes(needle)
+    );
+    return hit
+      ? { href: "#lore", label: hit.title, dataLoreId: hit.id }
+      : { href: "#lore", label: name };
+  }
+
+  function mdHTML(text) {
+    if (window.CS_MARKDOWN && typeof window.CS_MARKDOWN.renderMarkdown === "function") {
+      return window.CS_MARKDOWN.renderMarkdown(text, { resolveWiki: resolveWikiLink });
+    }
+    return escapeHTML(text);
+  }
+
   function formatMoney(value) {
     const n = Number(value) || 0;
     return "$" + Math.round(n).toLocaleString("en-US");
@@ -365,6 +385,28 @@
 
   function saveSettings() {
     saveJSON(STORAGE.settings, state.settings);
+  }
+
+  function applyContrast(value) {
+    const high = value === "high";
+    if (high) document.documentElement.dataset.contrast = "high";
+    else document.documentElement.removeAttribute("data-contrast");
+    const button = $("#contrastToggle");
+    if (button) {
+      button.setAttribute("aria-pressed", String(high));
+      button.setAttribute("title", high ? "Use standard contrast" : "Toggle high contrast");
+      button.setAttribute("aria-label", high ? "Use standard contrast" : "Toggle high contrast");
+    }
+  }
+
+  function initContrast() {
+    applyContrast(state.settings.contrast);
+    $("#contrastToggle")?.addEventListener("click", () => {
+      state.settings.contrast = state.settings.contrast === "high" ? "normal" : "high";
+      saveSettings();
+      applyContrast(state.settings.contrast);
+      showToast(`<strong>Contrast: ${state.settings.contrast}.</strong>`);
+    });
   }
 
   function saveStats() {
@@ -1195,7 +1237,7 @@
           <span class="tag">${escapeHTML(era.short)}</span>
         </div>
         <h3>${avatarHTML(game.shortName, game.theme)} ${escapeHTML(game.name)}</h3>
-        <p>${escapeHTML(game.blurb)}</p>
+        <p>${mdHTML(game.blurb)}</p>
         <p class="game-dossier-meta">${escapeHTML((game.characters || []).slice(0, 3).join(" · "))}</p>
         <div class="game-dossier-foot">
           <a class="btn btn-ghost btn-sm" href="games/${escapeHTML(game.slug)}/">Open game page</a>
@@ -1266,7 +1308,7 @@
       <div class="lore-card ${state.loreSelected === item.id ? "is-active" : ""}" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0">
         <div class="lore-card-head">${avatarHTML(item.title, item.era)}<span class="lore-type">${escapeHTML(item.type || "lore")}</span></div>
         <h3>${escapeHTML(item.title)}</h3>
-        <p>${escapeHTML(item.summary)}</p>
+        <p>${mdHTML(item.summary)}</p>
         <div class="lore-card-foot">
           <span>${escapeHTML(eras[item.era]?.name || item.era)}</span>
           <span class="text-link">Read →</span>
@@ -1335,7 +1377,7 @@
         </div>
         <button class="btn btn-quiet btn-sm" type="button" data-lore-close>Close</button>
       </div>
-      <p>${escapeHTML(item.summary)}</p>
+      <div class="md">${mdHTML(item.summary)}</div>
       <div class="chip-row">${(item.tags || []).map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join("")}</div>
       <div class="lore-actions">
         <button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle || item.title)}">Wikipedia summary</button>
@@ -1464,9 +1506,9 @@
       <div class="story-detail-body">
         <span class="detail-kicker">${escapeHTML(event.game)} · ${escapeHTML(String(event.year))}</span>
         <h3>${escapeHTML(event.title)}</h3>
-        <p>${escapeHTML(event.summary)}</p>
+        <div class="md">${mdHTML(event.summary)}</div>
         ${revealed
-          ? `<p class="story-full">${escapeHTML(event.detail)}</p>`
+          ? `<div class="md story-full">${mdHTML(event.detail)}</div>`
           : `<div class="spoiler-box"><p><strong>Spoiler warning.</strong> This entry contains story details.</p><button class="btn btn-quiet btn-sm" type="button" data-story-reveal>Reveal this entry</button></div>`}
         <div class="chip-row">
           ${(event.characters || []).map((name) => `<span class="tag tag-avatar">${avatarHTML(name, event.era)}${escapeHTML(name)}</span>`).join("")}
@@ -1636,7 +1678,7 @@
       <div class="lore-card" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0">
         <div class="lore-card-head">${avatarHTML(item.title, item.era)}<span class="lore-type">${escapeHTML(item.type || "lore")}</span></div>
         <h3>${escapeHTML(item.title)}</h3>
-        <p>${escapeHTML(item.summary)}</p>
+        <p>${mdHTML(item.summary)}</p>
         <div class="lore-card-foot">
           <span>${escapeHTML(eras[item.era]?.name || item.era)}</span>
           <span class="text-link">Read →</span>
@@ -2550,6 +2592,7 @@
 
     initTuner();
     initSound();
+    initContrast();
     bindNavigation();
     bindHeaderAndHome();
     renderTriviaSetup();
@@ -3965,7 +4008,7 @@
         <p class="eyebrow">Wire archive</p>
         <h4>${escapeHTML(item.title)}</h4>
       </div>
-      <p>${escapeHTML(item.summary)}</p>
+      <p>${mdHTML(item.summary)}</p>
       <div class="lore-actions">
         <button class="btn btn-quiet btn-sm" type="button" data-atlas-wiki="${escapeHTML(item.wikiTitle)}">Live summary</button>
         <a class="text-link" href="${escapeHTML(item.source)}" target="_blank" rel="noopener noreferrer">Source</a>

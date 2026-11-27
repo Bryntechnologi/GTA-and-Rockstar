@@ -51,6 +51,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -83,6 +84,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -120,7 +124,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>Red Dead Redemption II</h1>
-      <p class="lede">A prequel about the Van der Linde gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city share the same slow rhythm, and the frontier becomes a story people keep telling themselves.</p>
+      <p class="lede"><p>A prequel about the Van der Linde gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city share the same slow rhythm, and the frontier becomes a story people keep telling themselves.</p></p>
       <div class="game-meta">
         <span class="tag">1899</span>
         <span class="tag">Red Dead</span>
@@ -139,7 +143,7 @@
       <h2>Lore files</h2>
       <article class="game-entry">    <p class="meta">location</p>
     <h3>The Frontier, 1899</h3>
-    <p>Red Dead Redemption 2 is a prequel about the end of an era: a gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city all share the same slow rhythm. The frontier here is less a place to conquer than a story people keep telling themselves.</p>
+    <div class="md"><p>Red Dead Redemption 2 is a prequel about the end of an era: a gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city all share the same slow rhythm. The frontier here is less a place to conquer than a story people keep telling themselves.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Red_Dead_Redemption_2" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Red_Dead_Redemption_2" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>
     </section>

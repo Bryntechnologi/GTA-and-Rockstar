@@ -51,6 +51,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -83,6 +84,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -120,7 +124,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>Grand Theft Auto: Vice City</h1>
-      <p class="lede">The 2002 classic turned the series into a period piece. Tommy Vercetti arrives in Vice City expecting a debt to be settled and decides to collect the city instead. Clubs, property, betrayal, and a radio dial that became as memorable as the skyline.</p>
+      <p class="lede"><p>The 2002 classic turned the series into a period piece. Tommy Vercetti arrives in Vice City expecting a debt to be settled and decides to collect the city instead. Clubs, property, betrayal, and a radio dial that became as memorable as the skyline.</p></p>
       <div class="game-meta">
         <span class="tag">1986</span>
         <span class="tag">Vice City</span>
@@ -139,15 +143,15 @@
       <h2>Lore files</h2>
       <article class="game-entry">    <p class="meta">location</p>
     <h3>Vice City, 1986</h3>
-    <p>The 2002 classic turned the series into a period piece: pastel suits, synth-pop, oceanfront clubs, and a criminal economy with a taste for chrome. Tommy Vercetti arrives in a city that rewards confidence and punishes sentiment, and the game&#39;s radio dial becomes as memorable as its skyline.</p>
+    <div class="md"><p>The 2002 classic turned the series into a period piece: pastel suits, synth-pop, oceanfront clubs, and a criminal economy with a taste for chrome. Tommy Vercetti arrives in a city that rewards confidence and punishes sentiment, and the game&#39;s radio dial becomes as memorable as its skyline.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto%3A_Vice_City" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto%3A_Vice_City" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">character</p>
     <h3>Tommy Vercetti</h3>
-    <p>A made man with a long memory and a short temper. Tommy arrives in Vice City expecting a debt to be settled and decides to collect the whole city instead. His story is about refusing to be anyone&#39;s subordinate.</p>
+    <div class="md"><p>A made man with a long memory and a short temper. Tommy arrives in Vice City expecting a debt to be settled and decides to collect the whole city instead. His story is about refusing to be anyone&#39;s subordinate.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Tommy_Vercetti" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Tommy_Vercetti" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">faction</p>
     <h3>The Vercetti Organisation</h3>
-    <p>A crew built out of borrowed loyalty and purchased property. By the end of 1986 it controls clubs, businesses, and the kind of silence that money can buy.</p>
+    <div class="md"><p>A crew built out of borrowed loyalty and purchased property. By the end of 1986 it controls clubs, businesses, and the kind of silence that money can buy.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto%3A_Vice_City" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto%3A_Vice_City" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>
     </section>
@@ -157,33 +161,27 @@
       <article class="game-entry">
     <h3><span class="year">1986</span> Tommy Vercetti gets out</h3>
     <p class="meta">Grand Theft Auto: Vice City</p>
-    <p>A prison sentence ends and a new one begins: a drug deal on the beach goes wrong, and Tommy has to improvise.</p>
-    <p>Tommy arrives in Vice City expecting a clean handoff. The deal is ambushed, the money disappears, and the people who sent him want answers. The game&#39;s opening is a masterclass in tone: sun, neon, and immediate violence.</p>
+    <div class="md"><p>A prison sentence ends and a new one begins: a drug deal on the beach goes wrong, and Tommy has to improvise.</p><p>Tommy arrives in Vice City expecting a clean handoff. The deal is ambushed, the money disappears, and the people who sent him want answers. The game&#39;s opening is a masterclass in tone: sun, neon, and immediate violence.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1986</span> The Vercetti rise</h3>
     <p class="meta">Grand Theft Auto: Vice City</p>
-    <p>Tommy works his way through the city&#39;s power brokers, buying property and collecting enemies in equal measure.</p>
-    <p>The middle act is an empire-building montage: clubs, businesses, assassination contracts, and a growing crew. Tommy&#39;s refusal to be a subordinate turns a debt into a takeover, and Vice City starts to feel like his city.</p>
+    <div class="md"><p>Tommy works his way through the city&#39;s power brokers, buying property and collecting enemies in equal measure.</p><p>The middle act is an empire-building montage: clubs, businesses, assassination contracts, and a growing crew. Tommy&#39;s refusal to be a subordinate turns a debt into a takeover, and Vice City starts to feel like his city.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1986</span> Lance Vance changes sides</h3>
     <p class="meta">Grand Theft Auto: Vice City</p>
-    <p>The alliance at the centre of Tommy&#39;s rise starts to fracture. Loyalty in Vice City is always a temporary arrangement.</p>
-    <p>Lance&#39;s resentment and Sonny Forelli&#39;s pressure converge. Tommy&#39;s empire is strong enough to survive the city, but not strong enough to survive the people closest to it. The betrayal sets up the final confrontation.</p>
+    <div class="md"><p>The alliance at the centre of Tommy&#39;s rise starts to fracture. Loyalty in Vice City is always a temporary arrangement.</p><p>Lance&#39;s resentment and Sonny Forelli&#39;s pressure converge. Tommy&#39;s empire is strong enough to survive the city, but not strong enough to survive the people closest to it. The betrayal sets up the final confrontation.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1986</span> The last stand at the mansion</h3>
     <p class="meta">Grand Theft Auto: Vice City</p>
-    <p>Sonny comes to collect, Lance makes his choice, and Tommy settles the debt with a very loud house call.</p>
-    <p>The finale is a siege: Tommy alone against Sonny&#39;s men, with Lance on the wrong side. When it ends, Tommy is the last one standing in a mansion that now belongs to him. The city is quiet for exactly one sunset.</p>
+    <div class="md"><p>Sonny comes to collect, Lance makes his choice, and Tommy settles the debt with a very loud house call.</p><p>The finale is a siege: Tommy alone against Sonny&#39;s men, with Lance on the wrong side. When it ends, Tommy is the last one standing in a mansion that now belongs to him. The city is quiet for exactly one sunset.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1984</span> Victor Vance arrives</h3>
     <p class="meta">Grand Theft Auto: Vice City Stories</p>
-    <p>A soldier returns to Vice City looking for a clean way out and finds a city that only trades in complications.</p>
-    <p>Victor Vance&#39;s story is a tragedy in slow motion: family loyalty, military connections, and a drug economy that turns every favour into a debt. The game ends with him alive but compromised, which makes the opening of Vice City land harder.</p>
+    <div class="md"><p>A soldier returns to Vice City looking for a clean way out and finds a city that only trades in complications.</p><p>Victor Vance&#39;s story is a tragedy in slow motion: family loyalty, military connections, and a drug economy that turns every favour into a debt. The game ends with him alive but compromised, which makes the opening of Vice City land harder.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1984</span> The Vance empire</h3>
     <p class="meta">Grand Theft Auto: Vice City Stories</p>
-    <p>Victor builds a criminal operation out of borrowed muscle and family obligation. Every new asset comes with a new enemy.</p>
-    <p>By the end of Vice City Stories, Victor controls territory, businesses, and a growing reputation. The cost is the relationship with his brother Lance and the knowledge that the city always collects. His death in the opening of Vice City is the punchline to this setup.</p>
+    <div class="md"><p>Victor builds a criminal operation out of borrowed muscle and family obligation. Every new asset comes with a new enemy.</p><p>By the end of Vice City Stories, Victor controls territory, businesses, and a growing reputation. The cost is the relationship with his brother Lance and the knowledge that the city always collects. His death in the opening of Vice City is the punchline to this setup.</p></div>
   </article>
     </section>
 

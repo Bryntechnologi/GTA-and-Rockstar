@@ -51,6 +51,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -83,6 +84,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -120,7 +124,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>Grand Theft Auto IV</h1>
-      <p class="lede">GTA IV trades sunshine for overcast steel. Niko comes to Liberty City for his cousin&#39;s promised success and finds a dense immigrant story about war, loyalty, and the cost of leaving a past behind.</p>
+      <p class="lede"><p>GTA IV trades sunshine for overcast steel. Niko comes to Liberty City for his cousin&#39;s promised success and finds a dense immigrant story about war, loyalty, and the cost of leaving a past behind.</p></p>
       <div class="game-meta">
         <span class="tag">2008</span>
         <span class="tag">GTA IV / Liberty City</span>
@@ -139,15 +143,15 @@
       <h2>Lore files</h2>
       <article class="game-entry">    <p class="meta">location</p>
     <h3>Liberty City, 2008</h3>
-    <p>Grand Theft Auto IV trades sunshine for overcast steel. Niko Bellic arrives in Liberty City chasing an idea of success and finds a colder city of immigrants, debts, and old wars. The game&#39;s tone is grounded, its streets dense, and its story less about empire than about the cost of trying to leave one behind.</p>
+    <div class="md"><p>Grand Theft Auto IV trades sunshine for overcast steel. Niko Bellic arrives in Liberty City chasing an idea of success and finds a colder city of immigrants, debts, and old wars. The game&#39;s tone is grounded, its streets dense, and its story less about empire than about the cost of trying to leave one behind.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto_IV" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">character</p>
     <h3>Niko Bellic</h3>
-    <p>A war veteran chasing a ghost through Liberty City. Niko&#39;s story is about the difference between the life he was promised and the one he keeps choosing.</p>
+    <div class="md"><p>A war veteran chasing a ghost through Liberty City. Niko&#39;s story is about the difference between the life he was promised and the one he keeps choosing.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Niko_Bellic" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Niko_Bellic" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">faction</p>
     <h3>The Lost MC</h3>
-    <p>A motorcycle club held together by tradition and torn apart by ego. The Lost are at their most dangerous when they are trying to prove they still matter.</p>
+    <div class="md"><p>A motorcycle club held together by tradition and torn apart by ego. The Lost are at their most dangerous when they are trying to prove they still matter.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/The_Lost_and_Damned" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/The_Lost_and_Damned" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>
     </section>
@@ -157,33 +161,27 @@
       <article class="game-entry">
     <h3><span class="year">2008</span> Niko Bellic arrives</h3>
     <p class="meta">Grand Theft Auto IV</p>
-    <p>A war veteran comes to Liberty City chasing an old promise and finds his cousin&#39;s life was mostly a sales pitch.</p>
-    <p>Niko&#39;s arrival is the series&#39; most grounded opening: a cramped apartment, a cousin with debts, and a city that offers work before it offers answers. The immigrant story gives GTA IV its emotional weight.</p>
+    <div class="md"><p>A war veteran comes to Liberty City chasing an old promise and finds his cousin&#39;s life was mostly a sales pitch.</p><p>Niko&#39;s arrival is the series&#39; most grounded opening: a cramped apartment, a cousin with debts, and a city that offers work before it offers answers. The immigrant story gives GTA IV its emotional weight.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2008</span> Blood and debts</h3>
     <p class="meta">Grand Theft Auto IV</p>
-    <p>Niko&#39;s search for the man who betrayed his unit pulls him into loan sharks, gangsters, and a war he did not start.</p>
-    <p>The middle of GTA IV is a web of obligation: Roman&#39;s gambling, Dimitri&#39;s manipulations, and the gradual revelation of what happened to Niko&#39;s squad. The city&#39;s optimism curdles into something colder.</p>
+    <div class="md"><p>Niko&#39;s search for the man who betrayed his unit pulls him into loan sharks, gangsters, and a war he did not start.</p><p>The middle of GTA IV is a web of obligation: Roman&#39;s gambling, Dimitri&#39;s manipulations, and the gradual revelation of what happened to Niko&#39;s squad. The city&#39;s optimism curdles into something colder.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2008</span> Deal or revenge</h3>
     <p class="meta">Grand Theft Auto IV</p>
-    <p>The story&#39;s final choice is not about money or loyalty. It is about whether Niko can live with either answer.</p>
-    <p>The Deal ending costs Roman his life; the Revenge ending costs Kate hers. GTA IV refuses a clean victory. Whichever path the player chooses, Liberty City keeps its ledger balanced and Niko keeps carrying the cost.</p>
+    <div class="md"><p>The story&#39;s final choice is not about money or loyalty. It is about whether Niko can live with either answer.</p><p>The Deal ending costs Roman his life; the Revenge ending costs Kate hers. GTA IV refuses a clean victory. Whichever path the player chooses, Liberty City keeps its ledger balanced and Niko keeps carrying the cost.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2008</span> The diamond deal</h3>
     <p class="meta">Grand Theft Auto IV</p>
-    <p>A bag of diamonds passes through too many hands, linking Niko&#39;s story to the two episodes that follow.</p>
-    <p>The diamond exchange is the connective tissue of the GTA IV era: a single botched deal that pulls in the Lost MC, Gay Tony&#39;s nightlife, and Niko&#39;s own circle. It is the series&#39; clearest example of a shared criminal ecosystem.</p>
+    <div class="md"><p>A bag of diamonds passes through too many hands, linking Niko&#39;s story to the two episodes that follow.</p><p>The diamond exchange is the connective tissue of the GTA IV era: a single botched deal that pulls in the Lost MC, Gay Tony&#39;s nightlife, and Niko&#39;s own circle. It is the series&#39; clearest example of a shared criminal ecosystem.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2009</span> The Lost MC fractures</h3>
     <p class="meta">Grand Theft Auto IV: The Lost and Damned</p>
-    <p>Johnny Klebitz tries to hold a motorcycle club together while its president pushes it toward a war it cannot win.</p>
-    <p>The Lost and Damned is a story about loyalty in a culture that mistakes loyalty for obedience. Johnny&#39;s attempts to keep the club solvent collide with Billy Grey&#39;s recklessness, and the fallout leaves the Lost weaker and angrier.</p>
+    <div class="md"><p>Johnny Klebitz tries to hold a motorcycle club together while its president pushes it toward a war it cannot win.</p><p>The Lost and Damned is a story about loyalty in a culture that mistakes loyalty for obedience. Johnny&#39;s attempts to keep the club solvent collide with Billy Grey&#39;s recklessness, and the fallout leaves the Lost weaker and angrier.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2009</span> Nightlife on the edge</h3>
     <p class="meta">Grand Theft Auto IV: The Ballad of Gay Tony</p>
-    <p>Luis Lopez keeps Tony Prince&#39;s clubs running while the money, the drugs, and the Russians all want a piece.</p>
-    <p>The Ballad of Gay Tony is the flashiest of the GTA IV stories and the most anxious underneath. Luis is the competent one in a room full of people who have already spent the money. The finale ties back to the diamond deal and closes the IV-era trilogy.</p>
+    <div class="md"><p>Luis Lopez keeps Tony Prince&#39;s clubs running while the money, the drugs, and the Russians all want a piece.</p><p>The Ballad of Gay Tony is the flashiest of the GTA IV stories and the most anxious underneath. Luis is the competent one in a room full of people who have already spent the money. The finale ties back to the diamond deal and closes the IV-era trilogy.</p></div>
   </article>
     </section>
 

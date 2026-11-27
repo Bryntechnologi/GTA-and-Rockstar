@@ -71,6 +71,19 @@ test("home leads with lore and story previews", async () => {
   window.close();
 });
 
+test("contrast preference toggles and saves", async () => {
+  const { window, doc, errors } = await loadSite();
+  const button = doc.querySelector("#contrastToggle");
+  assert.ok(button, "contrast toggle should exist");
+  button.click();
+  assert.equal(doc.documentElement.dataset.contrast, "high");
+  assert.equal(button.getAttribute("aria-pressed"), "true");
+  button.click();
+  assert.equal(doc.documentElement.dataset.contrast, undefined);
+  assert.equal(errors.length, 0, errors.join("\n"));
+  window.close();
+});
+
 test("lore filters, search, and detail panel work", async () => {
   const { window, doc, errors } = await loadSite();
   nav(doc, "lore");
@@ -320,4 +333,16 @@ test("static indexability files and archive are present", () => {
 
   assert.ok(fs.existsSync(path.join(ROOT, "assets/fonts/fonts.css")), "fonts.css missing");
   assert.match(index, /assets\/fonts\/fonts\.css/);
+});
+
+test("markdown rendering is escaped and supports wiki links", () => {
+  const { renderMarkdown } = require(path.join(ROOT, "assets/js/markdown-core.js"));
+  const html = renderMarkdown("**Bold** <script>alert(1)</script> [[Tommy Vercetti]]", {
+    resolveWiki: (name) => ({ href: "archive.html#lore-tommy-vercetti", label: name, dataLoreId: "tommy-vercetti" })
+  });
+  assert.match(html, /<strong>Bold<\/strong>/);
+  assert.doesNotMatch(html, /<script>/);
+  assert.match(html, /class="wiki-link"/);
+  assert.match(html, /data-lore-open="tommy-vercetti"/);
+  assert.doesNotMatch(renderMarkdown("[bad](javascript:alert(1))"), /javascript:/i);
 });

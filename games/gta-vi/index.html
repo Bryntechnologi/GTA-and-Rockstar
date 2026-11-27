@@ -51,6 +51,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -83,6 +84,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -120,7 +124,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>Grand Theft Auto VI</h1>
-      <p class="lede">The next mainline GTA returns to Vice City and expands it into the state of Leonida: causeways, wetlands, small towns, and a modern coastline. The revealed story follows Jason and Lucia through a partnership built on trust in a place designed to test it.</p>
+      <p class="lede"><p>The next mainline GTA returns to Vice City and expands it into the state of Leonida: causeways, wetlands, small towns, and a modern coastline. The revealed story follows Jason and Lucia through a partnership built on trust in a place designed to test it.</p></p>
       <div class="game-meta">
         <span class="tag">2026</span>
         <span class="tag">GTA VI / Leonida</span>
@@ -139,11 +143,11 @@
       <h2>Lore files</h2>
       <article class="game-entry">    <p class="meta">location</p>
     <h3>Leonida &amp; Vice City</h3>
-    <p>Grand Theft Auto VI returns to the fictional state of Leonida, a sun-bleached peninsula of causeways, wetlands, and neon coastline. Vice City is its loudest address: a modern resort metropolis built for money, music, and bad decisions. The revealed story follows Jason and Lucia through a state that treats every sunset like a premiere.</p>
+    <div class="md"><p>Grand Theft Auto VI returns to the fictional state of Leonida, a sun-bleached peninsula of causeways, wetlands, and neon coastline. Vice City is its loudest address: a modern resort metropolis built for money, music, and bad decisions. The revealed story follows Jason and Lucia through a state that treats every sunset like a premiere.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto_VI" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">character</p>
     <h3>Jason &amp; Lucia</h3>
-    <p>The revealed leads of GTA VI: a partnership built on trust in a state that rewards self-interest. Their story is framed as a modern crime romance rather than a lone-wolf rise.</p>
+    <div class="md"><p>The revealed leads of GTA VI: a partnership built on trust in a state that rewards self-interest. Their story is framed as a modern crime romance rather than a lone-wolf rise.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto_VI" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>
     </section>
@@ -153,23 +157,19 @@
       <article class="game-entry">
     <h3><span class="year">2026</span> Jason and Lucia</h3>
     <p class="meta">Grand Theft Auto VI</p>
-    <p>A new state, a new pair of protagonists, and a Bonnie-and-Clyde premise set against modern Leonida.</p>
-    <p>The revealed premise follows Jason and Lucia through a version of Vice City and the wider state of Leonida. The tone is modern, sunlit, and tense: a relationship story wrapped around a crime spree. Specific plot details are intentionally left out here rather than invented.</p>
+    <div class="md"><p>A new state, a new pair of protagonists, and a Bonnie-and-Clyde premise set against modern Leonida.</p><p>The revealed premise follows Jason and Lucia through a version of Vice City and the wider state of Leonida. The tone is modern, sunlit, and tense: a relationship story wrapped around a crime spree. Specific plot details are intentionally left out here rather than invented.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2026</span> The state of Leonida</h3>
     <p class="meta">Grand Theft Auto VI</p>
-    <p>Causeways, wetlands, small towns, and a neon capital. The map is a state, not just a city.</p>
-    <p>Leonida expands the Vice City idea into a whole peninsula: Port Gellhorn&#39;s docks, Grassrivers&#39; wetlands, Mount Kalaga&#39;s ridges, and the Keys&#39; island roads. It is the broadest Rockstar map yet, and the setting is the story&#39;s co-star.</p>
+    <div class="md"><p>Causeways, wetlands, small towns, and a neon capital. The map is a state, not just a city.</p><p>Leonida expands the Vice City idea into a whole peninsula: Port Gellhorn&#39;s docks, Grassrivers&#39; wetlands, Mount Kalaga&#39;s ridges, and the Keys&#39; island roads. It is the broadest Rockstar map yet, and the setting is the story&#39;s co-star.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2026</span> The next score</h3>
     <p class="meta">Grand Theft Auto VI</p>
-    <p>A partnership, a state full of opportunities, and the oldest question in the series: how much is enough?</p>
-    <p>The central tension of the revealed premise is trust: two people trying to build something together in a place designed to separate them. Everything else — the cars, the clubs, the coastline — is the scenery around that question.</p>
+    <div class="md"><p>A partnership, a state full of opportunities, and the oldest question in the series: how much is enough?</p><p>The central tension of the revealed premise is trust: two people trying to build something together in a place designed to separate them. Everything else — the cars, the clubs, the coastline — is the scenery around that question.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2026</span> A world that keeps moving</h3>
     <p class="meta">Grand Theft Auto VI</p>
-    <p>The series&#39; next era is built around a living state: traffic, weather, wildlife, and a news cycle that never quite looks away.</p>
-    <p>Rockstar&#39;s pitch for GTA VI is density: a world with more systems, more interiors, and more ways for a plan to go sideways. The story is only one thread in a state that keeps generating its own.</p>
+    <div class="md"><p>The series&#39; next era is built around a living state: traffic, weather, wildlife, and a news cycle that never quite looks away.</p><p>Rockstar&#39;s pitch for GTA VI is density: a world with more systems, more interiors, and more ways for a plan to go sideways. The story is only one thread in a state that keeps generating its own.</p></div>
   </article>
     </section>
 

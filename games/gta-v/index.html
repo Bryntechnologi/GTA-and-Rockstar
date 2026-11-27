@@ -51,6 +51,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -83,6 +84,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -120,7 +124,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>Grand Theft Auto V</h1>
-      <p class="lede">Michael, Franklin, and Trevor move through Los Santos and Blaine County in a story about ambition, reinvention, and the entertainment industry&#39;s appetite for spectacle. The heist structure turns preparation and improvisation into the main event.</p>
+      <p class="lede"><p>Michael, Franklin, and Trevor move through Los Santos and Blaine County in a story about ambition, reinvention, and the entertainment industry&#39;s appetite for spectacle. The heist structure turns preparation and improvisation into the main event.</p></p>
       <div class="game-meta">
         <span class="tag">2013</span>
         <span class="tag">GTA V / Los Santos</span>
@@ -139,11 +143,11 @@
       <h2>Lore files</h2>
       <article class="game-entry">    <p class="meta">location</p>
     <h3>Los Santos, 2013</h3>
-    <p>Grand Theft Auto V splits its story across three protagonists and one sprawling satirical metropolis. Michael, Franklin, and Trevor move between heists, hobbies, and the entertainment industry&#39;s endless appetite for reinvention. The result is a West Coast playground built around planning, improvisation, and spectacle.</p>
+    <div class="md"><p>Grand Theft Auto V splits its story across three protagonists and one sprawling satirical metropolis. Michael, Franklin, and Trevor move between heists, hobbies, and the entertainment industry&#39;s endless appetite for reinvention. The result is a West Coast playground built around planning, improvisation, and spectacle.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_V" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto_V" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">character</p>
     <h3>Michael, Franklin &amp; Trevor</h3>
-    <p>Three protagonists with incompatible ideas about success. Michael wants meaning, Franklin wants distance from the block, and Trevor wants to be the only honest person in the room.</p>
+    <div class="md"><p>Three protagonists with incompatible ideas about success. Michael wants meaning, Franklin wants distance from the block, and Trevor wants to be the only honest person in the room.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_V" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto_V" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>
     </section>
@@ -153,28 +157,23 @@
       <article class="game-entry">
     <h3><span class="year">2013</span> Three men, one city</h3>
     <p class="meta">Grand Theft Auto V</p>
-    <p>Michael is bored, Franklin wants more, and Trevor is a live grenade with a driver&#39;s licence. Los Santos brings them together.</p>
-    <p>GTA V opens with a North Yankton heist and then jumps forward to a sunlit Los Santos where Michael&#39;s retirement is falling apart. Franklin&#39;s ambition and Trevor&#39;s chaos turn a midlife crisis into a criminal partnership.</p>
+    <div class="md"><p>Michael is bored, Franklin wants more, and Trevor is a live grenade with a driver&#39;s licence. Los Santos brings them together.</p><p>GTA V opens with a North Yankton heist and then jumps forward to a sunlit Los Santos where Michael&#39;s retirement is falling apart. Franklin&#39;s ambition and Trevor&#39;s chaos turn a midlife crisis into a criminal partnership.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2013</span> The first scores</h3>
     <p class="meta">Grand Theft Auto V</p>
-    <p>A jewellery store, a motorbike, and a plan that works just well enough to attract bigger problems.</p>
-    <p>The early heists establish GTA V&#39;s structure: preparation, crew choice, and improvisation. Franklin&#39;s first jobs with Michael turn into a partnership, while Trevor&#39;s presence makes every plan less stable and more profitable.</p>
+    <div class="md"><p>A jewellery store, a motorbike, and a plan that works just well enough to attract bigger problems.</p><p>The early heists establish GTA V&#39;s structure: preparation, crew choice, and improvisation. Franklin&#39;s first jobs with Michael turn into a partnership, while Trevor&#39;s presence makes every plan less stable and more profitable.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2013</span> Trevor finds out</h3>
     <p class="meta">Grand Theft Auto V</p>
-    <p>The past catches up with Michael in the most volatile way possible: Trevor learns the truth about North Yankton.</p>
-    <p>Trevor&#39;s discovery reframes the entire story. Michael&#39;s retirement was built on a lie, and the reunion becomes a hostage situation with old friends. The game&#39;s tone shifts from satire to something more personal and dangerous.</p>
+    <div class="md"><p>The past catches up with Michael in the most volatile way possible: Trevor learns the truth about North Yankton.</p><p>Trevor&#39;s discovery reframes the entire story. Michael&#39;s retirement was built on a lie, and the reunion becomes a hostage situation with old friends. The game&#39;s tone shifts from satire to something more personal and dangerous.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2013</span> The agency years</h3>
     <p class="meta">Grand Theft Auto V</p>
-    <p>The trio become assets for people with badges, budgets, and no intention of sharing the credit.</p>
-    <p>The FIB and Merryweather arcs turn the crew into deniable contractors. Every favour creates a new liability, and the line between criminal and government work becomes a joke the characters stop laughing at.</p>
+    <div class="md"><p>The trio become assets for people with badges, budgets, and no intention of sharing the credit.</p><p>The FIB and Merryweather arcs turn the crew into deniable contractors. Every favour creates a new liability, and the line between criminal and government work becomes a joke the characters stop laughing at.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2013</span> Three ways out</h3>
     <p class="meta">Grand Theft Auto V</p>
-    <p>The final choice is a menu of betrayals: kill Trevor, kill Michael, or refuse the script entirely.</p>
-    <p>GTA V&#39;s three endings are a commentary on the series itself. Ending A and B kill a protagonist; Ending C lets the trio survive by turning on their handlers. The last option is the most satisfying and the least realistic, which is exactly the point.</p>
+    <div class="md"><p>The final choice is a menu of betrayals: kill Trevor, kill Michael, or refuse the script entirely.</p><p>GTA V&#39;s three endings are a commentary on the series itself. Ending A and B kill a protagonist; Ending C lets the trio survive by turning on their handlers. The last option is the most satisfying and the least realistic, which is exactly the point.</p></div>
   </article>
     </section>
 

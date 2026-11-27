@@ -6216,3 +6216,78 @@ html[data-era="sanandreas"] .hero h1 em {
   box-shadow: 0 0 10px var(--accent);
   transition: width 0.1s linear;
 }
+
+/* Markdown-rendered content */
+.wiki-link {
+  color: var(--accent-2);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.16em;
+}
+.wiki-missing {
+  color: var(--muted);
+  border-bottom: 1px dotted var(--line-strong);
+}
+.md p,
+.md ul,
+.md ol,
+.md blockquote,
+.md pre {
+  margin: 0.7rem 0;
+}
+.md ul,
+.md ol {
+  padding-left: 1.2rem;
+}
+.md blockquote {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+}
+.md pre {
+  overflow-x: auto;
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--surface-solid) 75%, black 8%);
+}
+.md code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.md :not(pre) > code {
+  padding: 0.1em 0.3em;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface-solid) 70%, transparent);
+}
+
+/* Contrast preference layers over every era theme */
+html[data-contrast="high"] {
+  --muted: color-mix(in srgb, var(--ink) 82%, var(--bg));
+  --line: color-mix(in srgb, var(--ink) 30%, transparent);
+  --line-strong: color-mix(in srgb, var(--ink) 52%, transparent);
+  --surface: color-mix(in srgb, var(--surface-solid) 94%, var(--bg));
+  --surface-2: color-mix(in srgb, var(--surface-solid) 86%, var(--bg));
+  --header-bg: color-mix(in srgb, var(--bg) 92%, transparent);
+  --grain: 0;
+}
+html[data-contrast="high"] .muted,
+html[data-contrast="high"] .small.muted,
+html[data-contrast="high"] .footer-brand p,
+html[data-contrast="high"] .footer-links a,
+html[data-contrast="high"] .footer-links button,
+html[data-contrast="high"] .page-tool,
+html[data-contrast="high"] .page-tool-label {
+  color: var(--muted);
+}
+html[data-contrast="high"] .panel,
+html[data-contrast="high"] .lore-card,
+html[data-contrast="high"] .game-card,
+html[data-contrast="high"] .story-detail,
+html[data-contrast="high"] .search-dialog {
+  border-color: var(--line-strong);
+}
+html[data-contrast="high"] :focus-visible {
+  outline-width: 3px;
+}

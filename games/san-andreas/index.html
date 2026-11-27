@@ -51,6 +51,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -83,6 +84,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -120,7 +124,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>Grand Theft Auto: San Andreas</h1>
-      <p class="lede">San Andreas is a road trip through a fictional state: Los Santos, San Fierro, and Las Venturas each bring a different rhythm. CJ returns home to a family in crisis and gets pulled into a gang war, a drug network, and a police conspiracy.</p>
+      <p class="lede"><p>San Andreas is a road trip through a fictional state: Los Santos, San Fierro, and Las Venturas each bring a different rhythm. CJ returns home to a family in crisis and gets pulled into a gang war, a drug network, and a police conspiracy.</p></p>
       <div class="game-meta">
         <span class="tag">1992</span>
         <span class="tag">San Andreas</span>
@@ -139,15 +143,15 @@
       <h2>Lore files</h2>
       <article class="game-entry">    <p class="meta">location</p>
     <h3>San Andreas, 1992</h3>
-    <p>Three cities, one enormous state, and a homecoming story about family, loyalty, and territory. San Andreas mixes early-90s West Coast culture with a road-trip structure: Los Santos, San Fierro, and Las Venturas each bring a different rhythm, skyline, and kind of trouble.</p>
+    <div class="md"><p>Three cities, one enormous state, and a homecoming story about family, loyalty, and territory. San Andreas mixes early-90s West Coast culture with a road-trip structure: Los Santos, San Fierro, and Las Venturas each bring a different rhythm, skyline, and kind of trouble.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto%3A_San_Andreas" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto%3A_San_Andreas" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">character</p>
     <h3>Carl &#39;CJ&#39; Johnson</h3>
-    <p>A returning son who spends most of San Andreas trying to keep his family together while the city pulls it apart. CJ is loyal, practical, and increasingly aware that loyalty is not a plan.</p>
+    <div class="md"><p>A returning son who spends most of San Andreas trying to keep his family together while the city pulls it apart. CJ is loyal, practical, and increasingly aware that loyalty is not a plan.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Carl_Johnson_(Grand_Theft_Auto)" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Carl_Johnson_(Grand_Theft_Auto)" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">faction</p>
     <h3>Grove Street Families</h3>
-    <p>A neighbourhood outfit defined by history, loyalty, and a losing war for territory. Grove Street is less a gang than a memory of one, which is exactly what makes it worth fighting for.</p>
+    <div class="md"><p>A neighbourhood outfit defined by history, loyalty, and a losing war for territory. Grove Street is less a gang than a memory of one, which is exactly what makes it worth fighting for.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grove_Street_Families" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grove_Street_Families" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>
     </section>
@@ -157,28 +161,23 @@
       <article class="game-entry">
     <h3><span class="year">1992</span> CJ comes home</h3>
     <p class="meta">Grand Theft Auto: San Andreas</p>
-    <p>Five years away, a funeral, and a neighbourhood that has moved on without him. Carl Johnson returns to Los Santos.</p>
-    <p>The opening of San Andreas is a homecoming story: CJ finds his mother dead, his family scattered, and the Grove Street Families losing ground. The game&#39;s first act is about rebuilding trust before it becomes about rebuilding an empire.</p>
+    <div class="md"><p>Five years away, a funeral, and a neighbourhood that has moved on without him. Carl Johnson returns to Los Santos.</p><p>The opening of San Andreas is a homecoming story: CJ finds his mother dead, his family scattered, and the Grove Street Families losing ground. The game&#39;s first act is about rebuilding trust before it becomes about rebuilding an empire.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1992</span> Grove Street vs the Ballas</h3>
     <p class="meta">Grand Theft Auto: San Andreas</p>
-    <p>Territory, drive-bys, and a family under pressure. The neighbourhood war escalates while the people closest to CJ make other plans.</p>
-    <p>The gang war is both personal and structural: the Ballas have backing, Grove has history, and the police treat the whole block as a problem to manage. CJ&#39;s loyalty is tested long before the bigger conspiracy surfaces.</p>
+    <div class="md"><p>Territory, drive-bys, and a family under pressure. The neighbourhood war escalates while the people closest to CJ make other plans.</p><p>The gang war is both personal and structural: the Ballas have backing, Grove has history, and the police treat the whole block as a problem to manage. CJ&#39;s loyalty is tested long before the bigger conspiracy surfaces.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1992</span> San Fierro and the Loco Syndicate</h3>
     <p class="meta">Grand Theft Auto: San Andreas</p>
-    <p>The story widens beyond Los Santos: a new city, a new garage, and a drug network with ties back home.</p>
-    <p>San Fierro gives CJ a base, a cover business, and a target. The Loco Syndicate arc connects the street-level betrayal to a larger criminal supply chain, and introduces Mike Toreno as a very different kind of antagonist.</p>
+    <div class="md"><p>The story widens beyond Los Santos: a new city, a new garage, and a drug network with ties back home.</p><p>San Fierro gives CJ a base, a cover business, and a target. The Loco Syndicate arc connects the street-level betrayal to a larger criminal supply chain, and introduces Mike Toreno as a very different kind of antagonist.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1992</span> The Caligula&#39;s heist</h3>
     <p class="meta">Grand Theft Auto: San Andreas</p>
-    <p>Las Venturas, a casino, and a plan that depends on too many people behaving predictably.</p>
-    <p>The Caligula&#39;s arc is San Andreas at its most cinematic: surveillance, preparation, and a heist that becomes a power struggle between criminal organisations. It is also where the game&#39;s three-city structure pays off.</p>
+    <div class="md"><p>Las Venturas, a casino, and a plan that depends on too many people behaving predictably.</p><p>The Caligula&#39;s arc is San Andreas at its most cinematic: surveillance, preparation, and a heist that becomes a power struggle between criminal organisations. It is also where the game&#39;s three-city structure pays off.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1992</span> The homecoming</h3>
     <p class="meta">Grand Theft Auto: San Andreas</p>
-    <p>Los Santos riots, old friends return, and CJ finally gets to settle the score with the people who sold out Grove Street.</p>
-    <p>The final act ties the gang war, the police corruption, and the family betrayal together. CJ&#39;s return to Grove Street is not a victory lap; it is a cleanup. The last confrontation is personal, and the city keeps burning behind it.</p>
+    <div class="md"><p>Los Santos riots, old friends return, and CJ finally gets to settle the score with the people who sold out Grove Street.</p><p>The final act ties the gang war, the police corruption, and the family betrayal together. CJ&#39;s return to Grove Street is not a victory lap; it is a cleanup. The last confrontation is personal, and the city keeps burning behind it.</p></div>
   </article>
     </section>
 

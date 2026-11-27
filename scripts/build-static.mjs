@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import { createRequire } from "node:module";
 import { decoratePage } from "./site-chrome.mjs";
+
+const require = createRequire(import.meta.url);
+const { renderMarkdown } = require("../assets/js/markdown-core.js");
 
 const root = process.cwd();
 const configPath = path.join(root, "site.config.json");
@@ -81,6 +85,27 @@ function relatedMarkup(item) {
   </div>`;
 }
 
+function wikiResolver(prefix = "") {
+  return (name) => {
+    const needle = String(name || "").trim().toLowerCase();
+    const hit = lore.find((item) =>
+      item.title.toLowerCase() === needle ||
+      (item.tags || []).some((tag) => tag.toLowerCase() === needle) ||
+      item.title.toLowerCase().includes(needle)
+    );
+    if (!hit) return null;
+    return {
+      href: `${prefix}archive.html#lore-${hit.id}`,
+      label: hit.title,
+      dataLoreId: hit.id
+    };
+  };
+}
+
+function md(text, prefix = "") {
+  return renderMarkdown(text, { resolveWiki: wikiResolver(prefix) });
+}
+
 
 const eraNames = {
   gta6: "GTA VI / Leonida",
@@ -113,7 +138,7 @@ const loreSections = loreByType.map((type) => {
     ${items.map((item) => `<article id="lore-${esc(item.id)}">
       <h3>${esc(item.title)}</h3>
       <p class="meta">${esc(eraNames[item.era] || item.era)} · ${esc(item.type || "lore")}</p>
-      <p>${esc(item.summary)}</p>
+      <div class="md">${md(item.summary)}</div>
       ${item.tags ? `<p class="tags">${item.tags.map(esc).join(" · ")}</p>` : ""}
       ${relatedMarkup(item)}
     </article>`).join("")}
@@ -123,8 +148,7 @@ const loreSections = loreByType.map((type) => {
 const storySections = story.map((event) => `<article id="story-${esc(event.id)}">
   <h3><span class="year">${esc(event.year)}</span> ${esc(event.title)}</h3>
   <p class="meta">${esc(event.game)} · ${esc(eraNames[event.era] || event.era)}</p>
-  <p>${esc(event.summary)}</p>
-  <p>${esc(event.detail)}</p>
+  <div class="md">${md(event.summary)}${md(event.detail)}</div>
   <p class="tags">${[...(event.characters || []), ...(event.locations || [])].map(esc).join(" · ")}</p>
   ${(() => { const g = gameByEra.get(event.era); const related = storyRelated(event); const links = related.map((item) => `<a href="archive.html#lore-${esc(item.id)}">${esc(item.title)}</a>`); if (g) links.unshift(`<a href="games/${esc(g.slug)}/">${esc(g.name)} dossier</a>`); return links.length ? `<div class="related-links"><p><strong>Related:</strong> ${links.join(" · ")}</p></div>` : ""; })()}
 </article>`).join("");
@@ -138,14 +162,13 @@ function gamePage(game) {
   const photo = credit ? `<figure class="game-photo"><img src="${relative}${esc(credit.file)}" alt="${esc(credit.alt)}" loading="lazy"><figcaption>Real-world inspiration, not game artwork. Photo: ${esc(credit.artist)} (${esc(credit.license)}) · <a href="${esc(credit.source)}" rel="noopener noreferrer">source</a></figcaption></figure>` : "";
   const loreBlocks = gameLore.map((item) => `<article class="game-entry">    <p class="meta">${esc(item.type || "lore")}</p>
     <h3>${esc(item.title)}</h3>
-    <p>${esc(item.summary)}</p>
+    <div class="md">${md(item.summary, relative)}</div>
     <p class="source-links"><a href="${esc(wikiUrl(item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="${esc(fandomUrl(item.fandomTitle || item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>`).join("");
   const storyBlocks = gameStory.map((event) => `<article class="game-entry">
     <h3><span class="year">${esc(event.year)}</span> ${esc(event.title)}</h3>
     <p class="meta">${esc(event.game)}</p>
-    <p>${esc(event.summary)}</p>
-    <p>${esc(event.detail)}</p>
+    <div class="md">${md(event.summary, relative)}${md(event.detail, relative)}</div>
   </article>`).join("");
   return decoratePage(`<!DOCTYPE html>
 <html lang="en" data-era="${esc(game.theme)}">
@@ -203,7 +226,7 @@ function gamePage(game) {
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>${esc(game.name)}</h1>
-      <p class="lede">${esc(game.description)}</p>
+      <p class="lede">${md(game.description, relative)}</p>
       <div class="game-meta">
         <span class="tag">${esc(game.year)}</span>
         <span class="tag">${esc(eraNames[game.era] || game.era)}</span>
@@ -251,7 +274,7 @@ function elsewherePage() {
       <span class="elsewhere-year">${esc(item.year)}</span>
     </div>
     <p class="elsewhere-genre">${esc(item.genre)}</p>
-    <p>${esc(item.description)}</p>
+    <p>${md(item.description)}</p>
     <p class="elsewhere-tags">${item.themes.map(esc).join(" · ")}</p>
     ${credit ? `<p class="elsewhere-credit">Photo: ${esc(credit.artist)} (${esc(credit.license)}) · <a href="${esc(credit.source)}" rel="noopener noreferrer">source</a></p>` : ""}
     <a href="${esc(item.source)}" rel="noopener noreferrer">Source</a>
@@ -328,8 +351,7 @@ function storyPage() {
     <div class="reading-body">
       <p class="reading-kicker">${esc(event.game)}</p>
       <h2>${esc(event.title)}</h2>
-      <p class="reading-summary">${esc(event.summary)}</p>
-      <p>${esc(event.detail)}</p>
+      <div class="md">${md(event.summary)}${md(event.detail)}</div>
       <p class="reading-tags">${[...(event.characters || []), ...(event.locations || [])].map(esc).join(" · ")}</p>
       ${(() => { const g = gameByEra.get(event.era); const related = storyRelated(event); const links = related.map((item) => `<a href="archive.html#lore-${esc(item.id)}">${esc(item.title)}</a>`); if (g) links.unshift(`<a href="games/${esc(g.slug)}/">${esc(g.name)} dossier</a>`); return links.length ? `<p class="reading-related"><strong>Related:</strong> ${links.join(" · ")}</p>` : ""; })()}
     </div>

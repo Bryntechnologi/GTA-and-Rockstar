@@ -43,6 +43,15 @@ if (!executablePath) {
     await page.locator("#searchInput").fill("tommy");
     await page.waitForTimeout(200);
     assert.ok((await page.locator("#searchResults .search-result").count()) > 0, "static search should find lore entries");
+    await page.locator("#searchOverlay").press("Escape");
+
+    await page.locator("#contrastToggle").click();
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.contrast), "high", "contrast toggle should set the high-contrast mode");
+    assert.equal(await page.locator("#contrastToggle").getAttribute("aria-pressed"), "true");
+    await page.reload({ waitUntil: "domcontentloaded" });
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.contrast), "high", "contrast preference should persist");
+    await page.locator("#contrastToggle").click();
+
     assert.equal(await page.locator(".page-tools").count(), 1, "static pages should expose share and reaction tools");
     assert.equal(await page.locator(".reading-progress").count(), 1, "long static pages should expose reading progress");
 

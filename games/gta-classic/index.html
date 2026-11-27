@@ -51,6 +51,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -83,6 +84,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -120,7 +124,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
       <h1>Classic GTA</h1>
-      <p class="lede">The first era runs from the top-down original and its London expansions through GTA2&#39;s retro-futurist Anywhere City and GTA III&#39;s 3D Liberty City. It is the foundation of the entire series: steal cars, take jobs, outrun the consequences.</p>
+      <p class="lede"><p>The first era runs from the top-down original and its London expansions through GTA2&#39;s retro-futurist Anywhere City and GTA III&#39;s 3D Liberty City. It is the foundation of the entire series: steal cars, take jobs, outrun the consequences.</p></p>
       <div class="game-meta">
         <span class="tag">1997–2001</span>
         <span class="tag">GTA VI / Leonida</span>
@@ -139,11 +143,11 @@
       <h2>Lore files</h2>
       <article class="game-entry">    <p class="meta">franchise</p>
     <h3>The franchise, from 1997</h3>
-    <p>Grand Theft Auto began as a top-down crime game from DMA Design and grew into one of the most recognizable open-world series in the medium. Each era added a new city, a new voice, and a new way to measure freedom: from arcade chaos to cinematic scale.</p>
+    <div class="md"><p>Grand Theft Auto began as a top-down crime game from DMA Design and grew into one of the most recognizable open-world series in the medium. Each era added a new city, a new voice, and a new way to measure freedom: from arcade chaos to cinematic scale.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article><article class="game-entry">    <p class="meta">franchise</p>
     <h3>Rockstar Games</h3>
-    <p>Rockstar Games was established as a publishing label under Take-Two Interactive in 1998. Its studios have built a catalog across crime, westerns, noir, and schoolyard satire, with a house style that favors dense worlds, strong radio soundtracks, and sharply observed fiction.</p>
+    <div class="md"><p>Rockstar Games was established as a publishing label under Take-Two Interactive in 1998. Its studios have built a catalog across crime, westerns, noir, and schoolyard satire, with a house style that favors dense worlds, strong radio soundtracks, and sharply observed fiction.</p></div>
     <p class="source-links"><a href="https://en.wikipedia.org/wiki/Rockstar_Games" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="https://gta.fandom.com/wiki/Rockstar_Games" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>
     </section>
@@ -153,48 +157,39 @@
       <article class="game-entry">
     <h3><span class="year">1961</span> London, before the storm</h3>
     <p class="meta">Grand Theft Auto: London 1961</p>
-    <p>A top-down crime spree in a city still rebuilding itself. Small crews, borrowed cars, and a lot of bad decisions.</p>
-    <p>The London expansion strips the series back to period cars, tight streets, and a pre-Beatles underworld. It is less a franchise milestone than a proof of concept: the same chase loop, transplanted into a colder city.</p>
+    <div class="md"><p>A top-down crime spree in a city still rebuilding itself. Small crews, borrowed cars, and a lot of bad decisions.</p><p>The London expansion strips the series back to period cars, tight streets, and a pre-Beatles underworld. It is less a franchise milestone than a proof of concept: the same chase loop, transplanted into a colder city.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1969</span> Swinging London, wrong side of the river</h3>
     <p class="meta">Grand Theft Auto: London 1969</p>
-    <p>The expansion moves the clock forward and the attitude up. British cars, British gangs, and a city that never quite looks away.</p>
-    <p>London 1969 leans into the visual language of the era — minis, mods, and a soundtrack of period pastiche. It remains one of the series&#39; strangest side streets: a full GTA game built as an expansion.</p>
+    <div class="md"><p>The expansion moves the clock forward and the attitude up. British cars, British gangs, and a city that never quite looks away.</p><p>London 1969 leans into the visual language of the era — minis, mods, and a soundtrack of period pastiche. It remains one of the series&#39; strangest side streets: a full GTA game built as an expansion.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1997</span> Liberty City, top-down</h3>
     <p class="meta">Grand Theft Auto</p>
-    <p>The original crime spree begins: steal cars, take jobs, and climb a ladder made of other people&#39;s mistakes.</p>
-    <p>The first GTA established the template: a nameless criminal, a city grid, and a radio dial. Liberty City is the starting point, but the game quickly moves through San Andreas and Vice City, treating each as a new playground.</p>
+    <div class="md"><p>The original crime spree begins: steal cars, take jobs, and climb a ladder made of other people&#39;s mistakes.</p><p>The first GTA established the template: a nameless criminal, a city grid, and a radio dial. Liberty City is the starting point, but the game quickly moves through San Andreas and Vice City, treating each as a new playground.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1997</span> Three cities, one getaway</h3>
     <p class="meta">Grand Theft Auto</p>
-    <p>The original game&#39;s campaign spans multiple cities and ends in the kind of chase that defined the series.</p>
-    <p>GTA&#39;s structure was already episodic: jobs, betrayals, and a final run for freedom. The details are sparse by modern standards, but the rhythm — plan, drive, improvise — is recognisably the series&#39; DNA.</p>
+    <div class="md"><p>The original game&#39;s campaign spans multiple cities and ends in the kind of chase that defined the series.</p><p>GTA&#39;s structure was already episodic: jobs, betrayals, and a final run for freedom. The details are sparse by modern standards, but the rhythm — plan, drive, improvise — is recognisably the series&#39; DNA.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">1999</span> Anywhere City</h3>
     <p class="meta">Grand Theft Auto 2</p>
-    <p>A retro-futurist city, three gangs, and a protagonist with no name and no patience.</p>
-    <p>GTA2 leaned into dystopia: corporations, gangs, and a city that feels permanently on the edge of collapse. The game&#39;s reputation system and gang loyalty mechanics were early attempts at the living-world design the series would later refine.</p>
+    <div class="md"><p>A retro-futurist city, three gangs, and a protagonist with no name and no patience.</p><p>GTA2 leaned into dystopia: corporations, gangs, and a city that feels permanently on the edge of collapse. The game&#39;s reputation system and gang loyalty mechanics were early attempts at the living-world design the series would later refine.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2001</span> Claude is betrayed</h3>
     <p class="meta">Grand Theft Auto III</p>
-    <p>A bank job, a girlfriend with a gun, and a prison transport that does not go as planned. Liberty City goes 3D.</p>
-    <p>The opening of GTA III is still one of the series&#39; cleanest setups: Catalina shoots Claude, leaves him for the police, and accidentally creates a free agent. The rest of the game is Claude climbing back through Liberty City&#39;s criminal hierarchy.</p>
+    <div class="md"><p>A bank job, a girlfriend with a gun, and a prison transport that does not go as planned. Liberty City goes 3D.</p><p>The opening of GTA III is still one of the series&#39; cleanest setups: Catalina shoots Claude, leaves him for the police, and accidentally creates a free agent. The rest of the game is Claude climbing back through Liberty City&#39;s criminal hierarchy.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2001</span> Working for the families</h3>
     <p class="meta">Grand Theft Auto III</p>
-    <p>Claude becomes useful to the Leone family, the Triads, and everyone else with a job that needs doing.</p>
-    <p>GTA III&#39;s middle act is a tour of Liberty City power: the Leone family, the Colombian Cartel, the Yakuza, and a media circus. Claude&#39;s silence makes him a perfect contractor and a complete mystery to everyone around him.</p>
+    <div class="md"><p>Claude becomes useful to the Leone family, the Triads, and everyone else with a job that needs doing.</p><p>GTA III&#39;s middle act is a tour of Liberty City power: the Leone family, the Colombian Cartel, the Yakuza, and a media circus. Claude&#39;s silence makes him a perfect contractor and a complete mystery to everyone around him.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2001</span> The Cartel war</h3>
     <p class="meta">Grand Theft Auto III</p>
-    <p>Catalina returns with a cartel, a hostage, and a very personal score to settle.</p>
-    <p>The Cartel arc turns the game&#39;s opening betrayal into a full-scale war. Asuka, the Yakuza, and the Colombian Cartel all collide, and Claude becomes the one variable nobody can control. The city gets louder and more dangerous.</p>
+    <div class="md"><p>Catalina returns with a cartel, a hostage, and a very personal score to settle.</p><p>The Cartel arc turns the game&#39;s opening betrayal into a full-scale war. Asuka, the Yakuza, and the Colombian Cartel all collide, and Claude becomes the one variable nobody can control. The city gets louder and more dangerous.</p></div>
   </article><article class="game-entry">
     <h3><span class="year">2001</span> The exchange</h3>
     <p class="meta">Grand Theft Auto III</p>
-    <p>A final deal, a final betrayal, and a Liberty City that keeps running long after the credits.</p>
-    <p>The ending of GTA III is deliberately cold: Claude survives, Catalina does not, and the city absorbs another story without changing its expression. It set the tone for every GTA ending that followed.</p>
+    <div class="md"><p>A final deal, a final betrayal, and a Liberty City that keeps running long after the credits.</p><p>The ending of GTA III is deliberately cold: Claude survives, Catalina does not, and the city absorbs another story without changing its expression. It set the tone for every GTA ending that followed.</p></div>
   </article>
     </section>
 

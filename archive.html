@@ -49,6 +49,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
@@ -81,6 +82,9 @@
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
         <div class="utility-cluster">
+          <button class="icon-btn" id="contrastToggle" type="button" aria-pressed="false" aria-label="Toggle high contrast" title="Toggle high contrast">
+            <svg class="icon" aria-hidden="true"><use href="#i-contrast"></use></svg>
+          </button>
           <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
             <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           </button>
@@ -132,7 +136,7 @@
     <article id="lore-leonida-vice-city">
       <h3>Leonida &amp; Vice City</h3>
       <p class="meta">GTA VI / Leonida · location</p>
-      <p>Grand Theft Auto VI returns to the fictional state of Leonida, a sun-bleached peninsula of causeways, wetlands, and neon coastline. Vice City is its loudest address: a modern resort metropolis built for money, music, and bad decisions. The revealed story follows Jason and Lucia through a state that treats every sunset like a premiere.</p>
+      <div class="md"><p>Grand Theft Auto VI returns to the fictional state of Leonida, a sun-bleached peninsula of causeways, wetlands, and neon coastline. Vice City is its loudest address: a modern resort metropolis built for money, music, and bad decisions. The revealed story follows Jason and Lucia through a state that treats every sunset like a premiere.</p></div>
       <p class="tags">Leonida · Vice City · Jason &amp; Lucia</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a> · <a href="archive.html#lore-franchise-1997">The franchise, from 1997</a> · <a href="archive.html#lore-rockstar-games">Rockstar Games</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p>
@@ -141,7 +145,7 @@
     </article><article id="lore-vice-city-1986">
       <h3>Vice City, 1986</h3>
       <p class="meta">Vice City · location</p>
-      <p>The 2002 classic turned the series into a period piece: pastel suits, synth-pop, oceanfront clubs, and a criminal economy with a taste for chrome. Tommy Vercetti arrives in a city that rewards confidence and punishes sentiment, and the game&#39;s radio dial becomes as memorable as its skyline.</p>
+      <div class="md"><p>The 2002 classic turned the series into a period piece: pastel suits, synth-pop, oceanfront clubs, and a criminal economy with a taste for chrome. Tommy Vercetti arrives in a city that rewards confidence and punishes sentiment, and the game&#39;s radio dial becomes as memorable as its skyline.</p></div>
       <p class="tags">1986 · Tommy Vercetti · synth</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p>
@@ -150,7 +154,7 @@
     </article><article id="lore-san-andreas-1992">
       <h3>San Andreas, 1992</h3>
       <p class="meta">San Andreas · location</p>
-      <p>Three cities, one enormous state, and a homecoming story about family, loyalty, and territory. San Andreas mixes early-90s West Coast culture with a road-trip structure: Los Santos, San Fierro, and Las Venturas each bring a different rhythm, skyline, and kind of trouble.</p>
+      <div class="md"><p>Three cities, one enormous state, and a homecoming story about family, loyalty, and territory. San Andreas mixes early-90s West Coast culture with a road-trip structure: Los Santos, San Fierro, and Las Venturas each bring a different rhythm, skyline, and kind of trouble.</p></div>
       <p class="tags">1992 · Los Santos · CJ</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p>
@@ -159,7 +163,7 @@
     </article><article id="lore-los-santos-2013">
       <h3>Los Santos, 2013</h3>
       <p class="meta">GTA V / Los Santos · location</p>
-      <p>Grand Theft Auto V splits its story across three protagonists and one sprawling satirical metropolis. Michael, Franklin, and Trevor move between heists, hobbies, and the entertainment industry&#39;s endless appetite for reinvention. The result is a West Coast playground built around planning, improvisation, and spectacle.</p>
+      <div class="md"><p>Grand Theft Auto V splits its story across three protagonists and one sprawling satirical metropolis. Michael, Franklin, and Trevor move between heists, hobbies, and the entertainment industry&#39;s endless appetite for reinvention. The result is a West Coast playground built around planning, improvisation, and spectacle.</p></div>
       <p class="tags">2013 · three protagonists · heists</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-v/">Grand Theft Auto V dossier</a> · <a href="archive.html#lore-the-v-trio">Michael, Franklin &amp; Trevor</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p>
@@ -168,7 +172,7 @@
     </article><article id="lore-liberty-city-2008">
       <h3>Liberty City, 2008</h3>
       <p class="meta">GTA IV / Liberty City · location</p>
-      <p>Grand Theft Auto IV trades sunshine for overcast steel. Niko Bellic arrives in Liberty City chasing an idea of success and finds a colder city of immigrants, debts, and old wars. The game&#39;s tone is grounded, its streets dense, and its story less about empire than about the cost of trying to leave one behind.</p>
+      <div class="md"><p>Grand Theft Auto IV trades sunshine for overcast steel. Niko Bellic arrives in Liberty City chasing an idea of success and finds a colder city of immigrants, debts, and old wars. The game&#39;s tone is grounded, its streets dense, and its story less about empire than about the cost of trying to leave one behind.</p></div>
       <p class="tags">2008 · Niko Bellic · Liberty City</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p>
@@ -177,7 +181,7 @@
     </article><article id="lore-warriors-1979">
       <h3>The Warriors, 1979</h3>
       <p class="meta">The Warriors · location</p>
-      <p>Rockstar&#39;s brawler expands Walter Hill&#39;s cult film into a long, dangerous night across a stylized New York. Gangs own the subway map, turf is measured in blocks and platforms, and the journey home becomes the whole story. The game&#39;s look leans on graffiti, turnstiles, and fluorescent light.</p>
+      <div class="md"><p>Rockstar&#39;s brawler expands Walter Hill&#39;s cult film into a long, dangerous night across a stylized New York. Gangs own the subway map, turf is measured in blocks and platforms, and the journey home becomes the whole story. The game&#39;s look leans on graffiti, turnstiles, and fluorescent light.</p></div>
       <p class="tags">1979 · New York · gangs</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/the-warriors/">The Warriors dossier</a> · <a href="archive.html#lore-warriors-gangs">The gangs of 1979</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p>
@@ -186,7 +190,7 @@
     </article><article id="lore-frontier-1899">
       <h3>The Frontier, 1899</h3>
       <p class="meta">Red Dead · location</p>
-      <p>Red Dead Redemption 2 is a prequel about the end of an era: a gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city all share the same slow rhythm. The frontier here is less a place to conquer than a story people keep telling themselves.</p>
+      <div class="md"><p>Red Dead Redemption 2 is a prequel about the end of an era: a gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city all share the same slow rhythm. The frontier here is less a place to conquer than a story people keep telling themselves.</p></div>
       <p class="tags">1899 · Van der Linde gang · frontier</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/red-dead/">Red Dead Redemption II dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-los-santos-2013">Los Santos, 2013</a></p>
@@ -195,7 +199,7 @@
     </article><article id="lore-bullworth-2006">
       <h3>Bullworth Academy, 2006</h3>
       <p class="meta">Bully · location</p>
-      <p>Bully trades city blocks for school corridors, cliques, and small-town gossip. Jimmy Hopkins navigates a private academy where the hierarchy is absurdly serious and the calendar is a social weapon. It is a Rockstar game about territory at a much smaller scale, with the same eye for satire.</p>
+      <div class="md"><p>Bully trades city blocks for school corridors, cliques, and small-town gossip. Jimmy Hopkins navigates a private academy where the hierarchy is absurdly serious and the calendar is a social weapon. It is a Rockstar game about territory at a much smaller scale, with the same eye for satire.</p></div>
       <p class="tags">2006 · Bullworth · school</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/bully/">Bully dossier</a> · <a href="archive.html#lore-bullworth-cliques">Bullworth&#39;s cliques</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p>
@@ -207,7 +211,7 @@
     <article id="lore-tommy-vercetti">
       <h3>Tommy Vercetti</h3>
       <p class="meta">Vice City · character</p>
-      <p>A made man with a long memory and a short temper. Tommy arrives in Vice City expecting a debt to be settled and decides to collect the whole city instead. His story is about refusing to be anyone&#39;s subordinate.</p>
+      <div class="md"><p>A made man with a long memory and a short temper. Tommy arrives in Vice City expecting a debt to be settled and decides to collect the whole city instead. His story is about refusing to be anyone&#39;s subordinate.</p></div>
       <p class="tags">protagonist · 1986 · Vercetti</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a></p>
@@ -216,7 +220,7 @@
     </article><article id="lore-carl-johnson">
       <h3>Carl &#39;CJ&#39; Johnson</h3>
       <p class="meta">San Andreas · character</p>
-      <p>A returning son who spends most of San Andreas trying to keep his family together while the city pulls it apart. CJ is loyal, practical, and increasingly aware that loyalty is not a plan.</p>
+      <div class="md"><p>A returning son who spends most of San Andreas trying to keep his family together while the city pulls it apart. CJ is loyal, practical, and increasingly aware that loyalty is not a plan.</p></div>
       <p class="tags">protagonist · 1992 · Grove Street</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a></p>
@@ -225,7 +229,7 @@
     </article><article id="lore-niko-bellic">
       <h3>Niko Bellic</h3>
       <p class="meta">GTA IV / Liberty City · character</p>
-      <p>A war veteran chasing a ghost through Liberty City. Niko&#39;s story is about the difference between the life he was promised and the one he keeps choosing.</p>
+      <div class="md"><p>A war veteran chasing a ghost through Liberty City. Niko&#39;s story is about the difference between the life he was promised and the one he keeps choosing.</p></div>
       <p class="tags">protagonist · 2008 · Liberty City</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p>
@@ -234,7 +238,7 @@
     </article><article id="lore-the-v-trio">
       <h3>Michael, Franklin &amp; Trevor</h3>
       <p class="meta">GTA V / Los Santos · character</p>
-      <p>Three protagonists with incompatible ideas about success. Michael wants meaning, Franklin wants distance from the block, and Trevor wants to be the only honest person in the room.</p>
+      <div class="md"><p>Three protagonists with incompatible ideas about success. Michael wants meaning, Franklin wants distance from the block, and Trevor wants to be the only honest person in the room.</p></div>
       <p class="tags">protagonists · 2013 · heists</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-v/">Grand Theft Auto V dossier</a> · <a href="archive.html#lore-los-santos-2013">Los Santos, 2013</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a></p>
@@ -243,7 +247,7 @@
     </article><article id="lore-jason-lucia">
       <h3>Jason &amp; Lucia</h3>
       <p class="meta">GTA VI / Leonida · character</p>
-      <p>The revealed leads of GTA VI: a partnership built on trust in a state that rewards self-interest. Their story is framed as a modern crime romance rather than a lone-wolf rise.</p>
+      <div class="md"><p>The revealed leads of GTA VI: a partnership built on trust in a state that rewards self-interest. Their story is framed as a modern crime romance rather than a lone-wolf rise.</p></div>
       <p class="tags">protagonists · 2026 · Leonida</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-franchise-1997">The franchise, from 1997</a> · <a href="archive.html#lore-rockstar-games">Rockstar Games</a> · <a href="archive.html#lore-the-v-trio">Michael, Franklin &amp; Trevor</a></p>
@@ -255,7 +259,7 @@
     <article id="lore-grove-street">
       <h3>Grove Street Families</h3>
       <p class="meta">San Andreas · faction</p>
-      <p>A neighbourhood outfit defined by history, loyalty, and a losing war for territory. Grove Street is less a gang than a memory of one, which is exactly what makes it worth fighting for.</p>
+      <div class="md"><p>A neighbourhood outfit defined by history, loyalty, and a losing war for territory. Grove Street is less a gang than a memory of one, which is exactly what makes it worth fighting for.</p></div>
       <p class="tags">gang · 1992 · Los Santos</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a> · <a href="archive.html#lore-the-lost">The Lost MC</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p>
@@ -264,7 +268,7 @@
     </article><article id="lore-the-lost">
       <h3>The Lost MC</h3>
       <p class="meta">GTA IV / Liberty City · faction</p>
-      <p>A motorcycle club held together by tradition and torn apart by ego. The Lost are at their most dangerous when they are trying to prove they still matter.</p>
+      <div class="md"><p>A motorcycle club held together by tradition and torn apart by ego. The Lost are at their most dangerous when they are trying to prove they still matter.</p></div>
       <p class="tags">club · 2009 · Alderney</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p>
@@ -273,7 +277,7 @@
     </article><article id="lore-vercetti-gang">
       <h3>The Vercetti Organisation</h3>
       <p class="meta">Vice City · faction</p>
-      <p>A crew built out of borrowed loyalty and purchased property. By the end of 1986 it controls clubs, businesses, and the kind of silence that money can buy.</p>
+      <div class="md"><p>A crew built out of borrowed loyalty and purchased property. By the end of 1986 it controls clubs, businesses, and the kind of silence that money can buy.</p></div>
       <p class="tags">crew · 1986 · empire</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p>
@@ -282,7 +286,7 @@
     </article><article id="lore-warriors-gangs">
       <h3>The gangs of 1979</h3>
       <p class="meta">The Warriors · faction</p>
-      <p>The Warriors turns the New York night into a patchwork of turf, colours, and grudges. Every bridge is a border and every train car is somebody&#39;s territory.</p>
+      <div class="md"><p>The Warriors turns the New York night into a patchwork of turf, colours, and grudges. Every bridge is a border and every train car is somebody&#39;s territory.</p></div>
       <p class="tags">gangs · 1979 · New York</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/the-warriors/">The Warriors dossier</a> · <a href="archive.html#lore-warriors-1979">The Warriors, 1979</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-the-lost">The Lost MC</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p>
@@ -291,7 +295,7 @@
     </article><article id="lore-bullworth-cliques">
       <h3>Bullworth&#39;s cliques</h3>
       <p class="meta">Bully · faction</p>
-      <p>Bullworth Academy is a small world with big politics: jocks, preppies, greasers, nerds, and everyone else trying to survive the timetable. The satire is sharp because the stakes feel real.</p>
+      <div class="md"><p>Bullworth Academy is a small world with big politics: jocks, preppies, greasers, nerds, and everyone else trying to survive the timetable. The satire is sharp because the stakes feel real.</p></div>
       <p class="tags">cliques · 2006 · school</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/bully/">Bully dossier</a> · <a href="archive.html#lore-bullworth-2006">Bullworth Academy, 2006</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-the-lost">The Lost MC</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p>
@@ -303,7 +307,7 @@
     <article id="lore-franchise-1997">
       <h3>The franchise, from 1997</h3>
       <p class="meta">GTA VI / Leonida · franchise</p>
-      <p>Grand Theft Auto began as a top-down crime game from DMA Design and grew into one of the most recognizable open-world series in the medium. Each era added a new city, a new voice, and a new way to measure freedom: from arcade chaos to cinematic scale.</p>
+      <div class="md"><p>Grand Theft Auto began as a top-down crime game from DMA Design and grew into one of the most recognizable open-world series in the medium. Each era added a new city, a new voice, and a new way to measure freedom: from arcade chaos to cinematic scale.</p></div>
       <p class="tags">1997 · history · DMA Design</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-rockstar-games">Rockstar Games</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a></p>
@@ -312,7 +316,7 @@
     </article><article id="lore-rockstar-games">
       <h3>Rockstar Games</h3>
       <p class="meta">GTA VI / Leonida · franchise</p>
-      <p>Rockstar Games was established as a publishing label under Take-Two Interactive in 1998. Its studios have built a catalog across crime, westerns, noir, and schoolyard satire, with a house style that favors dense worlds, strong radio soundtracks, and sharply observed fiction.</p>
+      <div class="md"><p>Rockstar Games was established as a publishing label under Take-Two Interactive in 1998. Its studios have built a catalog across crime, westerns, noir, and schoolyard satire, with a house style that favors dense worlds, strong radio soundtracks, and sharply observed fiction.</p></div>
       <p class="tags">1998 · publisher · studios</p>
       <div class="related-links">
     <p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-franchise-1997">The franchise, from 1997</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a></p>
@@ -327,246 +331,211 @@
       <article id="story-london-1961">
   <h3><span class="year">1961</span> London, before the storm</h3>
   <p class="meta">Grand Theft Auto: London 1961 · Vice City</p>
-  <p>A top-down crime spree in a city still rebuilding itself. Small crews, borrowed cars, and a lot of bad decisions.</p>
-  <p>The London expansion strips the series back to period cars, tight streets, and a pre-Beatles underworld. It is less a franchise milestone than a proof of concept: the same chase loop, transplanted into a colder city.</p>
+  <div class="md"><p>A top-down crime spree in a city still rebuilding itself. Small crews, borrowed cars, and a lot of bad decisions.</p><p>The London expansion strips the series back to period cars, tight streets, and a pre-Beatles underworld. It is less a franchise milestone than a proof of concept: the same chase loop, transplanted into a colder city.</p></div>
   <p class="tags">The London protagonist · London</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p></div>
 </article><article id="story-london-1969">
   <h3><span class="year">1969</span> Swinging London, wrong side of the river</h3>
   <p class="meta">Grand Theft Auto: London 1969 · Vice City</p>
-  <p>The expansion moves the clock forward and the attitude up. British cars, British gangs, and a city that never quite looks away.</p>
-  <p>London 1969 leans into the visual language of the era — minis, mods, and a soundtrack of period pastiche. It remains one of the series&#39; strangest side streets: a full GTA game built as an expansion.</p>
+  <div class="md"><p>The expansion moves the clock forward and the attitude up. British cars, British gangs, and a city that never quite looks away.</p><p>London 1969 leans into the visual language of the era — minis, mods, and a soundtrack of period pastiche. It remains one of the series&#39; strangest side streets: a full GTA game built as an expansion.</p></div>
   <p class="tags">The London protagonist · London</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p></div>
 </article><article id="story-vcs-1984-arrival">
   <h3><span class="year">1984</span> Victor Vance arrives</h3>
   <p class="meta">Grand Theft Auto: Vice City Stories · Vice City</p>
-  <p>A soldier returns to Vice City looking for a clean way out and finds a city that only trades in complications.</p>
-  <p>Victor Vance&#39;s story is a tragedy in slow motion: family loyalty, military connections, and a drug economy that turns every favour into a debt. The game ends with him alive but compromised, which makes the opening of Vice City land harder.</p>
+  <div class="md"><p>A soldier returns to Vice City looking for a clean way out and finds a city that only trades in complications.</p><p>Victor Vance&#39;s story is a tragedy in slow motion: family loyalty, military connections, and a drug economy that turns every favour into a debt. The game ends with him alive but compromised, which makes the opening of Vice City land harder.</p></div>
   <p class="tags">Victor Vance · Lance Vance · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a></p></div>
 </article><article id="story-vcs-1984-empire">
   <h3><span class="year">1984</span> The Vance empire</h3>
   <p class="meta">Grand Theft Auto: Vice City Stories · Vice City</p>
-  <p>Victor builds a criminal operation out of borrowed muscle and family obligation. Every new asset comes with a new enemy.</p>
-  <p>By the end of Vice City Stories, Victor controls territory, businesses, and a growing reputation. The cost is the relationship with his brother Lance and the knowledge that the city always collects. His death in the opening of Vice City is the punchline to this setup.</p>
+  <div class="md"><p>Victor builds a criminal operation out of borrowed muscle and family obligation. Every new asset comes with a new enemy.</p><p>By the end of Vice City Stories, Victor controls territory, businesses, and a growing reputation. The cost is the relationship with his brother Lance and the knowledge that the city always collects. His death in the opening of Vice City is the punchline to this setup.</p></div>
   <p class="tags">Victor Vance · Lance Vance · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a></p></div>
 </article><article id="story-vc-1986-arrival">
   <h3><span class="year">1986</span> Tommy Vercetti gets out</h3>
   <p class="meta">Grand Theft Auto: Vice City · Vice City</p>
-  <p>A prison sentence ends and a new one begins: a drug deal on the beach goes wrong, and Tommy has to improvise.</p>
-  <p>Tommy arrives in Vice City expecting a clean handoff. The deal is ambushed, the money disappears, and the people who sent him want answers. The game&#39;s opening is a masterclass in tone: sun, neon, and immediate violence.</p>
+  <div class="md"><p>A prison sentence ends and a new one begins: a drug deal on the beach goes wrong, and Tommy has to improvise.</p><p>Tommy arrives in Vice City expecting a clean handoff. The deal is ambushed, the money disappears, and the people who sent him want answers. The game&#39;s opening is a masterclass in tone: sun, neon, and immediate violence.</p></div>
   <p class="tags">Tommy Vercetti · Sonny Forelli · Lance Vance · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p></div>
 </article><article id="story-vc-1986-rise">
   <h3><span class="year">1986</span> The Vercetti rise</h3>
   <p class="meta">Grand Theft Auto: Vice City · Vice City</p>
-  <p>Tommy works his way through the city&#39;s power brokers, buying property and collecting enemies in equal measure.</p>
-  <p>The middle act is an empire-building montage: clubs, businesses, assassination contracts, and a growing crew. Tommy&#39;s refusal to be a subordinate turns a debt into a takeover, and Vice City starts to feel like his city.</p>
+  <div class="md"><p>Tommy works his way through the city&#39;s power brokers, buying property and collecting enemies in equal measure.</p><p>The middle act is an empire-building montage: clubs, businesses, assassination contracts, and a growing crew. Tommy&#39;s refusal to be a subordinate turns a debt into a takeover, and Vice City starts to feel like his city.</p></div>
   <p class="tags">Tommy Vercetti · Lance Vance · Diaz · Vice City · Starfish Island</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p></div>
 </article><article id="story-vc-1986-lance">
   <h3><span class="year">1986</span> Lance Vance changes sides</h3>
   <p class="meta">Grand Theft Auto: Vice City · Vice City</p>
-  <p>The alliance at the centre of Tommy&#39;s rise starts to fracture. Loyalty in Vice City is always a temporary arrangement.</p>
-  <p>Lance&#39;s resentment and Sonny Forelli&#39;s pressure converge. Tommy&#39;s empire is strong enough to survive the city, but not strong enough to survive the people closest to it. The betrayal sets up the final confrontation.</p>
+  <div class="md"><p>The alliance at the centre of Tommy&#39;s rise starts to fracture. Loyalty in Vice City is always a temporary arrangement.</p><p>Lance&#39;s resentment and Sonny Forelli&#39;s pressure converge. Tommy&#39;s empire is strong enough to survive the city, but not strong enough to survive the people closest to it. The betrayal sets up the final confrontation.</p></div>
   <p class="tags">Tommy Vercetti · Lance Vance · Sonny Forelli · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p></div>
 </article><article id="story-vc-1986-finale">
   <h3><span class="year">1986</span> The last stand at the mansion</h3>
   <p class="meta">Grand Theft Auto: Vice City · Vice City</p>
-  <p>Sonny comes to collect, Lance makes his choice, and Tommy settles the debt with a very loud house call.</p>
-  <p>The finale is a siege: Tommy alone against Sonny&#39;s men, with Lance on the wrong side. When it ends, Tommy is the last one standing in a mansion that now belongs to him. The city is quiet for exactly one sunset.</p>
+  <div class="md"><p>Sonny comes to collect, Lance makes his choice, and Tommy settles the debt with a very loud house call.</p><p>The finale is a siege: Tommy alone against Sonny&#39;s men, with Lance on the wrong side. When it ends, Tommy is the last one standing in a mansion that now belongs to him. The city is quiet for exactly one sunset.</p></div>
   <p class="tags">Tommy Vercetti · Lance Vance · Sonny Forelli · Vice City · Starfish Island</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/vice-city/">Grand Theft Auto: Vice City dossier</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a> · <a href="archive.html#lore-tommy-vercetti">Tommy Vercetti</a> · <a href="archive.html#lore-vercetti-gang">The Vercetti Organisation</a></p></div>
 </article><article id="story-sa-1992-return">
   <h3><span class="year">1992</span> CJ comes home</h3>
   <p class="meta">Grand Theft Auto: San Andreas · San Andreas</p>
-  <p>Five years away, a funeral, and a neighbourhood that has moved on without him. Carl Johnson returns to Los Santos.</p>
-  <p>The opening of San Andreas is a homecoming story: CJ finds his mother dead, his family scattered, and the Grove Street Families losing ground. The game&#39;s first act is about rebuilding trust before it becomes about rebuilding an empire.</p>
+  <div class="md"><p>Five years away, a funeral, and a neighbourhood that has moved on without him. Carl Johnson returns to Los Santos.</p><p>The opening of San Andreas is a homecoming story: CJ finds his mother dead, his family scattered, and the Grove Street Families losing ground. The game&#39;s first act is about rebuilding trust before it becomes about rebuilding an empire.</p></div>
   <p class="tags">Carl Johnson · Sweet · Big Smoke · Ryder · Los Santos · Grove Street</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a></p></div>
 </article><article id="story-sa-1992-grove">
   <h3><span class="year">1992</span> Grove Street vs the Ballas</h3>
   <p class="meta">Grand Theft Auto: San Andreas · San Andreas</p>
-  <p>Territory, drive-bys, and a family under pressure. The neighbourhood war escalates while the people closest to CJ make other plans.</p>
-  <p>The gang war is both personal and structural: the Ballas have backing, Grove has history, and the police treat the whole block as a problem to manage. CJ&#39;s loyalty is tested long before the bigger conspiracy surfaces.</p>
+  <div class="md"><p>Territory, drive-bys, and a family under pressure. The neighbourhood war escalates while the people closest to CJ make other plans.</p><p>The gang war is both personal and structural: the Ballas have backing, Grove has history, and the police treat the whole block as a problem to manage. CJ&#39;s loyalty is tested long before the bigger conspiracy surfaces.</p></div>
   <p class="tags">Carl Johnson · Sweet · Big Smoke · Ryder · Los Santos · Grove Street</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a></p></div>
 </article><article id="story-sa-1992-san-fierro">
   <h3><span class="year">1992</span> San Fierro and the Loco Syndicate</h3>
   <p class="meta">Grand Theft Auto: San Andreas · San Andreas</p>
-  <p>The story widens beyond Los Santos: a new city, a new garage, and a drug network with ties back home.</p>
-  <p>San Fierro gives CJ a base, a cover business, and a target. The Loco Syndicate arc connects the street-level betrayal to a larger criminal supply chain, and introduces Mike Toreno as a very different kind of antagonist.</p>
+  <div class="md"><p>The story widens beyond Los Santos: a new city, a new garage, and a drug network with ties back home.</p><p>San Fierro gives CJ a base, a cover business, and a target. The Loco Syndicate arc connects the street-level betrayal to a larger criminal supply chain, and introduces Mike Toreno as a very different kind of antagonist.</p></div>
   <p class="tags">Carl Johnson · Mike Toreno · Wu Zi Mu · San Fierro</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a></p></div>
 </article><article id="story-sa-1992-venturas">
   <h3><span class="year">1992</span> The Caligula&#39;s heist</h3>
   <p class="meta">Grand Theft Auto: San Andreas · San Andreas</p>
-  <p>Las Venturas, a casino, and a plan that depends on too many people behaving predictably.</p>
-  <p>The Caligula&#39;s arc is San Andreas at its most cinematic: surveillance, preparation, and a heist that becomes a power struggle between criminal organisations. It is also where the game&#39;s three-city structure pays off.</p>
+  <div class="md"><p>Las Venturas, a casino, and a plan that depends on too many people behaving predictably.</p><p>The Caligula&#39;s arc is San Andreas at its most cinematic: surveillance, preparation, and a heist that becomes a power struggle between criminal organisations. It is also where the game&#39;s three-city structure pays off.</p></div>
   <p class="tags">Carl Johnson · Wu Zi Mu · Ken Rosenberg · Las Venturas · Caligula&#39;s Palace</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a></p></div>
 </article><article id="story-sa-1992-homecoming">
   <h3><span class="year">1992</span> The homecoming</h3>
   <p class="meta">Grand Theft Auto: San Andreas · San Andreas</p>
-  <p>Los Santos riots, old friends return, and CJ finally gets to settle the score with the people who sold out Grove Street.</p>
-  <p>The final act ties the gang war, the police corruption, and the family betrayal together. CJ&#39;s return to Grove Street is not a victory lap; it is a cleanup. The last confrontation is personal, and the city keeps burning behind it.</p>
+  <div class="md"><p>Los Santos riots, old friends return, and CJ finally gets to settle the score with the people who sold out Grove Street.</p><p>The final act ties the gang war, the police corruption, and the family betrayal together. CJ&#39;s return to Grove Street is not a victory lap; it is a cleanup. The last confrontation is personal, and the city keeps burning behind it.</p></div>
   <p class="tags">Carl Johnson · Sweet · Big Smoke · Officer Tenpenny · Los Santos · Grove Street</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/san-andreas/">Grand Theft Auto: San Andreas dossier</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a> · <a href="archive.html#lore-carl-johnson">Carl &#39;CJ&#39; Johnson</a></p></div>
 </article><article id="story-gta1-1997-liberty">
   <h3><span class="year">1997</span> Liberty City, top-down</h3>
   <p class="meta">Grand Theft Auto · GTA VI / Leonida</p>
-  <p>The original crime spree begins: steal cars, take jobs, and climb a ladder made of other people&#39;s mistakes.</p>
-  <p>The first GTA established the template: a nameless criminal, a city grid, and a radio dial. Liberty City is the starting point, but the game quickly moves through San Andreas and Vice City, treating each as a new playground.</p>
+  <div class="md"><p>The original crime spree begins: steal cars, take jobs, and climb a ladder made of other people&#39;s mistakes.</p><p>The first GTA established the template: a nameless criminal, a city grid, and a radio dial. Liberty City is the starting point, but the game quickly moves through San Andreas and Vice City, treating each as a new playground.</p></div>
   <p class="tags">The GTA protagonist · Liberty City · San Andreas · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-franchise-1997">The franchise, from 1997</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p></div>
 </article><article id="story-gta1-1997-chase">
   <h3><span class="year">1997</span> Three cities, one getaway</h3>
   <p class="meta">Grand Theft Auto · GTA VI / Leonida</p>
-  <p>The original game&#39;s campaign spans multiple cities and ends in the kind of chase that defined the series.</p>
-  <p>GTA&#39;s structure was already episodic: jobs, betrayals, and a final run for freedom. The details are sparse by modern standards, but the rhythm — plan, drive, improvise — is recognisably the series&#39; DNA.</p>
+  <div class="md"><p>The original game&#39;s campaign spans multiple cities and ends in the kind of chase that defined the series.</p><p>GTA&#39;s structure was already episodic: jobs, betrayals, and a final run for freedom. The details are sparse by modern standards, but the rhythm — plan, drive, improvise — is recognisably the series&#39; DNA.</p></div>
   <p class="tags">The GTA protagonist · Liberty City · San Andreas · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-franchise-1997">The franchise, from 1997</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p></div>
 </article><article id="story-gta2-1999-anywhere">
   <h3><span class="year">1999</span> Anywhere City</h3>
   <p class="meta">Grand Theft Auto 2 · GTA IV / Liberty City</p>
-  <p>A retro-futurist city, three gangs, and a protagonist with no name and no patience.</p>
-  <p>GTA2 leaned into dystopia: corporations, gangs, and a city that feels permanently on the edge of collapse. The game&#39;s reputation system and gang loyalty mechanics were early attempts at the living-world design the series would later refine.</p>
+  <div class="md"><p>A retro-futurist city, three gangs, and a protagonist with no name and no patience.</p><p>GTA2 leaned into dystopia: corporations, gangs, and a city that feels permanently on the edge of collapse. The game&#39;s reputation system and gang loyalty mechanics were early attempts at the living-world design the series would later refine.</p></div>
   <p class="tags">Claude Speed · Anywhere City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-warriors-1979">The Warriors, 1979</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a></p></div>
 </article><article id="story-gta3-2001-betrayal">
   <h3><span class="year">2001</span> Claude is betrayed</h3>
   <p class="meta">Grand Theft Auto III · GTA IV / Liberty City</p>
-  <p>A bank job, a girlfriend with a gun, and a prison transport that does not go as planned. Liberty City goes 3D.</p>
-  <p>The opening of GTA III is still one of the series&#39; cleanest setups: Catalina shoots Claude, leaves him for the police, and accidentally creates a free agent. The rest of the game is Claude climbing back through Liberty City&#39;s criminal hierarchy.</p>
+  <div class="md"><p>A bank job, a girlfriend with a gun, and a prison transport that does not go as planned. Liberty City goes 3D.</p><p>The opening of GTA III is still one of the series&#39; cleanest setups: Catalina shoots Claude, leaves him for the police, and accidentally creates a free agent. The rest of the game is Claude climbing back through Liberty City&#39;s criminal hierarchy.</p></div>
   <p class="tags">Claude · Catalina · Liberty City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-gta3-2001-families">
   <h3><span class="year">2001</span> Working for the families</h3>
   <p class="meta">Grand Theft Auto III · GTA IV / Liberty City</p>
-  <p>Claude becomes useful to the Leone family, the Triads, and everyone else with a job that needs doing.</p>
-  <p>GTA III&#39;s middle act is a tour of Liberty City power: the Leone family, the Colombian Cartel, the Yakuza, and a media circus. Claude&#39;s silence makes him a perfect contractor and a complete mystery to everyone around him.</p>
+  <div class="md"><p>Claude becomes useful to the Leone family, the Triads, and everyone else with a job that needs doing.</p><p>GTA III&#39;s middle act is a tour of Liberty City power: the Leone family, the Colombian Cartel, the Yakuza, and a media circus. Claude&#39;s silence makes him a perfect contractor and a complete mystery to everyone around him.</p></div>
   <p class="tags">Claude · Salvatore Leone · Asuka Kasen · Liberty City · Staunton Island</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-grove-street">Grove Street Families</a></p></div>
 </article><article id="story-gta3-2001-cartel">
   <h3><span class="year">2001</span> The Cartel war</h3>
   <p class="meta">Grand Theft Auto III · GTA IV / Liberty City</p>
-  <p>Catalina returns with a cartel, a hostage, and a very personal score to settle.</p>
-  <p>The Cartel arc turns the game&#39;s opening betrayal into a full-scale war. Asuka, the Yakuza, and the Colombian Cartel all collide, and Claude becomes the one variable nobody can control. The city gets louder and more dangerous.</p>
+  <div class="md"><p>Catalina returns with a cartel, a hostage, and a very personal score to settle.</p><p>The Cartel arc turns the game&#39;s opening betrayal into a full-scale war. Asuka, the Yakuza, and the Colombian Cartel all collide, and Claude becomes the one variable nobody can control. The city gets louder and more dangerous.</p></div>
   <p class="tags">Claude · Catalina · Asuka Kasen · Liberty City · Shoreside Vale</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-gta3-2001-exchange">
   <h3><span class="year">2001</span> The exchange</h3>
   <p class="meta">Grand Theft Auto III · GTA IV / Liberty City</p>
-  <p>A final deal, a final betrayal, and a Liberty City that keeps running long after the credits.</p>
-  <p>The ending of GTA III is deliberately cold: Claude survives, Catalina does not, and the city absorbs another story without changing its expression. It set the tone for every GTA ending that followed.</p>
+  <div class="md"><p>A final deal, a final betrayal, and a Liberty City that keeps running long after the credits.</p><p>The ending of GTA III is deliberately cold: Claude survives, Catalina does not, and the city absorbs another story without changing its expression. It set the tone for every GTA ending that followed.</p></div>
   <p class="tags">Claude · Catalina · Liberty City · Shoreside Vale</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-gta4-2008-arrival">
   <h3><span class="year">2008</span> Niko Bellic arrives</h3>
   <p class="meta">Grand Theft Auto IV · GTA IV / Liberty City</p>
-  <p>A war veteran comes to Liberty City chasing an old promise and finds his cousin&#39;s life was mostly a sales pitch.</p>
-  <p>Niko&#39;s arrival is the series&#39; most grounded opening: a cramped apartment, a cousin with debts, and a city that offers work before it offers answers. The immigrant story gives GTA IV its emotional weight.</p>
+  <div class="md"><p>A war veteran comes to Liberty City chasing an old promise and finds his cousin&#39;s life was mostly a sales pitch.</p><p>Niko&#39;s arrival is the series&#39; most grounded opening: a cramped apartment, a cousin with debts, and a city that offers work before it offers answers. The immigrant story gives GTA IV its emotional weight.</p></div>
   <p class="tags">Niko Bellic · Roman Bellic · Liberty City · Hove Beach</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-gta4-2008-debts">
   <h3><span class="year">2008</span> Blood and debts</h3>
   <p class="meta">Grand Theft Auto IV · GTA IV / Liberty City</p>
-  <p>Niko&#39;s search for the man who betrayed his unit pulls him into loan sharks, gangsters, and a war he did not start.</p>
-  <p>The middle of GTA IV is a web of obligation: Roman&#39;s gambling, Dimitri&#39;s manipulations, and the gradual revelation of what happened to Niko&#39;s squad. The city&#39;s optimism curdles into something colder.</p>
+  <div class="md"><p>Niko&#39;s search for the man who betrayed his unit pulls him into loan sharks, gangsters, and a war he did not start.</p><p>The middle of GTA IV is a web of obligation: Roman&#39;s gambling, Dimitri&#39;s manipulations, and the gradual revelation of what happened to Niko&#39;s squad. The city&#39;s optimism curdles into something colder.</p></div>
   <p class="tags">Niko Bellic · Roman Bellic · Dimitri Rascalov · Liberty City · Broker · Bohan</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-gta4-2008-choice">
   <h3><span class="year">2008</span> Deal or revenge</h3>
   <p class="meta">Grand Theft Auto IV · GTA IV / Liberty City</p>
-  <p>The story&#39;s final choice is not about money or loyalty. It is about whether Niko can live with either answer.</p>
-  <p>The Deal ending costs Roman his life; the Revenge ending costs Kate hers. GTA IV refuses a clean victory. Whichever path the player chooses, Liberty City keeps its ledger balanced and Niko keeps carrying the cost.</p>
+  <div class="md"><p>The story&#39;s final choice is not about money or loyalty. It is about whether Niko can live with either answer.</p><p>The Deal ending costs Roman his life; the Revenge ending costs Kate hers. GTA IV refuses a clean victory. Whichever path the player chooses, Liberty City keeps its ledger balanced and Niko keeps carrying the cost.</p></div>
   <p class="tags">Niko Bellic · Roman Bellic · Kate McReary · Dimitri Rascalov · Liberty City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-gta4-2008-diamonds">
   <h3><span class="year">2008</span> The diamond deal</h3>
   <p class="meta">Grand Theft Auto IV · GTA IV / Liberty City</p>
-  <p>A bag of diamonds passes through too many hands, linking Niko&#39;s story to the two episodes that follow.</p>
-  <p>The diamond exchange is the connective tissue of the GTA IV era: a single botched deal that pulls in the Lost MC, Gay Tony&#39;s nightlife, and Niko&#39;s own circle. It is the series&#39; clearest example of a shared criminal ecosystem.</p>
+  <div class="md"><p>A bag of diamonds passes through too many hands, linking Niko&#39;s story to the two episodes that follow.</p><p>The diamond exchange is the connective tissue of the GTA IV era: a single botched deal that pulls in the Lost MC, Gay Tony&#39;s nightlife, and Niko&#39;s own circle. It is the series&#39; clearest example of a shared criminal ecosystem.</p></div>
   <p class="tags">Niko Bellic · Johnny Klebitz · Luis Lopez · Tony Prince · Liberty City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-eflc-2009-lost">
   <h3><span class="year">2009</span> The Lost MC fractures</h3>
   <p class="meta">Grand Theft Auto IV: The Lost and Damned · GTA IV / Liberty City</p>
-  <p>Johnny Klebitz tries to hold a motorcycle club together while its president pushes it toward a war it cannot win.</p>
-  <p>The Lost and Damned is a story about loyalty in a culture that mistakes loyalty for obedience. Johnny&#39;s attempts to keep the club solvent collide with Billy Grey&#39;s recklessness, and the fallout leaves the Lost weaker and angrier.</p>
+  <div class="md"><p>Johnny Klebitz tries to hold a motorcycle club together while its president pushes it toward a war it cannot win.</p><p>The Lost and Damned is a story about loyalty in a culture that mistakes loyalty for obedience. Johnny&#39;s attempts to keep the club solvent collide with Billy Grey&#39;s recklessness, and the fallout leaves the Lost weaker and angrier.</p></div>
   <p class="tags">Johnny Klebitz · Billy Grey · Jim Fitzgerald · Liberty City · Alderney</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-the-lost">The Lost MC</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a></p></div>
 </article><article id="story-eflc-2009-tony">
   <h3><span class="year">2009</span> Nightlife on the edge</h3>
   <p class="meta">Grand Theft Auto IV: The Ballad of Gay Tony · GTA IV / Liberty City</p>
-  <p>Luis Lopez keeps Tony Prince&#39;s clubs running while the money, the drugs, and the Russians all want a piece.</p>
-  <p>The Ballad of Gay Tony is the flashiest of the GTA IV stories and the most anxious underneath. Luis is the competent one in a room full of people who have already spent the money. The finale ties back to the diamond deal and closes the IV-era trilogy.</p>
+  <div class="md"><p>Luis Lopez keeps Tony Prince&#39;s clubs running while the money, the drugs, and the Russians all want a piece.</p><p>The Ballad of Gay Tony is the flashiest of the GTA IV stories and the most anxious underneath. Luis is the competent one in a room full of people who have already spent the money. The finale ties back to the diamond deal and closes the IV-era trilogy.</p></div>
   <p class="tags">Luis Lopez · Tony Prince · Ray Bulgarin · Liberty City · Algonquin</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-iv/">Grand Theft Auto IV dossier</a> · <a href="archive.html#lore-liberty-city-2008">Liberty City, 2008</a> · <a href="archive.html#lore-niko-bellic">Niko Bellic</a> · <a href="archive.html#lore-the-lost">The Lost MC</a></p></div>
 </article><article id="story-gta5-2013-reunion">
   <h3><span class="year">2013</span> Three men, one city</h3>
   <p class="meta">Grand Theft Auto V · GTA V / Los Santos</p>
-  <p>Michael is bored, Franklin wants more, and Trevor is a live grenade with a driver&#39;s licence. Los Santos brings them together.</p>
-  <p>GTA V opens with a North Yankton heist and then jumps forward to a sunlit Los Santos where Michael&#39;s retirement is falling apart. Franklin&#39;s ambition and Trevor&#39;s chaos turn a midlife crisis into a criminal partnership.</p>
+  <div class="md"><p>Michael is bored, Franklin wants more, and Trevor is a live grenade with a driver&#39;s licence. Los Santos brings them together.</p><p>GTA V opens with a North Yankton heist and then jumps forward to a sunlit Los Santos where Michael&#39;s retirement is falling apart. Franklin&#39;s ambition and Trevor&#39;s chaos turn a midlife crisis into a criminal partnership.</p></div>
   <p class="tags">Michael De Santa · Franklin Clinton · Trevor Philips · Los Santos · North Yankton</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-v/">Grand Theft Auto V dossier</a> · <a href="archive.html#lore-los-santos-2013">Los Santos, 2013</a> · <a href="archive.html#lore-the-v-trio">Michael, Franklin &amp; Trevor</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p></div>
 </article><article id="story-gta5-2013-first-heists">
   <h3><span class="year">2013</span> The first scores</h3>
   <p class="meta">Grand Theft Auto V · GTA V / Los Santos</p>
-  <p>A jewellery store, a motorbike, and a plan that works just well enough to attract bigger problems.</p>
-  <p>The early heists establish GTA V&#39;s structure: preparation, crew choice, and improvisation. Franklin&#39;s first jobs with Michael turn into a partnership, while Trevor&#39;s presence makes every plan less stable and more profitable.</p>
+  <div class="md"><p>A jewellery store, a motorbike, and a plan that works just well enough to attract bigger problems.</p><p>The early heists establish GTA V&#39;s structure: preparation, crew choice, and improvisation. Franklin&#39;s first jobs with Michael turn into a partnership, while Trevor&#39;s presence makes every plan less stable and more profitable.</p></div>
   <p class="tags">Michael De Santa · Franklin Clinton · Trevor Philips · Lester Crest · Los Santos · Vinewood</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-v/">Grand Theft Auto V dossier</a> · <a href="archive.html#lore-los-santos-2013">Los Santos, 2013</a> · <a href="archive.html#lore-the-v-trio">Michael, Franklin &amp; Trevor</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p></div>
 </article><article id="story-gta5-2013-trevor">
   <h3><span class="year">2013</span> Trevor finds out</h3>
   <p class="meta">Grand Theft Auto V · GTA V / Los Santos</p>
-  <p>The past catches up with Michael in the most volatile way possible: Trevor learns the truth about North Yankton.</p>
-  <p>Trevor&#39;s discovery reframes the entire story. Michael&#39;s retirement was built on a lie, and the reunion becomes a hostage situation with old friends. The game&#39;s tone shifts from satire to something more personal and dangerous.</p>
+  <div class="md"><p>The past catches up with Michael in the most volatile way possible: Trevor learns the truth about North Yankton.</p><p>Trevor&#39;s discovery reframes the entire story. Michael&#39;s retirement was built on a lie, and the reunion becomes a hostage situation with old friends. The game&#39;s tone shifts from satire to something more personal and dangerous.</p></div>
   <p class="tags">Michael De Santa · Trevor Philips · Franklin Clinton · Los Santos · Sandy Shores · North Yankton</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-v/">Grand Theft Auto V dossier</a> · <a href="archive.html#lore-los-santos-2013">Los Santos, 2013</a> · <a href="archive.html#lore-the-v-trio">Michael, Franklin &amp; Trevor</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p></div>
 </article><article id="story-gta5-2013-agency">
   <h3><span class="year">2013</span> The agency years</h3>
   <p class="meta">Grand Theft Auto V · GTA V / Los Santos</p>
-  <p>The trio become assets for people with badges, budgets, and no intention of sharing the credit.</p>
-  <p>The FIB and Merryweather arcs turn the crew into deniable contractors. Every favour creates a new liability, and the line between criminal and government work becomes a joke the characters stop laughing at.</p>
+  <div class="md"><p>The trio become assets for people with badges, budgets, and no intention of sharing the credit.</p><p>The FIB and Merryweather arcs turn the crew into deniable contractors. Every favour creates a new liability, and the line between criminal and government work becomes a joke the characters stop laughing at.</p></div>
   <p class="tags">Michael De Santa · Franklin Clinton · Trevor Philips · Dave Norton · Steve Haines · Los Santos · Fort Zancudo</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-v/">Grand Theft Auto V dossier</a> · <a href="archive.html#lore-los-santos-2013">Los Santos, 2013</a> · <a href="archive.html#lore-the-v-trio">Michael, Franklin &amp; Trevor</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p></div>
 </article><article id="story-gta5-2013-endings">
   <h3><span class="year">2013</span> Three ways out</h3>
   <p class="meta">Grand Theft Auto V · GTA V / Los Santos</p>
-  <p>The final choice is a menu of betrayals: kill Trevor, kill Michael, or refuse the script entirely.</p>
-  <p>GTA V&#39;s three endings are a commentary on the series itself. Ending A and B kill a protagonist; Ending C lets the trio survive by turning on their handlers. The last option is the most satisfying and the least realistic, which is exactly the point.</p>
+  <div class="md"><p>The final choice is a menu of betrayals: kill Trevor, kill Michael, or refuse the script entirely.</p><p>GTA V&#39;s three endings are a commentary on the series itself. Ending A and B kill a protagonist; Ending C lets the trio survive by turning on their handlers. The last option is the most satisfying and the least realistic, which is exactly the point.</p></div>
   <p class="tags">Michael De Santa · Franklin Clinton · Trevor Philips · Los Santos</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-v/">Grand Theft Auto V dossier</a> · <a href="archive.html#lore-los-santos-2013">Los Santos, 2013</a> · <a href="archive.html#lore-the-v-trio">Michael, Franklin &amp; Trevor</a> · <a href="archive.html#lore-san-andreas-1992">San Andreas, 1992</a></p></div>
 </article><article id="story-gta6-2026-premise">
   <h3><span class="year">2026</span> Jason and Lucia</h3>
   <p class="meta">Grand Theft Auto VI · GTA VI / Leonida</p>
-  <p>A new state, a new pair of protagonists, and a Bonnie-and-Clyde premise set against modern Leonida.</p>
-  <p>The revealed premise follows Jason and Lucia through a version of Vice City and the wider state of Leonida. The tone is modern, sunlit, and tense: a relationship story wrapped around a crime spree. Specific plot details are intentionally left out here rather than invented.</p>
+  <div class="md"><p>A new state, a new pair of protagonists, and a Bonnie-and-Clyde premise set against modern Leonida.</p><p>The revealed premise follows Jason and Lucia through a version of Vice City and the wider state of Leonida. The tone is modern, sunlit, and tense: a relationship story wrapped around a crime spree. Specific plot details are intentionally left out here rather than invented.</p></div>
   <p class="tags">Jason · Lucia · Leonida · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p></div>
 </article><article id="story-gta6-2026-leonida">
   <h3><span class="year">2026</span> The state of Leonida</h3>
   <p class="meta">Grand Theft Auto VI · GTA VI / Leonida</p>
-  <p>Causeways, wetlands, small towns, and a neon capital. The map is a state, not just a city.</p>
-  <p>Leonida expands the Vice City idea into a whole peninsula: Port Gellhorn&#39;s docks, Grassrivers&#39; wetlands, Mount Kalaga&#39;s ridges, and the Keys&#39; island roads. It is the broadest Rockstar map yet, and the setting is the story&#39;s co-star.</p>
+  <div class="md"><p>Causeways, wetlands, small towns, and a neon capital. The map is a state, not just a city.</p><p>Leonida expands the Vice City idea into a whole peninsula: Port Gellhorn&#39;s docks, Grassrivers&#39; wetlands, Mount Kalaga&#39;s ridges, and the Keys&#39; island roads. It is the broadest Rockstar map yet, and the setting is the story&#39;s co-star.</p></div>
   <p class="tags">Jason · Lucia · Leonida · Vice City · Leonida Keys</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p></div>
 </article><article id="story-gta6-2026-score">
   <h3><span class="year">2026</span> The next score</h3>
   <p class="meta">Grand Theft Auto VI · GTA VI / Leonida</p>
-  <p>A partnership, a state full of opportunities, and the oldest question in the series: how much is enough?</p>
-  <p>The central tension of the revealed premise is trust: two people trying to build something together in a place designed to separate them. Everything else — the cars, the clubs, the coastline — is the scenery around that question.</p>
+  <div class="md"><p>A partnership, a state full of opportunities, and the oldest question in the series: how much is enough?</p><p>The central tension of the revealed premise is trust: two people trying to build something together in a place designed to separate them. Everything else — the cars, the clubs, the coastline — is the scenery around that question.</p></div>
   <p class="tags">Jason · Lucia · Leonida · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p></div>
 </article><article id="story-gta6-2026-world">
   <h3><span class="year">2026</span> A world that keeps moving</h3>
   <p class="meta">Grand Theft Auto VI · GTA VI / Leonida</p>
-  <p>The series&#39; next era is built around a living state: traffic, weather, wildlife, and a news cycle that never quite looks away.</p>
-  <p>Rockstar&#39;s pitch for GTA VI is density: a world with more systems, more interiors, and more ways for a plan to go sideways. The story is only one thread in a state that keeps generating its own.</p>
+  <div class="md"><p>The series&#39; next era is built around a living state: traffic, weather, wildlife, and a news cycle that never quite looks away.</p><p>Rockstar&#39;s pitch for GTA VI is density: a world with more systems, more interiors, and more ways for a plan to go sideways. The story is only one thread in a state that keeps generating its own.</p></div>
   <p class="tags">Jason · Lucia · Leonida · Vice City</p>
   <div class="related-links"><p><strong>Related:</strong> <a href="games/gta-vi/">Grand Theft Auto VI dossier</a> · <a href="archive.html#lore-leonida-vice-city">Leonida &amp; Vice City</a> · <a href="archive.html#lore-jason-lucia">Jason &amp; Lucia</a> · <a href="archive.html#lore-vice-city-1986">Vice City, 1986</a></p></div>
 </article>
