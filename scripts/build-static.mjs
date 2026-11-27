@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { createHash } from "node:crypto";
 import { decoratePage } from "./site-chrome.mjs";
 
 const require = createRequire(import.meta.url);
@@ -836,4 +837,60 @@ index = index
   .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${siteUrl}assets/og-cover.png">`);
 fs.writeFileSync(indexPath, index);
 
-console.log("generated archive.html, story.html, elsewhere.html, changelog.html, contact.html, credits.html, search-index.js, sitemap.xml, robots.txt, llms.txt, and", games.length, "game pages for", siteUrl);
+function buildCspHeaders() {
+  const htmlFiles = [];
+  function walk(directory) {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      if (entry.name === "node_modules" || entry.name === ".git" || entry.name === "tests") continue;
+      const full = path.join(directory, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith(".html")) htmlFiles.push(full);
+    }
+  }
+  walk(root);
+
+  const scriptHashes = new Set();
+  const styleHashes = new Set();
+  const sha = (value) => `'sha256-${createHash("sha256").update(value, "utf8").digest("base64")}'`;
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, "utf8");
+    for (const match of html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)) {
+      if (match[1].trim()) scriptHashes.add(sha(match[1]));
+    }
+    for (const match of html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
+      if (match[1].trim()) styleHashes.add(sha(match[1]));
+    }
+  }
+
+  const csp = [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "frame-ancestors 'none'",
+    "form-action 'self'",
+    "img-src 'self' data: https:",
+    `style-src 'self'${styleHashes.size ? " " + [...styleHashes].join(" ") : ""}`,
+    "style-src-attr 'unsafe-inline'",
+    `script-src 'self'${scriptHashes.size ? " " + [...scriptHashes].join(" ") : ""}`,
+    "script-src-attr 'none'",
+    "font-src 'self'",
+    "connect-src 'self' https://en.wikipedia.org https://gta.fandom.com https://*.openfreemap.org https://*.openstreetmap.org https://*.maplibre.org",
+    "media-src 'self' https://ccradio.ellak.gr https://mp3.theradio.cc https://*.somafm.com",
+    "worker-src 'self' blob:",
+    "object-src 'none'",
+    "manifest-src 'self'"
+  ].join("; ");
+
+  const headers = `/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Content-Security-Policy: ${csp}
+`;
+  fs.writeFileSync(path.join(root, "_headers"), headers);
+}
+
+buildCspHeaders();
+
+console.log("generated archive.html, story.html, elsewhere.html, changelog.html, contact.html, credits.html, search-index.js, sitemap.xml, robots.txt, llms.txt, _headers, and", games.length, "game pages for", siteUrl);
