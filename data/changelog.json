@@ -1,5 +1,31 @@
 [
   {
+    "version": "1.1.0",
+    "label": "Arcade SEO landing page",
+    "added": [
+      "Crawlable arcade landing page at arcade/ targeting GTA trivia quiz and Rockstar puzzle game searches.",
+      "Crawlable GTA map atlas at atlas/ covering Leonida, Vice City, San Andreas, Los Santos, and Liberty City.",
+      "Crawlable GTA vs real life page at real-vs-reel/ comparing fictional cities with Miami, New York, Los Angeles, and more.",
+      "Arcade page schema, canonical, Open Graph, and Twitter metadata.",
+      "GTA map and comparison schema, canonicals, Open Graph, and Twitter metadata.",
+      "Arcade guide and daily-challenge copy on the interactive arcade view.",
+      "Keyword-first titles and descriptions that drop the brand name from search snippets across every page."
+    ],
+    "changed": [
+      "Static-page navigation now links the Arcade entry to the dedicated arcade page.",
+      "Game dossiers link to the arcade page instead of the in-page arcade view.",
+      "Footer attribution now presents the Brynsites network as a visible banner instead of a small pill.",
+      "Removed the decorative grid pattern from the footer background.",
+      "Expanded every page title, description, keyword set, and social card, including Twitter card tags on all generated pages."
+    ],
+    "fixed": [
+      "Sitemap now includes the arcade URL.",
+      "Lore filters and search now clear a selected entry that no longer matches, so stale entries such as Niko Bellic no longer stay open under a Vice City filter.",
+      "The Lore nav item now shows its active state instead of highlighting Games.",
+      "Lore entries now open with a back control, result count, clear-filters action, and a dedicated reading layout."
+    ]
+  },
+  {
     "version": "1.0.0",
     "label": "Initial public build",
     "added": [

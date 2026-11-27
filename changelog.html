@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Changelog — CHANNEL SURF</title>
-  <meta name="description" content="Public, version-only changelog for CHANNEL SURF, an unofficial Rockstar lore archive and arcade.">
+  <title>Site Changelog: GTA Lore, Maps, Trivia &amp; Puzzle Updates</title>
+  <meta name="description" content="Version-only release history for the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle games, with every change documented.">
+  <meta name="keywords" content="GTA fan site changelog, site updates, GTA lore archive updates">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://channelsurf.pages.dev/changelog.html">
-  <meta property="og:title" content="Changelog — CHANNEL SURF">
-  <meta property="og:description" content="Release history for the CHANNEL SURF lore archive and arcade.">
+  <meta property="og:title" content="Site Changelog: GTA Lore, Maps, Trivia &amp; Puzzle Updates">
+  <meta property="og:description" content="Release history for the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle games.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://channelsurf.pages.dev/changelog.html">
   <meta property="og:image" content="https://channelsurf.pages.dev/assets/og-cover.png">
@@ -30,6 +31,11 @@
     .changelog-main a { color: var(--accent-2); }
     .changelog-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
   </style>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Site Changelog: GTA Lore, Maps, Trivia &amp; Puzzle Updates">
+  <meta name="twitter:description" content="Release history for the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle games.">
+  <meta name="twitter:image" content="https://channelsurf.pages.dev/assets/og-cover.png">
+  <meta name="twitter:url" content="https://channelsurf.pages.dev/changelog.html">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -53,11 +59,11 @@
   </svg></span>
         <span class="brand-copy">
           <span class="brand-name">CHANNEL <em>SURF</em></span>
-          <span class="brand-sub">Unofficial lore archive &amp; arcade</span>
+          <span class="brand-sub">GTA lore, maps, trivia &amp; puzzles</span>
         </span>
       </a>
       <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-        <div class="nav-inner"><a class="nav-link" href="./#games" data-route="games">Games</a><a class="nav-link" href="./#lore" data-route="lore">Lore</a><a class="nav-link" href="./#story" data-route="story">Story</a><a class="nav-link" href="./#atlas" data-route="atlas">Atlas</a><a class="nav-link" href="./#reel" data-route="reel">Real vs Reel</a><a class="nav-link" href="./#play" data-route="play">Arcade</a><a class="nav-link is-active" href="./#about" data-route="about" aria-current="page">About</a></div>
+        <div class="nav-inner"><a class="nav-link" href="./#games" data-route="games">Games</a><a class="nav-link" href="./#lore" data-route="lore">Lore</a><a class="nav-link" href="./#story" data-route="story">Story</a><a class="nav-link" href="atlas/" data-route="atlas">GTA Maps</a><a class="nav-link" href="real-vs-reel/" data-route="reel">GTA vs Real Life</a><a class="nav-link" href="arcade/" data-route="play">Arcade</a><a class="nav-link is-active" href="./#about" data-route="about" aria-current="page">About</a></div>
       </nav>
       <div class="header-actions">
         <button class="era-toggle" id="eraToggle" type="button" aria-expanded="false" aria-controls="eraPanel" title="Change game signal and theme">
@@ -106,7 +112,10 @@
     <nav class="changelog-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Changelog</nav>
     <h1>Changelog</h1>
     <p class="lede">Version-only release history for CHANNEL SURF. The machine-readable source also lives in <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
-    <section class="changelog-release" id="v1-0-0">
+    <section class="changelog-release" id="v1-1-0">
+      <h2>v1.1.0 <span>Arcade SEO landing page</span></h2>
+      <h3>Added</h3><ul><li>Crawlable arcade landing page at arcade/ targeting GTA trivia quiz and Rockstar puzzle game searches.</li><li>Crawlable GTA map atlas at atlas/ covering Leonida, Vice City, San Andreas, Los Santos, and Liberty City.</li><li>Crawlable GTA vs real life page at real-vs-reel/ comparing fictional cities with Miami, New York, Los Angeles, and more.</li><li>Arcade page schema, canonical, Open Graph, and Twitter metadata.</li><li>GTA map and comparison schema, canonicals, Open Graph, and Twitter metadata.</li><li>Arcade guide and daily-challenge copy on the interactive arcade view.</li><li>Keyword-first titles and descriptions that drop the brand name from search snippets across every page.</li></ul><h3>Changed</h3><ul><li>Static-page navigation now links the Arcade entry to the dedicated arcade page.</li><li>Game dossiers link to the arcade page instead of the in-page arcade view.</li><li>Footer attribution now presents the Brynsites network as a visible banner instead of a small pill.</li><li>Removed the decorative grid pattern from the footer background.</li><li>Expanded every page title, description, keyword set, and social card, including Twitter card tags on all generated pages.</li></ul><h3>Fixed</h3><ul><li>Sitemap now includes the arcade URL.</li><li>Lore filters and search now clear a selected entry that no longer matches, so stale entries such as Niko Bellic no longer stay open under a Vice City filter.</li><li>The Lore nav item now shows its active state instead of highlighting Games.</li><li>Lore entries now open with a back control, result count, clear-filters action, and a dedicated reading layout.</li></ul>
+    </section><section class="changelog-release" id="v1-0-0">
       <h2>v1.0.0 <span>Initial public build</span></h2>
       <h3>Added</h3><ul><li>Lore-first home page with a dedicated home theme.</li><li>Games hub with static, theme-per-game pages in release order.</li><li>Rockstar Elsewhere dossier for Max Payne, Manhunt, Midnight Club, and L.A. Noire.</li><li>Lore archive with era/type filters, search, sources, and optional live Wikipedia and GTA Wiki summaries.</li><li>In-universe story timeline carousel with era-following themes and spoiler controls.</li><li>Static, scroll-driven story reading timeline and full-text archive.</li><li>Interactive Leonida atlas with optional Leaflet mode and Geo-Guess.</li><li>Real vs Reel page with MapLibre/OpenFreeMap and comparison cards.</li><li>Trivia Arena modes: Classic, Blitz, Sudden Death, Mythbuster, Channel Surf, and Daily.</li><li>Vault Cracker, Heat Grid, and Clue Dossier puzzles, plus a crew and heist splitter.</li><li>Global search, fuzzy static-page search, and a keyboard command palette.</li><li>Self-hosted open-licence fonts with per-era pairings.</li><li>Local Wikimedia Commons imagery with visible credits and a dedicated credits page.</li><li>Generated SVG character portraits.</li><li>Themed scrollbars, footer atmosphere, and crossfading theme transitions.</li><li>PWA manifest, maskable icons, app-shell service worker, and offline fallback.</li><li>Universal header, footer, breadcrumbs, and a site-wide theme tuner on static pages.</li><li>Related-entry links, source links, and outbound further-reading links.</li><li>Static game, story, Elsewhere, archive, changelog, contact, credits, sitemap, robots, and llms.txt outputs.</li><li>jsdom regression tests, Playwright fallback/transition tests, and header breakpoint snapshots.</li></ul><h3>Changed</h3><ul><li>Rebuilt the header as a single bar with a game-signal popover.</li><li>Made game pages and local JSON the primary content sources, with fetch fallbacks.</li><li>Simplified UI copy and removed decorative counters and slogan-style headings.</li><li>Updated the game library to real release order.</li><li>Moved Signal Radio to the home page.</li><li>Clarified that the signal selector changes both theme and game focus.</li><li>Moved the changelog to a version-only format.</li><li>Marked the archive as partial and linked the project to Brynsites.</li></ul><h3>Fixed</h3><ul><li>Theme restoration when leaving lore, story, and trivia views.</li><li>Manual theme selection overriding content previews.</li><li>Duplicate and legacy font and image paths.</li><li>Offline and blocked-network fallbacks for lore, maps, and radio.</li></ul><h3>Notes</h3><ul><li>No GTA screenshots, official artwork, audio, or proprietary fonts are included.</li><li>All trivia, lore summaries, code, CSS, and vector art are original.</li><li>Production domain and project umbrella naming are intentionally pending.</li></ul>
     </section><section class="changelog-release" id="v0-1-0">
@@ -121,7 +130,11 @@
           <strong>CHANNEL SURF</strong>
           <p>An independent, non-commercial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All game names, characters, locations, and trademarks belong to their respective owners. Original writing, code, CSS, and vector art only. <a class="text-link" href="./#about">Full disclaimer</a></p>
           <p class="footer-note">A partial, fan-made archive. Not exhaustive, and may lag behind new releases. Updated when time allows.</p>
-          <p class="footer-umbrella">A <a href="https://brynsites.com/" rel="noopener">Brynsites</a> miscellany project, made for fun.</p>
+          <p class="footer-umbrella">
+            <span class="umbrella-label">Part of the Brynsites network</span>
+            <a href="https://brynsites.com/" rel="noopener">brynsites.com <span class="external-mark" aria-hidden="true">↗</span></a>
+            <span class="umbrella-note">More miscellany projects, writing, and contact.</span>
+          </p>
         </div>
         <nav class="footer-links footer-columns" aria-label="Footer navigation">
           <div class="footer-col">
@@ -130,9 +143,9 @@
             <a href="./#games">Games</a>
             <a href="./#lore">Lore</a>
             <a href="./#story">Story</a>
-            <a href="./#atlas">Atlas</a>
-            <a href="./#reel">Real vs Reel</a>
-            <a href="./#play">Arcade</a>
+            <a href="atlas/">GTA maps</a>
+            <a href="real-vs-reel/">GTA vs real life</a>
+            <a href="arcade/">Arcade</a>
           </div>
           <div class="footer-col">
             <p class="footer-heading">Project</p>

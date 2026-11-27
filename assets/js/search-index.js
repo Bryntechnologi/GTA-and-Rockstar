@@ -28,18 +28,18 @@ window.CS_SEARCH_INDEX = [
     "keywords": "story timeline chronology"
   },
   {
-    "title": "Atlas",
-    "subtitle": "Fictional map and Geo-Guess",
-    "href": "/#atlas",
+    "title": "GTA map atlas",
+    "subtitle": "Leonida, Vice City, San Andreas, Los Santos, and Liberty City",
+    "href": "/atlas/",
     "type": "Page",
-    "keywords": "atlas map geography"
+    "keywords": "GTA map GTA maps Vice City map San Andreas map Los Santos map Liberty City map Leonida map locations atlas"
   },
   {
-    "title": "Real vs Reel",
-    "subtitle": "Real-world city comparisons",
-    "href": "/#reel",
+    "title": "GTA vs real life",
+    "subtitle": "Real cities behind Vice City, Liberty City, and Los Santos",
+    "href": "/real-vs-reel/",
     "type": "Page",
-    "keywords": "real world comparison photography"
+    "keywords": "GTA vs real life Vice City Miami Liberty City New York Los Santos Los Angeles comparisons"
   },
   {
     "title": "Arcade",
@@ -47,6 +47,13 @@ window.CS_SEARCH_INDEX = [
     "href": "/#play",
     "type": "Page",
     "keywords": "arcade trivia puzzles"
+  },
+  {
+    "title": "GTA trivia quiz and Rockstar puzzle games",
+    "subtitle": "Free browser arcade guide",
+    "href": "/arcade/",
+    "type": "Page",
+    "keywords": "GTA trivia quiz Rockstar trivia puzzle games vault cracker heat grid clue dossier daily quiz"
   },
   {
     "title": "About",

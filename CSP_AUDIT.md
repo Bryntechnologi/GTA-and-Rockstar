@@ -5,7 +5,7 @@ Bounded audit of the enforced Content-Security-Policy in `_headers`.
 ## Policy
 
 ```text
-default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https:; style-src 'self' 'sha256-hTnfdAExgA0UXLzBjxTEIXdGqefxY7S7Xyx7EJ4Usvc=' 'sha256-GJrEdmv12j5eiHd+HZ+DtKY3bZYIdPkpWTO/GJ8+hDM=' 'sha256-3X+uuzb/oR3g5sfrSuhbIrf8aZni6egQN3hcQM2AM+A=' 'sha256-UnM8fNk5d82Cu1wt84cA81C1Jo1bz0kqBxRBkKC9ITY=' 'sha256-AcdZAtPSh9nYsF3+sZ8hvDf/QOwwBLUm4e0y6X2wXj0=' 'sha256-OdKcUN/yUD7bvSNNl7QhWAX1PUZyS1l7RhkPPGYEr64=' 'sha256-anvgTB8Nu7fAVPhCUWPKQKRVTo1pUx63V6WESfv6XeE='; style-src-attr 'unsafe-inline'; script-src 'self' 'sha256-78JHF0Ok9gePwq1NtnP1M04VDSvqq+C+5bAeErOpSsU=' 'sha256-9yx9TmhGp6jPjWCLn1yOFtgZDy+USLfNqxdfxRijLYU=' 'sha256-3WOFhcVtUlMgHg63uYPJ1/ZpUkPGKEADAt8sYz7Pa0Y=' 'sha256-Rp0oHkOy1xXEC9pdqJ/sRQ3YeAXGDn5UaJWXVNuEecg=' 'sha256-FsyfDQ6sIoGZJlHbxVqw3zDFy6/yWAPIudbTBaxoG6w=' 'sha256-9deDxO3brdVt2F+NGEuf/JLN9eO1zg7DpjTnxXr1P9A=' 'sha256-haEg2pJIweCLcnrCdkxHQwfvK/ctA1Sv+TneGWbqjdQ=' 'sha256-h6J5f9G+P++IXnb/SWaLVXGrSCBYPCDa6r8WHs69TwU=' 'sha256-z3x7YtBhTKEEpP4yofPM23wOcgirehWgiAS6U+fwfGc=' 'sha256-DI8y5pidGnCRIeEKPM6kAo8MWeXUa9o2GYzOoZH2qgs=' 'sha256-k/3eSARbbsLxrUBbGl/lNtZCPb0/vcM0O+ro0SMJcho=' 'sha256-MTL/CQ5ge8uFDOvt2xuYeUXkRfItsXEui9iP+MyV8Rg=' 'sha256-NkKVf6PYaTXyXiucEG9SvlBraxv/dJrlMGD3fXA/ZoU=' 'sha256-CBmevFV9D/CuQ3Se3A9lMvHchWousNzMFtCOBJhM34I=' 'sha256-+wd4++A1NiOZEuBVqc9cFFuQG6EY0ePR38a94UtkQpg='; script-src-attr 'none'; font-src 'self'; connect-src 'self' https://en.wikipedia.org https://gta.fandom.com https://*.openfreemap.org https://*.openstreetmap.org https://*.maplibre.org; media-src 'self' https://ccradio.ellak.gr https://mp3.theradio.cc https://*.somafm.com; worker-src 'self' blob:; object-src 'none'; manifest-src 'self'
+default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https:; style-src 'self' 'sha256-Y+W4HeV29QryNEKpFj9TR8jcW0OkkY8C/7lG8PEDkb0=' 'sha256-hTnfdAExgA0UXLzBjxTEIXdGqefxY7S7Xyx7EJ4Usvc=' 'sha256-82MEfZCu66bA1w4pdggiHkq5qr5wRUsHCC8DY63usiI=' 'sha256-GJrEdmv12j5eiHd+HZ+DtKY3bZYIdPkpWTO/GJ8+hDM=' 'sha256-3X+uuzb/oR3g5sfrSuhbIrf8aZni6egQN3hcQM2AM+A=' 'sha256-UnM8fNk5d82Cu1wt84cA81C1Jo1bz0kqBxRBkKC9ITY=' 'sha256-AcdZAtPSh9nYsF3+sZ8hvDf/QOwwBLUm4e0y6X2wXj0=' 'sha256-OdKcUN/yUD7bvSNNl7QhWAX1PUZyS1l7RhkPPGYEr64=' 'sha256-hjCbQdYOZFX5CjSmQIQQw+WTnGVt0RKMVzTeIwYo4SA=' 'sha256-anvgTB8Nu7fAVPhCUWPKQKRVTo1pUx63V6WESfv6XeE='; style-src-attr 'unsafe-inline'; script-src 'self' 'sha256-rDNmKPm46nuSmc4N68aVPxiuRFmXcRrjVyvVzGluBqY=' 'sha256-78JHF0Ok9gePwq1NtnP1M04VDSvqq+C+5bAeErOpSsU=' 'sha256-v4dX8txdUFTcZEKKT5GhtmEcQvPbg1toSMFioGMrqNQ=' 'sha256-9yx9TmhGp6jPjWCLn1yOFtgZDy+USLfNqxdfxRijLYU=' 'sha256-3WOFhcVtUlMgHg63uYPJ1/ZpUkPGKEADAt8sYz7Pa0Y=' 'sha256-Rp0oHkOy1xXEC9pdqJ/sRQ3YeAXGDn5UaJWXVNuEecg=' 'sha256-FsyfDQ6sIoGZJlHbxVqw3zDFy6/yWAPIudbTBaxoG6w=' 'sha256-9deDxO3brdVt2F+NGEuf/JLN9eO1zg7DpjTnxXr1P9A=' 'sha256-haEg2pJIweCLcnrCdkxHQwfvK/ctA1Sv+TneGWbqjdQ=' 'sha256-h6J5f9G+P++IXnb/SWaLVXGrSCBYPCDa6r8WHs69TwU=' 'sha256-z3x7YtBhTKEEpP4yofPM23wOcgirehWgiAS6U+fwfGc=' 'sha256-DI8y5pidGnCRIeEKPM6kAo8MWeXUa9o2GYzOoZH2qgs=' 'sha256-k/3eSARbbsLxrUBbGl/lNtZCPb0/vcM0O+ro0SMJcho=' 'sha256-MTL/CQ5ge8uFDOvt2xuYeUXkRfItsXEui9iP+MyV8Rg=' 'sha256-6mIe1s66RCH2GBf96Y5nhSDM766VnLog6UI1KyYFgpw=' 'sha256-QDKwTimi2wGNWNHA3+JC0na9vLZTDNEjsvpB1ZrYrJk=' 'sha256-CBmevFV9D/CuQ3Se3A9lMvHchWousNzMFtCOBJhM34I=' 'sha256-+wd4++A1NiOZEuBVqc9cFFuQG6EY0ePR38a94UtkQpg='; script-src-attr 'none'; font-src 'self'; connect-src 'self' https://en.wikipedia.org https://gta.fandom.com https://*.openfreemap.org https://*.openstreetmap.org https://*.maplibre.org; media-src 'self' https://ccradio.ellak.gr https://mp3.theradio.cc https://*.somafm.com; worker-src 'self' blob:; object-src 'none'; manifest-src 'self'
 ```
 
 ## Verified
@@ -20,26 +20,28 @@ default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self';
 
 ## Inventory
 
-- HTML files scanned: 16
-- Inline script blocks: 15
-- Inline style blocks: 15
+- HTML files scanned: 19
+- Inline script blocks: 18
+- Inline style blocks: 18
 - Inline event-handler attributes: 0
-- Unique script hashes: 15
-- Unique style hashes: 7
-- External origins referenced: https://brynsites.com, https://ccradio.ellak.gr, https://channelsurf.pages.dev, https://commons.wikimedia.org, https://en.wikipedia.org, https://github.com, https://gta.fandom.com, https://ice1.somafm.com, https://mp3.theradio.cc, https://schema.org, https://somafm.com, https://theradio.cc, https://your-subdomain.example
+- Unique script hashes: 18
+- Unique style hashes: 10
+- External origins referenced: https://brynsites.com, https://bully.fandom.com, https://ccradio.ellak.gr, https://channelsurf.pages.dev, https://commons.wikimedia.org, https://en.wikipedia.org, https://github.com, https://gta.fandom.com, https://ice1.somafm.com, https://mp3.theradio.cc, https://reddead.fandom.com, https://schema.org, https://somafm.com, https://theradio.cc, https://your-subdomain.example
 - `eval` / `new Function` hits: none
 
 ## External origins observed
 
-- `https://brynsites.com` — 72 reference(s)
+- `https://brynsites.com` — 84 reference(s)
+- `https://bully.fandom.com` — 1 reference(s)
 - `https://ccradio.ellak.gr` — 2 reference(s)
-- `https://channelsurf.pages.dev` — 20 reference(s)
-- `https://commons.wikimedia.org` — 42 reference(s)
+- `https://channelsurf.pages.dev` — 23 reference(s)
+- `https://commons.wikimedia.org` — 52 reference(s)
 - `https://en.wikipedia.org` — 54 reference(s)
-- `https://github.com` — 17 reference(s)
-- `https://gta.fandom.com` — 52 reference(s)
+- `https://github.com` — 20 reference(s)
+- `https://gta.fandom.com` — 57 reference(s)
 - `https://ice1.somafm.com` — 6 reference(s)
 - `https://mp3.theradio.cc` — 1 reference(s)
+- `https://reddead.fandom.com` — 1 reference(s)
 - `https://schema.org` — 1 reference(s)
 - `https://somafm.com` — 6 reference(s)
 - `https://theradio.cc` — 1 reference(s)

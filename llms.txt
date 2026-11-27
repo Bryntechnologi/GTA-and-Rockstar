@@ -1,8 +1,11 @@
 # CHANNEL SURF
 
-> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
+> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a GTA map atlas of Leonida, Vice City, San Andreas, Los Santos, and Liberty City, GTA vs real life city comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: https://channelsurf.pages.dev/
+GTA map atlas: https://channelsurf.pages.dev/atlas/
+GTA vs real life: https://channelsurf.pages.dev/real-vs-reel/
+Arcade (GTA trivia quiz and puzzle games): https://channelsurf.pages.dev/arcade/
 Full text archive: https://channelsurf.pages.dev/archive.html
 
 ## What is here
@@ -10,9 +13,12 @@ Full text archive: https://channelsurf.pages.dev/archive.html
 - [Lore archive](https://channelsurf.pages.dev/archive.html#lore): locations, characters, factions, and franchise history, with sources.
 - [Story timeline](https://channelsurf.pages.dev/archive.html#story): chronological GTA story beats, including full spoiler details.
 - [Story reading mode](https://channelsurf.pages.dev/story.html): a graphical scroll-driven timeline page.
+- [GTA map atlas](https://channelsurf.pages.dev/atlas/): maps of Leonida, Vice City, San Andreas, Los Santos, Liberty City, the Red Dead frontier, Bullworth, and The Warriors' New York, with fan annotations.
+- [GTA vs real life](https://channelsurf.pages.dev/real-vs-reel/): Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, and London compared with their GTA counterparts.
+- [Arcade](https://channelsurf.pages.dev/arcade/): play a free GTA trivia quiz and Rockstar puzzle games, including daily challenges.
 - [Games](https://channelsurf.pages.dev/#games): theme-per-game dossiers.
 - [Rockstar Elsewhere](https://channelsurf.pages.dev/elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
-- [Interactive site](https://channelsurf.pages.dev/): theme-morphing lore hub, horizontal story timeline, atlas, Real vs Reel map, trivia, and puzzles.
+- [Interactive site](https://channelsurf.pages.dev/): theme-morphing lore hub, horizontal story timeline, GTA map atlas, GTA vs real life map, trivia quiz, and puzzle games.
 - [Changelog](https://channelsurf.pages.dev/changelog.html): public release history.
 - [Image credits](https://channelsurf.pages.dev/credits.html): local photo sources and licences.
 - [Contact](https://channelsurf.pages.dev/contact.html): corrections and permissions via Brynsites.
@@ -40,7 +46,7 @@ Full text archive: https://channelsurf.pages.dev/archive.html
 - Live Wikipedia summaries, when requested, are CC BY-SA and are attributed with a source link.
 - Live GTA Wiki summaries, when requested, are CC BY-SA via Fandom and are attributed with a source link.
 - This is a partial archive and does not cover every game, character, location, or story beat.
-- Map comparisons use a local Natural Earth basemap with attribution.
+- Map comparisons use OpenFreeMap and OpenStreetMap data with attribution.
 - Game titles, characters, locations, and trademarks remain the property of their respective owners.
 
 ## Disclaimer

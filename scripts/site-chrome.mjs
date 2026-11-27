@@ -11,11 +11,12 @@ const NAV = [
   { key: "games", label: "Games" },
   { key: "lore", label: "Lore" },
   { key: "story", label: "Story" },
-  { key: "atlas", label: "Atlas" },
-  { key: "reel", label: "Real vs Reel" },
+  { key: "atlas", label: "GTA Maps" },
+  { key: "reel", label: "GTA vs Real Life" },
   { key: "play", label: "Arcade" },
   { key: "about", label: "About" }
 ];
+const PAGE_LINKS = { atlas: "atlas/", reel: "real-vs-reel/", play: "arcade/" };
 
 export function sprite() {
   return `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -38,7 +39,8 @@ export function header({ prefix = "", active = "", site = {} } = {}) {
   </svg></span>`;
   const nav = NAV.map((item) => {
     const isActive = item.key === active || (active === "changelog" && item.key === "about") || (active === "credits" && item.key === "about");
-    return `<a class="nav-link${isActive ? " is-active" : ""}" href="${home}#${item.key}" data-route="${item.key}"${isActive ? ' aria-current="page"' : ""}>${item.label}</a>`;
+    const href = PAGE_LINKS[item.key] ? `${prefix}${PAGE_LINKS[item.key]}` : `${home}#${item.key}`;
+    return `<a class="nav-link${isActive ? " is-active" : ""}" href="${href}" data-route="${item.key}"${isActive ? ' aria-current="page"' : ""}>${item.label}</a>`;
   }).join("");
   const umbrella = site.umbrella || {};
   return `<a class="skip-link" href="#main">Skip to content</a>
@@ -48,7 +50,7 @@ export function header({ prefix = "", active = "", site = {} } = {}) {
         ${brandMark}
         <span class="brand-copy">
           <span class="brand-name">CHANNEL <em>SURF</em></span>
-          <span class="brand-sub">Unofficial lore archive &amp; arcade</span>
+          <span class="brand-sub">GTA lore, maps, trivia &amp; puzzles</span>
         </span>
       </a>
       <nav class="primary-nav" id="primaryNav" aria-label="Primary">
@@ -124,7 +126,11 @@ export function footer({ prefix = "", site = {} } = {}) {
           <strong>CHANNEL SURF</strong>
           <p>An independent, non-commercial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All game names, characters, locations, and trademarks belong to their respective owners. Original writing, code, CSS, and vector art only. <a class="text-link" href="${home}#about">Full disclaimer</a></p>
           <p class="footer-note">${esc(archiveNote)} ${esc(updatedNote)}</p>
-          <p class="footer-umbrella">A <a href="${esc(umbrella.url || "https://brynsites.com/")}" rel="noopener">${esc(umbrella.name || "Brynsites")}</a> miscellany project, made for fun.</p>
+          <p class="footer-umbrella">
+            <span class="umbrella-label">Part of the ${esc(umbrella.name || "Brynsites")} network</span>
+            <a href="${esc(umbrella.url || "https://brynsites.com/")}" rel="noopener">${esc((umbrella.url || "https://brynsites.com/").replace(/^https?:\/\//, "").replace(/\/$/, ""))} <span class="external-mark" aria-hidden="true">↗</span></a>
+            <span class="umbrella-note">More miscellany projects, writing, and contact.</span>
+          </p>
         </div>
         <nav class="footer-links footer-columns" aria-label="Footer navigation">
           <div class="footer-col">
@@ -133,9 +139,9 @@ export function footer({ prefix = "", site = {} } = {}) {
             <a href="${home}#games">Games</a>
             <a href="${home}#lore">Lore</a>
             <a href="${home}#story">Story</a>
-            <a href="${home}#atlas">Atlas</a>
-            <a href="${home}#reel">Real vs Reel</a>
-            <a href="${home}#play">Arcade</a>
+            <a href="${prefix}atlas/">GTA maps</a>
+            <a href="${prefix}real-vs-reel/">GTA vs real life</a>
+            <a href="${prefix}arcade/">Arcade</a>
           </div>
           <div class="footer-col">
             <p class="footer-heading">Project</p>
@@ -171,13 +177,31 @@ export function chromeAssets(prefix = "") {
   <script src="${prefix}assets/js/engagement.js"></script>`;
 }
 
+function socialMeta(html) {
+  if (html.includes('name="twitter:card"')) return html;
+  const grab = (value) => {
+    const match = html.match(new RegExp(`<meta ${value} content="([^"]*)">`));
+    return match ? match[1] : "";
+  };
+  const title = grab('property="og:title"');
+  if (!title) return html;
+  const tags = [
+    '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:title" content="${title}">`,
+    `<meta name="twitter:description" content="${grab('property="og:description"')}">`,
+    `<meta name="twitter:image" content="${grab('property="og:image"')}">`,
+    `<meta name="twitter:url" content="${grab('property="og:url"')}">`
+  ].map((tag) => `  ${tag}`).join("\n");
+  return html.replace("</head>", `${tags}\n</head>`);
+}
+
 export function decoratePage(html, { prefix = "", active = "", lockEra = false, site = {} } = {}) {
   let out = html;
   if (lockEra) out = out.replace('<html lang="en"', '<html lang="en" data-lock-era="true"');
   out = out.replace("<body>", `<body>\n  <div class="ambient" aria-hidden="true"></div>\n  ${sprite()}\n  ${header({ prefix, active, site })}`);
   out = out.replace(/<main(\s|>)/, '<main id="main"$1');
   out = out.replace("</body>", `  ${footer({ prefix, site })}\n  ${searchOverlay()}\n  ${chromeAssets(prefix)}\n</body>`);
-  return out;
+  return socialMeta(out);
 }
 
 export { esc };

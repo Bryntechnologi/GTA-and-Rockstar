@@ -89,6 +89,14 @@ test("lore filters, search, and detail panel work", async () => {
   nav(doc, "lore");
   await new Promise((resolve) => setTimeout(resolve, 250));
   assert.equal(doc.querySelectorAll("#loreContent .lore-card").length, 20);
+  assert.equal(doc.querySelector('.nav-link[data-route="lore"]')?.getAttribute("aria-current"), "page");
+
+  doc.querySelector('[data-lore-open="niko-bellic"]')?.click();
+  await new Promise((resolve) => setTimeout(resolve, 120));
+  assert.match(doc.querySelector("#loreDetail h3")?.textContent || "", /Niko Bellic/);
+  doc.querySelector('[data-lore-era="vicecity"]')?.click();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  assert.ok(doc.querySelector("#loreDetail")?.classList.contains("hidden"), "filtering should clear a detail entry that no longer matches");
 
   doc.querySelector('[data-lore-era="vicecity"]')?.click();
   await new Promise((resolve) => setTimeout(resolve, 100));
@@ -278,11 +286,14 @@ test("static indexability files and archive are present", () => {
   assert.match(archive, /application\/ld\+json/);
 
   const sitemap = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 16);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 19);
   assert.match(sitemap, /credits\.html/);
   assert.match(sitemap, /contact\.html/);
+  assert.match(sitemap, /\/arcade\//);
+  assert.match(sitemap, /\/atlas\//);
+  assert.match(sitemap, /\/real-vs-reel\//);
 
-  for (const file of ["archive.html", "story.html", "elsewhere.html", "changelog.html", "contact.html", "credits.html"]) {
+  for (const file of ["archive.html", "story.html", "elsewhere.html", "changelog.html", "contact.html", "credits.html", "arcade/index.html", "atlas/index.html", "real-vs-reel/index.html"]) {
     const page = fs.readFileSync(path.join(ROOT, file), "utf8");
     assert.match(page, /<header class="site-header">/, `${file} should have the universal header`);
     assert.match(page, /<footer class="site-footer">/, `${file} should have the universal footer`);

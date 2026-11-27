@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { decoratePage } from "./site-chrome.mjs";
@@ -23,6 +24,10 @@ const games = JSON.parse(fs.readFileSync(path.join(root, "data/games.json"), "ut
 const elsewhere = JSON.parse(fs.readFileSync(path.join(root, "data/elsewhere.json"), "utf8"));
 const imageCredits = JSON.parse(fs.readFileSync(path.join(root, "data/image-credits.json"), "utf8"));
 const changelog = JSON.parse(fs.readFileSync(path.join(root, "data/changelog.json"), "utf8"));
+const realWorld = JSON.parse(fs.readFileSync(path.join(root, "data/real-world.json"), "utf8"));
+const dataSandbox = { window: {} };
+vm.runInNewContext(fs.readFileSync(path.join(root, "assets/js/data.js"), "utf8"), dataSandbox);
+const atlas = dataSandbox.window.CS_DATA.atlas || {};
 const loreById = new Map(lore.map((item) => [item.id, item]));
 const storyById = new Map(story.map((item) => [item.id, item]));
 const gameByEra = new Map(games.map((game) => [game.era, game]));
@@ -130,6 +135,45 @@ const eraAccents = {
   bully: "#d4af37"
 };
 
+const gameSeo = {
+  "gta-classic": {
+    title: "Classic GTA (1997–2001): Story, Characters & Maps",
+    description: "From top-down origins to the 3D debut: Classic GTA's London expansions, Anywhere City, characters, and maps explained in one fan-made guide with sources."
+  },
+  "vice-city": {
+    title: "GTA: Vice City (1986): Story, Characters & Map Guide",
+    description: "Tommy Vercetti, the Vercetti gang, and 1986 Vice City: story beats, characters, locations, and map explained in one fan-made guide with sources."
+  },
+  "san-andreas": {
+    title: "GTA: San Andreas (1992): Story, Characters & Map Guide",
+    description: "CJ, Grove Street, and three cities across San Andreas: story, characters, locations, and map explained in one fan-made guide with sources."
+  },
+  "the-warriors": {
+    title: "The Warriors (1979): Story, Characters & New York Map",
+    description: "The Warriors' long night across 1979 New York: gangs, story beats, characters, locations, and map explained in one fan-made guide with sources."
+  },
+  "bully": {
+    title: "Bully (2006): Story, Characters & Bullworth Map",
+    description: "Jimmy Hopkins, Bullworth Academy, and its cliques: story, characters, locations, and map explained in one fan-made guide with sources."
+  },
+  "gta-iv": {
+    title: "GTA IV (2008): Story, Characters & Liberty City Map",
+    description: "Niko Bellic, Liberty City, and the GTA IV story: characters, locations, map, and story beats explained in one fan-made guide with sources."
+  },
+  "gta-v": {
+    title: "GTA V (2013): Story, Characters & Los Santos Map",
+    description: "Michael, Franklin, Trevor, and Los Santos: GTA V's story, characters, locations, and map explained in one fan-made guide with sources."
+  },
+  "red-dead": {
+    title: "Red Dead Redemption 2: Story, Characters & Map Guide",
+    description: "Arthur Morgan, the Van der Linde gang, and the frontier: Red Dead Redemption 2's story, characters, locations, and map explained with sources."
+  },
+  "gta-vi": {
+    title: "GTA VI (2026): Story, Characters & Leonida Map",
+    description: "Jason, Lucia, and the state of Leonida: GTA VI's confirmed story, characters, locations, and map explained in one fan-made guide with sources."
+  }
+};
+
 const loreByType = ["location", "character", "faction", "franchise"];
 const loreSections = loreByType.map((type) => {
   const items = lore.filter((item) => (item.type || "location") === type);
@@ -159,6 +203,10 @@ function gamePage(game) {
   const gameStory = (game.storyIds || []).map((id) => storyById.get(id)).filter(Boolean);
   const relative = "../../";
   const canonical = `${siteUrl}games/${game.slug}/`;
+  const seo = gameSeo[game.slug] || {
+    title: `${game.name}: Story, Characters & Map`,
+    description: `${game.blurb} Explore ${game.name} characters, locations, story, and map in one fan-made guide.`
+  };
   const credit = imageCredits[game.image];
   const photo = credit ? `<figure class="game-photo"><img src="${relative}${esc(credit.file)}" alt="${esc(credit.alt)}" loading="lazy"><figcaption>Real-world inspiration, not game artwork. Photo: ${esc(credit.artist)} (${esc(credit.license)}) · <a href="${esc(credit.source)}" rel="noopener noreferrer">source</a></figcaption></figure>` : "";
   const loreBlocks = gameLore.map((item) => `<article class="game-entry">    <p class="meta">${esc(item.type || "lore")}</p>
@@ -176,12 +224,13 @@ function gamePage(game) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${esc(game.name)} — Lore, characters, and story | CHANNEL SURF</title>
-  <meta name="description" content="${esc(game.blurb)} ${esc(game.description)}">
+  <title>${esc(seo.title)}</title>
+  <meta name="description" content="${esc(seo.description)}">
+  <meta name="keywords" content="${esc(`${game.name} story, ${game.name} characters, ${game.name} map, ${game.name} locations, GTA lore`)}">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="${esc(game.name)} — CHANNEL SURF">
-  <meta property="og:description" content="${esc(game.blurb)}">
+  <meta property="og:title" content="${esc(seo.title)}">
+  <meta property="og:description" content="${esc(seo.description)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -210,9 +259,9 @@ function gamePage(game) {
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "${esc(game.name)} — CHANNEL SURF",
+    "name": "${esc(seo.title)}",
     "url": "${canonical}",
-    "description": "${esc(game.blurb)}",
+    "description": "${esc(seo.description)}",
     "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
     "about": { "@type": "VideoGame", "name": "${esc(game.name)}", "description": "${esc(game.description)}" },
     "inLanguage": "en"
@@ -235,8 +284,8 @@ function gamePage(game) {
       </div>
       <div class="game-links">
         <a class="btn btn-ghost btn-sm" href="${relative}#story">Open the story timeline</a>
-        <a class="btn btn-ghost btn-sm" href="${relative}#atlas">Open the atlas</a>
-        <a class="btn btn-quiet btn-sm" href="${relative}#play">Play the arcade</a>
+        <a class="btn btn-ghost btn-sm" href="${relative}#atlas">Open the GTA map</a>
+        <a class="btn btn-quiet btn-sm" href="${relative}arcade/">Play the arcade</a>
         <a class="btn btn-quiet btn-sm" href="${relative}archive.html">Full-text archive</a>
       </div>
     </header>
@@ -286,11 +335,12 @@ function elsewherePage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rockstar Elsewhere — Max Payne, Manhunt, Midnight Club | CHANNEL SURF</title>
-  <meta name="description" content="A lightweight Rockstar Elsewhere dossier covering Max Payne, Manhunt, and Midnight Club: noir, stealth horror, and street racing beyond GTA.">
+  <title>Rockstar Beyond GTA: Max Payne, Manhunt &amp; Midnight Club</title>
+  <meta name="description" content="Explore Rockstar games beyond GTA: Max Payne's noir, Manhunt's stealth horror, Midnight Club street racing, and more, with sources and context.">
+  <meta name="keywords" content="Max Payne, Manhunt, Midnight Club, L.A. Noire, Rockstar games, Rockstar beyond GTA">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Rockstar Elsewhere — CHANNEL SURF">
+  <meta property="og:title" content="Rockstar Beyond GTA: Max Payne, Manhunt &amp; Midnight Club">
   <meta property="og:description" content="Max Payne, Manhunt, and Midnight Club: three sides of Rockstar beyond GTA.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
@@ -362,12 +412,13 @@ function storyPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GTA Story Timeline - 1961 to 2026 | CHANNEL SURF</title>
-  <meta name="description" content="A graphical reading timeline of major in-universe GTA story beats, from 1961 London through Vice City, San Andreas, Liberty City, Los Santos, and 2026 Leonida.">
+  <title>GTA Story Timeline: Every Game in Order (1961–2026)</title>
+  <meta name="description" content="A complete chronological GTA story timeline from 1961 London to 2026 Leonida, covering Vice City, San Andreas, Liberty City, and Los Santos. Full spoilers.">
+  <meta name="keywords" content="GTA story timeline, GTA games in order, GTA lore, Vice City story, San Andreas story, GTA IV story, GTA V story, GTA VI Leonida">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="GTA Story Timeline - CHANNEL SURF">
-  <meta property="og:description" content="Major story beats, full spoilers, and a theme that shifts as you scroll.">
+  <meta property="og:title" content="GTA Story Timeline: Every Game in Order (1961–2026)">
+  <meta property="og:description" content="Every major GTA story era in order, from 1961 London to 2026 Leonida, with full spoilers.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -478,12 +529,13 @@ function changelogPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Changelog — CHANNEL SURF</title>
-  <meta name="description" content="Public, version-only changelog for CHANNEL SURF, an unofficial Rockstar lore archive and arcade.">
+  <title>Site Changelog: GTA Lore, Maps, Trivia &amp; Puzzle Updates</title>
+  <meta name="description" content="Version-only release history for the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle games, with every change documented.">
+  <meta name="keywords" content="GTA fan site changelog, site updates, GTA lore archive updates">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Changelog — CHANNEL SURF">
-  <meta property="og:description" content="Release history for the CHANNEL SURF lore archive and arcade.">
+  <meta property="og:title" content="Site Changelog: GTA Lore, Maps, Trivia &amp; Puzzle Updates">
+  <meta property="og:description" content="Release history for the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle games.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -525,12 +577,13 @@ function contactPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact — CHANNEL SURF</title>
-  <meta name="description" content="Contact CHANNEL SURF through the Brynsites umbrella site for corrections, permissions, or takedown requests.">
+  <title>Contact the GTA Fan Archive: Corrections &amp; Takedowns</title>
+  <meta name="description" content="Contact the GTA fan archive about corrections, permissions, or takedown requests through the Brynsites umbrella site. No email is published here.">
+  <meta name="keywords" content="GTA fan archive contact, corrections, takedown request, Brynsites contact">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Contact — CHANNEL SURF">
-  <meta property="og:description" content="Corrections and permissions are handled through Brynsites.">
+  <meta property="og:title" content="Contact the GTA Fan Archive: Corrections &amp; Takedowns">
+  <meta property="og:description" content="Corrections, permissions, and takedowns for the GTA fan archive are handled through the Brynsites umbrella site.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -578,12 +631,13 @@ function creditsPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Image credits — CHANNEL SURF</title>
-  <meta name="description" content="Photo credits and licences for the real-world images used on CHANNEL SURF. These are not GTA screenshots or official artwork.">
+  <title>GTA Fan Archive Image Credits &amp; Photo Licences</title>
+  <meta name="description" content="Photo credits and licences for the real-world images used across the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle pages.">
+  <meta name="keywords" content="GTA fan archive image credits, photo licences, Wikimedia Commons credits">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Image credits — CHANNEL SURF">
-  <meta property="og:description" content="Photo credits and licences for the real-world images used on the site.">
+  <meta property="og:title" content="GTA Fan Archive Image Credits &amp; Photo Licences">
+  <meta property="og:description" content="Photo credits and licences for the real-world images used across the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle pages.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -627,17 +681,382 @@ function creditsPage() {
 </html>`, { prefix: "", active: "credits", site });
 }
 
+function arcadePage() {
+  const canonical = `${siteUrl}arcade/`;
+  const gameLinks = games.map((game) => `<a href="../games/${esc(game.slug)}/">${esc(game.name)}</a>`).join(" · ");
+  return decoratePage(`<!DOCTYPE html>
+<html lang="en" data-era="gta6">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Play Free GTA Trivia Quiz &amp; Rockstar Puzzle Games Online</title>
+  <meta name="description" content="Play free GTA trivia quizzes and Rockstar puzzle games. Test your knowledge across every era, crack vaults, plot heat-grid routes, and solve clue dossiers.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <meta name="keywords" content="GTA trivia quiz, GTA trivia questions and answers, Rockstar trivia, Rockstar puzzle games, GTA puzzle games, free online trivia, GTA quiz game">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="Play Free GTA Trivia Quiz &amp; Rockstar Puzzle Games Online">
+  <meta property="og:description" content="Play free GTA trivia quizzes and Rockstar puzzle games: daily trivia, vault cracking, heat-grid routes, and clue dossiers. No account needed.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${siteUrl}assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../assets/fonts/fonts.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .arcade-main { max-width: 1040px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .arcade-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .arcade-main .lede { color: var(--muted); font-size: 1.1rem; max-width: 72ch; line-height: 1.7; }
+    .arcade-main h2 { margin: 2.6rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--accent); }
+    .arcade-main h3 { margin: 0.2rem 0 0.6rem; font-size: clamp(1.25rem, 3vw, 1.6rem); }
+    .arcade-main p, .arcade-main li { line-height: 1.7; }
+    .arcade-main a { color: var(--accent-2); }
+    .arcade-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+    .arcade-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .arcade-grid { display: grid; gap: 1rem; margin-top: 1.2rem; }
+    @media (min-width: 760px) { .arcade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .arcade-card { padding: 1.3rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+    .arcade-card ul { padding-left: 1.1rem; margin: 0.6rem 0 1rem; }
+    .arcade-card li { margin-bottom: 0.3rem; }
+    .arcade-card .eyebrow { color: var(--accent); }
+    .arcade-note { padding: 1rem; border-left: 3px solid var(--accent-2); background: color-mix(in srgb, var(--accent-2) 8%, transparent); }
+    .arcade-disclaimer { margin-top: 2.4rem; padding: 1rem; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    .arcade-steps { padding-left: 1.2rem; }
+    .arcade-steps li { margin-bottom: 0.4rem; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "${canonical}#webpage",
+        "url": "${canonical}",
+        "name": "Play Free GTA Trivia Quiz & Rockstar Puzzle Games",
+        "description": "A free browser arcade with a GTA trivia quiz across every Rockstar era and three Rockstar puzzle games: Vault Cracker, Heat Grid, and Clue Dossier.",
+        "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "${siteUrl}" },
+          { "@type": "ListItem", "position": 2, "name": "Arcade", "item": "${canonical}" }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "CHANNEL SURF arcade games",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Quiz",
+              "name": "GTA Trivia Quiz",
+              "url": "${canonical}#gta-trivia-quiz",
+              "description": "A free GTA trivia quiz covering Vice City, San Andreas, Liberty City, Los Santos, and Leonida, with daily and era-filtered formats.",
+              "about": ["Grand Theft Auto", "Rockstar Games", "video game trivia"],
+              "educationalLevel": "Beginner to expert"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Game",
+              "name": "Rockstar Puzzle Games",
+              "url": "${canonical}#rockstar-puzzles",
+              "description": "Vault Cracker, Heat Grid, and Clue Dossier: three generated Rockstar puzzle games with daily variants.",
+              "genre": "Puzzle",
+              "gamePlatform": "Web browser"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="arcade-main">
+    <nav class="arcade-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / Arcade</nav>
+    <p class="arcade-breadcrumb" style="margin-top:1.2rem">CHANNEL SURF // ARCADE</p>
+    <h1>Play free GTA trivia and Rockstar puzzle games.</h1>
+    <p class="lede">CHANNEL SURF is a fan-made Rockstar lore archive with a free browser arcade. Test your GTA trivia knowledge across Vice City, San Andreas, Liberty City, Los Santos, and Leonida, or switch to Rockstar puzzle games and crack a vault, plot a patrol route, or deduce a district from field notes. No account and no download.</p>
+    <div class="arcade-actions">
+      <a class="btn btn-primary" href="../#trivia">Play the GTA trivia quiz</a>
+      <a class="btn btn-ghost" href="../#puzzles">Play the puzzle games</a>
+    </div>
+
+    <section aria-labelledby="arcade-modes">
+      <h2 id="arcade-modes">Two ways to play</h2>
+      <div class="arcade-grid">
+        <article class="arcade-card" id="gta-trivia-quiz">
+          <p class="eyebrow">Quiz</p>
+          <h3>GTA Trivia Quiz</h3>
+          <p>A free GTA trivia quiz written from public franchise knowledge, with a source note after each answer. Filter by era or play the daily run that refreshes at 00:00 UTC.</p>
+          <ul>
+            <li>Era filters: Vice City, San Andreas, GTA IV, GTA V, GTA VI, and classic GTA.</li>
+            <li>Multiple formats, including fast runs, streak runs, and Channel Surf mode.</li>
+            <li>Keyboard-friendly, mobile-friendly, and replayable with local best scores.</li>
+          </ul>
+          <a class="btn btn-primary btn-sm" href="../#trivia">Start a trivia run</a>
+        </article>
+        <article class="arcade-card" id="rockstar-puzzles" style="--accent:var(--accent-2)">
+          <p class="eyebrow">Puzzles</p>
+          <h3>Rockstar Puzzle Games</h3>
+          <p>Three generated puzzle loops built for the theme. Every board is replayable, and daily variants use the same UTC seed for everyone.</p>
+          <ul>
+            <li><strong>Vault Cracker</strong> — deduce a safe code from feedback clues.</li>
+            <li><strong>Heat Grid</strong> — plot a route through patrols without getting caught.</li>
+            <li><strong>Clue Dossier</strong> — identify a district from field notes and map hints.</li>
+          </ul>
+          <a class="btn btn-primary btn-sm" href="../#puzzles">Open the puzzles</a>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="arcade-daily">
+      <h2 id="arcade-daily">Daily trivia and daily puzzles</h2>
+      <p>Both daily challenges use the UTC date as their seed, so everyone gets the same run for that day. A local streak tracks how many days in a row you have played. Progress, badges, and preferences are stored in your browser with <code>localStorage</code> — there is no sign-up and no server-side profile.</p>
+      <p class="arcade-note">The arcade is part of a non-commercial fan project. It is not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive.</p>
+    </section>
+
+    <section aria-labelledby="arcade-how">
+      <h2 id="arcade-how">How to play</h2>
+      <ol class="arcade-steps">
+        <li>Open the <a href="../#trivia">GTA trivia quiz</a> or the <a href="../#puzzles">Rockstar puzzle games</a>.</li>
+        <li>Pick an era or a daily challenge, then choose a format or puzzle type.</li>
+        <li>Play in the browser. Scores, streaks, and badges save locally on your device.</li>
+        <li>Want the lore behind an answer? Follow the source note or browse the <a href="../archive.html">full-text lore archive</a>.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="arcade-more">
+      <h2 id="arcade-more">Before or after you play</h2>
+      <p>The arcade sits alongside a partial Rockstar lore archive. Read the <a href="../story.html">GTA story timeline</a>, browse <a href="../archive.html">characters, locations, factions, and story beats</a>, or open a per-game dossier: ${gameLinks}.</p>
+      <p>Start at the <a href="../">interactive archive home</a>, compare the fiction with the real world in <a href="../#reel">Real vs Reel</a>, or check the <a href="../credits.html">image credits</a> for the real-world photos used across the site.</p>
+    </section>
+
+    <p class="arcade-disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All game names, characters, locations, and trademarks belong to their respective owners. Trivia, puzzle logic, and all original copy on this page were written for this project.</p>
+  </main>
+</body>
+</html>`, { prefix: "", active: "play", site });
+}
+
+function atlasPage() {
+  const canonical = `${siteUrl}atlas/`;
+  const maps = Object.entries(atlas).map(([era, entry]) => {
+    const game = gameByEra.get(era);
+    const locations = (entry.locations || []).map((spot) => `<li><strong>${esc(spot.name)}</strong> — ${esc(spot.kind)}. ${esc(spot.note)}</li>`).join("");
+    const image = entry.map && entry.map.src
+      ? `<figure class="map-shot"><img src="../${esc(entry.map.src)}" alt="${esc(entry.title)} map with fan-annotated districts and landmarks" loading="lazy" decoding="async"><figcaption>${esc(entry.map.credit)} · <a href="${esc(entry.map.source)}" rel="noopener noreferrer" target="_blank">map source</a></figcaption></figure>`
+      : `<p class="arcade-note">No official world map for this entry — a fan-made signal postcard and district dossier instead.</p>`;
+    return `<article class="map-card" id="map-${esc(era)}">
+      ${image}
+      <div class="map-copy">
+        <p class="eyebrow">${esc(eraNames[era] || era)}</p>
+        <h2>${esc(entry.title)}</h2>
+        <p>${esc(entry.subtitle)}</p>
+        <ul>${locations}</ul>
+        <p class="map-links">
+          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          ${game ? `<a class="btn btn-quiet btn-sm" href="../games/${esc(game.slug)}/">${esc(game.name)} dossier</a>` : ""}
+        </p>
+      </div>
+    </article>`;
+  }).join("");
+  return decoratePage(`<!DOCTYPE html>
+<html lang="en" data-era="gta6">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GTA Maps: Leonida, Vice City, San Andreas &amp; Los Santos</title>
+  <meta name="description" content="Browse GTA maps for Leonida, Vice City, San Andreas, Los Santos, and Liberty City with fan-annotated districts, landmarks, and links to their real-world cities.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <meta name="keywords" content="GTA map, GTA maps, GTA VI Leonida map, Vice City map, San Andreas map, Los Santos map, Liberty City map, GTA locations, GTA atlas">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="GTA Maps: Leonida, Vice City, San Andreas &amp; Los Santos">
+  <meta property="og:description" content="Fan-annotated GTA maps for every game, from Leonida and Vice City to San Andreas, Los Santos, and Liberty City.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${siteUrl}assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../assets/fonts/fonts.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .maps-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .maps-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .maps-main .lede { color: var(--muted); font-size: 1.1rem; max-width: 72ch; line-height: 1.7; }
+    .maps-main h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0.2rem 0 0.4rem; }
+    .maps-main p, .maps-main li { line-height: 1.7; }
+    .maps-main a { color: var(--accent-2); }
+    .maps-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+    .maps-list { display: grid; gap: 1.4rem; margin-top: 2rem; }
+    .map-card { display: grid; gap: 1.2rem; padding: 1.2rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+    @media (min-width: 820px) { .map-card { grid-template-columns: 300px minmax(0, 1fr); } }
+    .map-shot { margin: 0; }
+    .map-shot img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) * 0.6); }
+    .map-shot figcaption { margin-top: 0.4rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }
+    .map-copy ul { padding-left: 1.1rem; margin: 0.8rem 0 1rem; }
+    .map-copy li { margin-bottom: 0.35rem; }
+    .map-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .maps-note { padding: 1rem; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "${canonical}#webpage",
+        "url": "${canonical}",
+        "name": "GTA Maps: Leonida, Vice City, San Andreas, Los Santos & Liberty City",
+        "description": "Fan-annotated maps for every GTA era, with districts, landmarks, and links to the real-world cities that inspired them.",
+        "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "${siteUrl}" },
+          { "@type": "ListItem", "position": 2, "name": "GTA maps", "item": "${canonical}" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="maps-main">
+    <nav class="maps-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / GTA maps</nav>
+    <p class="maps-breadcrumb" style="margin-top:1.2rem">GTA MAP ATLAS</p>
+    <h1>GTA maps, district by district.</h1>
+    <p class="lede">Every major GTA map in one place: Leonida and Vice City, San Andreas and Los Santos, Liberty City, the Red Dead frontier, Bullworth, and The Warriors' New York. Each entry lists fan-annotated districts and landmarks, with a link to the interactive version and the game dossier. None of the annotations are official cartography.</p>
+    <p><a class="btn btn-primary btn-sm" href="../#atlas">Open the interactive GTA map</a> <a class="btn btn-ghost btn-sm" href="../real-vs-reel/">Compare GTA cities with real life</a></p>
+    <div class="maps-list">${maps}</div>
+    <h2 style="margin-top:2.6rem">Which real city is each GTA map based on?</h2>
+    <p>Vice City and Leonida echo Miami and Florida, Liberty City echoes New York, Los Santos echoes Los Angeles, San Fierro echoes San Francisco, Las Venturas echoes Las Vegas, and Saint Denis echoes New Orleans. The <a href="../real-vs-reel/">GTA vs real life comparison</a> puts each pair side by side.</p>
+    <p class="maps-note">Unofficial fan project. Map artwork belongs to Rockstar Games and is credited with each image. Annotations are fan-made and not official cartography. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive.</p>
+  </main>
+</body>
+</html>`, { prefix: "", active: "atlas", site });
+}
+
+function realWorldPage() {
+  const canonical = `${siteUrl}real-vs-reel/`;
+  const cards = realWorld.map((place) => {
+    const game = gameByEra.get(place.era);
+    const credit = imageCredits[place.image];
+    return `<article class="place-card" id="${esc(place.id)}">
+      ${credit ? `<img src="../${esc(credit.file)}" alt="${esc(credit.alt)}" loading="lazy" decoding="async">` : ""}
+      <div class="place-copy">
+        <p class="eyebrow">${esc(place.realName)}</p>
+        <h2>${esc(place.fictionalName)}</h2>
+        <p>${esc(place.note)}</p>
+        ${credit ? `<p class="place-credit">Photo: ${esc(credit.artist)} (${esc(credit.license)}) · <a href="${esc(credit.source)}" rel="noopener noreferrer" target="_blank">source</a></p>` : ""}
+        <p class="place-links"><a href="../atlas/#map-${esc(place.era)}">See the ${esc(place.fictionalName)} map</a>${game ? ` · <a href="../games/${esc(game.slug)}/">${esc(game.name)} story and characters</a>` : ""}</p>
+      </div>
+    </article>`;
+  }).join("");
+  return decoratePage(`<!DOCTYPE html>
+<html lang="en" data-era="gta6">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GTA vs Real Life: Miami, New York &amp; LA Behind the Games</title>
+  <meta name="description" content="See the real cities behind Vice City, Liberty City, and Los Santos: Miami, New York, Los Angeles, New Orleans, and more compared with the fiction.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <meta name="keywords" content="GTA vs real life, Vice City Miami, Liberty City New York, Los Santos Los Angeles, GTA real world locations, GTA map comparisons">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="GTA vs Real Life: Miami, New York &amp; LA Behind the Games">
+  <meta property="og:description" content="Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, and London compared with their GTA counterparts.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${siteUrl}assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../assets/fonts/fonts.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .places-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .places-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .places-main .lede { color: var(--muted); font-size: 1.1rem; max-width: 72ch; line-height: 1.7; }
+    .places-main h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0.2rem 0 0.4rem; }
+    .places-main p { line-height: 1.7; }
+    .places-main a { color: var(--accent-2); }
+    .places-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+    .places-grid { display: grid; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 760px) { .places-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .place-card { overflow: hidden; border: 1px solid var(--line); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+    .place-card img { display: block; width: 100%; height: 190px; object-fit: cover; filter: saturate(0.85); }
+    .place-copy { padding: 1rem 1.1rem 1.2rem; }
+    .place-credit { color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }
+    .place-links { margin-bottom: 0; }
+    .places-note { margin-top: 2.2rem; padding: 1rem; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "${canonical}#webpage",
+        "url": "${canonical}",
+        "name": "GTA vs Real Life: the cities behind Vice City, Liberty City, and Los Santos",
+        "description": "A side-by-side comparison of real cities and their GTA counterparts, with photos, notes, and map links.",
+        "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "${siteUrl}" },
+          { "@type": "ListItem", "position": 2, "name": "GTA vs real life", "item": "${canonical}" }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "Real cities behind GTA locations",
+        "itemListElement": [${realWorld.map((place, index) => `
+          { "@type": "ListItem", "position": ${index + 1}, "name": ${JSON.stringify(`${place.realName} / ${place.fictionalName}`)}, "url": "${canonical}#${esc(place.id)}" }`).join(",")}
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="places-main">
+    <nav class="places-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / GTA vs real life</nav>
+    <p class="places-breadcrumb" style="margin-top:1.2rem">REAL WORLD / REEL WORLD</p>
+    <h1>GTA vs real life: the cities behind the games.</h1>
+    <p class="lede">Vice City is Miami. Liberty City is New York. Los Santos is Los Angeles. This page pairs each fictional GTA location with the real city that inspired it, with photos, notes, and links to the matching map. These are real-world photographs, not game artwork.</p>
+    <p><a class="btn btn-primary btn-sm" href="../atlas/">Browse the GTA map atlas</a> <a class="btn btn-ghost btn-sm" href="../#reel">Open the interactive comparison map</a></p>
+    <div class="places-grid">${cards}</div>
+    <p class="places-note">Fan-made comparisons for commentary and context. Photos are credited to their photographers and licences. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive.</p>
+  </main>
+</body>
+</html>`, { prefix: "", active: "reel", site });
+}
+
 const archive = decoratePage(`<!DOCTYPE html>
 <html lang="en" data-era="gta6">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CHANNEL SURF - Full Text Archive (Lore and GTA Story Timeline)</title>
-  <meta name="description" content="Full text archive of CHANNEL SURF: curated Rockstar lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida.">
+  <title>GTA Lore Archive: Characters, Locations &amp; Story (1961–2026)</title>
+  <meta name="description" content="Full-text GTA lore archive: characters, locations, factions, and story beats from 1961 London to 2026 Leonida, plus links to the trivia quiz and puzzles.">
+  <meta name="keywords" content="GTA lore, GTA characters, GTA locations, GTA factions, GTA story, GTA archive, Rockstar lore">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${siteUrl}archive.html">
-  <meta property="og:title" content="CHANNEL SURF - Full Text Archive">
-  <meta property="og:description" content="All lore entries and the full GTA story timeline in one static, readable page.">
+  <meta property="og:title" content="GTA Lore Archive: Characters, Locations &amp; Story (1961–2026)">
+  <meta property="og:description" content="All GTA lore entries, characters, locations, and the full story timeline in one static, readable archive.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${siteUrl}archive.html">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -703,7 +1122,9 @@ const archive = decoratePage(`<!DOCTYPE html>
 
 
 const sitemapUrls = [
-  { loc: siteUrl, priority: "1.0" },
+  { loc: siteUrl, priority: "1.0" },  { loc: `${siteUrl}arcade/`, priority: "0.9" },
+  { loc: `${siteUrl}atlas/`, priority: "0.9" },
+  { loc: `${siteUrl}real-vs-reel/`, priority: "0.7" },
   { loc: `${siteUrl}archive.html`, priority: "0.9" },
   { loc: `${siteUrl}elsewhere.html`, priority: "0.7" },
   { loc: `${siteUrl}story.html`, priority: "0.8" },
@@ -731,9 +1152,12 @@ Sitemap: ${siteUrl}sitemap.xml
 
 const llms = `# CHANNEL SURF
 
-> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
+> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a GTA map atlas of Leonida, Vice City, San Andreas, Los Santos, and Liberty City, GTA vs real life city comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: ${siteUrl}
+GTA map atlas: ${siteUrl}atlas/
+GTA vs real life: ${siteUrl}real-vs-reel/
+Arcade (GTA trivia quiz and puzzle games): ${siteUrl}arcade/
 Full text archive: ${siteUrl}archive.html
 
 ## What is here
@@ -741,9 +1165,12 @@ Full text archive: ${siteUrl}archive.html
 - [Lore archive](${siteUrl}archive.html#lore): locations, characters, factions, and franchise history, with sources.
 - [Story timeline](${siteUrl}archive.html#story): chronological GTA story beats, including full spoiler details.
 - [Story reading mode](${siteUrl}story.html): a graphical scroll-driven timeline page.
+- [GTA map atlas](${siteUrl}atlas/): maps of Leonida, Vice City, San Andreas, Los Santos, Liberty City, the Red Dead frontier, Bullworth, and The Warriors' New York, with fan annotations.
+- [GTA vs real life](${siteUrl}real-vs-reel/): Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, and London compared with their GTA counterparts.
+- [Arcade](${siteUrl}arcade/): play a free GTA trivia quiz and Rockstar puzzle games, including daily challenges.
 - [Games](${siteUrl}#games): theme-per-game dossiers.
 - [Rockstar Elsewhere](${siteUrl}elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
-- [Interactive site](${siteUrl}): theme-morphing lore hub, horizontal story timeline, atlas, Real vs Reel map, trivia, and puzzles.
+- [Interactive site](${siteUrl}): theme-morphing lore hub, horizontal story timeline, GTA map atlas, GTA vs real life map, trivia quiz, and puzzle games.
 - [Changelog](${siteUrl}changelog.html): public release history.
 - [Image credits](${siteUrl}credits.html): local photo sources and licences.
 - [Contact](${siteUrl}contact.html): corrections and permissions via ${site.umbrella.name}.
@@ -795,9 +1222,10 @@ const searchIndex = [
   { title: "Games", subtitle: "Theme-per-game dossiers", href: `${searchBase}#games`, type: "Page", keywords: "games dossiers" },
   { title: "Lore", subtitle: "Locations, characters, factions", href: `${searchBase}#lore`, type: "Page", keywords: "lore archive characters locations" },
   { title: "Story timeline", subtitle: "In-universe chronology", href: `${searchBase}#story`, type: "Page", keywords: "story timeline chronology" },
-  { title: "Atlas", subtitle: "Fictional map and Geo-Guess", href: `${searchBase}#atlas`, type: "Page", keywords: "atlas map geography" },
-  { title: "Real vs Reel", subtitle: "Real-world city comparisons", href: `${searchBase}#reel`, type: "Page", keywords: "real world comparison photography" },
+  { title: "GTA map atlas", subtitle: "Leonida, Vice City, San Andreas, Los Santos, and Liberty City", href: `${searchBase}atlas/`, type: "Page", keywords: "GTA map GTA maps Vice City map San Andreas map Los Santos map Liberty City map Leonida map locations atlas" },
+  { title: "GTA vs real life", subtitle: "Real cities behind Vice City, Liberty City, and Los Santos", href: `${searchBase}real-vs-reel/`, type: "Page", keywords: "GTA vs real life Vice City Miami Liberty City New York Los Santos Los Angeles comparisons" },
   { title: "Arcade", subtitle: "Trivia and puzzles", href: `${searchBase}#play`, type: "Page", keywords: "arcade trivia puzzles" },
+  { title: "GTA trivia quiz and Rockstar puzzle games", subtitle: "Free browser arcade guide", href: `${searchBase}arcade/`, type: "Page", keywords: "GTA trivia quiz Rockstar trivia puzzle games vault cracker heat grid clue dossier daily quiz" },
   { title: "About", subtitle: "Project and IP notes", href: `${searchBase}#about`, type: "Page", keywords: "about disclaimer" },
   { title: "Full-text archive", subtitle: "Static lore and story reading page", href: `${searchBase}archive.html`, type: "Page", keywords: "archive static full text" },
   { title: "Story reading mode", subtitle: "Scroll-driven timeline", href: `${searchBase}story.html`, type: "Page", keywords: "story reading" },
@@ -811,6 +1239,12 @@ const searchIndex = [
 ];
 
 fs.writeFileSync(path.join(root, "archive.html"), archive);
+fs.mkdirSync(path.join(root, "arcade"), { recursive: true });
+fs.writeFileSync(path.join(root, "arcade", "index.html"), arcadePage());
+fs.mkdirSync(path.join(root, "atlas"), { recursive: true });
+fs.writeFileSync(path.join(root, "atlas", "index.html"), atlasPage());
+fs.mkdirSync(path.join(root, "real-vs-reel"), { recursive: true });
+fs.writeFileSync(path.join(root, "real-vs-reel", "index.html"), realWorldPage());
 fs.writeFileSync(path.join(root, "story.html"), storyPage());
 fs.writeFileSync(path.join(root, "elsewhere.html"), elsewherePage());
 fs.writeFileSync(path.join(root, "changelog.html"), changelogPage());
@@ -893,4 +1327,4 @@ function buildCspHeaders() {
 
 buildCspHeaders();
 
-console.log("generated archive.html, story.html, elsewhere.html, changelog.html, contact.html, credits.html, search-index.js, sitemap.xml, robots.txt, llms.txt, _headers, and", games.length, "game pages for", siteUrl);
+console.log("generated archive.html, arcade/index.html, atlas/index.html, real-vs-reel/index.html, story.html, elsewhere.html, changelog.html, contact.html, credits.html, search-index.js, sitemap.xml, robots.txt, llms.txt, _headers, and", games.length, "game pages for", siteUrl);

@@ -130,18 +130,18 @@
   };
 
   const ROUTE_TITLES = {
-    home: "CHANNEL SURF — Unofficial Rockstar Lore Archive & Arcade",
-    games: "Games — CHANNEL SURF",
-    lore: "The Wire Archive — CHANNEL SURF",
-    story: "Story Timeline — CHANNEL SURF",
-    reel: "Real vs Reel — CHANNEL SURF",
-    play: "Arcade — CHANNEL SURF",
-    trivia: "Trivia Arena — CHANNEL SURF",
-    puzzles: "Puzzles & Safehouse — CHANNEL SURF",
-    atlas: "The Era Atlas — CHANNEL SURF",
-    timeline: "Franchise Timeline — CHANNEL SURF",
-    toolkit: "Crew & Heist Splitter — CHANNEL SURF",
-    about: "About / IP Note — CHANNEL SURF"
+    home: "GTA Lore, Story Timeline, Maps, Trivia Quiz & Puzzles",
+    games: "GTA Game Pages: Story, Characters & Maps",
+    lore: "GTA Lore Archive: Characters, Locations & Factions",
+    story: "GTA Story Timeline: Every Game in Order",
+    reel: "GTA vs Real Life: The Cities Behind the Games",
+    play: "GTA Trivia Quiz & Rockstar Puzzle Games",
+    trivia: "GTA Trivia Quiz: Play Free Online",
+    puzzles: "Rockstar Puzzle Games: Vault, Heat Grid & Dossier",
+    atlas: "GTA Maps: Leonida, Vice City, San Andreas & Los Santos",
+    timeline: "GTA Timeline: Every Game in Order",
+    toolkit: "GTA Heist Splitter & Crew Toolkit",
+    about: "About This GTA Fan Archive"
   };
 
   const GRID_LEVELS = {
@@ -1219,8 +1219,7 @@
     ensureLoreArchive().then(() => {
       if (state.currentView !== "lore") return;
       renderLoreFilters();
-      renderLoreGrid();
-      renderLoreDetail();
+      applyLoreFilters();
     });
     renderLoreFilters();
     renderLoreGrid();
@@ -1230,7 +1229,7 @@
     const eraBar = $("#loreEraFilters");
     if (eraBar) {
       eraBar.innerHTML = [`<button class="chip" type="button" data-lore-era="all" aria-pressed="${state.loreFilter === "all"}">All eras</button>`]
-        .concat(eraOrder.map((key) => `<button class="chip" type="button" data-lore-era="${key}" aria-pressed="${state.loreFilter === key}">${escapeHTML(eras[key].short)}</button>`))
+        .concat(eraOrder.map((key) => `<button class="chip" type="button" data-lore-era="${key}" title="${escapeHTML(eras[key].name || key)}" aria-label="Filter by ${escapeHTML(eras[key].name || key)}" aria-pressed="${state.loreFilter === key}">${escapeHTML(eras[key].short)}</button>`))
         .join("");
     }
     const typeBar = $("#loreTypeFilters");
@@ -1251,6 +1250,53 @@
     return `${item.title} ${item.summary} ${(item.tags || []).join(" ")} ${item.type || ""}`.toLowerCase().includes(query);
   }
 
+  function loreHasFilters() {
+    return state.loreFilter !== "all" || state.loreType !== "all" || Boolean(state.loreQuery.trim());
+  }
+
+  function loreFilterSummary() {
+    const parts = [];
+    if (state.loreFilter !== "all") parts.push(eras[state.loreFilter]?.name || state.loreFilter);
+    if (state.loreType !== "all") parts.push(state.loreType);
+    if (state.loreQuery.trim()) parts.push(`“${state.loreQuery.trim()}”`);
+    return parts.join(" · ");
+  }
+
+  function updateLoreCount(count) {
+    const label = $("#loreCount");
+    if (label) {
+      const summary = loreFilterSummary();
+      label.textContent = `${count} ${count === 1 ? "entry" : "entries"}${summary ? ` · ${summary}` : ""}`;
+    }
+    const clear = $("#loreClear");
+    if (clear) clear.hidden = !loreHasFilters();
+  }
+
+  function resetLoreFilters() {
+    state.loreFilter = "all";
+    state.loreType = "all";
+    state.loreQuery = "";
+    state.loreSelected = null;
+    const search = $("#loreSearch");
+    if (search) search.value = "";
+    syncLoreTheme();
+    renderLoreFilters();
+    renderLoreGrid();
+    renderLoreDetail();
+  }
+
+  function applyLoreFilters() {
+    if (state.loreSelected) {
+      const selected = (state.lore || []).find((entry) => entry.id === state.loreSelected);
+      if (!selected || !loreMatches(selected)) {
+        state.loreSelected = null;
+        syncLoreTheme();
+      }
+    }
+    renderLoreGrid();
+    renderLoreDetail();
+  }
+
   function renderLoreGrid() {
     const grid = $("#loreContent");
     if (!grid) return;
@@ -1266,23 +1312,22 @@
       return;
     }
     const filtered = lore.filter(loreMatches);
-    const count = $("#loreCount");
-    if (count) count.textContent = filtered.length;
+    updateLoreCount(filtered.length);
     const notice = state.loreStatus === "fallback"
       ? `<p class="small muted lore-notice">Showing featured entries only. <a class="text-link" href="archive.html">Open the full static archive</a> for all 20 entries, or run the local preview server.</p>`
       : "";
     if (!filtered.length) {
-      grid.innerHTML = `${notice}<p class="small muted panel">No entries match that filter.</p>`;
+      grid.innerHTML = `${notice}<div class="panel lore-empty"><p>No entries match those filters.</p><button class="btn btn-ghost btn-sm" type="button" data-lore-clear>Clear filters</button></div>`;
       return;
     }
     grid.innerHTML = notice + filtered.map((item) => `
-      <div class="lore-card ${state.loreSelected === item.id ? "is-active" : ""}" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0">
+      <div class="lore-card ${state.loreSelected === item.id ? "is-active" : ""}" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0" aria-label="Open ${escapeHTML(item.title)} (${escapeHTML(item.type || "lore")}, ${escapeHTML(eras[item.era]?.name || item.era)})">
         <div class="lore-card-head">${avatarHTML(item.title, item.era)}<span class="lore-type">${escapeHTML(item.type || "lore")}</span></div>
         <h3>${escapeHTML(item.title)}</h3>
         <p>${mdHTML(item.summary)}</p>
         <div class="lore-card-foot">
           <span>${escapeHTML(eras[item.era]?.name || item.era)}</span>
-          <span class="text-link">Read →</span>
+          <span class="text-link">Read entry →</span>
         </div>
       </div>
     `).join("");
@@ -1326,7 +1371,7 @@
     return `https://gta.fandom.com/wiki/${encodeURIComponent(String(title || "").trim().replace(/\s+/g, "_"))}`;
   }
 
-  function renderLoreDetail() {
+  function renderLoreDetail(options = {}) {
     const box = $("#loreDetail");
     if (!box) return;
     const item = (state.lore || []).find((entry) => entry.id === state.loreSelected);
@@ -1338,31 +1383,42 @@
     previewContentEra(item.era, "lore");
     box.classList.remove("hidden");
     box.innerHTML = `
+      <div class="lore-detail-top">
+        <button class="text-link" type="button" data-lore-close>← Back to all entries</button>
+        <span class="detail-kicker">${escapeHTML(item.type || "lore")} · ${escapeHTML(eras[item.era]?.name || item.era)}</span>
+      </div>
       <div class="lore-detail-head">
         <div class="lore-detail-title">
           ${avatarHTML(item.title, item.era)}
           <div>
-            <span class="detail-kicker">${escapeHTML(item.type || "lore")} · ${escapeHTML(eras[item.era]?.name || item.era)}</span>
-            <h3>${escapeHTML(item.title)}</h3>
+            <h3 id="loreEntryTitle" tabindex="-1">${escapeHTML(item.title)}</h3>
+            <p class="lore-detail-era">${escapeHTML(eras[item.era]?.name || item.era)}</p>
           </div>
         </div>
-        <button class="btn btn-quiet btn-sm" type="button" data-lore-close>Close</button>
       </div>
-      <div class="md">${mdHTML(item.summary)}</div>
-      <div class="chip-row">${(item.tags || []).map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join("")}</div>
-      <div class="lore-actions">
-        <button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle || item.title)}">Wikipedia summary</button>
-        <button class="btn btn-quiet btn-sm" type="button" data-lore-fandom="${escapeHTML(item.fandomTitle || item.wikiTitle || item.title)}">GTA Wiki summary</button>
-        <a class="text-link" href="${escapeHTML(item.source || fandomHref(item.title))}" target="_blank" rel="noopener noreferrer">Source</a>
-        <button class="btn btn-ghost btn-sm" type="button" data-route="games">Open game dossier</button>
-        <button class="btn btn-ghost btn-sm" type="button" data-route="atlas">Open atlas</button>
-        <button class="btn btn-ghost btn-sm" type="button" data-route="play">Play the arcade</button>
+      <div class="lore-detail-body">
+        <div class="lore-detail-copy">
+          <div class="md">${mdHTML(item.summary)}</div>
+          <div class="chip-row">${(item.tags || []).map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join("")}</div>
+        </div>
+        <aside class="lore-detail-actions" aria-label="Entry tools">
+          <p class="eyebrow">Entry tools</p>
+          <button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle || item.title)}">Wikipedia summary</button>
+          <button class="btn btn-quiet btn-sm" type="button" data-lore-fandom="${escapeHTML(item.fandomTitle || item.wikiTitle || item.title)}">GTA Wiki summary</button>
+          <a class="text-link" href="${escapeHTML(item.source || fandomHref(item.title))}" target="_blank" rel="noopener noreferrer">Open source ↗</a>
+          <button class="btn btn-ghost btn-sm" type="button" data-route="games">Browse all game dossiers</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-route="atlas">Open the GTA map</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-route="play">Play the arcade</button>
+        </aside>
       </div>
       <div class="live-lore" id="loreLive" hidden></div>
       ${relatedLoreHTML(item)}
     `;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) box.scrollIntoView({ block: "nearest" });
-    else box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    if (options.focus) {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      box.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      box.focus({ preventScroll: true });
+    }
   }
 
   /* ---------------------------------------------------------------------
@@ -1872,7 +1928,7 @@
     if (!ROUTES.includes(view)) view = "home";
     const previous = state.currentView;
     state.currentView = view;
-    const navView = view === "reel" ? "atlas" : (view === "lore" ? "games" : (view === "trivia" || view === "puzzles" ? "play" : view));
+    const navView = view === "reel" ? "atlas" : (view === "trivia" || view === "puzzles" ? "play" : view);
 
     $$(".view").forEach((panel) => {
       panel.classList.toggle("is-active", panel.dataset.view === view);
@@ -2237,11 +2293,16 @@
       const loreOpen = event.target.closest("[data-lore-open]");
       if (loreOpen) {
         state.loreSelected = loreOpen.dataset.loreOpen;
-        navigate("lore");
-        renderLoreHub();
-        renderLoreDetail();
+        if (state.currentView !== "lore") {
+          navigate("lore");
+          renderLoreDetail({ focus: true });
+        } else {
+          renderLoreGrid();
+          renderLoreDetail({ focus: true });
+        }
         return;
-      }      const storyJump = event.target.closest("[data-story-jump]");
+      }
+      const storyJump = event.target.closest("[data-story-jump]");
       if (storyJump) {
         state.storySelected = storyJump.dataset.storyJump;
         state.storyFilter = "all";
@@ -2253,6 +2314,10 @@
         syncLoreTheme();
         renderLoreDetail();
         renderLoreGrid();
+        return;
+      }
+      if (event.target.closest("[data-lore-clear]")) {
+        resetLoreFilters();
         return;
       }
       const wiki = event.target.closest("[data-lore-wiki]");
@@ -2272,7 +2337,7 @@
       state.loreFilter = button.dataset.loreEra;
       syncLoreTheme();
       renderLoreFilters();
-      renderLoreGrid();
+      applyLoreFilters();
     });
 
     $("#loreTypeFilters")?.addEventListener("click", (event) => {
@@ -2280,13 +2345,15 @@
       if (!button) return;
       state.loreType = button.dataset.loreType;
       renderLoreFilters();
-      renderLoreGrid();
+      applyLoreFilters();
     });
 
     $("#loreSearch")?.addEventListener("input", (event) => {
       state.loreQuery = event.target.value;
-      renderLoreGrid();
+      applyLoreFilters();
     });
+
+    $("#loreClear")?.addEventListener("click", resetLoreFilters);
 
     $("#storyContent")?.addEventListener("click", (event) => {
       const eraButton = event.target.closest("[data-story-era]");
@@ -2337,9 +2404,13 @@
       if (!card) return;
       event.preventDefault();
       state.loreSelected = card.dataset.loreOpen;
-      navigate("lore");
-      renderLoreHub();
-      renderLoreDetail();
+      if (state.currentView !== "lore") {
+        navigate("lore");
+        renderLoreDetail({ focus: true });
+      } else {
+        renderLoreGrid();
+        renderLoreDetail({ focus: true });
+      }
     });
   }
 

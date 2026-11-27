@@ -50,6 +50,11 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - [x] Safe Markdown rendering and `[[wiki links]]`
 - [x] Enforced CSP with a repeatable audit
 - [x] One-command local preview server (`npm run dev`)
+- [x] Crawlable arcade page for GTA trivia and Rockstar puzzle searches
+- [x] Crawlable GTA map atlas and GTA vs real life pages
+- [x] Prominent Brynsites network attribution in the footer
+- [x] Lore filter, detail-panel, and nav-state UX fixes
+- [x] Per-page SEO titles, descriptions, keywords, and Twitter cards
 - [ ] Final production domain
 - [ ] Final project rename
 
