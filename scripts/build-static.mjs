@@ -1,17 +1,27 @@
 import fs from "node:fs";
 import path from "node:path";
+import { decoratePage } from "./site-chrome.mjs";
 
 const root = process.cwd();
 const configPath = path.join(root, "site.config.json");
 const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, "utf8")) : {};
 const siteUrl = (process.env.SITE_URL || config.siteUrl || "https://channelsurf.pages.dev/").replace(/\/?$/, "/");
+const site = {
+  siteUrl,
+  umbrella: config.umbrella || { name: "Brynsites", url: "https://brynsites.com/", contactUrl: "https://brynsites.com/contact" },
+  archiveNote: config.archiveNote || "A partial, fan-made archive. Not exhaustive, and may lag behind new releases.",
+  updatedNote: config.updatedNote || "Updated when time allows."
+};
 const lore = JSON.parse(fs.readFileSync(path.join(root, "data/lore.json"), "utf8"));
 const story = JSON.parse(fs.readFileSync(path.join(root, "data/story-timeline.json"), "utf8"));
 const games = JSON.parse(fs.readFileSync(path.join(root, "data/games.json"), "utf8"));
 const elsewhere = JSON.parse(fs.readFileSync(path.join(root, "data/elsewhere.json"), "utf8"));
 const imageCredits = JSON.parse(fs.readFileSync(path.join(root, "data/image-credits.json"), "utf8"));
+const changelog = JSON.parse(fs.readFileSync(path.join(root, "data/changelog.json"), "utf8"));
 const loreById = new Map(lore.map((item) => [item.id, item]));
 const storyById = new Map(story.map((item) => [item.id, item]));
+const gameByEra = new Map(games.map((game) => [game.era, game]));
+const gameByTheme = new Map(games.map((game) => [game.theme, game]));
 
 const esc = (value) => String(value)
   .replaceAll("&", "&amp;")
@@ -19,6 +29,58 @@ const esc = (value) => String(value)
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;")
   .replaceAll("'", "&#39;");
+
+const fandomUrl = (title) => `https://gta.fandom.com/wiki/${encodeURIComponent(String(title || "").trim().replace(/\s+/g, "_"))}`;
+const wikiUrl = (title) => `https://en.wikipedia.org/wiki/${encodeURIComponent(String(title || "").trim().replace(/\s+/g, "_"))}`;
+
+function gameForItem(item) {
+  return gameByEra.get(item.era) || gameByTheme.get(item.era) || null;
+}
+
+function loreRelated(item, limit = 4) {
+  const tags = new Set((item.tags || []).map((tag) => tag.toLowerCase()));
+  return lore
+    .filter((candidate) => candidate.id !== item.id)
+    .map((candidate) => {
+      const shared = (candidate.tags || []).filter((tag) => tags.has(tag.toLowerCase())).length;
+      return { item: candidate, score: (candidate.era === item.era ? 3 : 0) + shared * 2 + (candidate.type === item.type ? 1 : 0) };
+    })
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((entry) => entry.item);
+}
+
+function storyRelated(event, limit = 3) {
+  const names = new Set([...(event.characters || []), ...(event.locations || []), ...(event.tags || [])].map((name) => name.toLowerCase()));
+  const matches = lore
+    .map((item) => {
+      const haystack = `${item.title} ${(item.tags || []).join(" ")}`.toLowerCase();
+      const score = [...names].filter((name) => name.length > 2 && haystack.includes(name)).length + (item.era === event.era ? 1 : 0);
+      return { item, score };
+    })
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((entry) => entry.item);
+  return matches;
+}
+
+function relatedMarkup(item) {
+  const related = loreRelated(item);
+  const game = gameForItem(item);
+  const links = related.map((entry) => `<a href="archive.html#lore-${esc(entry.id)}">${esc(entry.title)}</a>`);
+  if (game) links.unshift(`<a href="games/${esc(game.slug)}/">${esc(game.name)} dossier</a>`);
+  const sources = [
+    item.wikiTitle ? `<a href="${esc(wikiUrl(item.wikiTitle))}" rel="noopener noreferrer" target="_blank">Wikipedia</a>` : "",
+    `<a href="${esc(fandomUrl(item.fandomTitle || item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">GTA Wiki</a>`
+  ].filter(Boolean);
+  return `<div class="related-links">
+    ${links.length ? `<p><strong>Related:</strong> ${links.join(" · ")}</p>` : ""}
+    <p class="source-links"><strong>Further reading:</strong> ${sources.join(" · ")}</p>
+  </div>`;
+}
+
 
 const eraNames = {
   gta6: "GTA VI / Leonida",
@@ -53,7 +115,7 @@ const loreSections = loreByType.map((type) => {
       <p class="meta">${esc(eraNames[item.era] || item.era)} · ${esc(item.type || "lore")}</p>
       <p>${esc(item.summary)}</p>
       ${item.tags ? `<p class="tags">${item.tags.map(esc).join(" · ")}</p>` : ""}
-      <p><a href="${esc(item.source)}" rel="noopener noreferrer">Source</a></p>
+      ${relatedMarkup(item)}
     </article>`).join("")}
   </section>`;
 }).join("");
@@ -64,6 +126,7 @@ const storySections = story.map((event) => `<article id="story-${esc(event.id)}"
   <p>${esc(event.summary)}</p>
   <p>${esc(event.detail)}</p>
   <p class="tags">${[...(event.characters || []), ...(event.locations || [])].map(esc).join(" · ")}</p>
+  ${(() => { const g = gameByEra.get(event.era); const related = storyRelated(event); const links = related.map((item) => `<a href="archive.html#lore-${esc(item.id)}">${esc(item.title)}</a>`); if (g) links.unshift(`<a href="games/${esc(g.slug)}/">${esc(g.name)} dossier</a>`); return links.length ? `<div class="related-links"><p><strong>Related:</strong> ${links.join(" · ")}</p></div>` : ""; })()}
 </article>`).join("");
 
 function gamePage(game) {
@@ -76,7 +139,7 @@ function gamePage(game) {
   const loreBlocks = gameLore.map((item) => `<article class="game-entry">    <p class="meta">${esc(item.type || "lore")}</p>
     <h3>${esc(item.title)}</h3>
     <p>${esc(item.summary)}</p>
-    <p><a href="${esc(item.source)}" rel="noopener noreferrer">Source</a></p>
+    <p class="source-links"><a href="${esc(wikiUrl(item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="${esc(fandomUrl(item.fandomTitle || item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>`).join("");
   const storyBlocks = gameStory.map((event) => `<article class="game-entry">
     <h3><span class="year">${esc(event.year)}</span> ${esc(event.title)}</h3>
@@ -84,7 +147,7 @@ function gamePage(game) {
     <p>${esc(event.summary)}</p>
     <p>${esc(event.detail)}</p>
   </article>`).join("");
-  return `<!DOCTYPE html>
+  return decoratePage(`<!DOCTYPE html>
 <html lang="en" data-era="${esc(game.theme)}">
 <head>
   <meta charset="utf-8">
@@ -168,12 +231,13 @@ function gamePage(game) {
     <section id="places">
       <h2>Places</h2>
       <p>${(game.locations || []).map(esc).join(" · ")}</p>
+      <p class="source-links"><strong>Further reading:</strong> <a href="${esc(wikiUrl(game.wikiTitle || game.name))}" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="${esc(fandomUrl(game.wikiTitle || game.name))}" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
     </section>
 
-    <p class="game-disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. Summaries are original editorial writing for this project. <a href="${esc(game.source)}" rel="noopener noreferrer">Source</a></p>
+    <p class="game-disclaimer">A partial, fan-made dossier. Not every game, character, or location is covered. Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. Summaries are original editorial writing for this project.</p>
   </main>
 </body>
-</html>`;
+</html>`, { prefix: relative, active: "games", lockEra: true, site });
 }
 
 function elsewherePage() {
@@ -193,7 +257,7 @@ function elsewherePage() {
     <a href="${esc(item.source)}" rel="noopener noreferrer">Source</a>
   </article>`;
   }).join("");
-  return `<!DOCTYPE html>
+  return decoratePage(`<!DOCTYPE html>
 <html lang="en" data-era="gta4">
 <head>
   <meta charset="utf-8">
@@ -254,7 +318,7 @@ function elsewherePage() {
     <p class="elsewhere-breadcrumb"><a href="./">Return to the interactive archive</a> · <a href="archive.html">Full-text archive</a></p>
   </main>
 </body>
-</html>`;
+</html>`, { prefix: "", active: "games", site });
 }
 
 function storyPage() {
@@ -267,9 +331,10 @@ function storyPage() {
       <p class="reading-summary">${esc(event.summary)}</p>
       <p>${esc(event.detail)}</p>
       <p class="reading-tags">${[...(event.characters || []), ...(event.locations || [])].map(esc).join(" · ")}</p>
+      ${(() => { const g = gameByEra.get(event.era); const related = storyRelated(event); const links = related.map((item) => `<a href="archive.html#lore-${esc(item.id)}">${esc(item.title)}</a>`); if (g) links.unshift(`<a href="games/${esc(g.slug)}/">${esc(g.name)} dossier</a>`); return links.length ? `<p class="reading-related"><strong>Related:</strong> ${links.join(" · ")}</p>` : ""; })()}
     </div>
   </article>`).join("");
-  return `<!DOCTYPE html>
+  return decoratePage(`<!DOCTYPE html>
 <html lang="en" data-era="gta6">
 <head>
   <meta charset="utf-8">
@@ -331,7 +396,7 @@ function storyPage() {
     <p class="reading-kicker">READING MODE</p>
     <header class="reading-hero">
       <h1>The story, from 1961 to 2026.</h1>
-      <p class="lede">Major in-universe GTA story beats, in chronological order. The page theme shifts as each chapter enters view. Full story details follow.</p>
+      <p class="lede">Major in-universe GTA story beats, in chronological order. This is a partial archive, not a complete history. The page theme shifts as each chapter enters view. Full story details follow.</p>
       <div class="reading-meta"><span class="tag">${story.length} story beats</span><span class="tag">Full spoilers</span><span class="tag">Original summaries</span></div>
       <div class="reading-actions"><a class="btn btn-primary btn-sm" href="./#story">Open interactive timeline</a><a class="btn btn-ghost btn-sm" href="archive.html">Full-text archive</a><a class="btn btn-quiet btn-sm" href="./">Back to the site</a></div>
     </header>
@@ -364,10 +429,182 @@ function storyPage() {
     })();
   </script>
 </body>
-</html>`;
+</html>`, { prefix: "", active: "story", lockEra: true, site });
 }
 
-const archive = `<!DOCTYPE html>
+function changelogPage() {
+  const canonical = `${siteUrl}changelog.html`;
+  const sections = changelog.map((release) => {
+    const id = `v${release.version.replaceAll(".", "-")}`;
+    const block = (title, items) => items && items.length
+      ? `<h3>${title}</h3><ul>${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>`
+      : "";
+    const parts = [
+      block("Added", release.added),
+      block("Changed", release.changed),
+      block("Fixed", release.fixed),
+      block("Notes", release.notes)
+    ].filter(Boolean).join("");
+    return `<section class="changelog-release" id="${esc(id)}">
+      <h2>v${esc(release.version)} <span>${esc(release.label || "")}</span></h2>
+      ${parts}
+    </section>`;
+  }).join("");
+  return decoratePage(`<!DOCTYPE html>
+<html lang="en" data-era="home">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changelog — CHANNEL SURF</title>
+  <meta name="description" content="Public, version-only changelog for CHANNEL SURF, an unofficial Rockstar lore archive and arcade.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="Changelog — CHANNEL SURF">
+  <meta property="og:description" content="Release history for the CHANNEL SURF lore archive and arcade.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${siteUrl}assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .changelog-main { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .changelog-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .changelog-main .lede { color: var(--muted); font-size: 1.05rem; max-width: 68ch; }
+    .changelog-release { margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+    .changelog-release h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 0.3rem; }
+    .changelog-release h2 span { color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .changelog-release h3 { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-2); margin: 1.5rem 0 0.6rem; }
+    .changelog-release ul { padding-left: 1.1rem; line-height: 1.75; }
+    .changelog-release li { margin-bottom: 0.35rem; }
+    .changelog-main a { color: var(--accent-2); }
+    .changelog-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="changelog-main">
+    <nav class="changelog-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Changelog</nav>
+    <h1>Changelog</h1>
+    <p class="lede">Version-only release history for CHANNEL SURF. The machine-readable source also lives in <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
+    ${sections}
+  </main>
+</body>
+</html>`, { prefix: "", active: "changelog", site });
+}
+
+function contactPage() {
+  const canonical = `${siteUrl}contact.html`;
+  const contact = site.umbrella.contactUrl;
+  return decoratePage(`<!DOCTYPE html>
+<html lang="en" data-era="home">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — CHANNEL SURF</title>
+  <meta name="description" content="Contact CHANNEL SURF through the Brynsites umbrella site for corrections, permissions, or takedown requests.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="Contact — CHANNEL SURF">
+  <meta property="og:description" content="Corrections and permissions are handled through Brynsites.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${siteUrl}assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .contact-main { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .contact-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .contact-main p { line-height: 1.7; }
+    .contact-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+    .contact-card { margin-top: 2rem; padding: 1.3rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+  </style>
+</head>
+<body>
+  <main class="contact-main">
+    <nav class="contact-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Contact</nav>
+    <h1>Contact</h1>
+    <p>CHANNEL SURF is a personal fan project, not a company. Contact is handled through the ${esc(site.umbrella.name)} umbrella site so the details stay in one place.</p>
+    <div class="contact-card">
+      <h2>Corrections, permissions, and takedowns</h2>
+      <p>If something here is wrong, misattributed, or needs to be removed, use the ${esc(site.umbrella.name)} contact page. Please include the page URL and the specific issue.</p>
+      <p><a class="btn btn-primary" href="${esc(contact)}" rel="noopener">Open the ${esc(site.umbrella.name)} contact page</a></p>
+    </div>
+    <p class="small muted">No email address is published on this subdomain. The umbrella contact page is the current source of truth.</p>
+  </main>
+</body>
+</html>`, { prefix: "", active: "contact", site });
+}
+
+function creditsPage() {
+  const canonical = `${siteUrl}credits.html`;
+  const cards = Object.entries(imageCredits).map(([key, credit]) => `<figure class="credit-card">
+    <img src="${esc(credit.file)}" alt="${esc(credit.alt)}" loading="lazy">
+    <figcaption>
+      <h2>${esc(credit.title || key)}</h2>
+      <p>${esc(credit.artist)} · ${esc(credit.license)}</p>
+      <p class="source-links"><a href="${esc(credit.source)}" rel="noopener noreferrer" target="_blank">Original file</a></p>
+    </figcaption>
+  </figure>`).join("");
+  return decoratePage(`<!DOCTYPE html>
+<html lang="en" data-era="gta6">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image credits — CHANNEL SURF</title>
+  <meta name="description" content="Photo credits and licences for the real-world images used on CHANNEL SURF. These are not GTA screenshots or official artwork.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="Image credits — CHANNEL SURF">
+  <meta property="og:description" content="Photo credits and licences for the real-world images used on the site.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${siteUrl}assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .credits-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .credits-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .credits-main .lede { color: var(--muted); max-width: 72ch; }
+    .credit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .credit-card { margin: 0; border: 1px solid var(--line); border-radius: calc(var(--radius) * 0.8); overflow: hidden; background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+    .credit-card img { display: block; width: 100%; height: 160px; object-fit: cover; }
+    .credit-card figcaption { padding: 0.8rem; }
+    .credit-card h2 { margin: 0 0 0.3rem; font-size: 1rem; }
+    .credit-card p { margin: 0.2rem 0; color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; }
+    .credit-card a { color: var(--accent-2); }
+    .credits-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "CHANNEL SURF image credits",
+    "url": "${canonical}",
+    "description": "Photo credits and licences for real-world images used on CHANNEL SURF.",
+    "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" }
+  }
+  </script>
+</head>
+<body>
+  <main class="credits-main">
+    <nav class="credits-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Image credits</nav>
+    <h1>Image credits</h1>
+    <p class="lede">These are real-world photos used as mood and place references. They are not GTA screenshots, official artwork, or game assets. Each image is credited to its photographer and licence.</p>
+    <div class="credit-grid">${cards}</div>
+  </main>
+</body>
+</html>`, { prefix: "", active: "credits", site });
+}
+
+const archive = decoratePage(`<!DOCTYPE html>
 <html lang="en" data-era="gta6">
 <head>
   <meta charset="utf-8">
@@ -417,7 +654,7 @@ const archive = `<!DOCTYPE html>
   <main class="archive-main">
     <p class="meta">CHANNEL SURF // FULL TEXT ARCHIVE</p>
     <h1>The story, in plain text.</h1>
-    <p>This page is a static, JavaScript-free archive of every lore entry and every story beat on the site. It exists so the content can be read, linked, indexed, and summarised without running the app.</p>
+    <p>This page is a static, JavaScript-free archive of the lore entries and story beats currently on the site. It is a partial archive, not a complete lore database. It exists so the content can be read, linked, indexed, and summarised without running the app.</p>
     <p class="disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. All summaries below are original editorial writing for this project.</p>
     <p class="meta">This archive contains full story details. Treat it as a spoiler zone.</p>
     <nav class="archive-nav">
@@ -437,14 +674,10 @@ const archive = `<!DOCTYPE html>
       <h2>GTA story timeline</h2>
       ${storySections}
     </section>
-
-    <footer>
-      <p class="meta">CHANNEL SURF · Unofficial Rockstar lore archive and arcade · <a href="./">Return to the interactive site</a></p>
-    </footer>
   </main>
 </body>
-</html>
-`;
+</html>`, { prefix: "", active: "lore", site });
+
 
 const sitemapUrls = [
   { loc: siteUrl, priority: "1.0" },
@@ -452,6 +685,8 @@ const sitemapUrls = [
   { loc: `${siteUrl}elsewhere.html`, priority: "0.7" },
   { loc: `${siteUrl}story.html`, priority: "0.8" },
   { loc: `${siteUrl}changelog.html`, priority: "0.4" },
+  { loc: `${siteUrl}credits.html`, priority: "0.5" },
+  { loc: `${siteUrl}contact.html`, priority: "0.3" },
   ...games.map((game) => ({ loc: `${siteUrl}games/${game.slug}/`, priority: "0.8" }))
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -473,7 +708,7 @@ Sitemap: ${siteUrl}sitemap.xml
 
 const llms = `# CHANNEL SURF
 
-> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is not affiliated with Rockstar Games or Take-Two Interactive.
+> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: ${siteUrl}
 Full text archive: ${siteUrl}archive.html
@@ -487,6 +722,8 @@ Full text archive: ${siteUrl}archive.html
 - [Rockstar Elsewhere](${siteUrl}elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
 - [Interactive site](${siteUrl}): theme-morphing lore hub, horizontal story timeline, atlas, Real vs Reel map, trivia, and puzzles.
 - [Changelog](${siteUrl}changelog.html): public release history.
+- [Image credits](${siteUrl}credits.html): local photo sources and licences.
+- [Contact](${siteUrl}contact.html): corrections and permissions via ${site.umbrella.name}.
 
 ## Game pages
 
@@ -501,6 +738,8 @@ ${games.map((game) => `- [${game.name}](${siteUrl}games/${game.slug}/): ${game.b
 
 - All lore summaries and story notes are original editorial writing for this project.
 - Live Wikipedia summaries, when requested, are CC BY-SA and are attributed with a source link.
+- Live GTA Wiki summaries, when requested, are CC BY-SA via Fandom and are attributed with a source link.
+- This is a partial archive and does not cover every game, character, location, or story beat.
 - Map comparisons use OpenFreeMap and OpenStreetMap data with attribution.
 - Game titles, characters, locations, and trademarks remain the property of their respective owners.
 
@@ -509,9 +748,53 @@ ${games.map((game) => `- [${game.name}](${siteUrl}games/${game.slug}/): ${game.b
 This is a personal hobby and portfolio project, not a commercial product and not an official Rockstar resource. If a rights holder believes anything here oversteps, contact the site owner and the content will be removed or changed promptly.
 `;
 
+function changelogMarkdown() {
+  const lines = ["# Changelog", "", "Version-only release history for CHANNEL SURF.", ""];
+  changelog.forEach((release) => {
+    lines.push(`## v${release.version}${release.label ? ` — ${release.label}` : ""}`, "");
+    const block = (title, items) => {
+      if (!items || !items.length) return;
+      lines.push(`### ${title}`, "");
+      items.forEach((item) => lines.push(`- ${item}`));
+      lines.push("");
+    };
+    block("Added", release.added);
+    block("Changed", release.changed);
+    block("Fixed", release.fixed);
+    block("Notes", release.notes);
+  });
+  return lines.join("\n");
+}
+
+const searchBase = new URL(siteUrl).pathname.replace(/\/?$/, "/");
+const searchIndex = [
+  { title: "Home", subtitle: "Lore-first landing page", href: `${searchBase}#home`, type: "Page", keywords: "home start archive" },
+  { title: "Games", subtitle: "Theme-per-game dossiers", href: `${searchBase}#games`, type: "Page", keywords: "games dossiers" },
+  { title: "Lore", subtitle: "Locations, characters, factions", href: `${searchBase}#lore`, type: "Page", keywords: "lore archive characters locations" },
+  { title: "Story timeline", subtitle: "In-universe chronology", href: `${searchBase}#story`, type: "Page", keywords: "story timeline chronology" },
+  { title: "Atlas", subtitle: "Fictional map and Geo-Guess", href: `${searchBase}#atlas`, type: "Page", keywords: "atlas map geography" },
+  { title: "Real vs Reel", subtitle: "Real-world city comparisons", href: `${searchBase}#reel`, type: "Page", keywords: "real world comparison photography" },
+  { title: "Arcade", subtitle: "Trivia and puzzles", href: `${searchBase}#play`, type: "Page", keywords: "arcade trivia puzzles" },
+  { title: "About", subtitle: "Project and IP notes", href: `${searchBase}#about`, type: "Page", keywords: "about disclaimer" },
+  { title: "Full-text archive", subtitle: "Static lore and story reading page", href: `${searchBase}archive.html`, type: "Page", keywords: "archive static full text" },
+  { title: "Story reading mode", subtitle: "Scroll-driven timeline", href: `${searchBase}story.html`, type: "Page", keywords: "story reading" },
+  { title: "Rockstar Elsewhere", subtitle: "Max Payne, Manhunt, Midnight Club, L.A. Noire", href: `${searchBase}elsewhere.html`, type: "Page", keywords: "elsewhere max payne manhunt midnight club la noire" },
+  { title: "Changelog", subtitle: "Version-only release history", href: `${searchBase}changelog.html`, type: "Page", keywords: "changelog releases versions" },
+  { title: "Image credits", subtitle: "Photo sources and licences", href: `${searchBase}credits.html`, type: "Page", keywords: "credits images photos licences" },
+  { title: "Contact", subtitle: "Corrections and permissions", href: `${searchBase}contact.html`, type: "Page", keywords: "contact corrections takedown" },
+  ...lore.map((item) => ({ title: item.title, subtitle: item.summary, href: `${searchBase}archive.html#lore-${item.id}`, type: "Lore", keywords: [item.era, item.type, ...(item.tags || [])].join(" ") })),
+  ...story.map((event) => ({ title: `${event.year} — ${event.title}`, subtitle: event.summary, href: `${searchBase}archive.html#story-${event.id}`, type: "Story", keywords: [event.game, event.era, ...(event.characters || []), ...(event.locations || [])].join(" ") })),
+  ...games.map((game) => ({ title: game.name, subtitle: game.blurb, href: `${searchBase}games/${game.slug}/`, type: "Game", keywords: [game.year, game.era, ...(game.characters || []), ...(game.locations || [])].join(" ") }))
+];
+
 fs.writeFileSync(path.join(root, "archive.html"), archive);
 fs.writeFileSync(path.join(root, "story.html"), storyPage());
 fs.writeFileSync(path.join(root, "elsewhere.html"), elsewherePage());
+fs.writeFileSync(path.join(root, "changelog.html"), changelogPage());
+fs.writeFileSync(path.join(root, "CHANGELOG.md"), changelogMarkdown());
+fs.writeFileSync(path.join(root, "contact.html"), contactPage());
+fs.writeFileSync(path.join(root, "credits.html"), creditsPage());
+fs.writeFileSync(path.join(root, "assets/js/search-index.js"), `window.CS_SEARCH_INDEX = ${JSON.stringify(searchIndex, null, 2)};\n`);
 fs.writeFileSync(path.join(root, "sitemap.xml"), sitemap);
 fs.writeFileSync(path.join(root, "robots.txt"), robots);
 fs.writeFileSync(path.join(root, "llms.txt"), llms);
@@ -531,4 +814,4 @@ index = index
   .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${siteUrl}assets/og-cover.png">`);
 fs.writeFileSync(indexPath, index);
 
-console.log("generated archive.html, story.html, elsewhere.html, sitemap.xml, robots.txt, llms.txt, and", games.length, "game pages for", siteUrl);
+console.log("generated archive.html, story.html, elsewhere.html, changelog.html, contact.html, credits.html, search-index.js, sitemap.xml, robots.txt, llms.txt, and", games.length, "game pages for", siteUrl);

@@ -26,6 +26,16 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://channelsurf.pages.dev/credits.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://channelsurf.pages.dev/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://channelsurf.pages.dev/games/gta-classic/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -1,3 +1,10 @@
 {
-  "siteUrl": "https://channelsurf.pages.dev/"
+  "siteUrl": "https://channelsurf.pages.dev/",
+  "umbrella": {
+    "name": "Brynsites",
+    "url": "https://brynsites.com/",
+    "contactUrl": "https://brynsites.com/contact"
+  },
+  "archiveNote": "A partial, fan-made archive. Not exhaustive, and may lag behind new releases.",
+  "updatedNote": "Updated when time allows."
 }

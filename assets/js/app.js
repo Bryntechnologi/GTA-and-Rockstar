@@ -1275,6 +1275,44 @@
     `).join("");
   }
 
+  function relatedLore(item, limit = 4) {
+    const tags = new Set((item.tags || []).map((tag) => tag.toLowerCase()));
+    return (state.lore || [])
+      .filter((entry) => entry.id !== item.id)
+      .map((entry) => {
+        const shared = (entry.tags || []).filter((tag) => tags.has(tag.toLowerCase())).length;
+        return { entry, score: (entry.era === item.era ? 3 : 0) + shared * 2 + (entry.type === item.type ? 1 : 0) };
+      })
+      .filter((entry) => entry.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map((entry) => entry.entry);
+  }
+
+  function relatedLoreHTML(item) {
+    const related = relatedLore(item);
+    if (!related.length) return "";
+    return `<div class="related-links"><p><strong>Related:</strong> ${related.map((entry) => `<button class="text-link" type="button" data-lore-open="${escapeHTML(entry.id)}">${escapeHTML(entry.title)}</button>`).join(" · ")}</p></div>`;
+  }
+
+  function storyRelatedLore(event, limit = 3) {
+    const names = new Set([...(event.characters || []), ...(event.locations || []), ...(event.tags || [])].map((name) => name.toLowerCase()));
+    return (state.lore || [])
+      .map((entry) => {
+        const haystack = `${entry.title} ${(entry.tags || []).join(" ")}`.toLowerCase();
+        const score = [...names].filter((name) => name.length > 2 && haystack.includes(name)).length + (entry.era === event.era ? 1 : 0);
+        return { entry, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map((item) => item.entry);
+  }
+
+  function fandomHref(title) {
+    return `https://gta.fandom.com/wiki/${encodeURIComponent(String(title || "").trim().replace(/\s+/g, "_"))}`;
+  }
+
   function renderLoreDetail() {
     const box = $("#loreDetail");
     if (!box) return;
@@ -1300,12 +1338,15 @@
       <p>${escapeHTML(item.summary)}</p>
       <div class="chip-row">${(item.tags || []).map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join("")}</div>
       <div class="lore-actions">
-        <button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle)}">Live summary</button>
-        <a class="text-link" href="${escapeHTML(item.source)}" target="_blank" rel="noopener noreferrer">Source</a>
+        <button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle || item.title)}">Wikipedia summary</button>
+        <button class="btn btn-quiet btn-sm" type="button" data-lore-fandom="${escapeHTML(item.fandomTitle || item.wikiTitle || item.title)}">GTA Wiki summary</button>
+        <a class="text-link" href="${escapeHTML(item.source || fandomHref(item.title))}" target="_blank" rel="noopener noreferrer">Source</a>
+        <button class="btn btn-ghost btn-sm" type="button" data-route="games">Open game dossier</button>
         <button class="btn btn-ghost btn-sm" type="button" data-route="atlas">Open atlas</button>
         <button class="btn btn-ghost btn-sm" type="button" data-route="play">Play the arcade</button>
       </div>
       <div class="live-lore" id="loreLive" hidden></div>
+      ${relatedLoreHTML(item)}
     `;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) box.scrollIntoView({ block: "nearest" });
     else box.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -1431,6 +1472,11 @@
           ${(event.characters || []).map((name) => `<span class="tag tag-avatar">${avatarHTML(name, event.era)}${escapeHTML(name)}</span>`).join("")}
           ${(event.locations || []).map((name) => `<span class="tag">${escapeHTML(name)}</span>`).join("")}
         </div>
+        ${(() => {
+          const related = storyRelatedLore(event);
+          if (!related.length) return "";
+          return `<div class="related-links"><p><strong>Related lore:</strong> ${related.map((entry) => `<button class="text-link" type="button" data-lore-open="${escapeHTML(entry.id)}">${escapeHTML(entry.title)}</button>`).join(" · ")}</p></div>`;
+        })()}
         <div class="story-detail-actions">
           <button class="btn btn-ghost btn-sm" type="button" data-story-prev>← Previous</button>
           <button class="btn btn-ghost btn-sm" type="button" data-story-next>Next →</button>
@@ -2180,6 +2226,11 @@
       const wiki = event.target.closest("[data-lore-wiki]");
       if (wiki) {
         loadWikiInto($("#loreLive"), wiki.dataset.loreWiki);
+        return;
+      }
+      const fandom = event.target.closest("[data-lore-fandom]");
+      if (fandom) {
+        loadFandomInto($("#loreLive"), fandom.dataset.loreFandom);
       }
     });
 
@@ -2290,13 +2341,26 @@
     return items;
   }
 
+  function searchScore(item, query) {
+    const haystack = `${item.title} ${item.subtitle} ${item.type}`.toLowerCase();
+    if (!query) return 1;
+    if (haystack.includes(query)) return 100 - haystack.indexOf(query);
+    const tokens = query.split(/\s+/).filter(Boolean);
+    let matched = 0;
+    tokens.forEach((token) => {
+      if (haystack.includes(token)) matched += 1;
+      else if (token.length > 2 && haystack.includes(token.slice(0, Math.ceil(token.length * 0.7)))) matched += 0.5;
+    });
+    return matched ? matched * 10 : 0;
+  }
+
   function renderSearchResults(query) {
     const results = $("#searchResults");
     if (!results) return;
     const q = String(query || "").trim().toLowerCase();
     const items = buildSearchIndex();
     const filtered = (q
-      ? items.filter((item) => `${item.title} ${item.subtitle} ${item.type}`.toLowerCase().includes(q))
+      ? items.map((item) => ({ item, score: searchScore(item, q) })).filter((entry) => entry.score > 0).sort((a, b) => b.score - a.score).map((entry) => entry.item)
       : items).slice(0, 12);
     if (!filtered.length) {
       results.innerHTML = '<p class="small muted search-empty">No matches. Try a game, era, person, or place.</p>';
@@ -4254,6 +4318,34 @@
     box.appendChild(credit);
   }
 
+  async function loadFandomInto(box, title) {
+    if (!box || !SERVICES) return;
+    box.hidden = false;
+    box.textContent = "Fetching GTA Wiki summary...";
+    const summary = await SERVICES.getFandomSummary(title);
+    if (!summary) {
+      box.textContent = "GTA Wiki summary unavailable right now. The curated archive above still works.";
+      return;
+    }
+    box.innerHTML = "";
+    const text = document.createElement("p");
+    text.textContent = summary.extract;
+    box.appendChild(text);
+    const credit = document.createElement("p");
+    credit.className = "small muted";
+    credit.textContent = "Lore via GTA Wiki / Fandom (CC BY-SA). ";
+    if (summary.page) {
+      const link = document.createElement("a");
+      link.href = summary.page;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = "text-link";
+      link.textContent = "Read the source";
+      credit.appendChild(link);
+    }
+    box.appendChild(credit);
+  }
+
   /* ---------------------------------------------------------------------
      FRANCHISE TIMELINE
      --------------------------------------------------------------------- */
@@ -4682,7 +4774,28 @@
   }
 
   /* ---------------------------------------------------------------------
+     GLOBAL ERROR BOUNDARY
+     --------------------------------------------------------------------- */
+  function installErrorBoundary() {
+    const show = () => {
+      if ($("#globalErrorNotice")) return;
+      const notice = document.createElement("div");
+      notice.id = "globalErrorNotice";
+      notice.className = "chrome-error";
+      notice.setAttribute("role", "status");
+      notice.innerHTML = '<span>A background feature failed, but the archive is still usable.</span><button type="button" aria-label="Dismiss">Dismiss</button>';
+      notice.querySelector("button").addEventListener("click", () => notice.remove());
+      document.body.appendChild(notice);
+    };
+    window.addEventListener("error", show);
+    window.addEventListener("unhandledrejection", show);
+  }
+
+  /* ---------------------------------------------------------------------
      BOOT (deferred until the helpers above exist)
      --------------------------------------------------------------------- */
-  window.addEventListener("DOMContentLoaded", init);
+  window.addEventListener("DOMContentLoaded", () => {
+    installErrorBoundary();
+    init();
+  });
 })();

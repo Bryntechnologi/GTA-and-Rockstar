@@ -96,6 +96,39 @@
     return loadLocalJSON("data/lore.json");
   }
 
+  function fandomTitleToPath(title) {
+    return encodeURIComponent(String(title).trim().replace(/\s+/g, "_"));
+  }
+
+  async function getFandomSummary(title) {
+    if (!title) return null;
+    const url = `https://gta.fandom.com/api.php?action=parse&prop=text&section=0&format=json&origin=*&page=${encodeURIComponent(title)}`;
+    const data = await cachedFetchJSON(url, { ttl: 24 * 60 * 60 * 1000, timeout: 8000 });
+    const html = data && data.parse && data.parse.text ? data.parse.text["*"] : "";
+    if (!html) return null;
+    let extract = "";
+    if (typeof DOMParser !== "undefined") {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      extract = Array.from(doc.querySelectorAll("p"))
+        .map((node) => (node.textContent || "").replace(/\s+/g, " ").trim())
+        .filter((text) => text.length > 80)
+        .slice(0, 3)
+        .join("\n\n");
+    } else {
+      extract = (html.match(/<p[^>]*>([\s\S]*?)<\/p>/g) || [])
+        .map((block) => block.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim())
+        .filter((text) => text.length > 80)
+        .slice(0, 3)
+        .join("\n\n");
+    }
+    if (!extract) return null;
+    return {
+      title: data.parse.title || title,
+      extract,
+      page: `https://gta.fandom.com/wiki/${fandomTitleToPath(data.parse.title || title)}`
+    };
+  }
+
   function getRealWorld() {
     return loadLocalJSON("data/real-world.json");
   }
@@ -120,6 +153,7 @@
     cachedFetchJSON,
     loadLocalJSON,
     getWikiSummary,
+    getFandomSummary,
     getLore,
     getRealWorld,
     getStreams,
