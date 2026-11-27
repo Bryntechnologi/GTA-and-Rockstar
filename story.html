@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-era="gta6">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GTA Story Timeline - 1961 to 2026 | CHANNEL SURF</title>
+  <meta name="description" content="A graphical reading timeline of 35 major in-universe GTA story beats, from 1961 London through Vice City, San Andreas, Liberty City, Los Santos, and 2026 Leonida.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <link rel="canonical" href="https://channelsurf.pages.dev/story.html">
+  <meta property="og:title" content="GTA Story Timeline - CHANNEL SURF">
+  <meta property="og:description" content="35 story beats, full spoilers, and a theme that shifts as you scroll.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://channelsurf.pages.dev/story.html">
+  <meta property="og:image" content="https://channelsurf.pages.dev/assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .reading-main { max-width: 980px; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
+    .reading-hero { padding: 1.5rem 0 2.5rem; border-bottom: 2px solid var(--accent); }
+    .reading-hero h1 { font-size: clamp(2.2rem, 7vw, 4.4rem); line-height: 1.02; margin: 0.4rem 0 1rem; }
+    .reading-hero .lede { max-width: 70ch; color: var(--muted); font-size: 1.1rem; }
+    .reading-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .reading-timeline { position: relative; margin-top: 2.5rem; }
+    .reading-timeline::before { content: ""; position: absolute; left: 58px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent-2), var(--accent-3)); opacity: 0.45; }
+    .reading-card { position: relative; display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 1.4rem; padding: 1.2rem 0 1.8rem; opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reading-card.is-visible { opacity: 1; transform: translateY(0); }
+    .reading-year { position: relative; z-index: 1; width: 58px; height: 58px; display: grid; place-items: center; justify-self: center; background: color-mix(in srgb, var(--bg) 82%, var(--event-accent)); border: 2px solid var(--event-accent); border-radius: 50%; color: var(--ink); font-family: var(--font-mono); font-size: 0.72rem; box-shadow: 0 0 24px -8px var(--event-accent); }
+    .reading-body { padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-left: 4px solid var(--event-accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+    .reading-kicker { margin: 0; color: var(--event-accent); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .reading-body h2 { margin: 0.3rem 0 0.7rem; font-size: clamp(1.25rem, 3vw, 1.7rem); }
+    .reading-body p { line-height: 1.7; }
+    .reading-summary { color: var(--ink); }
+    .reading-tags { color: var(--muted); font-family: var(--font-mono); font-size: 0.74rem; }
+    .reading-bar { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 1rem; margin: 0 -1.25rem 1.5rem; background: color-mix(in srgb, var(--bg) 88%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+    .reading-bar b { color: var(--accent); }
+    .reading-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.4rem; }
+    .reading-disclaimer { margin-top: 2.5rem; padding: 1rem; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    @media (max-width: 640px) { .reading-card { grid-template-columns: 46px minmax(0, 1fr); gap: 0.8rem; } .reading-year { width: 42px; height: 42px; font-size: 0.6rem; } .reading-timeline::before { left: 22px; } }
+    @media (prefers-reduced-motion: reduce) { .reading-card { opacity: 1; transform: none; transition: none; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "GTA Story Timeline - CHANNEL SURF",
+    "url": "https://channelsurf.pages.dev/story.html",
+    "description": "35 in-universe Grand Theft Auto story beats in chronological order.",
+    "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "https://channelsurf.pages.dev/" },
+    "inLanguage": "en",
+    "about": ["Grand Theft Auto", "Rockstar Games", "story timeline"]
+  }
+  </script>
+</head>
+<body>
+  <main class="reading-main">
+    <div class="reading-bar"><span>CHANNEL SURF // STORY TIMELINE</span><span>Era: <b id="readingEra">GTA VI</b></span></div>
+    <p class="reading-kicker">READING MODE</p>
+    <header class="reading-hero">
+      <h1>The story, from 1961 to 2026.</h1>
+      <p class="lede">35 major in-universe GTA story beats, in chronological order. The page theme shifts as each chapter enters view. Full story details follow.</p>
+      <div class="reading-meta"><span class="tag">35 story beats</span><span class="tag">Full spoilers</span><span class="tag">Original summaries</span></div>
+      <div class="reading-actions"><a class="btn btn-primary btn-sm" href="./#story">Open interactive timeline</a><a class="btn btn-ghost btn-sm" href="archive.html">Full-text archive</a><a class="btn btn-quiet btn-sm" href="./">Back to the site</a></div>
+    </header>
+    <div class="reading-timeline"><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1961</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: London 1961</p>
+      <h2>London, before the storm</h2>
+      <p class="reading-summary">A top-down crime spree in a city still rebuilding itself. Small crews, borrowed cars, and a lot of bad decisions.</p>
+      <p>The London expansion strips the series back to period cars, tight streets, and a pre-Beatles underworld. It is less a franchise milestone than a proof of concept: the same chase loop, transplanted into a colder city.</p>
+      <p class="reading-tags">The London protagonist · London</p>
+    </div>
+  </article><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1969</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: London 1969</p>
+      <h2>Swinging London, wrong side of the river</h2>
+      <p class="reading-summary">The expansion moves the clock forward and the attitude up. British cars, British gangs, and a city that never quite looks away.</p>
+      <p>London 1969 leans into the visual language of the era — minis, mods, and a soundtrack of period pastiche. It remains one of the series&#39; strangest side streets: a full GTA game built as an expansion.</p>
+      <p class="reading-tags">The London protagonist · London</p>
+    </div>
+  </article><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1984</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: Vice City Stories</p>
+      <h2>Victor Vance arrives</h2>
+      <p class="reading-summary">A soldier returns to Vice City looking for a clean way out and finds a city that only trades in complications.</p>
+      <p>Victor Vance&#39;s story is a tragedy in slow motion: family loyalty, military connections, and a drug economy that turns every favour into a debt. The game ends with him alive but compromised, which makes the opening of Vice City land harder.</p>
+      <p class="reading-tags">Victor Vance · Lance Vance · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1984</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: Vice City Stories</p>
+      <h2>The Vance empire</h2>
+      <p class="reading-summary">Victor builds a criminal operation out of borrowed muscle and family obligation. Every new asset comes with a new enemy.</p>
+      <p>By the end of Vice City Stories, Victor controls territory, businesses, and a growing reputation. The cost is the relationship with his brother Lance and the knowledge that the city always collects. His death in the opening of Vice City is the punchline to this setup.</p>
+      <p class="reading-tags">Victor Vance · Lance Vance · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1986</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: Vice City</p>
+      <h2>Tommy Vercetti gets out</h2>
+      <p class="reading-summary">A prison sentence ends and a new one begins: a drug deal on the beach goes wrong, and Tommy has to improvise.</p>
+      <p>Tommy arrives in Vice City expecting a clean handoff. The deal is ambushed, the money disappears, and the people who sent him want answers. The game&#39;s opening is a masterclass in tone: sun, neon, and immediate violence.</p>
+      <p class="reading-tags">Tommy Vercetti · Sonny Forelli · Lance Vance · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1986</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: Vice City</p>
+      <h2>The Vercetti rise</h2>
+      <p class="reading-summary">Tommy works his way through the city&#39;s power brokers, buying property and collecting enemies in equal measure.</p>
+      <p>The middle act is an empire-building montage: clubs, businesses, assassination contracts, and a growing crew. Tommy&#39;s refusal to be a subordinate turns a debt into a takeover, and Vice City starts to feel like his city.</p>
+      <p class="reading-tags">Tommy Vercetti · Lance Vance · Diaz · Vice City · Starfish Island</p>
+    </div>
+  </article><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1986</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: Vice City</p>
+      <h2>Lance Vance changes sides</h2>
+      <p class="reading-summary">The alliance at the centre of Tommy&#39;s rise starts to fracture. Loyalty in Vice City is always a temporary arrangement.</p>
+      <p>Lance&#39;s resentment and Sonny Forelli&#39;s pressure converge. Tommy&#39;s empire is strong enough to survive the city, but not strong enough to survive the people closest to it. The betrayal sets up the final confrontation.</p>
+      <p class="reading-tags">Tommy Vercetti · Lance Vance · Sonny Forelli · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="vicecity" style="--event-accent:#ff4fa3">
+    <div class="reading-year">1986</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: Vice City</p>
+      <h2>The last stand at the mansion</h2>
+      <p class="reading-summary">Sonny comes to collect, Lance makes his choice, and Tommy settles the debt with a very loud house call.</p>
+      <p>The finale is a siege: Tommy alone against Sonny&#39;s men, with Lance on the wrong side. When it ends, Tommy is the last one standing in a mansion that now belongs to him. The city is quiet for exactly one sunset.</p>
+      <p class="reading-tags">Tommy Vercetti · Lance Vance · Sonny Forelli · Vice City · Starfish Island</p>
+    </div>
+  </article><article class="reading-card" data-era="sanandreas" style="--event-accent:#f5a623">
+    <div class="reading-year">1992</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: San Andreas</p>
+      <h2>CJ comes home</h2>
+      <p class="reading-summary">Five years away, a funeral, and a neighbourhood that has moved on without him. Carl Johnson returns to Los Santos.</p>
+      <p>The opening of San Andreas is a homecoming story: CJ finds his mother dead, his family scattered, and the Grove Street Families losing ground. The game&#39;s first act is about rebuilding trust before it becomes about rebuilding an empire.</p>
+      <p class="reading-tags">Carl Johnson · Sweet · Big Smoke · Ryder · Los Santos · Grove Street</p>
+    </div>
+  </article><article class="reading-card" data-era="sanandreas" style="--event-accent:#f5a623">
+    <div class="reading-year">1992</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: San Andreas</p>
+      <h2>Grove Street vs the Ballas</h2>
+      <p class="reading-summary">Territory, drive-bys, and a family under pressure. The neighbourhood war escalates while the people closest to CJ make other plans.</p>
+      <p>The gang war is both personal and structural: the Ballas have backing, Grove has history, and the police treat the whole block as a problem to manage. CJ&#39;s loyalty is tested long before the bigger conspiracy surfaces.</p>
+      <p class="reading-tags">Carl Johnson · Sweet · Big Smoke · Ryder · Los Santos · Grove Street</p>
+    </div>
+  </article><article class="reading-card" data-era="sanandreas" style="--event-accent:#f5a623">
+    <div class="reading-year">1992</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: San Andreas</p>
+      <h2>San Fierro and the Loco Syndicate</h2>
+      <p class="reading-summary">The story widens beyond Los Santos: a new city, a new garage, and a drug network with ties back home.</p>
+      <p>San Fierro gives CJ a base, a cover business, and a target. The Loco Syndicate arc connects the street-level betrayal to a larger criminal supply chain, and introduces Mike Toreno as a very different kind of antagonist.</p>
+      <p class="reading-tags">Carl Johnson · Mike Toreno · Wu Zi Mu · San Fierro</p>
+    </div>
+  </article><article class="reading-card" data-era="sanandreas" style="--event-accent:#f5a623">
+    <div class="reading-year">1992</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: San Andreas</p>
+      <h2>The Caligula&#39;s heist</h2>
+      <p class="reading-summary">Las Venturas, a casino, and a plan that depends on too many people behaving predictably.</p>
+      <p>The Caligula&#39;s arc is San Andreas at its most cinematic: surveillance, preparation, and a heist that becomes a power struggle between criminal organisations. It is also where the game&#39;s three-city structure pays off.</p>
+      <p class="reading-tags">Carl Johnson · Wu Zi Mu · Ken Rosenberg · Las Venturas · Caligula&#39;s Palace</p>
+    </div>
+  </article><article class="reading-card" data-era="sanandreas" style="--event-accent:#f5a623">
+    <div class="reading-year">1992</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto: San Andreas</p>
+      <h2>The homecoming</h2>
+      <p class="reading-summary">Los Santos riots, old friends return, and CJ finally gets to settle the score with the people who sold out Grove Street.</p>
+      <p>The final act ties the gang war, the police corruption, and the family betrayal together. CJ&#39;s return to Grove Street is not a victory lap; it is a cleanup. The last confrontation is personal, and the city keeps burning behind it.</p>
+      <p class="reading-tags">Carl Johnson · Sweet · Big Smoke · Officer Tenpenny · Los Santos · Grove Street</p>
+    </div>
+  </article><article class="reading-card" data-era="gta6" style="--event-accent:#ff5d7e">
+    <div class="reading-year">1997</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto</p>
+      <h2>Liberty City, top-down</h2>
+      <p class="reading-summary">The original crime spree begins: steal cars, take jobs, and climb a ladder made of other people&#39;s mistakes.</p>
+      <p>The first GTA established the template: a nameless criminal, a city grid, and a radio dial. Liberty City is the starting point, but the game quickly moves through San Andreas and Vice City, treating each as a new playground.</p>
+      <p class="reading-tags">The GTA protagonist · Liberty City · San Andreas · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta6" style="--event-accent:#ff5d7e">
+    <div class="reading-year">1997</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto</p>
+      <h2>Three cities, one getaway</h2>
+      <p class="reading-summary">The original game&#39;s campaign spans multiple cities and ends in the kind of chase that defined the series.</p>
+      <p>GTA&#39;s structure was already episodic: jobs, betrayals, and a final run for freedom. The details are sparse by modern standards, but the rhythm — plan, drive, improvise — is recognisably the series&#39; DNA.</p>
+      <p class="reading-tags">The GTA protagonist · Liberty City · San Andreas · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">1999</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto 2</p>
+      <h2>Anywhere City</h2>
+      <p class="reading-summary">A retro-futurist city, three gangs, and a protagonist with no name and no patience.</p>
+      <p>GTA2 leaned into dystopia: corporations, gangs, and a city that feels permanently on the edge of collapse. The game&#39;s reputation system and gang loyalty mechanics were early attempts at the living-world design the series would later refine.</p>
+      <p class="reading-tags">Claude Speed · Anywhere City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2001</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto III</p>
+      <h2>Claude is betrayed</h2>
+      <p class="reading-summary">A bank job, a girlfriend with a gun, and a prison transport that does not go as planned. Liberty City goes 3D.</p>
+      <p>The opening of GTA III is still one of the series&#39; cleanest setups: Catalina shoots Claude, leaves him for the police, and accidentally creates a free agent. The rest of the game is Claude climbing back through Liberty City&#39;s criminal hierarchy.</p>
+      <p class="reading-tags">Claude · Catalina · Liberty City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2001</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto III</p>
+      <h2>Working for the families</h2>
+      <p class="reading-summary">Claude becomes useful to the Leone family, the Triads, and everyone else with a job that needs doing.</p>
+      <p>GTA III&#39;s middle act is a tour of Liberty City power: the Leone family, the Colombian Cartel, the Yakuza, and a media circus. Claude&#39;s silence makes him a perfect contractor and a complete mystery to everyone around him.</p>
+      <p class="reading-tags">Claude · Salvatore Leone · Asuka Kasen · Liberty City · Staunton Island</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2001</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto III</p>
+      <h2>The Cartel war</h2>
+      <p class="reading-summary">Catalina returns with a cartel, a hostage, and a very personal score to settle.</p>
+      <p>The Cartel arc turns the game&#39;s opening betrayal into a full-scale war. Asuka, the Yakuza, and the Colombian Cartel all collide, and Claude becomes the one variable nobody can control. The city gets louder and more dangerous.</p>
+      <p class="reading-tags">Claude · Catalina · Asuka Kasen · Liberty City · Shoreside Vale</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2001</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto III</p>
+      <h2>The exchange</h2>
+      <p class="reading-summary">A final deal, a final betrayal, and a Liberty City that keeps running long after the credits.</p>
+      <p>The ending of GTA III is deliberately cold: Claude survives, Catalina does not, and the city absorbs another story without changing its expression. It set the tone for every GTA ending that followed.</p>
+      <p class="reading-tags">Claude · Catalina · Liberty City · Shoreside Vale</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2008</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto IV</p>
+      <h2>Niko Bellic arrives</h2>
+      <p class="reading-summary">A war veteran comes to Liberty City chasing an old promise and finds his cousin&#39;s life was mostly a sales pitch.</p>
+      <p>Niko&#39;s arrival is the series&#39; most grounded opening: a cramped apartment, a cousin with debts, and a city that offers work before it offers answers. The immigrant story gives GTA IV its emotional weight.</p>
+      <p class="reading-tags">Niko Bellic · Roman Bellic · Liberty City · Hove Beach</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2008</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto IV</p>
+      <h2>Blood and debts</h2>
+      <p class="reading-summary">Niko&#39;s search for the man who betrayed his unit pulls him into loan sharks, gangsters, and a war he did not start.</p>
+      <p>The middle of GTA IV is a web of obligation: Roman&#39;s gambling, Dimitri&#39;s manipulations, and the gradual revelation of what happened to Niko&#39;s squad. The city&#39;s optimism curdles into something colder.</p>
+      <p class="reading-tags">Niko Bellic · Roman Bellic · Dimitri Rascalov · Liberty City · Broker · Bohan</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2008</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto IV</p>
+      <h2>Deal or revenge</h2>
+      <p class="reading-summary">The story&#39;s final choice is not about money or loyalty. It is about whether Niko can live with either answer.</p>
+      <p>The Deal ending costs Roman his life; the Revenge ending costs Kate hers. GTA IV refuses a clean victory. Whichever path the player chooses, Liberty City keeps its ledger balanced and Niko keeps carrying the cost.</p>
+      <p class="reading-tags">Niko Bellic · Roman Bellic · Kate McReary · Dimitri Rascalov · Liberty City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2008</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto IV</p>
+      <h2>The diamond deal</h2>
+      <p class="reading-summary">A bag of diamonds passes through too many hands, linking Niko&#39;s story to the two episodes that follow.</p>
+      <p>The diamond exchange is the connective tissue of the GTA IV era: a single botched deal that pulls in the Lost MC, Gay Tony&#39;s nightlife, and Niko&#39;s own circle. It is the series&#39; clearest example of a shared criminal ecosystem.</p>
+      <p class="reading-tags">Niko Bellic · Johnny Klebitz · Luis Lopez · Tony Prince · Liberty City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2009</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto IV: The Lost and Damned</p>
+      <h2>The Lost MC fractures</h2>
+      <p class="reading-summary">Johnny Klebitz tries to hold a motorcycle club together while its president pushes it toward a war it cannot win.</p>
+      <p>The Lost and Damned is a story about loyalty in a culture that mistakes loyalty for obedience. Johnny&#39;s attempts to keep the club solvent collide with Billy Grey&#39;s recklessness, and the fallout leaves the Lost weaker and angrier.</p>
+      <p class="reading-tags">Johnny Klebitz · Billy Grey · Jim Fitzgerald · Liberty City · Alderney</p>
+    </div>
+  </article><article class="reading-card" data-era="gta4" style="--event-accent:#eab308">
+    <div class="reading-year">2009</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto IV: The Ballad of Gay Tony</p>
+      <h2>Nightlife on the edge</h2>
+      <p class="reading-summary">Luis Lopez keeps Tony Prince&#39;s clubs running while the money, the drugs, and the Russians all want a piece.</p>
+      <p>The Ballad of Gay Tony is the flashiest of the GTA IV stories and the most anxious underneath. Luis is the competent one in a room full of people who have already spent the money. The finale ties back to the diamond deal and closes the IV-era trilogy.</p>
+      <p class="reading-tags">Luis Lopez · Tony Prince · Ray Bulgarin · Liberty City · Algonquin</p>
+    </div>
+  </article><article class="reading-card" data-era="gta5" style="--event-accent:#ff9f1c">
+    <div class="reading-year">2013</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto V</p>
+      <h2>Three men, one city</h2>
+      <p class="reading-summary">Michael is bored, Franklin wants more, and Trevor is a live grenade with a driver&#39;s licence. Los Santos brings them together.</p>
+      <p>GTA V opens with a North Yankton heist and then jumps forward to a sunlit Los Santos where Michael&#39;s retirement is falling apart. Franklin&#39;s ambition and Trevor&#39;s chaos turn a midlife crisis into a criminal partnership.</p>
+      <p class="reading-tags">Michael De Santa · Franklin Clinton · Trevor Philips · Los Santos · North Yankton</p>
+    </div>
+  </article><article class="reading-card" data-era="gta5" style="--event-accent:#ff9f1c">
+    <div class="reading-year">2013</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto V</p>
+      <h2>The first scores</h2>
+      <p class="reading-summary">A jewellery store, a motorbike, and a plan that works just well enough to attract bigger problems.</p>
+      <p>The early heists establish GTA V&#39;s structure: preparation, crew choice, and improvisation. Franklin&#39;s first jobs with Michael turn into a partnership, while Trevor&#39;s presence makes every plan less stable and more profitable.</p>
+      <p class="reading-tags">Michael De Santa · Franklin Clinton · Trevor Philips · Lester Crest · Los Santos · Vinewood</p>
+    </div>
+  </article><article class="reading-card" data-era="gta5" style="--event-accent:#ff9f1c">
+    <div class="reading-year">2013</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto V</p>
+      <h2>Trevor finds out</h2>
+      <p class="reading-summary">The past catches up with Michael in the most volatile way possible: Trevor learns the truth about North Yankton.</p>
+      <p>Trevor&#39;s discovery reframes the entire story. Michael&#39;s retirement was built on a lie, and the reunion becomes a hostage situation with old friends. The game&#39;s tone shifts from satire to something more personal and dangerous.</p>
+      <p class="reading-tags">Michael De Santa · Trevor Philips · Franklin Clinton · Los Santos · Sandy Shores · North Yankton</p>
+    </div>
+  </article><article class="reading-card" data-era="gta5" style="--event-accent:#ff9f1c">
+    <div class="reading-year">2013</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto V</p>
+      <h2>The agency years</h2>
+      <p class="reading-summary">The trio become assets for people with badges, budgets, and no intention of sharing the credit.</p>
+      <p>The FIB and Merryweather arcs turn the crew into deniable contractors. Every favour creates a new liability, and the line between criminal and government work becomes a joke the characters stop laughing at.</p>
+      <p class="reading-tags">Michael De Santa · Franklin Clinton · Trevor Philips · Dave Norton · Steve Haines · Los Santos · Fort Zancudo</p>
+    </div>
+  </article><article class="reading-card" data-era="gta5" style="--event-accent:#ff9f1c">
+    <div class="reading-year">2013</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto V</p>
+      <h2>Three ways out</h2>
+      <p class="reading-summary">The final choice is a menu of betrayals: kill Trevor, kill Michael, or refuse the script entirely.</p>
+      <p>GTA V&#39;s three endings are a commentary on the series itself. Ending A and B kill a protagonist; Ending C lets the trio survive by turning on their handlers. The last option is the most satisfying and the least realistic, which is exactly the point.</p>
+      <p class="reading-tags">Michael De Santa · Franklin Clinton · Trevor Philips · Los Santos</p>
+    </div>
+  </article><article class="reading-card" data-era="gta6" style="--event-accent:#ff5d7e">
+    <div class="reading-year">2026</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto VI</p>
+      <h2>Jason and Lucia</h2>
+      <p class="reading-summary">A new state, a new pair of protagonists, and a Bonnie-and-Clyde premise set against modern Leonida.</p>
+      <p>The revealed premise follows Jason and Lucia through a version of Vice City and the wider state of Leonida. The tone is modern, sunlit, and tense: a relationship story wrapped around a crime spree. Specific plot details are intentionally left out here rather than invented.</p>
+      <p class="reading-tags">Jason · Lucia · Leonida · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta6" style="--event-accent:#ff5d7e">
+    <div class="reading-year">2026</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto VI</p>
+      <h2>The state of Leonida</h2>
+      <p class="reading-summary">Causeways, wetlands, small towns, and a neon capital. The map is a state, not just a city.</p>
+      <p>Leonida expands the Vice City idea into a whole peninsula: Port Gellhorn&#39;s docks, Grassrivers&#39; wetlands, Mount Kalaga&#39;s ridges, and the Keys&#39; island roads. It is the broadest Rockstar map yet, and the setting is the story&#39;s co-star.</p>
+      <p class="reading-tags">Jason · Lucia · Leonida · Vice City · Leonida Keys</p>
+    </div>
+  </article><article class="reading-card" data-era="gta6" style="--event-accent:#ff5d7e">
+    <div class="reading-year">2026</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto VI</p>
+      <h2>The next score</h2>
+      <p class="reading-summary">A partnership, a state full of opportunities, and the oldest question in the series: how much is enough?</p>
+      <p>The central tension of the revealed premise is trust: two people trying to build something together in a place designed to separate them. Everything else — the cars, the clubs, the coastline — is the scenery around that question.</p>
+      <p class="reading-tags">Jason · Lucia · Leonida · Vice City</p>
+    </div>
+  </article><article class="reading-card" data-era="gta6" style="--event-accent:#ff5d7e">
+    <div class="reading-year">2026</div>
+    <div class="reading-body">
+      <p class="reading-kicker">Grand Theft Auto VI</p>
+      <h2>A world that keeps moving</h2>
+      <p class="reading-summary">The series&#39; next era is built around a living state: traffic, weather, wildlife, and a news cycle that never quite looks away.</p>
+      <p>Rockstar&#39;s pitch for GTA VI is density: a world with more systems, more interiors, and more ways for a plan to go sideways. The story is only one thread in a state that keeps generating its own.</p>
+      <p class="reading-tags">Jason · Lucia · Leonida · Vice City</p>
+    </div>
+  </article></div>
+    <p class="reading-disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All summaries are original editorial writing for this project.</p>
+  </main>
+  <script>
+    (function () {
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".reading-card"));
+      var era = document.getElementById("readingEra");
+      function apply(card) {
+        if (!card) return;
+        document.documentElement.dataset.era = card.dataset.era;
+        if (era) era.textContent = card.querySelector(".reading-kicker").textContent;
+      }
+      if ("IntersectionObserver" in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) entry.target.classList.add("is-visible");
+          });
+          var active = cards.filter(function (card) { return card.getBoundingClientRect().top < window.innerHeight * 0.55; }).pop();
+          apply(active || cards[0]);
+        }, { rootMargin: "-10% 0px -35% 0px", threshold: 0.15 });
+        cards.forEach(function (card) { observer.observe(card); });
+        cards.slice(0, 2).forEach(function (card) { card.classList.add("is-visible"); });
+      } else {
+        cards.forEach(function (card) { card.classList.add("is-visible"); });
+      }
+      apply(cards[0]);
+    })();
+  </script>
+</body>
+</html>
