@@ -1,6 +1,6 @@
 # Static Site Kit Extraction Plan
 
-Working plan for extracting the reusable parts of CHANNEL SURF into a small Brynsites static-site
+Working plan for extracting the reusable parts of FIVE STAR WANTED into a small Brynsites static-site
 kit. This is intentionally **not** a general-purpose framework.
 
 ## Goal
@@ -51,8 +51,8 @@ Move site-specific values into one config object:
 
 ```js
 {
-  name: "CHANNEL SURF",
-  url: "https://channelsurf.pages.dev/",
+  name: "FIVE STAR WANTED",
+  url: "https://fivestarwanted.pages.dev/",
   umbrella: {
     name: "Brynsites",
     url: "https://brynsites.com/",
@@ -85,7 +85,7 @@ Content files stay in each site repo.
 ### Phase 1 — Freeze and seam
 
 - Add config seams to the current build and chrome modules without changing output.
-- Keep CHANNEL SURF as the reference implementation.
+- Keep FIVE STAR WANTED as the reference implementation.
 - Add a snapshot test that compares generated page structure before/after.
 
 ### Phase 2 — Move stable modules
@@ -103,14 +103,14 @@ Keep tests alongside each module. No visual changes.
 ### Phase 3 — Move build and theme
 
 - Extract `build-static.mjs` into `build.mjs` with a config object.
-- Split CHANNEL SURF-specific content renderers from generic page/sitemap/CSP output.
+- Split FIVE STAR WANTED-specific content renderers from generic page/sitemap/CSP output.
 - Move theme tokens and the contrast layer into `theme.css`, leaving per-site era overrides in the
   site repo.
 
 ### Phase 4 — Prove it on a second site
 
 - Build a second Brynsites site with the kit.
-- Do not extract anything that only CHANNEL SURF uses.
+- Do not extract anything that only FIVE STAR WANTED uses.
 - Fix the API based on actual friction, not guesses.
 
 ### Phase 5 — Version it
@@ -131,8 +131,8 @@ Keep tests alongside each module. No visual changes.
 
 - A new site can run `npm run dev` and preview immediately.
 - A new site can generate static pages, sitemap, robots, llms.txt, and CSP headers from config.
-- Shared modules have tests independent of CHANNEL SURF content.
-- CHANNEL SURF still passes its existing tests and Lighthouse checks.
+- Shared modules have tests independent of FIVE STAR WANTED content.
+- FIVE STAR WANTED still passes its existing tests and Lighthouse checks.
 - Extracting the kit does not make the current site harder to edit.
 
 ## Risks
@@ -144,6 +144,6 @@ Keep tests alongside each module. No visual changes.
 
 ## Recommendation
 
-Do not turn CHANNEL SURF into a framework. Finish it, build the next site, then extract the proven
+Do not turn FIVE STAR WANTED into a framework. Finish it, build the next site, then extract the proven
 parts into an internal static-site kit. The dev server and generated CSP work are already the first
 pieces of that kit.

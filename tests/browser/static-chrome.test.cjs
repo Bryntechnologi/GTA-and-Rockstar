@@ -31,7 +31,7 @@ if (!executablePath) {
     assert.equal(await page.locator(".site-header").count(), 1, "changelog should render the universal header");
     assert.equal(await page.locator(".site-footer").count(), 1, "changelog should render the universal footer");
     assert.match((await page.locator("h1").textContent()).trim(), /Changelog/i);
-    assert.equal(await page.locator(".changelog-release").count(), 3, "changelog should show every version");
+    assert.equal(await page.locator(".changelog-release").count(), 5, "changelog should show every version");
     assert.doesNotMatch(await page.locator("body").innerText(), /\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/);
 
     await page.locator("#eraToggle").click();
@@ -55,7 +55,7 @@ if (!executablePath) {
     assert.equal(await page.locator(".page-tools").count(), 1, "static pages should expose share and reaction tools");
     assert.equal(await page.locator(".reading-progress").count(), 1, "long static pages should expose reading progress");
 
-    for (const [path, marker] of [["contact.html", "brynsites.com/contact"], ["credits.html", "Image credits"]]) {
+    for (const [path, marker] of [["contact.html", "brynsites.com/contact"], ["credits.html", "Credits, sources"]]) {
       await page.goto(BASE + path, { waitUntil: "domcontentloaded" });
       assert.equal(await page.locator(".site-header").count(), 1, `${path} should have the header`);
       assert.equal(await page.locator(".site-footer").count(), 1, `${path} should have the footer`);

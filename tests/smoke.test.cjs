@@ -88,7 +88,7 @@ test("lore filters, search, and detail panel work", async () => {
   const { window, doc, errors } = await loadSite();
   nav(doc, "lore");
   await new Promise((resolve) => setTimeout(resolve, 250));
-  assert.equal(doc.querySelectorAll("#loreContent .lore-card").length, 20);
+  assert.equal(doc.querySelectorAll("#loreContent .lore-card").length, 42);
   assert.equal(doc.querySelector('.nav-link[data-route="lore"]')?.getAttribute("aria-current"), "page");
 
   doc.querySelector('[data-lore-open="niko-bellic"]')?.click();
@@ -101,7 +101,7 @@ test("lore filters, search, and detail panel work", async () => {
   doc.querySelector('[data-lore-era="vicecity"]')?.click();
   await new Promise((resolve) => setTimeout(resolve, 100));
   const filtered = doc.querySelectorAll("#loreContent .lore-card").length;
-  assert.ok(filtered > 0 && filtered < 20, `expected a subset, got ${filtered}`);
+  assert.ok(filtered > 0 && filtered < 42, `expected a subset, got ${filtered}`);
 
   doc.querySelector('[data-lore-type="all"]')?.click();
   const search = doc.querySelector("#loreSearch");
@@ -274,14 +274,14 @@ test("trivia era filters set and restore the theme", async () => {
 
 test("static indexability files and archive are present", () => {
   const index = fs.readFileSync(INDEX, "utf8");
-  assert.match(index, /<link rel="canonical" href="https:\/\/channelsurf\.pages\.dev\/">/);
+  assert.match(index, /<link rel="canonical" href="https:\/\/fivestarwanted\.pages\.dev\/">/);
   assert.match(index, /application\/ld\+json/);
   assert.match(index, /name="robots" content="index,follow/);
   assert.match(index, /og-cover\.png/);
   assert.match(index, /archive\.html/);
 
   const archive = fs.readFileSync(path.join(ROOT, "archive.html"), "utf8");
-  assert.equal((archive.match(/<article id="lore-/g) || []).length, 20);
+  assert.equal((archive.match(/<article id="lore-/g) || []).length, 42);
   assert.equal((archive.match(/<article id="story-/g) || []).length, 35);
   assert.match(archive, /application\/ld\+json/);
 
@@ -311,7 +311,8 @@ test("static indexability files and archive are present", () => {
   assert.match(contact, /brynsites\.com\/contact/);
 
   const creditsPage = fs.readFileSync(path.join(ROOT, "credits.html"), "utf8");
-  assert.match(creditsPage, /ImageGallery/);
+  assert.match(creditsPage, /Text sources and licences/);
+  assert.match(creditsPage, /CC BY-SA/);
 
   const elsewhere = fs.readFileSync(path.join(ROOT, "elsewhere.html"), "utf8");
   assert.equal((elsewhere.match(/class="elsewhere-card"/g) || []).length, 4);

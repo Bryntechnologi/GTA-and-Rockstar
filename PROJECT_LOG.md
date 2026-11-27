@@ -1,15 +1,15 @@
 # Project Log
 
-Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
+Working notes for FIVE STAR WANTED. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 
 ## Identity
 
-- **Current project name:** CHANNEL SURF
+- **Current project name:** FIVE STAR WANTED
 - **Status:** Unofficial fan archive and front-end portfolio project
 - **Deployment target:** static host, intended for Cloudflare Pages
 - **Umbrella:** [Brynsites](https://brynsites.com/) (`brynsites.com`)
 - **Contact route:** [brynsites.com/contact](https://brynsites.com/contact)
-- **Production domain:** not finalised; `site.config.json` currently points at the placeholder `https://channelsurf.pages.dev/`
+- **Production domain:** not finalised; `site.config.json` currently points at the placeholder `https://fivestarwanted.pages.dev/`
 
 ## Product direction
 
@@ -40,7 +40,7 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - [x] CC/PD imagery with credits
 - [x] PWA and service worker
 - [x] Regression, transition, and header tests
-- [x] Universal header, footer, breadcrumbs, and theme tuner on static pages
+- [x] Universal header, footer, breadcrumbs, and game theme picker on static pages
 - [x] Version-only public changelog
 - [x] Partial-archive and Brynsites identity copy
 - [x] Related-entry links, GTA Wiki links, and attributed summaries
@@ -55,6 +55,11 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - [x] Prominent Brynsites network attribution in the footer
 - [x] Lore filter, detail-panel, and nav-state UX fixes
 - [x] Per-page SEO titles, descriptions, keywords, and Twitter cards
+- [x] Restructured About page with quick links and a collapsible disclaimer
+- [x] Mobile nav grid alignment and full-width Brynsites footer banner
+- [x] FIVE STAR WANTED rebrand, theme-copy cleanup, and GTA-style UI audio
+- [x] 42-entry lore archive with era-neutral franchise entries and CC BY-SA attribution
+- [x] Rockstar Beyond GTA series dossiers and whole-page theme crossfades
 - [ ] Final production domain
 - [ ] Final project rename
 

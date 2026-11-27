@@ -1,4 +1,4 @@
-# CHANNEL SURF �" smoke-test checklist
+# FIVE STAR WANTED �" smoke-test checklist
 
 Run with a local server (not `file://`):
 
@@ -12,14 +12,14 @@ Then open <http://localhost:4173>.
 
 1. Console has zero uncaught errors on load and on every view change.
 2. All views render; hash routing works (`#home`, `#lore`, `#atlas`, `#story`, `#reel`, `#play`, `#about`, plus `#trivia`, `#puzzles`, `#timeline`, `#toolkit`).
-3. The first-visit disclaimer banner appears; “I understand” hides it; `channelsurf.disclaimer.v1` is stored; the footer “Full disclaimer” reopens the About notice.
+3. The first-visit disclaimer banner appears; “I understand” hides it; `fivestarwanted.disclaimer.v1` is stored; the footer “Full disclaimer” reopens the About notice.
 4. All eight era themes switch; Auto-morph re-skins per trivia question.
 5. Home shows 4 featured lore cards and 5 story preview cards.
-6. Lore hub shows 20 entries; era/type filters and search work; a card opens the detail panel; “Live summary” loads Wikipedia with attribution.
+6. Lore hub shows 42 entries; era/type filters and search work; a card opens the detail panel; “Live summary” loads Wikipedia with attribution.
 7. Story Timeline shows 35 cards; prev/next, progress dots, arrow keys, and scroll-snap work; the detail panel updates and the era follows the active beat.
 8. Spoiler toggle persists and reveals full detail; “Follow era” toggle persists and restores the previous era on exit.
 9. Global search opens with the header button or `Ctrl/Cmd + K`; results navigate to views, eras, lore, and story beats.
-10. Trivia: Classic, Blitz, Sudden Death, Mythbuster, Channel Surf, Daily. Timer pauses on lore, streaks score, ranks show.
+10. Trivia: Classic, Blitz, Sudden Death, Mythbuster, Five Star Wanted, Daily. Timer pauses on lore, streaks score, ranks show.
 11. Daily trivia seed is identical across reloads on the same UTC day.
 12. Vault: 6 tries, unique digits, daily seed, feedback, PNG card download.
 13. Heat Grid: 6�"6 / 7�"7 / 8�"8, guaranteed path, par, keyboard/WASD, PNG card download.
@@ -60,7 +60,7 @@ Then open <http://localhost:4173>.
 36. Keyboard: trivia 1�"4/Enter, grid arrows/WASD, Escape exits.
 37. Visible focus states and skip link.
 38. `prefers-reduced-motion` disables ambient/ticker motion.
-39. Mobile widths 360 / 390 / 768: nav, tuner, atlas, maps, radio, and result cards fit.
+39. Mobile widths 360 / 390 / 768: nav, switchr, atlas, maps, radio, and result cards fit.
 40. Color contrast holds in all eight era themes.
 
 ## Content and IP
@@ -73,7 +73,7 @@ Then open <http://localhost:4173>.
 ## Automated regression + browser validation
 
 - `npm test` passes (jsdom: routes, lore, story, search, fallbacks, SEO files).
-- Playwright/Edge smoke pass: no console errors; 4 home lore cards, 5 story previews, 20 lore cards, 35 story cards, 7 arcade cards, 9 badges, search returns results.
+- Playwright/Edge smoke pass: no console errors; 4 home lore cards, 5 story previews, 42 lore cards, 35 story cards, 7 arcade cards, 9 badges, search returns results.
 - Blocked-network pass: Wikipedia fallback message appears; map tile failure keeps 10 comparison cards; no page errors.
 - Offline pass: after one online visit, reload with the network offline still renders the home heading, lore cards, and theme CSS.
 - Lighthouse (local, mobile emulation): Accessibility 100, Best Practices 100, SEO 100. Performance is lower locally because the dev server does not compress assets; Cloudflare Pages compression should improve it. Re-run Lighthouse after deploy.
@@ -81,7 +81,7 @@ Then open <http://localhost:4173>.
 ## Indexability
 
 - `index.html` canonical, robots, OG/Twitter, and JSON-LD are present.
-- `archive.html` contains 20 lore articles and 35 story articles without JavaScript.
+- `archive.html` contains 42 lore articles and 35 story articles without JavaScript.
 - `robots.txt`, `sitemap.xml`, and `llms.txt` resolve.
 - Change `SITE_URL` in `scripts/build-static.mjs` and the absolute canonical/OG URLs in `index.html` to the real subdomain before launch.
 
@@ -140,7 +140,7 @@ npm run test:browser
 - Home uses its own `home` theme, distinct from all game eras.
 - Leaving home restores the saved game era; returning home restores the home theme.
 - Games hub is ordered by real release year: 1997, 2002, 2004, 2005, 2006, 2008, 2013, 2018, 2026.
-- Signal radio is surfaced on the home page and remains click-to-play.
+- Radio is surfaced on the home page and remains click-to-play.
 - Character avatars are unique generated SVG portraits, not initials; no official likenesses are used.
 
 ## Imagery and attribution
@@ -164,7 +164,7 @@ npm run test:browser
 ## Universal chrome and project pages
 
 - `npm run test:static` checks that the changelog, contact, credits, and game pages render the universal header/footer.
-- Static pages expose the full era tuner and keep their content theme on first load.
+- Static pages expose the full era switchr and keep their content theme on first load.
 - Static search finds lore entries through `assets/js/search-index.js`.
 - The changelog is version-only; both `v1.0.0` and `v0.1.0` are present and no month names appear.
 - Contact links to `https://brynsites.com/contact`; no email is published on the subdomain.

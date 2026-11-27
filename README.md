@@ -1,8 +1,8 @@
-# CHANNEL SURF
+# FIVE STAR WANTED
 
 **An unofficial Rockstar archive, arcade, and portfolio piece.**
 
-CHANNEL SURF is a 100% client-side, zero-backend web app built as a playable tribute to the
+FIVE STAR WANTED is a 100% client-side, zero-backend web app built as a playable tribute to the
 cities, crews, frontiers, and radio static of the Rockstar universe. The entire interface morphs
 to match the selected era — from modern Leonida neon to 1979 New York grit — using CSS custom
 properties, inline SVG ambience, and synthesized Web Audio sound effects.
@@ -25,16 +25,16 @@ and permissions go through the [Brynsites contact page](https://brynsites.com/co
 ### Lore-first structure
 The site leads with the archive, not the arcade:
 
-- **Home** — a signature home-only theme, featured lore, a story preview, a signal radio, the era rack, and clear atlas/arcade CTAs.
+- **Home** — a signature home-only theme, featured lore, a story preview, a radio panel, the era rack, and clear atlas/arcade CTAs.
 - **Games** - a hub of static, theme-per-game dossier pages in release order. Each page has its own metadata, canonical URL, era theme, characters, locations, lore, and story beats.
-- **Rockstar Elsewhere** - a static dossier page covering Max Payne, Manhunt, Midnight Club, and L.A. Noire without adding new global theme eras.
+- **Rockstar Beyond GTA** - a static dossier page covering Max Payne, Manhunt, Midnight Club, and L.A. Noire without adding new global theme eras.
 - **Lore** - curated entries across locations, characters, factions, and franchise history, with era/type filters, search, sources, and optional live Wikipedia and GTA Wiki summaries. The archive is explicitly partial.
 - **Story Timeline** - in-universe story beats from 1961 London to 2026 Leonida, presented as a horizontal, theme-morphing carousel. Full spoilers are available behind a persisted toggle. A static **reading mode** at `story.html` presents the same chronology as a scroll-driven, theme-shifting page.
 - **Atlas** — the fictional map, Leaflet mode, and Geo-Guess, with Real vs Reel as a sub-tab.
 - **Real vs Reel** — MapLibre + OpenFreeMap comparisons, now grouped under Atlas.
 - **Arcade** — trivia, vault, heat grid, clue dossier, heist splitter, and badges.
 - **Global search** — `Ctrl/Cmd + K` or the header search button. The SPA search covers lore, story beats, games, eras, and views; static pages get a fuzzy search overlay over the full site index.
-- **Universal chrome** — the same header, footer, breadcrumbs, theme tuner, and mobile navigation on the SPA and every static page.
+- **Universal chrome** — the same header, footer, breadcrumbs, game theme picker, and mobile navigation on the SPA and every static page.
 - **Project pages** — a version-only [changelog](changelog.html), [image credits](credits.html), and a [contact page](contact.html) that routes through Brynsites.
 - **Share and reactions** — Web Share API with a copy-link fallback, plus positive-only localStorage reactions. Long pages show a reading-progress bar.
 - **Contrast preference** — a high-contrast toggle that layers over every era theme and persists in localStorage.
@@ -42,23 +42,23 @@ The site leads with the archive, not the arcade:
 - **CSP audit** — `npm run audit:csp` checks the enforced policy against actual scripts, styles, external origins, streams, and map/API hosts.
 
 ### Theme behaviour
-The era theme is stable by default and changes with the content you open. Lore filters and lore detail use that entry’s era; trivia uses the selected era filter; the story timeline follows the active beat; atlas chips switch the era. Exiting a content view restores the previous theme, and manual tuning wins. “Follow trivia era” only lets trivia questions change the signal, and Channel Surf still does it by design. Registered CSS custom properties crossfade the palette over ~0.55s, so theme changes are smooth rather than snapping. Static game pages bake their theme into the HTML, so there is no flicker or global theme drift.
+The era theme is stable by default and changes with the content you open. Lore filters and lore detail use that entry’s era; trivia uses the selected era filter; the story timeline follows the active beat; atlas chips switch the era. Exiting a content view restores the previous theme, and manual selection wins. “Follow trivia era” only lets trivia questions change the theme, and Full Sweep still does it by design. Registered CSS custom properties crossfade the palette over ~0.55s, so theme changes are smooth rather than snapping. Static game pages bake their theme into the HTML, so there is no flicker or global theme drift.
 
 ### Era-morphing theme engine
 Era presets, each with its own palette, typography, corner radius, card treatment, and
 animated SVG backdrop. Each era also uses a distinct self-hosted open font pairing — no GTA font
 files are included.
 
-| Era | Signal | Vibe |
+| Era | Theme | Vibe |
 | --- | --- | --- |
-| `gta6` | Leonida Wave 98.7 | Neon twilight, swaying palms |
-| `vicecity` | Wave 103 | 1986 pastel noir |
-| `sanandreas` | West Coast Classics | Golden-hour amber and grove green |
-| `gta5` | Blaine County Radio | Sun-bleached Los Santos |
-| `gta4` | Liberty Talk | Steel-gray dossier |
-| `warriors` | 1979 Bopper FM | Subway tile, brick, hazard orange |
-| `reddead` | Frontier Dispatch | Parchment, ink, woodcut trim |
-| `bully` | Prep Radio | Collegiate navy and crest gold |
+| `gta6` | Leonida neon | Neon twilight, swaying palms |
+| `vicecity` | Pastel noir | 1986 pastel noir |
+| `sanandreas` | Grove amber | Golden-hour amber and grove green |
+| `gta5` | Los Santos sun | Sun-bleached Los Santos |
+| `gta4` | Liberty steel | Steel-gray dossier |
+| `warriors` | Subway brick | Subway tile, brick, hazard orange |
+| `reddead` | Frontier parchment | Parchment, ink, woodcut trim |
+| `bully` | Bullworth crest | Collegiate navy and crest gold |
 
 ### Theme typography
 
@@ -79,17 +79,17 @@ All fonts are self-hosted open-licence alternatives — no proprietary GTA font 
 
 Elsewhere cards also get their own display faces: Anton for Max Payne, Rubik Glitch for Manhunt, Russo One for Midnight Club, and Poiret One for L.A. Noire.
 
-Switch manually with the radio tuner, or enable **Follow trivia era** so the whole site re-skins to the era of each trivia question.
+Switch manually with the game theme picker, or enable **Follow trivia era** so the whole site re-skins to the era of each trivia question.
 
 ### Arcade modes
 - **Trivia Arena** — Classic Run, 60-Second Blitz, Sudden Death, Mythbuster (spot the fake fact),
-  and Channel Surf (mixed eras with live theme morphing).
+  and Full Sweep (mixed eras with live theme morphing).
 - **Vault & Keypad Cracker** — a Mastermind-style 4-digit codebreaker with positional feedback.
 - **Heat & Getaway Grid** — route a 6×6 / 7×7 / 8×8 block grid from start to safehouse while avoiding
   patrol and heat tiles.
 - **Clue Dossier** — three field notes from the era atlas, four districts, two tries. Deduce the
   location; a clean read unlocks the Profiler badge.
-- **Daily Signal** — a date-seeded run (UTC) so every visitor gets the same challenge that day, with
+- **Daily Run** — a date-seeded run (UTC) so every visitor gets the same challenge that day, with
   daily trivia, a daily vault, and a daily dossier.
 - **Leonida Atlas** — a custom SVG district map, plus an optional lazy-loaded **Leaflet** mode
   with pan/zoom, clickable pins, and a **Geo-Guess** mini-game.
@@ -97,8 +97,8 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
   with their fictional echoes. Falls back to comparison cards if tiles fail.
 - **Wire Archive** — curated, original lore summaries per era, with an optional live Wikipedia
   summary (cached 24h, CC BY-SA attribution) and a source link.
-- **Signal Radio** — optional, click-to-play CC/free streams with licence and station links, surfaced on the home page.
-- **Signal / game tuner** — the header signal pill opens a game-world selector. Each signal changes the site theme and tunes the archive to that game.
+- **Radio** — optional, click-to-play CC/free streams with licence and station links, surfaced on the home page.
+- **Game theme picker** — the header theme pill opens a game-world selector. Each theme changes the site styling and focuses the archive on that game.
 - **Franchise Timeline** — a filterable era scrubber from the 1997 origins through GTA VI.
 - **Crew & Heist Splitter** — a payout calculator with crew sizing, prep costs, presets, and
   visual split bars.
@@ -166,7 +166,7 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 │       ├── data.js         # Core eras, questions, fake facts, atlas, timeline, badges
 │       ├── app.js          # State, routing, themes, games, maps, radio, sharing
 │       ├── markdown-core.js # Safe Markdown + [[wiki link]] renderer
-│       ├── chrome.js       # Universal static-page header/footer, tuner, search
+│       ├── chrome.js       # Universal static-page header/footer, switchr, search
 │       └── search-index.js # Generated static-page search index
 ├── data/
 │   ├── lore.json           # Curated lore summaries + types + wiki titles + sources
@@ -252,7 +252,7 @@ npm run audit:csp
 - `test:browser` verifies blocked Wikipedia, blocked map tiles, and the offline app shell.
 - `test:transitions` verifies registered-token crossfades and content-era restoration in Chromium.
 - `test:header` snapshots and asserts header layout at 360-1440px (images go to `tests/snapshots/`).
-- `test:static` checks universal chrome, the version-only changelog, the contact and credits pages, and the static theme tuner.
+- `test:static` checks universal chrome, the version-only changelog, the contact and credits pages, and the static game theme picker.
 - `audit:csp` verifies the enforced CSP against inline scripts/styles, external origins, media streams, and map/API hosts.
 
 ### Static archive / SEO regeneration
@@ -265,13 +265,13 @@ npm run build:static
 SITE_URL=https://your-subdomain.example/ npm run build:static
 ```
 
-This updates `archive.html`, `elsewhere.html`, `games/<slug>/index.html`, `sitemap.xml`, `robots.txt`, `llms.txt`, and the canonical/OG URLs in `index.html`. Set the real domain in `site.config.json` (or pass `SITE_URL`). The checked-in default is `https://channelsurf.pages.dev/`.
+This updates `archive.html`, `elsewhere.html`, `games/<slug>/index.html`, `sitemap.xml`, `robots.txt`, `llms.txt`, and the canonical/OG URLs in `index.html`. Set the real domain in `site.config.json` (or pass `SITE_URL`). The checked-in default is `https://fivestarwanted.pages.dev/`.
 
 ### Indexability
 
 - `index.html` has canonical, robots, Open Graph, Twitter, and JSON-LD metadata.
 - Each game page is a static, theme-baked page with unique title, description, canonical, and JSON-LD.
-- `elsewhere.html` is a static Rockstar Elsewhere dossier with its own metadata.
+- `elsewhere.html` is a static Rockstar Beyond GTA dossier with its own metadata.
 - `story.html` is a static, scroll-driven story timeline with its own metadata.
 - `archive.html` is a static, JavaScript-free full-text archive of all lore entries and story beats.
 - `robots.txt`, `sitemap.xml`, and `llms.txt` are included.
@@ -323,10 +323,10 @@ credited as CC BY-SA with a source link. If the request fails, the curated local
 
 | Key | Contents |
 | --- | --- |
-| `channelsurf.settings.v1` | Era, sound, reduced motion, auto-morph |
-| `channelsurf.stats.v1` | High scores, streaks, badges, eras seen, daily results |
-| `channelsurf.disclaimer.v1` | Whether the first-visit disclaimer was dismissed |
-| `channelsurf.cache.*` | Cached live wiki responses (24h TTL) |
+| `fivestarwanted.settings.v1` | Era, sound, reduced motion, auto-morph |
+| `fivestarwanted.stats.v1` | High scores, streaks, badges, eras seen, daily results |
+| `fivestarwanted.disclaimer.v1` | Whether the first-visit disclaimer was dismissed |
+| `fivestarwanted.cache.*` | Cached live wiki responses (24h TTL) |
 
 The **About** view includes a **Wipe local data** button.
 
@@ -340,7 +340,9 @@ with the Web Audio API.
 - **Leaflet** — BSD-2-Clause, vendored in `assets/vendor/leaflet/`.
 - **MapLibre GL JS** — BSD-3-Clause, vendored in `assets/vendor/maplibre/`.
 - **OpenFreeMap / OpenStreetMap** — map data attribution is shown in the Real vs Reel view.
-- **Wikipedia** — live summaries are CC BY-SA; the UI links to the source article.
+- **Wikipedia** — live summaries and some adapted lore entries are CC BY-SA 4.0; the UI links to the source article and marks changes.
+- **GTA Wiki / Fandom** — some adapted lore entries are CC BY-SA 3.0; each entry links its source and marks changes.
+- **Site content licence** — original code, CSS, SVG, and story notes remain the project's own. Adapted lore text is shared under the source's CC BY-SA licence.
 - **Wikimedia Commons** — local real-world city photos under CC BY / CC BY-SA / public domain. Credit and source are stored in `data/image-credits.json` and shown in the UI.
 - **Google Fonts** — self-hosted open-licence font files (SIL OFL) in `assets/fonts/`. No GTA font files are used.
 - **Streams** — licences and station links are shown in the radio panel. Only add stations whose
