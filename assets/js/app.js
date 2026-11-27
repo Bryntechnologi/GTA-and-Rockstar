@@ -8,7 +8,13 @@
 
   const DATA = window.CS_DATA;
   if (!DATA) {
-    document.body.innerHTML = "<p style='padding:2rem;font-family:monospace'>CHANNEL SURF data failed to load.</p>";
+    document.body.innerHTML = `<main id="main" style="max-width:42rem;margin:0 auto;padding:4rem 1.25rem;font-family:system-ui,sans-serif;line-height:1.6">
+      <p style="font-family:monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase">CHANNEL SURF</p>
+      <h1 style="font-size:clamp(2rem,6vw,3.4rem);line-height:1.05">The interactive shell could not start.</h1>
+      <p>The core data script did not load. The static archive is still available:</p>
+      <p><a href="archive.html">Open the full-text archive</a></p>
+      <p style="color:#777">If you are previewing locally, serve the folder over HTTP instead of opening the file directly.</p>
+    </main>`;
     return;
   }
 

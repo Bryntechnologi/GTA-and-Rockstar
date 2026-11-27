@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Unofficial Rockstar lore archive and arcade.",
   "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "start": "node scripts/dev-server.mjs",
+    "preview": "node scripts/dev-server.mjs",
     "test": "node --test --test-force-exit tests/*.test.cjs",
     "test:browser": "node tests/browser/fallbacks.test.cjs",
     "test:transitions": "node tests/browser/theme-transitions.test.cjs",
