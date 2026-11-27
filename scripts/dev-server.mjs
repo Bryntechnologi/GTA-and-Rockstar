@@ -1,4 +1,4 @@
-/* Local preview server for CHANNEL SURF.
+/* Local preview server for FIVE STAR WANTED.
    Run with: npm run dev
    Optional: PORT=5000 npm run dev
    Optional: CSP=1 npm run dev  (apply the generated _headers CSP as well)
@@ -100,7 +100,7 @@ server.on("error", (error) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`CHANNEL SURF dev server: http://${host}:${port}/`);
+  console.log(`FIVE STAR WANTED dev server: http://${host}:${port}/`);
   console.log("Press Ctrl+C to stop.");
   if (!applyCsp) console.log("Previewing without CSP. Use CSP=1 npm run dev to test the generated policy.");
 });

@@ -46,10 +46,10 @@ export function header({ prefix = "", active = "", site = {} } = {}) {
   return `<a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container header-bar">
-      <a class="brand" href="${home}" aria-label="CHANNEL SURF home">
+      <a class="brand" href="${home}" aria-label="FIVE STAR WANTED home">
         ${brandMark}
         <span class="brand-copy">
-          <span class="brand-name">CHANNEL <em>SURF</em></span>
+          <span class="brand-name"><span class="brand-long">FIVE STAR <em>WANTED</em></span><span class="brand-short">5★ <em>WANTED</em></span></span>
           <span class="brand-sub">GTA lore, maps, trivia &amp; puzzles</span>
         </span>
       </a>
@@ -57,11 +57,11 @@ export function header({ prefix = "", active = "", site = {} } = {}) {
         <div class="nav-inner">${nav}</div>
       </nav>
       <div class="header-actions">
-        <button class="era-toggle" id="eraToggle" type="button" aria-expanded="false" aria-controls="eraPanel" title="Change game signal and theme">
+        <button class="era-toggle" id="eraToggle" type="button" aria-expanded="false" aria-controls="eraPanel" aria-label="Change game theme" title="Change game theme">
           <span class="onair-dot" aria-hidden="true"></span>
           <span class="era-toggle-copy">
-            <span class="era-toggle-kicker">Game signal</span>
-            <span class="era-toggle-value"><span id="tunerShort">CS</span><span id="tunerFreq">00.0</span><span id="tunerStation">CHANNEL SURF</span></span>
+            <span class="era-toggle-kicker">Game theme</span>
+            <span class="era-toggle-value"><span id="tunerShort">CS</span><span id="tunerFreq">Five Star Wanted</span></span>
           </span>
           <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
@@ -82,16 +82,16 @@ export function header({ prefix = "", active = "", site = {} } = {}) {
       <div class="container era-panel-inner">
         <div class="era-panel-head">
           <div>
-            <p class="eyebrow">Game signal</p>
-            <h2>Choose a game world</h2>
-            <p class="small muted" style="margin:0.3rem 0 0">Each signal changes the site theme. Content pages keep their own game theme until you choose another.</p>
+            <p class="eyebrow">Game theme</p>
+            <h2>Choose a game theme</h2>
+            <p class="small muted" style="margin:0.3rem 0 0">Each theme changes the site styling. Content pages keep their own game theme until you choose another.</p>
           </div>
           <div class="era-panel-controls">
-            <button class="tuner-step" id="prevStation" type="button" aria-label="Previous signal">‹</button>
-            <button class="tuner-step" id="nextStation" type="button" aria-label="Next signal">›</button>
+            <button class="tuner-step" id="prevStation" type="button" aria-label="Previous theme">‹</button>
+            <button class="tuner-step" id="nextStation" type="button" aria-label="Next theme">›</button>
           </div>
         </div>
-        <div class="station-rail" id="stationRail" role="tablist" aria-label="Era signals"></div>
+        <div class="station-rail" id="stationRail" role="tablist" aria-label="Game themes"></div>
         <div class="era-panel-foot">
           <span class="theme-mode" id="themeMode">Theme: page default</span>
           <span class="small muted">A <a href="${esc(umbrella.url || "https://brynsites.com/")}" rel="noopener">${esc(umbrella.name || "Brynsites")}</a> project</span>
@@ -123,14 +123,9 @@ export function footer({ prefix = "", site = {} } = {}) {
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <strong>CHANNEL SURF</strong>
+          <strong>FIVE STAR WANTED</strong>
           <p>An independent, non-commercial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All game names, characters, locations, and trademarks belong to their respective owners. Original writing, code, CSS, and vector art only. <a class="text-link" href="${home}#about">Full disclaimer</a></p>
           <p class="footer-note">${esc(archiveNote)} ${esc(updatedNote)}</p>
-          <p class="footer-umbrella">
-            <span class="umbrella-label">Part of the ${esc(umbrella.name || "Brynsites")} network</span>
-            <a href="${esc(umbrella.url || "https://brynsites.com/")}" rel="noopener">${esc((umbrella.url || "https://brynsites.com/").replace(/^https?:\/\//, "").replace(/\/$/, ""))} <span class="external-mark" aria-hidden="true">↗</span></a>
-            <span class="umbrella-note">More miscellany projects, writing, and contact.</span>
-          </p>
         </div>
         <nav class="footer-links footer-columns" aria-label="Footer navigation">
           <div class="footer-col">
@@ -147,11 +142,11 @@ export function footer({ prefix = "", site = {} } = {}) {
             <p class="footer-heading">Project</p>
             <a href="${home}#about">About</a>
             <a href="${prefix}changelog.html">Changelog</a>
-            <a href="${prefix}credits.html">Image credits</a>
+            <a href="${prefix}credits.html">Credits &amp; licences</a>
             <a href="${prefix}contact.html">Contact</a>
             <a href="${prefix}archive.html">Full-text archive</a>
             <a href="${prefix}story.html">Story reading mode</a>
-            <a href="${prefix}elsewhere.html">Rockstar Elsewhere</a>
+            <a href="${prefix}elsewhere.html">Rockstar Beyond GTA</a>
           </div>
           <div class="footer-col">
             <p class="footer-heading">Elsewhere</p>
@@ -162,6 +157,11 @@ export function footer({ prefix = "", site = {} } = {}) {
           </div>
         </nav>
       </div>
+      <p class="footer-umbrella">
+        <span class="umbrella-label">Part of the ${esc(umbrella.name || "Brynsites")} network</span>
+        <a href="${esc(umbrella.url || "https://brynsites.com/")}" rel="noopener">${esc((umbrella.url || "https://brynsites.com/").replace(/^https?:\/\//, "").replace(/\/$/, ""))} <span class="external-mark" aria-hidden="true">↗</span></a>
+        <span class="umbrella-note">More miscellany projects, writing, and contact.</span>
+      </p>
       <div class="footer-bottom">
         <span>${esc(archiveNote)}</span>
         <span>Unofficial fan project · ${esc(updatedNote)}</span>

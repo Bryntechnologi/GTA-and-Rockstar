@@ -1,4 +1,4 @@
-/* Bounded CSP audit for CHANNEL SURF.
+/* Bounded CSP audit for FIVE STAR WANTED.
    Run with: node scripts/csp-audit.mjs
    Writes CSP_AUDIT.md and exits non-zero if the enforced policy is missing a
    required source or an inline script/style hash. */

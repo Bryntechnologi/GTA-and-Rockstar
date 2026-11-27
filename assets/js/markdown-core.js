@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------
-   CHANNEL SURF — markdown-core.js
+   FIVE STAR WANTED — markdown-core.js
    Small, dependency-free Markdown subset with HTML escaping and a wiki-link
    resolver. Works as a browser global and as a CommonJS module for the
    static build.

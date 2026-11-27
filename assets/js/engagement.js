@@ -1,13 +1,13 @@
 /* -------------------------------------------------------------------------
-   CHANNEL SURF — engagement.js
+   FIVE STAR WANTED — engagement.js
    Lightweight, backend-free share tools, positive reactions, and reading
    progress. Everything stays in localStorage.
    ------------------------------------------------------------------------- */
 (function () {
   "use strict";
 
-  const REACTION_KEY = "channelsurf.reactions.v1";
-  const PROGRESS_KEY = "channelsurf.progress.v1";
+  const REACTION_KEY = "fivestarwanted.reactions.v1";
+  const PROGRESS_KEY = "fivestarwanted.progress.v1";
   const path = window.location.pathname + window.location.search;
 
   function read(key, fallback) {

@@ -1,12 +1,12 @@
 /* -------------------------------------------------------------------------
-   CHANNEL SURF — services.js
+   FIVE STAR WANTED — services.js
    Optional, keyless integrations with graceful local fallbacks.
    No secrets, no build step, no backend.
    ------------------------------------------------------------------------- */
 (function () {
   "use strict";
 
-  const CACHE_PREFIX = "channelsurf.cache.";
+  const CACHE_PREFIX = "fivestarwanted.cache.";
   const memory = new Map();
 
   function readCache(key) {

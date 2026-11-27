@@ -1,9 +1,9 @@
 /* -------------------------------------------------------------------------
-   CHANNEL SURF — service worker
+   FIVE STAR WANTED — service worker
    App-shell offline support. External APIs, map tiles, and audio streams are
    deliberately network-only so they never go stale silently.
    ------------------------------------------------------------------------- */
-const VERSION = "channelsurf-v23";
+const VERSION = "fivestarwanted-v25";
 const CORE = [
   "./",
   "index.html",

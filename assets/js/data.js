@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CHANNEL SURF — data.js
+   FIVE STAR WANTED — data.js
    Original fan-written content. No game assets, audio, or copied text.
    Edit this file to add eras, questions, fake facts, atlas entries, or events.
    ========================================================================== */
@@ -8,19 +8,16 @@ window.CS_DATA = (() => {
   "use strict";
 
   /* ---------------------------------------------------------------------
-     ERA SIGNALS
+     GAME THEMES
      The `key` values must match [data-era="..."] blocks in styles.css.
      --------------------------------------------------------------------- */
   const eras = {
     home: {
       key: "home",
-      name: "Channel Surf",
+      name: "Five Star Wanted",
       short: "CS",
       place: "The archive",
-      year: "STUDIO",
-      station: "CHANNEL SURF",
-      freq: "00.0",
-      tagline: "The archive, the signal, and the arcade.",
+      year: "STUDIO",      tagline: "The archive, the eras, and the arcade.",
       accentName: "Ember orange",
       visited: false
     },
@@ -29,10 +26,7 @@ window.CS_DATA = (() => {
       name: "Classic GTA",
       short: "GTA",
       place: "1997–2001",
-      year: "1997",
-      station: "GTA RADIO",
-      freq: "97.1",
-      tagline: "Top-down mayhem and arcade nerve.",
+      year: "1997",      tagline: "Top-down mayhem and arcade nerve.",
       accentName: "Arcade lime",
       visited: false
     },
@@ -41,10 +35,7 @@ window.CS_DATA = (() => {
       name: "GTA VI",
       short: "VI",
       place: "Leonida / Vice City",
-      year: "2026",
-      station: "LEONIDA WAVE",
-      freq: "98.7",
-      tagline: "Neon, salt, and trouble.",
+      year: "2026",      tagline: "Neon, salt, and trouble.",
       accentName: "Sunset coral",
       visited: false
     },
@@ -53,10 +44,7 @@ window.CS_DATA = (() => {
       name: "Vice City",
       short: "VC",
       place: "Vice City, 1986",
-      year: "1986",
-      station: "FLASH FM",
-      freq: "105.2",
-      tagline: "Pastel sunsets and questionable business.",
+      year: "1986",      tagline: "Pastel sunsets and questionable business.",
       accentName: "Hot pink",
       visited: false
     },
@@ -65,10 +53,7 @@ window.CS_DATA = (() => {
       name: "San Andreas",
       short: "SA",
       place: "San Andreas, 1992",
-      year: "1992",
-      station: "RADIO LOS SANTOS",
-      freq: "92.3",
-      tagline: "Golden hour on the wrong side of town.",
+      year: "1992",      tagline: "Golden hour on the wrong side of town.",
       accentName: "Amber",
       visited: false
     },
@@ -77,10 +62,7 @@ window.CS_DATA = (() => {
       name: "GTA V",
       short: "V",
       place: "Los Santos, 2013",
-      year: "2013",
-      station: "NON-STOP-POP FM",
-      freq: "100.7",
-      tagline: "Sunshine, scandal, and a nine-figure score.",
+      year: "2013",      tagline: "Sunshine, scandal, and a nine-figure score.",
       accentName: "Poolside orange",
       visited: false
     },
@@ -89,10 +71,7 @@ window.CS_DATA = (() => {
       name: "GTA IV",
       short: "IV",
       place: "Liberty City, 2008",
-      year: "2008",
-      station: "LIBERTY ROCK RADIO",
-      freq: "97.8",
-      tagline: "The city takes more than it gives.",
+      year: "2008",      tagline: "The city takes more than it gives.",
       accentName: "Taxi yellow",
       visited: false
     },
@@ -101,10 +80,7 @@ window.CS_DATA = (() => {
       name: "The Warriors",
       short: "NY79",
       place: "New York, 1979",
-      year: "1979",
-      station: "BOPPER FM",
-      freq: "88.1",
-      tagline: "All the way to Coney. No detours.",
+      year: "1979",      tagline: "All the way to Coney. No detours.",
       accentName: "Brick red",
       visited: false
     },
@@ -113,10 +89,7 @@ window.CS_DATA = (() => {
       name: "Red Dead",
       short: "RDR",
       place: "The American Frontier",
-      year: "1899",
-      station: "FRONTIER WIRELESS",
-      freq: "AM 660",
-      tagline: "Dust, debt, and one last ride.",
+      year: "1899",      tagline: "Dust, debt, and one last ride.",
       accentName: "Oxblood",
       visited: false
     },
@@ -125,10 +98,7 @@ window.CS_DATA = (() => {
       name: "Bully",
       short: "BW",
       place: "Bullworth Academy",
-      year: "2006",
-      station: "BULLWORTH AM",
-      freq: "AM 1240",
-      tagline: "Class is in session. So is trouble.",
+      year: "2006",      tagline: "Class is in session. So is trouble.",
       accentName: "Crest gold",
       visited: false
     }
@@ -139,7 +109,7 @@ window.CS_DATA = (() => {
   /* ---------------------------------------------------------------------
      TRIVIA QUESTIONS
      Each question has four choices. `answer` is the zero-based index.
-     `era` controls the channel-surf theme; `game` is the displayed label.
+     `era` controls the five-star-wanted theme; `game` is the displayed label.
      --------------------------------------------------------------------- */
   const questions = [
     /* GTA VI ------------------------------------------------------------ */
@@ -1191,7 +1161,7 @@ window.CS_DATA = (() => {
     },
     warriors: {
       title: "New York, 1979",
-      subtitle: "No official world map — a fan-made signal postcard and district dossier.",
+      subtitle: "No official world map — a fan-made theme postcard and district dossier.",
       locations: [
         { id: "coney-island", name: "Coney Island", kind: "Home turf", note: "Boardwalk rides and the long way home. The Warriors' entire night is measured by the distance back to this place." },
         { id: "riverside-park", name: "Riverside Park", kind: "Park", note: "Trees, benches, and the kind of shadows that make a shortcut look like a mistake." },
@@ -1249,7 +1219,7 @@ window.CS_DATA = (() => {
 
   /* ---------------------------------------------------------------------
      FRANCHISE TIMELINE
-     `theme` lets an event tune the site to a matching era skin.
+     `theme` lets an event switch the site to a matching era skin.
      --------------------------------------------------------------------- */
   const timeline = [
     { id: "t-1997", year: "1997", title: "Grand Theft Auto", franchise: "GTA", theme: null, blurb: "DMA Design's top-down crime game introduces the series' core formula: steal cars, take jobs, and outrun the consequences." },
@@ -1280,11 +1250,11 @@ window.CS_DATA = (() => {
      BADGES
      --------------------------------------------------------------------- */
   const badges = [
-    { id: "tuned-in", name: "Tuned In", desc: "Visit all eight era skins.", symbol: "signal" },
-    { id: "daily-driver", name: "Daily Driver", desc: "Complete a Daily Signal run.", symbol: "calendar" },
+    { id: "tuned-in", name: "Era Tourist", desc: "Visit all eight era skins.", symbol: "signal" },
+    { id: "daily-driver", name: "Daily Driver", desc: "Complete a Daily Run.", symbol: "calendar" },
     { id: "cracked-safe", name: "Cracked Safe", desc: "Solve a Vault Cracker puzzle.", symbol: "lock" },
     { id: "ghost-run", name: "Ghost Run", desc: "Clear a Heat Grid at par or better.", symbol: "route" },
-    { id: "perfect-signal", name: "Perfect Signal", desc: "Finish a trivia run with 100% accuracy.", symbol: "star" },
+    { id: "perfect-signal", name: "Perfect Run", desc: "Finish a trivia run with 100% accuracy.", symbol: "star" },
     { id: "sudden-survivor", name: "Sudden Survivor", desc: "Build a five-answer streak in Sudden Death.", symbol: "bolt" },
     { id: "lorekeeper", name: "Lorekeeper", desc: "Answer 50 questions correctly across the archive.", symbol: "book" },
     { id: "decoy-hunter", name: "Decoy Hunter", desc: "Clear a Mythbuster run without a miss.", symbol: "eye" },
@@ -1339,10 +1309,10 @@ window.CS_DATA = (() => {
   };
 
   const site = {
-    name: "CHANNEL SURF",
-    fullName: "CHANNEL SURF — Unofficial Rockstar Lore Archive & Arcade",
+    name: "FIVE STAR WANTED",
+    fullName: "FIVE STAR WANTED — Unofficial Rockstar Lore Archive & Arcade",
     tagline: "An unofficial Rockstar archive.",
-    disclaimer: "CHANNEL SURF is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games, Take-Two Interactive, or any of their subsidiaries. I do not own, operate, or claim any rights to Grand Theft Auto, Red Dead, The Warriors, Bully, Max Payne, L.A. Noire, Midnight Club, or any related games, characters, locations, logos, trademarks, or other intellectual property. All such rights belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. All quizzes, puzzle logic, original code, CSS, and vector art on this site were created for this project. References to games, lore, characters, and settings are included for commentary, criticism, education, and entertainment only. No game assets, audio, models, textures, screenshots, or copied dialogue are included. This site is a personal hobby/portfolio showcase, not a commercial product. If a rights holder believes anything here oversteps, contact me and I will remove or change it promptly."
+    disclaimer: "FIVE STAR WANTED is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games, Take-Two Interactive, or any of their subsidiaries. I do not own, operate, or claim any rights to Grand Theft Auto, Red Dead, The Warriors, Bully, Max Payne, L.A. Noire, Midnight Club, or any related games, characters, locations, logos, trademarks, or other intellectual property. All such rights belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. All quizzes, puzzle logic, original code, CSS, and vector art on this site were created for this project. References to games, lore, characters, and settings are included for commentary, criticism, education, and entertainment only. No game assets, audio, models, textures, screenshots, or copied dialogue are included. This site is a personal hobby/portfolio showcase, not a commercial product. If a rights holder believes anything here oversteps, contact me and I will remove or change it promptly."
   };
 
   const featuredLore = [

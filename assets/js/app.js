@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CHANNEL SURF — app.js
+   FIVE STAR WANTED — app.js
    Zero-build, zero-backend, zero-asset fan arcade.
    ========================================================================== */
 
@@ -9,7 +9,7 @@
   const DATA = window.CS_DATA;
   if (!DATA) {
     document.body.innerHTML = `<main id="main" style="max-width:42rem;margin:0 auto;padding:4rem 1.25rem;font-family:system-ui,sans-serif;line-height:1.6">
-      <p style="font-family:monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase">CHANNEL SURF</p>
+      <p style="font-family:monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase">FIVE STAR WANTED</p>
       <h1 style="font-size:clamp(2rem,6vw,3.4rem);line-height:1.05">The interactive shell could not start.</h1>
       <p>The core data script did not load. The static archive is still available:</p>
       <p><a href="archive.html">Open the full-text archive</a></p>
@@ -21,14 +21,33 @@
   const { featuredLore, featuredStory, eras, eraOrder, questions, fakeFacts, atlas, timeline, badges, chatter, site } = DATA;  const SERVICES = window.CS_SERVICES || null;
 
   const STORAGE = {
-    settings: "channelsurf.settings.v1",
-    stats: "channelsurf.stats.v1",
-    disclaimer: "channelsurf.disclaimer.v1"
+    settings: "fivestarwanted.settings.v1",
+    stats: "fivestarwanted.stats.v1",
+    disclaimer: "fivestarwanted.disclaimer.v1"
   };
+
+  /* Keep progress and preferences from the project's previous names. */
+  try {
+    const previousNames = [
+      ["criminalrecords.settings.v1", "criminalrecords.stats.v1", "criminalrecords.disclaimer.v1"],
+      [["channel", "surf.settings.v1"].join(""), ["channel", "surf.stats.v1"].join(""), ["channel", "surf.disclaimer.v1"].join("")]
+    ];
+    const targets = [STORAGE.settings, STORAGE.stats, STORAGE.disclaimer];
+    previousNames.forEach((keys) => {
+      keys.forEach((previous, index) => {
+        const nextKey = targets[index];
+        if (!localStorage.getItem(nextKey) && localStorage.getItem(previous)) {
+          localStorage.setItem(nextKey, localStorage.getItem(previous));
+        }
+      });
+    });
+  } catch (error) {
+    /* storage blocked - the page still works */
+  }
 
   const DEFAULT_SETTINGS = {
     era: "gta6",
-    sound: false,
+    sound: true,
     autoMorph: false,
     storySpoilers: false,
     storyFollowEra: true,
@@ -107,13 +126,13 @@
       count: 6
     },
     channel: {
-      name: "Channel Surf",
-      desc: "Mixed eras. The whole site morphs with every question.",
+      name: "Full Sweep",
+      desc: "Mixed eras. The whole site changes theme with every question.",
       icon: "shuffle",
       count: 8
     },
     daily: {
-      name: "Daily Signal",
+      name: "Daily Run",
       desc: "Five UTC-seeded questions. The same run for everyone.",
       icon: "calendar",
       count: 5
@@ -125,8 +144,8 @@
     blitz: "Blitz",
     sudden: "Sudden Death",
     fake: "Mythbuster",
-    channel: "Channel Surf",
-    daily: "Daily Signal"
+    channel: "Full Sweep",
+    daily: "Daily Run"
   };
 
   const ROUTE_TITLES = {
@@ -479,14 +498,19 @@
       }
     };
     $("#noticeDismiss")?.addEventListener("click", dismiss);
+    const showFullDisclaimer = () => {
+      const details = $("#aboutDisclaimerDetails");
+      if (details) details.open = true;
+      window.setTimeout(() => $("#aboutDisclaimer")?.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
+    };
     $("#noticeRead")?.addEventListener("click", () => {
       dismiss();
       navigate("about");
-      window.setTimeout(() => $("#aboutDisclaimer")?.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
+      showFullDisclaimer();
     });
     $("#footerDisclaimerBtn")?.addEventListener("click", () => {
       navigate("about");
-      window.setTimeout(() => $("#aboutDisclaimer")?.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
+      showFullDisclaimer();
     });
   }
 
@@ -638,7 +662,7 @@
 
     ctx.fillStyle = accent;
     ctx.font = `600 26px ${mono}`;
-    ctx.fillText("CHANNEL SURF // UNOFFICIAL FAN ARCADE", 84, 138);
+    ctx.fillText("FIVE STAR WANTED // UNOFFICIAL FAN ARCADE", 84, 138);
 
     ctx.fillStyle = text;
     ctx.font = `900 76px ${display}`;
@@ -688,7 +712,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `channel-surf-${(payload.slug || "result").replace(/[^a-z0-9-]+/gi, "-").toLowerCase()}.png`;
+      link.download = `five-star-wanted-${(payload.slug || "result").replace(/[^a-z0-9-]+/gi, "-").toLowerCase()}.png`;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -739,6 +763,30 @@
     bully: { pitch: 1.08, gain: 0.95 }
   };
 
+  function noiseBurst(start, duration, volume, centre) {
+    const ctx = getAudio();
+    if (!ctx) return;
+    const frames = Math.max(1, Math.floor(ctx.sampleRate * duration));
+    const buffer = ctx.createBuffer(1, frames, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < frames; i += 1) {
+      data[i] = (Math.random() * 2 - 1) * (1 - i / frames);
+    }
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(centre, ctx.currentTime + start);
+    filter.Q.value = 0.9;
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime + start);
+    gain.gain.exponentialRampToValueAtTime(volume, ctx.currentTime + start + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + duration);
+    source.connect(filter).connect(gain).connect(ctx.destination);
+    source.start(ctx.currentTime + start);
+    source.stop(ctx.currentTime + start + duration + 0.02);
+  }
+
   function sfx(kind) {
     if (!state.settings.sound) return;
     const profile = SFX_PROFILES[document.documentElement.dataset.era] || SFX_PROFILES.gta6;
@@ -746,42 +794,50 @@
       tone(freq * profile.pitch, start, duration, type, volume * profile.gain);
     switch (kind) {
       case "click":
-        note(520, 0, 0.045, "triangle", 0.022);
+        note(740, 0, 0.032, "square", 0.014);
+        note(520, 0.018, 0.05, "triangle", 0.018);
+        break;
+      case "nav":
+        note(620, 0, 0.045, "triangle", 0.018);
+        note(880, 0.05, 0.07, "sine", 0.02);
         break;
       case "tick":
-        note(760, 0, 0.025, "square", 0.012);
-        break;
-      case "tune":
-        note(280, 0, 0.1, "triangle", 0.025);
-        note(520, 0.05, 0.12, "sine", 0.025);
-        break;
-      case "correct":
-        note(660, 0, 0.09, "triangle", 0.03);
-        note(990, 0.08, 0.16, "sine", 0.028);
-        break;
-      case "wrong":
-        note(190, 0, 0.16, "sawtooth", 0.025);
-        note(130, 0.1, 0.2, "triangle", 0.02);
-        break;
-      case "win":
-        note(523, 0, 0.1, "triangle", 0.032);
-        note(659, 0.09, 0.1, "triangle", 0.032);
-        note(784, 0.18, 0.14, "triangle", 0.032);
-        note(1047, 0.29, 0.24, "sine", 0.03);
-        break;
-      case "loss":
-        note(220, 0, 0.16, "triangle", 0.03);
-        note(165, 0.14, 0.28, "sine", 0.028);
+        note(880, 0, 0.02, "square", 0.009);
         break;
       case "move":
-        note(430, 0, 0.035, "triangle", 0.018);
+        note(480, 0, 0.028, "triangle", 0.01);
+        break;
+      case "tune":
+        noiseBurst(0, 0.11, 0.018, 1400 * profile.pitch);
+        note(300, 0.02, 0.09, "triangle", 0.02);
+        note(560, 0.11, 0.11, "sine", 0.022);
+        break;
+      case "correct":
+        note(659, 0, 0.07, "triangle", 0.022);
+        note(880, 0.07, 0.09, "triangle", 0.024);
+        note(1175, 0.15, 0.14, "sine", 0.02);
+        break;
+      case "wrong":
+        note(220, 0, 0.11, "square", 0.014);
+        note(165, 0.1, 0.17, "triangle", 0.018);
+        break;
+      case "win":
+        note(523, 0, 0.09, "triangle", 0.03);
+        note(659, 0.08, 0.09, "triangle", 0.03);
+        note(784, 0.16, 0.11, "triangle", 0.03);
+        note(1047, 0.26, 0.22, "sine", 0.028);
+        break;
+      case "loss":
+        note(220, 0, 0.14, "triangle", 0.026);
+        note(165, 0.12, 0.24, "sine", 0.024);
         break;
       case "unlock":
-        note(420, 0, 0.05, "square", 0.015);
-        note(620, 0.05, 0.08, "triangle", 0.025);
+        note(440, 0, 0.045, "square", 0.012);
+        note(660, 0.045, 0.07, "triangle", 0.02);
+        note(880, 0.11, 0.09, "sine", 0.018);
         break;
       default:
-        note(500, 0, 0.04, "sine", 0.02);
+        note(560, 0, 0.04, "sine", 0.016);
     }
   }
 
@@ -985,55 +1041,61 @@
      THEME ENGINE
      --------------------------------------------------------------------- */
   function setEra(era, options = {}) {
-    const { persist = true, flash = false, track = true, silent = false } = options;
+    const { persist = true, track = true, silent = false } = options;
     if (!eras[era]) return;
 
     const root = document.documentElement;
     const changed = root.dataset.era !== era;
-    root.dataset.era = era;
 
-    if (persist) {
-      state.settings.era = era;
-      state.contentBaseEra = null;
-      state.contentSource = null;
-      saveSettings();
+    const apply = () => {
+      root.dataset.era = era;
+
+      if (persist) {
+        state.settings.era = era;
+        state.contentBaseEra = null;
+        state.contentSource = null;
+        saveSettings();
+      }
+      if (track) trackEra(era);
+
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        const bg = getComputedStyle(root).getPropertyValue("--bg").trim();
+        if (bg) meta.setAttribute("content", bg);
+      }
+
+      $$(".station-btn").forEach((button) => {
+        button.setAttribute("aria-selected", String(button.dataset.station === era));
+      });
+
+      const profile = eras[era];
+      const themeName = $("#tunerFreq");
+      const short = $("#tunerShort");
+      if (themeName) themeName.textContent = profile.name;
+      if (short) short.textContent = profile.short;
+      $("#eraToggle")?.setAttribute("aria-label", `Change game theme. Current: ${profile.name}`);
+
+      renderAmbient(era);
+      renderOnAir(era);
+      renderTicker(era);
+
+      if (state.currentView === "home") {
+        renderSpotlight();
+        renderEraRack();
+      }
+      if (state.currentView === "atlas") renderAtlas();
+      if (state.currentView === "toolkit" || state.currentView === "home") renderRadioList();
+      updateThemeMode();
+    };
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (changed && !reduced && typeof document.startViewTransition === "function") {
+      document.startViewTransition(apply);
+    } else {
+      apply();
     }
-    if (track) trackEra(era);
 
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) {
-      const bg = getComputedStyle(root).getPropertyValue("--bg").trim();
-      if (bg) meta.setAttribute("content", bg);
-    }
-
-    $$(".station-btn").forEach((button) => {
-      button.setAttribute("aria-selected", String(button.dataset.station === era));
-    });
-
-    const profile = eras[era];
-    const freq = $("#tunerFreq");
-    const station = $("#tunerStation");
-    const short = $("#tunerShort");
-    if (freq) freq.textContent = profile.freq;
-    if (station) station.textContent = profile.station;
-    if (short) short.textContent = profile.short;
-
-    renderAmbient(era);
-    renderOnAir(era);
-    renderTicker(era);
-
-    if (changed) {
-      if (flash) flashSignal();
-      if (!silent) sfx("tune");
-    }
-
-    if (state.currentView === "home") {
-      renderSpotlight();
-      renderEraRack();
-    }
-    if (state.currentView === "atlas") renderAtlas();
-    if (state.currentView === "toolkit" || state.currentView === "home") renderRadioList();
-    updateThemeMode();
+    if (changed && !silent) sfx("tune");
   }
 
   function contentBaseEra() {
@@ -1086,7 +1148,7 @@
     if (!rail) return;
     rail.innerHTML = eraOrder.map((key) => {
       const era = eras[key];
-      return `<button class="station-btn" type="button" role="tab" aria-selected="${document.documentElement.dataset.era === key}" data-station="${key}" title="${escapeHTML(era.name)} - ${escapeHTML(era.station)}"><span class="station-btn-short">${escapeHTML(era.short)}</span><span class="station-btn-name">${escapeHTML(era.name)}</span></button>`;
+      return `<button class="station-btn" type="button" role="tab" aria-selected="${document.documentElement.dataset.era === key}" data-station="${key}" title="${escapeHTML(era.name)}"><span class="station-btn-short">${escapeHTML(era.short)}</span><span class="station-btn-name">${escapeHTML(era.name)}</span></button>`;
     }).join("");
   }
 
@@ -1094,14 +1156,13 @@
     const profile = eras[era];
     if (!profile) return;
     const fields = {
-      onairCode: profile.short,
-      onairFreq: profile.freq,
-      onairStation: profile.station,
+      onairCode: profile.year === "STUDIO" ? "HOME" : profile.year,
+      onairFreq: profile.short,
+      onairStation: profile.name,
       onairTagline: profile.tagline,
       onairEra: profile.name,
       onairYear: profile.year,
-      tunerFreq: profile.freq,
-      tunerStation: profile.station
+      tunerFreq: profile.name
     };
     Object.entries(fields).forEach(([id, value]) => {
       const el = document.getElementById(id);
@@ -1123,7 +1184,7 @@
     if (!track) return;
     const lines = [
       ...(chatter[era] || []),
-      "No servers. No trackers. No signal loss.",
+      "No servers. No trackers. No accounts.",
       "An unofficial fan project and portfolio arcade."
     ];
     const html = lines.map((line) => `<span>${escapeHTML(line)}</span>`).join("");
@@ -1156,9 +1217,9 @@
     if (title) title.textContent = SPOTLIGHT_TITLES[era] || profile.tagline;
     if (meta) meta.textContent = `${profile.place} · ${profile.year}`;
     if (note) note.textContent = first ? first.note : profile.tagline;
-    if (kicker) kicker.textContent = `Signal spotlight // ${profile.short}`;
+    if (kicker) kicker.textContent = `Theme spotlight // ${profile.short}`;
     if (tags) {
-      tags.innerHTML = [profile.accentName, profile.station, "fan atlas"]
+      tags.innerHTML = [profile.accentName, profile.name, "fan atlas"]
         .map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`)
         .join("");
     }
@@ -1243,11 +1304,15 @@
   }
 
   function loreMatches(item) {
-    if (state.loreFilter !== "all" && item.era !== state.loreFilter) return false;
+    if (state.loreFilter !== "all" && item.scope !== "franchise" && item.era !== state.loreFilter) return false;
     if (state.loreType !== "all" && item.type !== state.loreType) return false;
     const query = state.loreQuery.trim().toLowerCase();
     if (!query) return true;
     return `${item.title} ${item.summary} ${(item.tags || []).join(" ")} ${item.type || ""}`.toLowerCase().includes(query);
+  }
+
+  function loreEraLabel(item) {
+    return item.scope === "franchise" ? "All games" : (eras[item.era]?.name || item.era);
   }
 
   function loreHasFilters() {
@@ -1314,19 +1379,19 @@
     const filtered = lore.filter(loreMatches);
     updateLoreCount(filtered.length);
     const notice = state.loreStatus === "fallback"
-      ? `<p class="small muted lore-notice">Showing featured entries only. <a class="text-link" href="archive.html">Open the full static archive</a> for all 20 entries, or run the local preview server.</p>`
+      ? `<p class="small muted lore-notice">Showing featured entries only. <a class="text-link" href="archive.html">Open the full static archive</a> for all 42 entries, or run the local preview server.</p>`
       : "";
     if (!filtered.length) {
       grid.innerHTML = `${notice}<div class="panel lore-empty"><p>No entries match those filters.</p><button class="btn btn-ghost btn-sm" type="button" data-lore-clear>Clear filters</button></div>`;
       return;
     }
     grid.innerHTML = notice + filtered.map((item) => `
-      <div class="lore-card ${state.loreSelected === item.id ? "is-active" : ""}" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0" aria-label="Open ${escapeHTML(item.title)} (${escapeHTML(item.type || "lore")}, ${escapeHTML(eras[item.era]?.name || item.era)})">
+      <div class="lore-card ${state.loreSelected === item.id ? "is-active" : ""}" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0" aria-label="Open ${escapeHTML(item.title)} (${escapeHTML(item.type || "lore")}, ${escapeHTML(loreEraLabel(item))})">
         <div class="lore-card-head">${avatarHTML(item.title, item.era)}<span class="lore-type">${escapeHTML(item.type || "lore")}</span></div>
         <h3>${escapeHTML(item.title)}</h3>
         <p>${mdHTML(item.summary)}</p>
         <div class="lore-card-foot">
-          <span>${escapeHTML(eras[item.era]?.name || item.era)}</span>
+          <span>${escapeHTML(loreEraLabel(item))}</span>
           <span class="text-link">Read entry →</span>
         </div>
       </div>
@@ -1380,19 +1445,19 @@
       box.innerHTML = "";
       return;
     }
-    previewContentEra(item.era, "lore");
+    if (item.scope !== "franchise") previewContentEra(item.era, "lore");
     box.classList.remove("hidden");
     box.innerHTML = `
       <div class="lore-detail-top">
         <button class="text-link" type="button" data-lore-close>← Back to all entries</button>
-        <span class="detail-kicker">${escapeHTML(item.type || "lore")} · ${escapeHTML(eras[item.era]?.name || item.era)}</span>
+        <span class="detail-kicker">${escapeHTML(item.type || "lore")} · ${escapeHTML(loreEraLabel(item))}</span>
       </div>
       <div class="lore-detail-head">
         <div class="lore-detail-title">
           ${avatarHTML(item.title, item.era)}
           <div>
             <h3 id="loreEntryTitle" tabindex="-1">${escapeHTML(item.title)}</h3>
-            <p class="lore-detail-era">${escapeHTML(eras[item.era]?.name || item.era)}</p>
+            <p class="lore-detail-era">${escapeHTML(loreEraLabel(item))}</p>
           </div>
         </div>
       </div>
@@ -1400,10 +1465,11 @@
         <div class="lore-detail-copy">
           <div class="md">${mdHTML(item.summary)}</div>
           <div class="chip-row">${(item.tags || []).map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join("")}</div>
+          ${item.sourceLicense ? `<p class="lore-license">${escapeHTML(item.attribution || "Adapted from an external source")} · ${escapeHTML(item.sourceLicense)} · changes may have been made.</p>` : ""}
         </div>
         <aside class="lore-detail-actions" aria-label="Entry tools">
           <p class="eyebrow">Entry tools</p>
-          <button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle || item.title)}">Wikipedia summary</button>
+          ${item.wikiTitle ? `<button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle)}">Wikipedia summary</button>` : ""}
           <button class="btn btn-quiet btn-sm" type="button" data-lore-fandom="${escapeHTML(item.fandomTitle || item.wikiTitle || item.title)}">GTA Wiki summary</button>
           <a class="text-link" href="${escapeHTML(item.source || fandomHref(item.title))}" target="_blank" rel="noopener noreferrer">Open source ↗</a>
           <button class="btn btn-ghost btn-sm" type="button" data-route="games">Browse all game dossiers</button>
@@ -1821,7 +1887,7 @@
         open: "atlas",
         icon: "atlas",
         title: "The Era Atlas",
-        copy: "A custom vector map of Leonida, plus district dossiers for every other signal in the archive.",
+        copy: "A custom vector map of Leonida, plus district dossiers for every other era in the archive.",
         meta: "8 eras",
         score: "Explore",
         accent: "var(--accent)"
@@ -1873,7 +1939,7 @@
         open: "timeline",
         number: "03",
         title: "Franchise Timeline",
-        copy: "Scrub from 1997's top-down origins to the modern era. Tune the site to any milestone on the rail.",
+        copy: "Scrub from 1997's top-down origins to the modern era. Switch the site to any milestone on the rail.",
         link: "Open the archive"
       }
     ];
@@ -1898,7 +1964,7 @@
       return `<button class="era-tile" type="button" data-era-tile="${key}" data-visited="${visited}" style="--tile-accent:${ERA_ACCENTS[key]};--tile-image:url('${ERA_IMAGES[key]}')">
         <span>
           <strong>${escapeHTML(era.name)}</strong>
-          <small>${escapeHTML(era.station)} · ${escapeHTML(era.year)}</small>
+          <small>${escapeHTML(era.name)} · ${escapeHTML(era.year)}</small>
         </span>
       </button>`;
     }).join("");
@@ -1995,7 +2061,7 @@
       window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
     }
 
-    if (previous !== view) sfx("click");
+    if (previous !== view) sfx("nav");
   }
 
   function openContent(kind, dataset = {}) {
@@ -2132,7 +2198,7 @@
         saveSettings();
         updateThemeMode();
         sfx("click");
-        showToast(auto.checked ? "<strong>Follow trivia era on</strong> — trivia questions can change the signal." : "Follow trivia era off — the tuner is yours.");
+        showToast(auto.checked ? "<strong>Follow trivia era on</strong> - trivia questions can change the theme." : "Follow trivia era off - the theme is yours.");
       });
     }
   }
@@ -2158,11 +2224,23 @@
       update();
       if (state.settings.sound) {
         getAudio();
-        sfx("tune");
-        showToast("<strong>Sound on</strong> — synthesized in the browser, no audio files.");
+        sfx("nav");
+        showToast("<strong>Sound on</strong> — GTA-style clicks, confirms, and theme static, synthesised in the browser.");
       } else {
         showToast("Sound off.");
       }
+    });
+
+    let lastHover = 0;
+    document.addEventListener("pointerover", (event) => {
+      if (!state.settings.sound) return;
+      const target = event.target.closest("a, button, [role='button'], .chip, .lore-card, .game-card");
+      if (!target) return;
+      if (event.relatedTarget instanceof Node && target.contains(event.relatedTarget)) return;
+      const now = performance.now();
+      if (now - lastHover < 70) return;
+      lastHover = now;
+      sfx("move");
     });
 
     update();
@@ -2197,7 +2275,7 @@
       const others = eraOrder.filter((era) => era !== document.documentElement.dataset.era);
       const next = others[Math.floor(Math.random() * others.length)];
       setEra(next);
-      showToast(`<strong>Signal acquired</strong> — ${escapeHTML(eras[next].name)}.`);
+      showToast(`<strong>Theme applied</strong> - ${escapeHTML(eras[next].name)}.`);
     });
 
     $("#dailyStartBtn")?.addEventListener("click", () => {
@@ -2260,7 +2338,7 @@
   }
 
   /* ---------------------------------------------------------------------
-     SIGNAL RADIO — optional, user-initiated, license-labelled
+     RADIO - optional, user-initiated, license-labelled
      --------------------------------------------------------------------- */
   /* ---------------------------------------------------------------------
      LORE + STORY EVENTS
@@ -2269,7 +2347,7 @@
     const item = (state.lore || []).find((entry) => entry.id === state.loreSelected);
     if (state.loreFilter !== "all") {
       previewContentEra(state.loreFilter, "lore");
-    } else if (item) {
+    } else if (item && item.scope !== "franchise") {
       previewContentEra(item.era, "lore");
     } else {
       restoreContentEra("lore");
@@ -2421,7 +2499,7 @@
     const items = [
       { type: "view", title: "Home", subtitle: "Lore-first landing page", view: "home" },
       { type: "view", title: "Games", subtitle: "Theme-per-game dossiers", view: "games" },
-      { type: "view", title: "Rockstar Elsewhere", subtitle: "Max Payne, Manhunt, Midnight Club", href: "elsewhere.html" },
+      { type: "view", title: "Rockstar Beyond GTA", subtitle: "Max Payne, Manhunt, Midnight Club", href: "elsewhere.html" },
       { type: "view", title: "Lore", subtitle: "The Wire Archive", view: "lore" },
       { type: "view", title: "Atlas", subtitle: "Fictional map and Geo-Guess", view: "atlas" },
       { type: "view", title: "Story Timeline", subtitle: "In-universe chronology", view: "story" },
@@ -2433,7 +2511,7 @@
       items.push({ type: "era", title: eras[key].name, subtitle: `${eras[key].short} · ${eras[key].year}`, era: key });
     });
     (state.lore || []).forEach((item) => {
-      items.push({ type: item.type || "lore", title: item.title, subtitle: `${eras[item.era]?.name || item.era} · ${item.summary}`, view: "lore", loreId: item.id });
+      items.push({ type: item.type || "lore", title: item.title, subtitle: `${loreEraLabel(item)} · ${item.summary}`, view: "lore", loreId: item.id });
     });
     (state.story || []).forEach((event) => {
       items.push({ type: "story", title: `${event.year} · ${event.title}`, subtitle: event.game, view: "story", storyId: event.id });
@@ -2483,7 +2561,7 @@
         closeSearch();
         if (item.era) {
           setEra(item.era);
-          showToast(`<strong>Tuned to ${escapeHTML(eras[item.era].name)}.</strong>`);
+          showToast(`<strong>Theme set to ${escapeHTML(eras[item.era].name)}.</strong>`);
           return;
         }
         if (item.loreId) state.loreSelected = item.loreId;
@@ -2551,12 +2629,12 @@
     const now = $("#radioNow");
     const license = $("#radioLicense");
     const stop = $("#radioStop");
-    if (now) now.textContent = stream ? `Tuned to ${stream.name}` : "No station tuned.";
+    if (now) now.textContent = stream ? `Playing ${stream.name}` : "Nothing playing.";
     if (license) {
       if (stream) {
         license.innerHTML = `${escapeHTML(stream.license)} · ${escapeHTML(stream.attribution)} · <a class="text-link" href="${escapeHTML(stream.homepage)}" target="_blank" rel="noopener noreferrer">station page</a>`;
       } else {
-        license.textContent = "Station licenses and links appear here.";
+        license.textContent = "Station licences and links appear here.";
       }
     }
     if (stop) stop.disabled = !stream;
@@ -2602,7 +2680,7 @@
       audio.volume = 0.55;
       audio.addEventListener("playing", () => {
         const now = $("#radioNow");
-        if (now && state.currentStream) now.textContent = `Tuned to ${state.currentStream.name}`;
+        if (now && state.currentStream) now.textContent = `Playing ${state.currentStream.name}`;
       });
       audio.addEventListener("error", () => {
         const now = $("#radioNow");
@@ -2858,7 +2936,7 @@
     }
 
     if (!items.length) {
-      showToast("No questions available for that signal. Try another filter.");
+      showToast("No questions available for that era. Try another filter.");
       return;
     }
 
@@ -3177,7 +3255,7 @@
     const accuracy = trivia.answered ? Math.round((trivia.correct / trivia.answered) * 100) : 0;
     const rank = getRank(trivia.correct, trivia.answered);
     const text = [
-      `CHANNEL SURF // ${mode}`,
+      `FIVE STAR WANTED // ${mode}`,
       `${trivia.score} pts · ${trivia.correct}/${trivia.answered} correct · ${trivia.bestStreak} best streak · ${accuracy}% accuracy`,
       `Rank: ${rank.title}`,
       "Unofficial fan arcade — not affiliated with Rockstar Games or Take-Two."
@@ -4078,7 +4156,7 @@
       <p>${escapeHTML(selected.note)}</p>
       <div class="detail-tags">
         <span class="tag">${escapeHTML(eras[era].year)}</span>
-        <span class="tag">${escapeHTML(eras[era].station)}</span>
+        <span class="tag">${escapeHTML(eras[era].name)}</span>
         <span class="tag">${hasMap ? "Official map · fan notes" : "Fan atlas"}</span>
       </div>
       ${atlasLoreHTML(era)}
@@ -4573,7 +4651,7 @@
       return;
     }
     const themeButton = entry.theme
-      ? `<button class="btn btn-ghost btn-sm" type="button" data-timeline-tune="${entry.theme}">${icon("atlas")} Tune to ${escapeHTML(eras[entry.theme]?.name || "era")}</button>`
+      ? `<button class="btn btn-ghost btn-sm" type="button" data-timeline-tune="${entry.theme}">${icon("atlas")} Apply ${escapeHTML(eras[entry.theme]?.name || "era")} theme</button>`
       : `<span class="tag">No era skin for this one</span>`;
 
     detail.innerHTML = `
@@ -4611,7 +4689,7 @@
       const tune = event.target.closest("[data-timeline-tune]");
       if (!tune) return;
       setEra(tune.dataset.timelineTune);
-      showToast(`<strong>Tuned.</strong> ${escapeHTML(eras[tune.dataset.timelineTune]?.name || "Era")} signal acquired.`);
+      showToast(`<strong>Theme applied.</strong> ${escapeHTML(eras[tune.dataset.timelineTune]?.name || "Era")} is now active.`);
     });
   }
 
@@ -4739,7 +4817,7 @@
   function copyHeistSummary() {
     const math = heistMath();
     const lines = [
-      `CHANNEL SURF // Crew split`,
+      `FIVE STAR WANTED // Crew split`,
       `Total take: ${formatMoney(math.take)}`,
       `Prep & costs: ${formatMoney(math.cost)}`,
       `Payout pool: ${formatMoney(math.pool)}`,
@@ -4839,8 +4917,8 @@
     const best = Math.max(0, ...Object.values(stats.highScores).map((value) => Number(value) || 0));
     const earned = badges.filter((badge) => stats.badges.includes(badge.id)).map((badge) => badge.name);
     return [
-      "CHANNEL SURF // Local dossier",
-      `Era tuned: ${eras[state.settings.era]?.name || "GTA VI"}`,
+      "FIVE STAR WANTED // Local dossier",
+      `Theme: ${eras[state.settings.era]?.name || "GTA VI"}`,
       `Daily streak: ${stats.dailyStreak} day(s)`,
       `Runs logged: ${stats.runs}`,
       `Correct answers: ${stats.totalCorrect}`,
@@ -4862,7 +4940,7 @@
     });
 
     $("#resetData")?.addEventListener("click", () => {
-      const okay = window.confirm("Wipe all CHANNEL SURF progress in this browser? This clears scores, streaks, badges, and era visits. It cannot be undone.");
+      const okay = window.confirm("Wipe all FIVE STAR WANTED progress in this browser? This clears scores, streaks, badges, and era visits. It cannot be undone.");
       if (!okay) return;
       try {
         localStorage.removeItem(STORAGE.settings);

@@ -1,7 +1,7 @@
 {
-  "name": "channel-surf",
+  "name": "five-star-wanted",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "Unofficial Rockstar lore archive and arcade.",
   "scripts": {
     "dev": "node scripts/dev-server.mjs",

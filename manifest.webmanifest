@@ -1,6 +1,6 @@
 {
-  "name": "CHANNEL SURF - Unofficial Rockstar Lore Archive & Arcade",
-  "short_name": "CHANNEL SURF",
+  "name": "FIVE STAR WANTED - Unofficial Rockstar Lore Archive & Arcade",
+  "short_name": "FIVE STAR WANTED",
   "description": "A fan-made Rockstar lore archive and arcade: story timeline, lore, atlas, real-vs-reel maps, trivia, and puzzles.",
   "id": "./",
   "start_url": "./",
@@ -38,7 +38,7 @@
   ],
   "shortcuts": [
     {
-      "name": "Daily Signal",
+      "name": "Daily Run",
       "short_name": "Daily",
       "url": "./#trivia"
     },

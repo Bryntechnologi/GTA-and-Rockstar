@@ -588,9 +588,9 @@ svg {
 
 .brand-name {
   font-family: var(--font-display);
-  font-size: 1.28rem;
+  font-size: 1.06rem;
   font-weight: var(--display-weight);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -599,6 +599,10 @@ svg {
 .brand-name em {
   color: var(--accent);
   font-style: normal;
+}
+
+.brand-short {
+  display: none;
 }
 
 .brand-sub {
@@ -3737,14 +3741,125 @@ main {
    14. ABOUT / FOOTER
    -------------------------------------------------------------------------- */
 .about-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-  gap: 1.5rem;
-  align-items: start;
+  display: block;
 }
 
 .about-hero h2 {
-  max-width: 14ch;
+  max-width: 18ch;
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.1rem;
+}
+
+.about-stats-card {
+  padding: 1.1rem;
+}
+
+.about-stats-card > .small {
+  margin: 0.8rem 0 0;
+}
+
+.about-explore {
+  margin-top: 2rem;
+}
+
+.about-links {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+}
+
+.about-links a {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: calc(var(--radius) * 0.7);
+  background: color-mix(in srgb, var(--surface-solid) 78%, transparent);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.about-links a:hover,
+.about-links a:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface-solid));
+}
+
+.about-links strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.about-links span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  line-height: 1.5;
+}
+
+.about-facts {
+  margin-top: 0.7rem;
+}
+
+.about-disclaimer {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+}
+
+.about-disclaimer > div > p {
+  max-width: 80ch;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.about-disclaimer-details {
+  margin-top: 0.9rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.8rem;
+}
+
+.about-disclaimer-details summary {
+  cursor: pointer;
+  color: var(--accent-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.about-disclaimer-details summary:hover,
+.about-disclaimer-details summary:focus-visible {
+  color: var(--accent);
+}
+
+.about-disclaimer-details[open] summary {
+  margin-bottom: 0.8rem;
+}
+
+.about-disclaimer-details .disclaimer-box {
+  max-width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .about-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .about-links {
+    grid-template-columns: 1fr;
+  }
 }
 
 .about-grid {
@@ -3793,6 +3908,20 @@ main {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.55rem;
   margin-top: 1rem;
+}
+
+.about-stats-inline {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0.9rem 0 0.2rem;
+}
+
+@media (max-width: 700px) {
+  .about-stats-inline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .umbrella-note {
+    margin-left: 0;
+  }
 }
 
 .data-actions {
@@ -4677,6 +4806,15 @@ html[data-era="bully"] .brand-mark {
 .lore-detail-copy .md {
   line-height: 1.7;
 }
+.lore-license {
+  margin: 0.8rem 0 0;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  line-height: 1.55;
+}
 .lore-detail-actions {
   display: flex;
   flex-direction: column;
@@ -5130,15 +5268,28 @@ html[data-era="bully"] .brand-mark {
   }
 }
 
+@media (max-width: 600px) {
+  .era-toggle-copy {
+    display: none;
+  }
+  .era-toggle {
+    padding: 0.42rem 0.6rem;
+  }
+}
+
 @media (max-width: 480px) {
   .brand-sub {
     display: none;
   }
   .brand {
-    gap: 0.55rem;
+    gap: 0.4rem;
+  }
+  .brand-mark {
+    display: none;
   }
   .brand-name {
-    font-size: 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
   }
 }
 
@@ -5534,6 +5685,52 @@ html[data-era="bully"] .brand-mark {
     width: auto;
     margin: 0;
   }
+  .primary-nav.is-open .nav-inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.3rem;
+    width: 100%;
+    overflow: visible;
+    padding: 0;
+    background: transparent;
+    border: 0;
+  }
+  .primary-nav.is-open .nav-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.55rem 0.7rem;
+    text-align: left;
+    border-radius: var(--radius-sm);
+  }
+  .primary-nav.is-open .nav-link[aria-current="page"] {
+    border-left: 2px solid var(--accent);
+  }
+}
+
+@media (max-width: 420px) {
+  .primary-nav.is-open .nav-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Theme crossfade: view transitions give the whole page one smooth palette swap. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.62s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.theme-changing,
+html.theme-changing *,
+html.theme-changing *::before,
+html.theme-changing *::after {
+  transition:
+    background-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    fill 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    stroke 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* --------------------------------------------------------------------------
@@ -6247,11 +6444,13 @@ html[data-era="sanandreas"] .hero h1 em {
   color: var(--accent-2);
 }
 .footer-umbrella {
-  display: grid;
-  gap: 0.15rem;
-  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.7rem;
+  width: 100%;
   max-width: 100%;
-  margin-top: 1rem;
+  margin: 1.1rem 0 0.9rem;
   padding: 0.7rem 0.95rem 0.75rem;
   border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
   border-left: 3px solid var(--accent);
@@ -6280,6 +6479,7 @@ html[data-era="sanandreas"] .hero h1 em {
   text-transform: uppercase;
 }
 .umbrella-note {
+  margin-left: auto;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.58rem;
@@ -6513,4 +6713,80 @@ html[data-contrast="high"] .search-dialog {
 }
 html[data-contrast="high"] :focus-visible {
   outline-width: 3px;
+}
+
+/* Final header compaction: the long brand and theme pill must never collide. */
+@media (max-width: 600px) {
+  .site-header .era-toggle-copy {
+    display: none;
+  }
+  .site-header .era-toggle {
+    padding: 0.42rem 0.6rem;
+  }
+}
+@media (max-width: 480px) {
+  .site-header .brand-mark {
+    display: none;
+  }
+  .site-header .brand-name {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+  .site-header .brand-sub {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .brand-long {
+    display: none;
+  }
+  .site-header .brand-short {
+    display: inline;
+  }
+}
+
+/* Rockstar Beyond GTA cards in the games hub */
+.beyond-gta {
+  margin-top: 2rem;
+}
+.beyond-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+}
+.beyond-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--beyond-accent, var(--accent));
+  border-radius: calc(var(--radius) * 0.7);
+  background: color-mix(in srgb, var(--surface-solid) 78%, transparent);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.beyond-card:hover,
+.beyond-card:focus-visible {
+  border-color: var(--beyond-accent, var(--accent));
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--beyond-accent, var(--accent)) 8%, var(--surface-solid));
+}
+.beyond-card strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+.beyond-card span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  line-height: 1.5;
+}
+@media (max-width: 1000px) {
+  .beyond-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .beyond-grid { grid-template-columns: 1fr; }
 }

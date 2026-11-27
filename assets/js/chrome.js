@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------
-   CHANNEL SURF — chrome.js
-   Shared header, footer, theme tuner, search, and error boundary for static
+   FIVE STAR WANTED — chrome.js
+   Shared header, footer, game theme picker, search, and error boundary for static
    pages. The interactive SPA keeps its own app.js.
    ------------------------------------------------------------------------- */
 (function () {
@@ -10,7 +10,7 @@
   const DATA = window.CS_DATA || {};
   const eras = DATA.eras || {};
   const eraOrder = (DATA.eraOrder || Object.keys(eras)).filter((key) => eras[key]);
-  const SETTINGS_KEY = "channelsurf.settings.v1";
+  const SETTINGS_KEY = "fivestarwanted.settings.v1";
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => Array.prototype.slice.call(document.querySelectorAll(selector));
@@ -26,6 +26,11 @@
 
   function readSettings() {
     try {
+      const previousKeys = ["criminalrecords.settings.v1", ["channel", "surf.settings.v1"].join("")];
+      if (!localStorage.getItem(SETTINGS_KEY)) {
+        const previous = previousKeys.find((key) => localStorage.getItem(key));
+        if (previous) localStorage.setItem(SETTINGS_KEY, localStorage.getItem(previous));
+      }
       const parsed = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
       return parsed && typeof parsed === "object" ? parsed : {};
     } catch (error) {
@@ -72,10 +77,9 @@
     if (!era) return;
     const short = $("#tunerShort");
     const freq = $("#tunerFreq");
-    const station = $("#tunerStation");
     if (short) short.textContent = era.short || "";
-    if (freq) freq.textContent = era.freq || "";
-    if (station) station.textContent = era.station || era.name || "";
+    if (freq) freq.textContent = era.name || key;
+    $("#eraToggle")?.setAttribute("aria-label", `Change game theme. Current: ${era.name || key}`);
     const mode = $("#themeMode");
     if (mode) mode.textContent = `Theme: ${era.name || key}`;
     $$("#stationRail [data-station]").forEach((button) => {
@@ -85,9 +89,18 @@
 
   function applyEra(key, options = {}) {
     if (!eras[key]) return;
-    root.dataset.era = key;
-    updateReadout(key);
-    if (options.persist !== false) saveSettings({ era: key });
+    const changed = root.dataset.era !== key;
+    const apply = () => {
+      root.dataset.era = key;
+      updateReadout(key);
+      if (options.persist !== false) saveSettings({ era: key });
+    };
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (changed && !reduced && typeof document.startViewTransition === "function") {
+      document.startViewTransition(apply);
+    } else {
+      apply();
+    }
   }
 
   function renderRail() {
@@ -96,7 +109,7 @@
     rail.innerHTML = eraOrder.map((key) => {
       const era = eras[key];
       const selected = currentEra() === key;
-      return `<button class="station-btn" type="button" role="tab" aria-selected="${selected}" data-station="${escapeHTML(key)}" title="${escapeHTML(era.name)} — ${escapeHTML(era.station || "")}">
+      return `<button class="station-btn" type="button" role="tab" aria-selected="${selected}" data-station="${escapeHTML(key)}" title="${escapeHTML(era.name)}">
         <span class="station-btn-short">${escapeHTML(era.short || "")}</span>
         <span class="station-btn-name">${escapeHTML(era.name || key)}</span>
       </button>`;
