@@ -3,26 +3,121 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CHANNEL SURF — Unofficial Rockstar Universe Arcade</title>
-  <meta name="description" content="A fan-made, zero-backend arcade for the Rockstar universe. Trivia, puzzles, an era atlas, a timeline, and a heist splitter — with a UI that changes era with every signal.">
+  <title>CHANNEL SURF - Unofficial Rockstar Lore Archive &amp; Arcade</title>
+  <meta name="description" content="A fan-made Rockstar lore archive and arcade: nine theme-per-game pages, 20 lore entries, 35 story beats, an era atlas, real-vs-reel maps, trivia, and puzzles.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="CHANNEL SURF">
+  <meta name="keywords" content="GTA lore, Rockstar Games, Grand Theft Auto story timeline, Vice City, Leonida, GTA VI, Max Payne, Manhunt, Midnight Club, fan archive">
+  <!-- Replace canonical/OG URLs by running: SITE_URL=https://your-subdomain.example/ npm run build:static -->
+  <link rel="canonical" href="https://channelsurf.pages.dev/">
   <meta name="theme-color" content="#050914">
-  <meta property="og:title" content="CHANNEL SURF — Unofficial Rockstar Universe Arcade">
-  <meta property="og:description" content="Tune the era. Play the city. An original fan-made arcade and portfolio project.">
+  <meta property="og:url" content="https://channelsurf.pages.dev/">
+  <meta property="og:image" content="https://channelsurf.pages.dev/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CHANNEL SURF - unofficial Rockstar lore archive and arcade">
+  <meta property="og:title" content="CHANNEL SURF - Unofficial Rockstar Lore Archive &amp; Arcade">
+  <meta property="og:description" content="Explore the lore, follow the story timeline, compare real cities with the fiction, then play the arcade.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CHANNEL SURF">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="CHANNEL SURF — Unofficial Rockstar Universe Arcade">
-  <meta name="twitter:description" content="Tune the era. Play the city. An original fan-made arcade and portfolio project.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CHANNEL SURF - Unofficial Rockstar Lore Archive &amp; Arcade">
+  <meta name="twitter:description" content="Explore the lore, follow the story timeline, compare real cities with the fiction, then play the arcade.">
+  <meta name="twitter:image" content="https://channelsurf.pages.dev/assets/og-cover.png">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="LLM site summary">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Channel Surf">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
   <link rel="stylesheet" href="assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "./#website",
+        "name": "CHANNEL SURF",
+        "alternateName": "CHANNEL SURF - Unofficial Rockstar Lore Archive & Arcade",
+        "url": "./",
+        "description": "An independent, non-commercial fan archive and arcade for the Rockstar universe: 20 lore entries, 35 story beats, an era atlas, real-vs-reel maps, trivia, and puzzles.",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "./#webpage",
+        "url": "./",
+        "name": "CHANNEL SURF - Unofficial Rockstar Lore Archive & Arcade",
+        "isPartOf": { "@id": "./#website" },
+        "description": "Explore GTA lore, follow an in-universe story timeline from 1961 to 2026, compare real cities with fictional ones, and play the arcade.",
+        "inLanguage": "en",
+        "about": ["Grand Theft Auto", "Rockstar Games", "video game lore", "story timeline"]
+      },
+      {
+        "@type": "ItemList",
+        "name": "CHANNEL SURF sections",
+        "itemListElement": [
+          { "@type": "SiteNavigationElement", "position": 1, "name": "Games", "url": "./#games" },
+          { "@type": "SiteNavigationElement", "position": 2, "name": "Lore", "url": "./#lore" },
+          { "@type": "SiteNavigationElement", "position": 3, "name": "Story Timeline", "url": "./#story" },
+          { "@type": "SiteNavigationElement", "position": 4, "name": "Atlas", "url": "./#atlas" },
+          { "@type": "SiteNavigationElement", "position": 5, "name": "Real vs Reel", "url": "./#reel" },
+          { "@type": "SiteNavigationElement", "position": 6, "name": "Arcade", "url": "./#play" },
+          { "@type": "SiteNavigationElement", "position": 7, "name": "Rockstar Elsewhere", "url": "./elsewhere.html" },
+          { "@type": "SiteNavigationElement", "position": 8, "name": "Story reading mode", "url": "./story.html" },
+          { "@type": "SiteNavigationElement", "position": 9, "name": "Full text archive", "url": "./archive.html" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is CHANNEL SURF affiliated with Rockstar Games or Take-Two Interactive?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. CHANNEL SURF is an independent, non-commercial fan project and portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games or Take-Two Interactive, and it claims no ownership of any game, character, location, or trademark."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the CHANNEL SURF story timeline cover?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It covers 35 major in-universe GTA story beats in chronological order, from the 1961 London expansion through Vice City, San Andreas, Liberty City, Los Santos, and the 2026 Leonida era."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do the lore and story summaries come from?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "All summaries are original editorial writing for this project. Optional live summaries come from Wikipedia and are credited as CC BY-SA with a source link. A static, JavaScript-free full-text archive is available at archive.html."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="ambient" id="ambient" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <aside class="notice-banner" id="noticeBanner" role="region" aria-label="Fan project disclaimer" hidden>
+    <div class="notice-inner">
+      <p><strong>Unofficial fan project.</strong> Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. No ownership of any game, character, location, or trademark is claimed. <button class="text-link" type="button" id="noticeRead">Read the full notice</button></p>
+      <button class="btn btn-quiet btn-sm" type="button" id="noticeDismiss">I understand</button>
+    </div>
+  </aside>
+
   <header class="site-header">
-    <div class="container header-top">
-      <a class="brand" href="#arcade" aria-label="CHANNEL SURF — Unofficial Rockstar-universe arcade, home">
+    <div class="container header-bar">
+      <a class="brand" href="#home">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 44 44" fill="none">
             <circle cx="22" cy="22" r="18.5" stroke="currentColor" stroke-width="1.4"/>
@@ -33,80 +128,96 @@
         </span>
         <span class="brand-copy">
           <span class="brand-name">CHANNEL <em>SURF</em></span>
-          <span class="brand-sub">Unofficial Rockstar-universe arcade</span>
+          <span class="brand-sub">Unofficial lore archive &amp; arcade</span>
         </span>
       </a>
 
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <div class="nav-inner">
+          <button class="nav-link" data-route="home" type="button">Home</button>
+          <button class="nav-link" data-route="games" type="button">Games</button>
+          <button class="nav-link" data-route="story" type="button">Story</button>
+          <button class="nav-link" data-route="atlas" type="button">Atlas</button>
+          <button class="nav-link" data-route="play" type="button">Arcade</button>
+          <button class="nav-link" data-route="about" type="button">About</button>
+        </div>
+      </nav>
+
       <div class="header-actions">
-        <button class="streak-chip" id="streakChip" type="button" title="Daily streak — jump to the Daily Signal">
-          <svg class="icon" aria-hidden="true"><use href="#i-bolt"></use></svg>
-          <b id="streakCount">0</b>
-          <span>day streak</span>
+        <button class="era-toggle" id="eraToggle" type="button" aria-expanded="false" aria-controls="eraPanel" title="Change game signal and theme">
+          <span class="onair-dot" aria-hidden="true"></span>
+          <span class="era-toggle-copy">
+            <span class="era-toggle-kicker">Game signal</span>
+            <span class="era-toggle-value"><span id="tunerShort">VI</span><span id="tunerFreq">98.7</span><span id="tunerStation">LEONIDA WAVE</span></span>
+          </span>
+          <svg class="icon era-toggle-chevron" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </button>
-        <button class="icon-btn" id="soundToggle" type="button" aria-label="Mute sound" aria-pressed="false" title="Toggle sound">
-          <svg class="icon sound-on-icon" aria-hidden="true"><use href="#i-sound-on"></use></svg>
-          <svg class="icon sound-off-icon hidden" aria-hidden="true"><use href="#i-sound-off"></use></svg>
-        </button>
-        <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primaryNav">
-          <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
-        </button>
+        <div class="utility-cluster">
+          <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the archive" title="Search (Ctrl+K)">
+            <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+          </button>
+          <button class="icon-btn" id="soundToggle" type="button" aria-label="Mute sound" aria-pressed="false" title="Toggle sound">
+            <svg class="icon sound-on-icon" aria-hidden="true"><use href="#i-sound-on"></use></svg>
+            <svg class="icon sound-off-icon hidden" aria-hidden="true"><use href="#i-sound-off"></use></svg>
+          </button>
+          <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primaryNav">
+            <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="container tuner" aria-label="Era tuner">
-      <div class="tuner-id"><span class="onair-dot"></span><span>RECEIVER</span></div>
-      <button class="tuner-step" id="prevStation" type="button" aria-label="Previous signal">‹</button>
-      <div class="station-rail" id="stationRail" role="tablist" aria-label="Era signals"></div>
-      <button class="tuner-step" id="nextStation" type="button" aria-label="Next signal">›</button>
-      <div class="tuner-readout" aria-live="polite">
-        <span id="tunerFreq">98.7</span>
-        <span id="tunerStation">LEONIDA WAVE</span>
+    <div class="era-panel" id="eraPanel" hidden>
+      <div class="container era-panel-inner">
+        <div class="era-panel-head">
+          <div>
+            <p class="eyebrow">Game signal</p>
+            <h2>Choose a game world</h2>
+            <p class="small muted" style="margin:0.3rem 0 0">Each signal changes the site theme and tunes the archive to that game.</p>
+          </div>
+          <div class="era-panel-controls">
+            <button class="tuner-step" id="prevStation" type="button" aria-label="Previous signal">‹</button>
+            <button class="tuner-step" id="nextStation" type="button" aria-label="Next signal">›</button>
+          </div>
+        </div>
+        <div class="station-rail" id="stationRail" role="tablist" aria-label="Era signals"></div>
+        <div class="era-panel-foot">
+          <label class="auto-switch" title="Let trivia questions change the site theme">
+            <input type="checkbox" id="autoMorph">
+            <span class="switch-track" aria-hidden="true"></span>
+            <span class="auto-label">Follow trivia era</span>
+          </label>
+          <span class="theme-mode" id="themeMode" aria-live="polite">Theme: locked</span>
+        </div>
       </div>
-      <label class="auto-switch" title="Let each trivia question change the site theme">
-        <input type="checkbox" id="autoMorph">
-        <span class="switch-track" aria-hidden="true"></span>
-        <span class="auto-label">Auto-morph</span>
-      </label>
     </div>
-
-    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-      <div class="container nav-inner">
-        <button class="nav-link" data-route="arcade" type="button">Arcade</button>
-        <button class="nav-link" data-route="trivia" type="button">Trivia</button>
-        <button class="nav-link" data-route="puzzles" type="button">Puzzles</button>
-        <button class="nav-link" data-route="atlas" type="button">Atlas</button>
-        <button class="nav-link" data-route="timeline" type="button">Timeline</button>
-        <button class="nav-link" data-route="toolkit" type="button">Field Kit</button>
-        <button class="nav-link" data-route="about" type="button">About</button>
-      </div>
-    </nav>
   </header>
 
   <main id="main" class="container">
 
     <!-- ==================================================================
-         ARCADE / HOME
+         HOME — LORE FIRST
          ================================================================== -->
-    <section class="view is-active" id="view-arcade" data-view="arcade" aria-labelledby="home-title">
+    <section class="view is-active" id="view-home" data-view="home" aria-labelledby="home-title">
       <div class="hero">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="live-dot"></span> A fan-made arcade dossier</p>
-          <h1 id="home-title">Tune the era.<br><em>Play the city.</em></h1>
-          <p class="lede">Eight signals. One archive. A playable tribute to the cities, crews, frontiers, and radio static of the Rockstar universe — built as a zero-backend portfolio piece with original trivia, custom vector art, and a UI that changes its whole personality on demand.</p>
+          <p class="eyebrow"><span class="live-dot"></span> An unofficial Rockstar archive</p>
+          <h1 id="home-title">The story,<br><em>not the score.</em></h1>
+          <p class="lede">An original fan archive of the cities, crews, and turning points that shaped the Rockstar universe. Start with the lore, follow the timeline, then step into the arcade when you feel like playing.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" id="heroDailyBtn" type="button">
-              <svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg>
-              Start the daily signal
+            <button class="btn btn-primary" id="heroLoreBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-book"></use></svg>
+              Explore the lore
             </button>
-            <button class="btn btn-ghost" id="heroRandomBtn" type="button">
-              <svg class="icon" aria-hidden="true"><use href="#i-shuffle"></use></svg>
-              Spin the dial
+            <button class="btn btn-ghost" id="heroStoryBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg>
+              Open the story timeline
             </button>
           </div>
           <div class="hero-meta">
             <div><b id="metaEras">08</b><span>era skins</span></div>
-            <div><b>06</b><span>play modes</span></div>
-            <div><b>00</b><span>servers required</span></div>
+            <div><b id="metaLore">20</b><span>lore entries</span></div>
+            <div><b id="metaStory">35</b><span>story beats</span></div>
           </div>
         </div>
 
@@ -145,6 +256,7 @@
           <div class="daily-actions">
             <button class="btn btn-primary" id="dailyStartBtn" type="button">Play daily trivia</button>
             <button class="btn btn-ghost" id="dailyVaultBtn" type="button">Daily vault</button>
+            <button class="btn btn-ghost" id="dailyDossierBtn" type="button">Daily dossier</button>
           </div>
           <div class="daily-progress">
             <span class="progress-track" aria-hidden="true"><span class="progress-fill" id="dailyProgressFill" style="width:0%"></span></span>
@@ -161,7 +273,7 @@
           <dl class="stat-list">
             <div class="stat-row"><dt>Daily streak</dt><dd id="statStreak">0 days</dd></div>
             <div class="stat-row"><dt>Accuracy</dt><dd id="statAccuracy">—</dd></div>
-            <div class="stat-row"><dt>Badges</dt><dd id="statBadges">0 / 8</dd></div>
+            <div class="stat-row"><dt>Badges</dt><dd id="statBadges">0 / 9</dd></div>
             <div class="stat-row"><dt>Runs logged</dt><dd id="statRuns">0</dd></div>
           </dl>
         </article>
@@ -178,26 +290,77 @@
         </article>
       </div>
 
-      <section class="section" aria-labelledby="games-title">
+      <section class="section" aria-labelledby="featured-lore-title">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Pick a frequency</p>
-            <h2 id="games-title">Six ways to waste a perfectly good evening.</h2>
+            <p class="eyebrow">From the archive</p>
+            <h2 id="featured-lore-title">Start with a story.</h2>
           </div>
-          <p>Fast trivia, a safe-cracking loop, a route puzzle, and a heist calculator. All client-side, all replayable.</p>
+          <p>Curated lore entries, original summaries, and links to the source material. <button class="text-link" type="button" data-route="lore">Browse the full archive →</button></p>
         </div>
-        <div class="game-grid" id="homeGameGrid"></div>
+        <div class="lore-feature-grid" id="homeLoreCards"></div>
       </section>
 
-      <section class="section" aria-labelledby="kit-title">
+      <section class="section" aria-labelledby="home-story-title">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Field kit</p>
-            <h2 id="kit-title">Useful little gadgets.</h2>
+            <p class="eyebrow">The long view</p>
+            <h2 id="home-story-title">Follow the story, left to right.</h2>
           </div>
-          <p>Built for the fantasy: split a score, browse the era atlas, or scrub the archive timeline.</p>
+          <p>35 story beats from 1961 London to 2026 Leonida. <button class="text-link" type="button" data-route="story">Open the full timeline →</button></p>
         </div>
-        <div class="tool-grid" id="toolGrid"></div>
+        <div class="home-story-strip" id="homeStoryStrip"></div>
+      </section>
+
+      <section class="section" aria-labelledby="real-world-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Real world / reel world</p>
+            <h2 id="real-world-title">The cities behind the fiction.</h2>
+          </div>
+          <p>Real-world inspiration, not game screenshots. <button class="text-link" type="button" data-route="reel">Open Real vs Reel →</button></p>
+        </div>
+        <div class="photo-strip">
+          <figure class="photo-strip-item">
+            <img src="assets/images/miami.jpg" alt="Miami skyline at dusk" loading="lazy">
+            <figcaption><strong>Miami</strong> / Vice City <a href="https://commons.wikimedia.org/wiki/File:Miami_skyline_20080328.jpg" target="_blank" rel="noopener noreferrer">Photo: Averette, CC BY 3.0</a></figcaption>
+          </figure>
+          <figure class="photo-strip-item">
+            <img src="assets/images/new-york.jpg" alt="New York City skyline" loading="lazy">
+            <figcaption><strong>New York</strong> / Liberty City <a href="https://commons.wikimedia.org/wiki/File:Skyline-New-York-City.jpg" target="_blank" rel="noopener noreferrer">Photo: Martin Dürrschnabel, public domain</a></figcaption>
+          </figure>
+          <figure class="photo-strip-item">
+            <img src="assets/images/los-angeles.jpg" alt="Downtown Los Angeles skyline" loading="lazy">
+            <figcaption><strong>Los Angeles</strong> / Los Santos <a href="https://commons.wikimedia.org/wiki/File:Skyline_of_Los_Angeles,_Downtown_Los_Angeles,_California_13.jpg" target="_blank" rel="noopener noreferrer">Photo: Levi Clancy, CC BY-SA 4.0</a></figcaption>
+          </figure>
+          <figure class="photo-strip-item">
+            <img src="assets/images/miami-neon.jpg" alt="Neon hotel sign in Miami Beach" loading="lazy">
+            <figcaption><strong>Miami neon</strong> / Vice City <a href="https://commons.wikimedia.org/wiki/File:Boulevard_Hotel_(Neon_sign),_Miami_Beach.jpg" target="_blank" rel="noopener noreferrer">Photo: Radomianin, public domain</a></figcaption>
+          </figure>
+          <figure class="photo-strip-item">
+            <img src="assets/images/everglades.jpg" alt="Everglades wetland" loading="lazy">
+            <figcaption><strong>Everglades</strong> / Grassrivers <a href="https://commons.wikimedia.org/wiki/File:Everglades_National_Park_EVER1503.jpg" target="_blank" rel="noopener noreferrer">Photo: NPS, public domain</a></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="radio-home-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Signal radio</p>
+            <h2 id="radio-home-title">Put something on.</h2>
+          </div>
+          <p>Curated CC and free streams. Click to play — nothing autoplays.</p>
+        </div>
+        <div class="panel radio-panel radio-home-panel">
+          <div class="radio-list" id="radioList"></div>
+          <div class="radio-player">
+            <audio id="radioAudio" preload="none"></audio>
+            <div class="radio-now" id="radioNow">No station tuned.</div>
+            <button class="btn btn-quiet btn-sm" type="button" id="radioStop" disabled>Stop</button>
+          </div>
+          <p class="small muted" id="radioLicense" style="margin-bottom:0">Station licenses and links appear here.</p>
+        </div>
       </section>
 
       <section class="section" aria-labelledby="eras-title">
@@ -211,6 +374,169 @@
         <div class="era-rack" id="eraRack"></div>
       </section>
 
+      <section class="section" aria-labelledby="arcade-teaser-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Pick a direction</p>
+            <h2 id="arcade-teaser-title">Three ways in.</h2>
+          </div>
+          <p>Read the map, play the city, or compare the fiction with the real world.</p>
+        </div>
+        <div class="cta-grid">
+          <article class="cta-card" style="--cta-accent:var(--accent-2)">
+            <h3>The Atlas</h3>
+            <p>Leonida, Liberty City, Los Santos, and every district in between. Custom vector map plus an interactive Leaflet mode.</p>
+            <button class="btn btn-primary btn-sm" type="button" data-route="atlas">Open the atlas</button>
+          </article>
+          <article class="cta-card" style="--cta-accent:var(--accent)">
+            <h3>The Arcade</h3>
+            <p>Trivia, safe-cracking, route puzzles, deduction, and a heist splitter. All client-side and replayable.</p>
+            <button class="btn btn-primary btn-sm" type="button" data-route="play">Enter the arcade</button>
+          </article>
+          <article class="cta-card" style="--cta-accent:var(--accent-3)">
+            <h3>Real vs Reel</h3>
+            <p>Miami, New York, Los Angeles, and the fictional cities they echo — on a live map.</p>
+            <button class="btn btn-ghost btn-sm" type="button" data-route="reel">Compare the cities</button>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <!-- ==================================================================
+         GAMES HUB
+         ================================================================== -->
+    <section class="view" id="view-games" data-view="games" aria-labelledby="games-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">The game library</p>
+          <h2 id="games-title">Every city has its own page.</h2>
+          <p>Stable, theme-per-game dossiers in release order. Open a game to read its setting, people, and story beats, then jump into the interactive atlas or timeline.</p>
+        </div>
+        <div class="page-head-side">
+          <b id="gamesCount">09</b>
+          game pages
+        </div>
+      </div>
+      <div class="games-layout">
+        <div class="games-grid" id="gamesContent"></div>
+        <aside class="panel games-side">
+          <p class="eyebrow">Also in the archive</p>
+          <h3>Lore, story, and sources.</h3>
+          <p>Browse every location, character, faction, and franchise entry, or read the full in-universe chronology.</p>
+          <div class="games-side-actions">
+            <button class="btn btn-ghost btn-sm" type="button" data-route="lore">Open the lore hub</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-route="story">Open the story timeline</button>
+            <button class="btn btn-quiet btn-sm" type="button" data-route="reel">Real vs Reel</button>
+            <a class="btn btn-quiet btn-sm" href="elsewhere.html">Rockstar Elsewhere</a>
+            <a class="btn btn-quiet btn-sm" href="archive.html">Full-text archive</a>
+          </div>
+          <p class="small muted" style="margin:1rem 0 0">Each game page is static, indexable, and themed to its own era.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         LORE HUB
+         ================================================================== -->
+    <section class="view" id="view-lore" data-view="lore" aria-labelledby="lore-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">The wire archive</p>
+          <h2 id="lore-title">Every city has a story.</h2>
+          <p>Original summaries of places, people, and factions. Filter by era or type, search the archive, and follow the source links for more.</p>
+        </div>
+        <div class="page-head-side">
+          <b id="loreCount">20</b>
+          entries
+        </div>
+      </div>
+      <div class="lore-toolbar">
+        <div class="chip-row" id="loreEraFilters" role="group" aria-label="Filter lore by era"></div>
+        <div class="chip-row" id="loreTypeFilters" role="group" aria-label="Filter lore by type"></div>
+        <label class="lore-search">
+          <span class="sr-only">Search the archive</span>
+          <input id="loreSearch" type="search" placeholder="Search the archive…" autocomplete="off">
+        </label>
+      </div>
+      <div class="lore-detail hidden" id="loreDetail"></div>
+      <div class="lore-grid" id="loreContent"></div>
+    </section>
+
+    <!-- ==================================================================
+         STORY TIMELINE
+         ================================================================== -->
+    <section class="view" id="view-story" data-view="story" aria-labelledby="story-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">In-universe chronology</p>
+          <h2 id="story-title">The story timeline.</h2>
+          <p>Major GTA story beats in chronological order, from 1961 London to 2026 Leonida. Scroll horizontally, filter by era, and follow the theme.</p>
+        </div>
+        <div class="page-head-side story-controls">
+          <button class="btn btn-quiet btn-sm" type="button" id="storySpoilerToggle" aria-pressed="false">Spoilers: off</button>
+          <button class="btn btn-quiet btn-sm" type="button" id="storyFollowToggle" aria-pressed="true">Follow era: on</button>
+          <a class="btn btn-quiet btn-sm" href="story.html">Reading mode</a>
+        </div>
+      </div>
+      <div id="storyContent"></div>
+    </section>
+
+    <!-- ==================================================================
+         REAL VS REEL
+         ================================================================== -->
+    <section class="view" id="view-reel" data-view="reel" aria-labelledby="reel-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Real world / reel world</p>
+          <h2 id="reel-title">Real vs Reel.</h2>
+          <p>Real cities, fictional echoes. A keyless MapLibre map with comparison cards, plus the source notes behind each parallel.</p>
+        </div>
+        <div class="page-head-side">
+          <b>10</b>
+          parallels
+        </div>
+      </div>
+      <div class="atlas-subnav" role="navigation" aria-label="Atlas sections">
+        <button type="button" data-route="atlas">Fictional Atlas</button>
+        <button type="button" data-route="reel" aria-current="page">Real vs Reel</button>
+      </div>
+      <div id="reelContent"></div>
+    </section>
+
+    <!-- ==================================================================
+         ARCADE HUB
+         ================================================================== -->
+    <section class="view" id="view-play" data-view="play" aria-labelledby="play-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">The arcade</p>
+          <h2 id="play-title">Pick a frequency.</h2>
+          <p>Fast trivia, safe-cracking, route puzzles, deduction, and a heist calculator. Everything runs client-side and saves locally.</p>
+        </div>
+        <div class="page-head-side">
+          <b>09</b>
+          play loops
+        </div>
+      </div>
+      <div class="game-grid" id="playGameGrid"></div>
+      <div class="cta-strip">
+        <div><p class="eyebrow">Need context?</p><h3>Every game has a story.</h3></div>
+        <div class="cta-strip-actions">
+          <button class="btn btn-ghost btn-sm" type="button" data-route="games">Browse the game pages</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-route="atlas">Open the atlas</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-route="story">Story timeline</button>
+        </div>
+      </div>
+      <section class="section" aria-labelledby="kit-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Field kit</p>
+            <h2 id="kit-title">Useful little gadgets.</h2>
+          </div>
+          <p>Built for the fantasy: split a score, browse the era atlas, or scrub the archive timeline.</p>
+        </div>
+        <div class="tool-grid" id="toolGrid"></div>
+      </section>
       <section class="panel badge-panel" aria-labelledby="badges-title">
         <div class="section-head" style="margin-bottom:0">
           <div>
@@ -284,7 +610,7 @@
         <div>
           <p class="eyebrow">Side jobs</p>
           <h2 id="puzzles-title">Puzzles &amp; safehouses</h2>
-          <p>Two quick loops with real logic underneath: crack a four-digit safe, or plot a route through patrols to the safehouse. Deterministic daily variants included.</p>
+          <p>Three quick loops with real logic underneath: crack a four-digit safe, plot a route through patrols to the safehouse, or deduce a district from field notes. Deterministic daily variants included.</p>
         </div>
         <div class="page-head-side">
           <b id="vaultSolveCount">0</b>
@@ -292,12 +618,16 @@
           <br>
           <b id="gridSolveCount" style="margin-top:0.3rem">0</b>
           routes cleared
+          <br>
+          <b id="dossierSolveCount" style="margin-top:0.3rem">0</b>
+          dossiers closed
         </div>
       </div>
 
       <div class="puzzle-tabs" role="tablist" aria-label="Puzzle type">
         <button class="puzzle-tab" data-puzzle-tab="vault" role="tab" aria-selected="true" type="button">Vault Cracker</button>
         <button class="puzzle-tab" data-puzzle-tab="grid" role="tab" aria-selected="false" type="button">Heat Grid</button>
+        <button class="puzzle-tab" data-puzzle-tab="dossier" role="tab" aria-selected="false" type="button">Clue Dossier</button>
       </div>
 
       <div class="puzzle-layout">
@@ -321,6 +651,7 @@
               <button class="btn btn-primary btn-sm" id="vaultSubmit" type="button">Submit guess</button>
               <button class="btn btn-ghost btn-sm" id="vaultNew" type="button">New vault</button>
               <button class="btn btn-quiet btn-sm" id="vaultDaily" type="button">Daily vault</button>
+              <button class="btn btn-quiet btn-sm" id="vaultCard" type="button" disabled>Save card</button>
             </div>
             <div class="vault-status" id="vaultStatus">Enter four digits to begin.</div>
             <div class="vault-hint">
@@ -358,6 +689,30 @@
             <div class="heat-actions">
               <button class="btn btn-primary btn-sm" id="gridNew" type="button">New route</button>
               <button class="btn btn-ghost btn-sm" id="gridReset" type="button">Reset route</button>
+              <button class="btn btn-quiet btn-sm" id="gridCard" type="button" disabled>Save card</button>
+            </div>
+          </section>
+
+          <section class="panel puzzle-main hidden" id="dossierPanel" aria-labelledby="dossier-title">
+            <div class="puzzle-head">
+              <div>
+                <p class="eyebrow">Clue dossier</p>
+                <h2 id="dossier-title">District Deduction</h2>
+                <p>Read three field notes, then name the district. Two tries. Every file has one right answer.</p>
+              </div>
+              <span class="attempts-display" id="dossierTries">2 tries</span>
+            </div>
+            <div class="vault-scenario" id="dossierScenario">
+              <svg class="icon" aria-hidden="true"><use href="#i-book"></use></svg>
+              <span>Loading the file…</span>
+            </div>
+            <ol class="dossier-clues" id="dossierClues"></ol>
+            <div class="dossier-options" id="dossierOptions"></div>
+            <div class="vault-status" id="dossierStatus">Pick the district the field notes describe.</div>
+            <div class="heat-actions">
+              <button class="btn btn-primary btn-sm" id="dossierNew" type="button">New dossier</button>
+              <button class="btn btn-ghost btn-sm" id="dossierDaily" type="button">Daily dossier</button>
+              <button class="btn btn-quiet btn-sm" id="dossierCard" type="button" disabled>Save card</button>
             </div>
           </section>
         </div>
@@ -374,6 +729,10 @@
               <h4>Heat Grid</h4>
               <p>Every board is generated with a guaranteed path. Beat par to earn the Ghost Run badge. Arrow keys work too.</p>
             </div>
+            <div class="side-note" style="margin-top:0.5rem">
+              <h4>Clue Dossier</h4>
+              <p>Field notes from the era atlas. Deduce the district in two tries; a clean read earns the Profiler badge.</p>
+            </div>
           </div>
           <div class="panel">
             <p class="eyebrow">Local record</p>
@@ -382,6 +741,8 @@
               <div class="side-stat"><b id="sideGridSolves">0</b><span>routes</span></div>
               <div class="side-stat"><b id="sideVaultStreak">0</b><span>vault streak</span></div>
               <div class="side-stat"><b id="sideGridBest">—</b><span>best par</span></div>
+              <div class="side-stat"><b id="sideDossierSolves">0</b><span>dossiers</span></div>
+              <div class="side-stat"><b id="sideDossierStreak">0</b><span>read streak</span></div>
             </div>
             <p class="small muted" style="margin:0.8rem 0 0">Records live in this browser only. Clear them from the About page.</p>
           </div>
@@ -397,14 +758,25 @@
         <div>
           <p class="eyebrow">The era atlas</p>
           <h2 id="atlas-title">Every city has a tell.</h2>
-          <p>A stylized, original fan atlas of districts, landmarks, and moods. The Leonida map is custom SVG; every other signal gets a district dossier. None of it is official cartography.</p>
+          <p>A stylized, original fan atlas of districts, landmarks, and moods. The Leonida map is custom SVG, with an optional Leaflet mode; the Real vs Reel tab adds keyless MapLibre comparisons. None of it is official cartography.</p>
         </div>
         <div class="page-head-side">
           <b id="atlasEraCount">08</b>
           eras mapped
         </div>
       </div>
+      <div class="atlas-subnav" role="navigation" aria-label="Atlas sections">
+        <button type="button" data-route="atlas" aria-current="page">Fictional Atlas</button>
+        <button type="button" data-route="reel">Real vs Reel</button>
+      </div>
       <div id="atlasContent"></div>
+      <div class="cta-strip">
+        <div><p class="eyebrow">Next stop</p><h3>Play the city you just mapped.</h3></div>
+        <div class="cta-strip-actions">
+          <button class="btn btn-primary btn-sm" type="button" data-route="play">Enter the arcade</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-route="story">Open the story timeline</button>
+        </div>
+      </div>
     </section>
 
     <!-- ==================================================================
@@ -516,7 +888,7 @@
             </div>
             <div class="side-note" style="margin-top:0.5rem">
               <h4>Privacy</h4>
-              <p>No analytics, no cookies, no network calls. Stats are in <code>localStorage</code> and can be wiped from About.</p>
+              <p>No analytics and no cookies. Core play is local. Optional lore, map, and radio features make network requests only when you open them, and all stats stay in <code>localStorage</code>.</p>
             </div>
           </div>
         </aside>
@@ -539,7 +911,7 @@
             <div class="side-stat"><b id="aboutBest">—</b><span>best trivia score</span></div>
           </div>
         </div>
-        <div class="disclaimer-box" id="aboutDisclaimer">An unofficial fan project and portfolio arcade. Not affiliated with Rockstar Games or Take-Two Interactive. All game names, characters, and trademarks belong to their respective owners. This site uses original writing, code, CSS, and vector art — no extracted game assets, audio, or ripped artwork.</div>
+        <div class="disclaimer-box" id="aboutDisclaimer">CHANNEL SURF is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games, Take-Two Interactive, or any of their subsidiaries. I do not own, operate, or claim any rights to Grand Theft Auto, Red Dead, The Warriors, Bully, Max Payne, L.A. Noire, Midnight Club, or any related games, characters, locations, logos, trademarks, or other intellectual property. All such rights belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. All quizzes, puzzle logic, original code, CSS, and vector art on this site were created for this project. References to games, lore, characters, and settings are included for commentary, criticism, education, and entertainment only. No game assets, audio, models, textures, screenshots, or copied dialogue are included. This site is a personal hobby/portfolio showcase, not a commercial product. If a rights holder believes anything here oversteps, contact me and I will remove or change it promptly.</div>
       </div>
 
       <div class="about-grid">
@@ -569,10 +941,13 @@
         <article class="panel prose">
           <p class="eyebrow">Build notes</p>
           <h3>Portfolio-shaped by design.</h3>
-          <p>No framework, no build step, no external APIs. The interesting engineering is the theme engine, deterministic seeding, accessible keyboard play, generated puzzle boards, and the small Web Audio SFX layer.</p>
+          <p>No framework and no build step. Core play is local; optional lore, map, and radio features are progressive enhancements with fallbacks. The interesting engineering is the theme engine, deterministic seeding, accessible keyboard play, generated puzzle boards, the small Web Audio SFX layer, and the PWA shell.</p>
           <ul>
             <li>CSS custom-property theming across eight complete era skins.</li>
             <li>Date-seeded daily runs using a small deterministic RNG.</li>
+            <li>Three generated puzzle loops, including an atlas-driven deduction game.</li>
+            <li>Canvas-drawn PNG result cards with no image assets.</li>
+            <li>Optional Leaflet and MapLibre maps, lazily loaded with static fallbacks.</li>
             <li>localStorage persistence for bests, streaks, seen eras, and badges.</li>
             <li>Inline SVG art and synthesized audio — no binary asset pipeline.</li>
             <li>Reduced-motion support and keyboard controls for trivia and Heat Grid.</li>
@@ -603,15 +978,21 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <strong>CHANNEL SURF</strong>
-          <p id="footerDisclaimer">An unofficial fan project and portfolio arcade. Not affiliated with Rockstar Games or Take-Two Interactive. All game names, characters, and trademarks belong to their respective owners. Original writing, code, CSS, and vector art only.</p>
+          <p id="footerDisclaimer">An independent, non-commercial fan project and portfolio piece. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All game names, characters, locations, and trademarks belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. Original writing, code, CSS, and vector art only. <button class="text-link" type="button" id="footerDisclaimerBtn">Full disclaimer</button></p>
         </div>
         <div class="footer-links" aria-label="Footer navigation">
-          <button type="button" data-route="arcade">Arcade</button>
-          <button type="button" data-route="trivia">Trivia</button>
-          <button type="button" data-route="puzzles">Puzzles</button>
+          <button type="button" data-route="home">Home</button>
+          <button type="button" data-route="games">Games</button>
+          <button type="button" data-route="lore">Lore</button>
           <button type="button" data-route="atlas">Atlas</button>
-          <button type="button" data-route="timeline">Timeline</button>
+          <button type="button" data-route="story">Story Timeline</button>
+          <button type="button" data-route="reel">Real vs Reel</button>
+          <button type="button" data-route="play">Arcade</button>
+          <button type="button" data-route="timeline">Franchise Timeline</button>
           <button type="button" data-route="toolkit">Field Kit</button>
+          <a class="footer-link" href="story.html">Story reading mode</a>
+          <a class="footer-link" href="elsewhere.html">Rockstar Elsewhere</a>
+          <a class="footer-link" href="archive.html">Full-text archive</a>
           <button type="button" data-route="about">About / IP</button>
         </div>
       </div>
@@ -623,7 +1004,25 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <noscript>CHANNEL SURF is a client-side arcade; please enable JavaScript to play.</noscript>
+  <div class="search-overlay" id="searchOverlay" hidden>
+    <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Search the archive">
+      <label class="search-field">
+        <span class="sr-only">Search</span>
+        <input id="searchInput" type="search" placeholder="Search lore, events, eras, views…" autocomplete="off">
+      </label>
+      <div class="search-results" id="searchResults"></div>
+      <p class="small muted search-hint">Esc to close · Enter to open the first result</p>
+    </div>
+  </div>
+  <noscript>
+    <div class="container" style="padding:2rem 0">
+      <h2>CHANNEL SURF — Unofficial Rockstar Lore Archive &amp; Arcade</h2>
+      <p>This is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim.</p>
+      <p>The site contains 20 curated lore entries, 35 in-universe GTA story beats from 1961 London to 2026 Leonida, nine theme-per-game dossier pages, an era atlas, real-vs-reel city comparisons, trivia, and puzzles.</p>
+      <p><a href="archive.html">Read the full-text archive</a> (all lore and story entries, no JavaScript required). Game pages live at <a href="games/gta-vi/">/games/gta-vi/</a> and similar paths.</p>
+      <p>JavaScript is required for the interactive map, timeline, trivia, and puzzles.</p>
+    </div>
+  </noscript>
 
   <!-- Inline icon sprite. Everything is original line art. -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -651,8 +1050,11 @@
     <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.7M20 5v6h-6"/></symbol>
     <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></symbol>
     <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 22V3M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   </svg>
 
+  <script src="assets/js/services.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/app.js"></script>
 </body>

@@ -1,0 +1,282 @@
+[
+  {
+    "id": "leonida-vice-city",
+    "era": "gta6",
+    "title": "Leonida & Vice City",
+    "summary": "Grand Theft Auto VI returns to the fictional state of Leonida, a sun-bleached peninsula of causeways, wetlands, and neon coastline. Vice City is its loudest address: a modern resort metropolis built for money, music, and bad decisions. The revealed story follows Jason and Lucia through a state that treats every sunset like a premiere.",
+    "wikiTitle": "Grand Theft Auto VI",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+    "tags": [
+      "Leonida",
+      "Vice City",
+      "Jason & Lucia"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "vice-city-1986",
+    "era": "vicecity",
+    "title": "Vice City, 1986",
+    "summary": "The 2002 classic turned the series into a period piece: pastel suits, synth-pop, oceanfront clubs, and a criminal economy with a taste for chrome. Tommy Vercetti arrives in a city that rewards confidence and punishes sentiment, and the game's radio dial becomes as memorable as its skyline.",
+    "wikiTitle": "Grand Theft Auto: Vice City",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City",
+    "tags": [
+      "1986",
+      "Tommy Vercetti",
+      "synth"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "san-andreas-1992",
+    "era": "sanandreas",
+    "title": "San Andreas, 1992",
+    "summary": "Three cities, one enormous state, and a homecoming story about family, loyalty, and territory. San Andreas mixes early-90s West Coast culture with a road-trip structure: Los Santos, San Fierro, and Las Venturas each bring a different rhythm, skyline, and kind of trouble.",
+    "wikiTitle": "Grand Theft Auto: San Andreas",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas",
+    "tags": [
+      "1992",
+      "Los Santos",
+      "CJ"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "los-santos-2013",
+    "era": "gta5",
+    "title": "Los Santos, 2013",
+    "summary": "Grand Theft Auto V splits its story across three protagonists and one sprawling satirical metropolis. Michael, Franklin, and Trevor move between heists, hobbies, and the entertainment industry's endless appetite for reinvention. The result is a West Coast playground built around planning, improvisation, and spectacle.",
+    "wikiTitle": "Grand Theft Auto V",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_V",
+    "tags": [
+      "2013",
+      "three protagonists",
+      "heists"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "liberty-city-2008",
+    "era": "gta4",
+    "title": "Liberty City, 2008",
+    "summary": "Grand Theft Auto IV trades sunshine for overcast steel. Niko Bellic arrives in Liberty City chasing an idea of success and finds a colder city of immigrants, debts, and old wars. The game's tone is grounded, its streets dense, and its story less about empire than about the cost of trying to leave one behind.",
+    "wikiTitle": "Grand Theft Auto IV",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV",
+    "tags": [
+      "2008",
+      "Niko Bellic",
+      "Liberty City"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "warriors-1979",
+    "era": "warriors",
+    "title": "The Warriors, 1979",
+    "summary": "Rockstar's brawler expands Walter Hill's cult film into a long, dangerous night across a stylized New York. Gangs own the subway map, turf is measured in blocks and platforms, and the journey home becomes the whole story. The game's look leans on graffiti, turnstiles, and fluorescent light.",
+    "wikiTitle": "The Warriors (video game)",
+    "source": "https://en.wikipedia.org/wiki/The_Warriors_(video_game)",
+    "tags": [
+      "1979",
+      "New York",
+      "gangs"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "frontier-1899",
+    "era": "reddead",
+    "title": "The Frontier, 1899",
+    "summary": "Red Dead Redemption 2 is a prequel about the end of an era: a gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city all share the same slow rhythm. The frontier here is less a place to conquer than a story people keep telling themselves.",
+    "wikiTitle": "Red Dead Redemption 2",
+    "source": "https://en.wikipedia.org/wiki/Red_Dead_Redemption_2",
+    "tags": [
+      "1899",
+      "Van der Linde gang",
+      "frontier"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "bullworth-2006",
+    "era": "bully",
+    "title": "Bullworth Academy, 2006",
+    "summary": "Bully trades city blocks for school corridors, cliques, and small-town gossip. Jimmy Hopkins navigates a private academy where the hierarchy is absurdly serious and the calendar is a social weapon. It is a Rockstar game about territory at a much smaller scale, with the same eye for satire.",
+    "wikiTitle": "Bully (video game)",
+    "source": "https://en.wikipedia.org/wiki/Bully_(video_game)",
+    "tags": [
+      "2006",
+      "Bullworth",
+      "school"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "franchise-1997",
+    "era": "gta6",
+    "title": "The franchise, from 1997",
+    "summary": "Grand Theft Auto began as a top-down crime game from DMA Design and grew into one of the most recognizable open-world series in the medium. Each era added a new city, a new voice, and a new way to measure freedom: from arcade chaos to cinematic scale.",
+    "wikiTitle": "Grand Theft Auto",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto",
+    "tags": [
+      "1997",
+      "history",
+      "DMA Design"
+    ],
+    "type": "franchise"
+  },
+  {
+    "id": "rockstar-games",
+    "era": "gta6",
+    "title": "Rockstar Games",
+    "summary": "Rockstar Games was established as a publishing label under Take-Two Interactive in 1998. Its studios have built a catalog across crime, westerns, noir, and schoolyard satire, with a house style that favors dense worlds, strong radio soundtracks, and sharply observed fiction.",
+    "wikiTitle": "Rockstar Games",
+    "source": "https://en.wikipedia.org/wiki/Rockstar_Games",
+    "tags": [
+      "1998",
+      "publisher",
+      "studios"
+    ],
+    "type": "franchise"
+  },
+  {
+    "id": "tommy-vercetti",
+    "era": "vicecity",
+    "type": "character",
+    "title": "Tommy Vercetti",
+    "summary": "A made man with a long memory and a short temper. Tommy arrives in Vice City expecting a debt to be settled and decides to collect the whole city instead. His story is about refusing to be anyone's subordinate.",
+    "wikiTitle": "Tommy Vercetti",
+    "source": "https://en.wikipedia.org/wiki/Tommy_Vercetti",
+    "tags": [
+      "protagonist",
+      "1986",
+      "Vercetti"
+    ]
+  },
+  {
+    "id": "carl-johnson",
+    "era": "sanandreas",
+    "type": "character",
+    "title": "Carl 'CJ' Johnson",
+    "summary": "A returning son who spends most of San Andreas trying to keep his family together while the city pulls it apart. CJ is loyal, practical, and increasingly aware that loyalty is not a plan.",
+    "wikiTitle": "Carl Johnson (Grand Theft Auto)",
+    "source": "https://en.wikipedia.org/wiki/Carl_Johnson_(Grand_Theft_Auto)",
+    "tags": [
+      "protagonist",
+      "1992",
+      "Grove Street"
+    ]
+  },
+  {
+    "id": "niko-bellic",
+    "era": "gta4",
+    "type": "character",
+    "title": "Niko Bellic",
+    "summary": "A war veteran chasing a ghost through Liberty City. Niko's story is about the difference between the life he was promised and the one he keeps choosing.",
+    "wikiTitle": "Niko Bellic",
+    "source": "https://en.wikipedia.org/wiki/Niko_Bellic",
+    "tags": [
+      "protagonist",
+      "2008",
+      "Liberty City"
+    ]
+  },
+  {
+    "id": "the-v-trio",
+    "era": "gta5",
+    "type": "character",
+    "title": "Michael, Franklin & Trevor",
+    "summary": "Three protagonists with incompatible ideas about success. Michael wants meaning, Franklin wants distance from the block, and Trevor wants to be the only honest person in the room.",
+    "wikiTitle": "Grand Theft Auto V",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_V",
+    "tags": [
+      "protagonists",
+      "2013",
+      "heists"
+    ]
+  },
+  {
+    "id": "jason-lucia",
+    "era": "gta6",
+    "type": "character",
+    "title": "Jason & Lucia",
+    "summary": "The revealed leads of GTA VI: a partnership built on trust in a state that rewards self-interest. Their story is framed as a modern crime romance rather than a lone-wolf rise.",
+    "wikiTitle": "Grand Theft Auto VI",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+    "tags": [
+      "protagonists",
+      "2026",
+      "Leonida"
+    ]
+  },
+  {
+    "id": "grove-street",
+    "era": "sanandreas",
+    "type": "faction",
+    "title": "Grove Street Families",
+    "summary": "A neighbourhood outfit defined by history, loyalty, and a losing war for territory. Grove Street is less a gang than a memory of one, which is exactly what makes it worth fighting for.",
+    "wikiTitle": "Grove Street Families",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas",
+    "tags": [
+      "gang",
+      "1992",
+      "Los Santos"
+    ]
+  },
+  {
+    "id": "the-lost",
+    "era": "gta4",
+    "type": "faction",
+    "title": "The Lost MC",
+    "summary": "A motorcycle club held together by tradition and torn apart by ego. The Lost are at their most dangerous when they are trying to prove they still matter.",
+    "wikiTitle": "The Lost and Damned",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV:_The_Lost_and_Damned",
+    "tags": [
+      "club",
+      "2009",
+      "Alderney"
+    ]
+  },
+  {
+    "id": "vercetti-gang",
+    "era": "vicecity",
+    "type": "faction",
+    "title": "The Vercetti Organisation",
+    "summary": "A crew built out of borrowed loyalty and purchased property. By the end of 1986 it controls clubs, businesses, and the kind of silence that money can buy.",
+    "wikiTitle": "Grand Theft Auto: Vice City",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City",
+    "tags": [
+      "crew",
+      "1986",
+      "empire"
+    ]
+  },
+  {
+    "id": "warriors-gangs",
+    "era": "warriors",
+    "type": "faction",
+    "title": "The gangs of 1979",
+    "summary": "The Warriors turns the New York night into a patchwork of turf, colours, and grudges. Every bridge is a border and every train car is somebody's territory.",
+    "wikiTitle": "The Warriors (video game)",
+    "source": "https://en.wikipedia.org/wiki/The_Warriors_(video_game)",
+    "tags": [
+      "gangs",
+      "1979",
+      "New York"
+    ]
+  },
+  {
+    "id": "bullworth-cliques",
+    "era": "bully",
+    "type": "faction",
+    "title": "Bullworth's cliques",
+    "summary": "Bullworth Academy is a small world with big politics: jocks, preppies, greasers, nerds, and everyone else trying to survive the timetable. The satire is sharp because the stakes feel real.",
+    "wikiTitle": "Bully (video game)",
+    "source": "https://en.wikipedia.org/wiki/Bully_(video_game)",
+    "tags": [
+      "cliques",
+      "2006",
+      "school"
+    ]
+  }
+]

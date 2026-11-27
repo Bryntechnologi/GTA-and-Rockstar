@@ -12,6 +12,30 @@ window.CS_DATA = (() => {
      The `key` values must match [data-era="..."] blocks in styles.css.
      --------------------------------------------------------------------- */
   const eras = {
+    home: {
+      key: "home",
+      name: "Channel Surf",
+      short: "CS",
+      place: "The archive",
+      year: "STUDIO",
+      station: "CHANNEL SURF",
+      freq: "00.0",
+      tagline: "The archive, the signal, and the arcade.",
+      accentName: "Ember orange",
+      visited: false
+    },
+    classic: {
+      key: "classic",
+      name: "Classic GTA",
+      short: "GTA",
+      place: "1997–2001",
+      year: "1997",
+      station: "GTA RADIO",
+      freq: "97.1",
+      tagline: "Top-down mayhem and arcade nerve.",
+      accentName: "Arcade lime",
+      visited: false
+    },
     gta6: {
       key: "gta6",
       name: "GTA VI",
@@ -1213,7 +1237,8 @@ window.CS_DATA = (() => {
     { id: "perfect-signal", name: "Perfect Signal", desc: "Finish a trivia run with 100% accuracy.", symbol: "star" },
     { id: "sudden-survivor", name: "Sudden Survivor", desc: "Build a five-answer streak in Sudden Death.", symbol: "bolt" },
     { id: "lorekeeper", name: "Lorekeeper", desc: "Answer 50 questions correctly across the archive.", symbol: "book" },
-    { id: "decoy-hunter", name: "Decoy Hunter", desc: "Clear a Mythbuster run without a miss.", symbol: "eye" }
+    { id: "decoy-hunter", name: "Decoy Hunter", desc: "Clear a Mythbuster run without a miss.", symbol: "eye" },
+    { id: "profiler", name: "Profiler", desc: "Close a Clue Dossier without a wrong pick.", symbol: "target" }
   ];
 
   /* ---------------------------------------------------------------------
@@ -1265,12 +1290,110 @@ window.CS_DATA = (() => {
 
   const site = {
     name: "CHANNEL SURF",
-    fullName: "CHANNEL SURF — Unofficial Rockstar Universe Arcade",
+    fullName: "CHANNEL SURF — Unofficial Rockstar Lore Archive & Arcade",
     tagline: "Tune the era. Play the city.",
-    disclaimer: "An unofficial fan project and portfolio arcade. Not affiliated with Rockstar Games or Take-Two Interactive. All game names, characters, and trademarks belong to their respective owners. This site uses original writing, code, CSS, and vector art — no extracted game assets, audio, or ripped artwork."
+    disclaimer: "CHANNEL SURF is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games, Take-Two Interactive, or any of their subsidiaries. I do not own, operate, or claim any rights to Grand Theft Auto, Red Dead, The Warriors, Bully, Max Payne, L.A. Noire, Midnight Club, or any related games, characters, locations, logos, trademarks, or other intellectual property. All such rights belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. All quizzes, puzzle logic, original code, CSS, and vector art on this site were created for this project. References to games, lore, characters, and settings are included for commentary, criticism, education, and entertainment only. No game assets, audio, models, textures, screenshots, or copied dialogue are included. This site is a personal hobby/portfolio showcase, not a commercial product. If a rights holder believes anything here oversteps, contact me and I will remove or change it promptly."
   };
 
+  const featuredLore = [
+  {
+    "id": "leonida-vice-city",
+    "era": "gta6",
+    "title": "Leonida & Vice City",
+    "summary": "Grand Theft Auto VI returns to the fictional state of Leonida, a sun-bleached peninsula of causeways, wetlands, and neon coastline. Vice City is its loudest address: a modern resort metropolis built for money, music, and bad decisions. The revealed story follows Jason and Lucia through a state that treats every sunset like a premiere.",
+    "wikiTitle": "Grand Theft Auto VI",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+    "tags": [
+      "Leonida",
+      "Vice City",
+      "Jason & Lucia"
+    ],
+    "type": "location"
+  },
+  {
+    "id": "tommy-vercetti",
+    "era": "vicecity",
+    "type": "character",
+    "title": "Tommy Vercetti",
+    "summary": "A made man with a long memory and a short temper. Tommy arrives in Vice City expecting a debt to be settled and decides to collect the whole city instead. His story is about refusing to be anyone's subordinate.",
+    "wikiTitle": "Tommy Vercetti",
+    "source": "https://en.wikipedia.org/wiki/Tommy_Vercetti",
+    "tags": [
+      "protagonist",
+      "1986",
+      "Vercetti"
+    ]
+  },
+  {
+    "id": "grove-street",
+    "era": "sanandreas",
+    "type": "faction",
+    "title": "Grove Street Families",
+    "summary": "A neighbourhood outfit defined by history, loyalty, and a losing war for territory. Grove Street is less a gang than a memory of one, which is exactly what makes it worth fighting for.",
+    "wikiTitle": "Grove Street Families",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas",
+    "tags": [
+      "gang",
+      "1992",
+      "Los Santos"
+    ]
+  },
+  {
+    "id": "jason-lucia",
+    "era": "gta6",
+    "type": "character",
+    "title": "Jason & Lucia",
+    "summary": "The revealed leads of GTA VI: a partnership built on trust in a state that rewards self-interest. Their story is framed as a modern crime romance rather than a lone-wolf rise.",
+    "wikiTitle": "Grand Theft Auto VI",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+    "tags": [
+      "protagonists",
+      "2026",
+      "Leonida"
+    ]
+  }
+];
+  const featuredStory = [
+  {
+    "id": "london-1961",
+    "year": 1961,
+    "title": "London, before the storm",
+    "game": "Grand Theft Auto: London 1961",
+    "era": "vicecity"
+  },
+  {
+    "id": "vc-1986-arrival",
+    "year": 1986,
+    "title": "Tommy Vercetti gets out",
+    "game": "Grand Theft Auto: Vice City",
+    "era": "vicecity"
+  },
+  {
+    "id": "sa-1992-return",
+    "year": 1992,
+    "title": "CJ comes home",
+    "game": "Grand Theft Auto: San Andreas",
+    "era": "sanandreas"
+  },
+  {
+    "id": "gta4-2008-arrival",
+    "year": 2008,
+    "title": "Niko Bellic arrives",
+    "game": "Grand Theft Auto IV",
+    "era": "gta4"
+  },
+  {
+    "id": "gta6-2026-premise",
+    "year": 2026,
+    "title": "Jason and Lucia",
+    "game": "Grand Theft Auto VI",
+    "era": "gta6"
+  }
+];
+
   return {
+    featuredLore,
+    featuredStory,
     eras,
     eraOrder,
     questions,

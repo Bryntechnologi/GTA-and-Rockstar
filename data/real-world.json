@@ -1,0 +1,122 @@
+[
+  {
+    "id": "miami",
+    "realName": "Miami, Florida",
+    "coords": [
+      -80.1918,
+      25.7617
+    ],
+    "fictionalName": "Vice City",
+    "era": "gta6",
+    "note": "Coastal towers, causeways, and a skyline built for sunset. The clearest real-world echo of Leonida's main stage.",
+    "image": "miami"
+  },
+  {
+    "id": "florida-keys",
+    "realName": "Florida Keys",
+    "coords": [
+      -81.78,
+      24.5551
+    ],
+    "fictionalName": "Leonida Keys",
+    "era": "gta6",
+    "note": "A chain of islands linked by long roads and longer water views. Great inspiration for a map that ends in causeways.",
+    "image": "floridaKeys"
+  },
+  {
+    "id": "new-york",
+    "realName": "New York City",
+    "coords": [
+      -74.006,
+      40.7128
+    ],
+    "fictionalName": "Liberty City",
+    "era": "gta4",
+    "note": "Density, weather, and a transit system that shapes the day. Liberty City borrows the attitude more than the exact street grid.",
+    "image": "newYork"
+  },
+  {
+    "id": "coney-island",
+    "realName": "Coney Island, Brooklyn",
+    "coords": [
+      -73.985,
+      40.5749
+    ],
+    "fictionalName": "Coney Island (The Warriors)",
+    "era": "warriors",
+    "note": "Boardwalk, amusement lights, and the long train home. The film and game turn a real edge-of-the-city place into a starting line.",
+    "image": "coneyIsland"
+  },
+  {
+    "id": "los-angeles",
+    "realName": "Los Angeles, California",
+    "coords": [
+      -118.2437,
+      34.0522
+    ],
+    "fictionalName": "Los Santos",
+    "era": "gta5",
+    "note": "Freeway sprawl, entertainment industry satire, and hills that turn a skyline into a status symbol.",
+    "image": "losAngeles"
+  },
+  {
+    "id": "san-francisco",
+    "realName": "San Francisco, California",
+    "coords": [
+      -122.4194,
+      37.7749
+    ],
+    "fictionalName": "San Fierro",
+    "era": "sanandreas",
+    "note": "Steep streets, bridges, and a compact urban core. San Fierro takes the silhouette and runs with it.",
+    "image": "sanFrancisco"
+  },
+  {
+    "id": "las-vegas",
+    "realName": "Las Vegas, Nevada",
+    "coords": [
+      -115.1398,
+      36.1699
+    ],
+    "fictionalName": "Las Venturas",
+    "era": "sanandreas",
+    "note": "Neon, casinos, and desert heat. A natural fit for a map that treats nightlife as infrastructure.",
+    "image": "lasVegas"
+  },
+  {
+    "id": "new-orleans",
+    "realName": "New Orleans, Louisiana",
+    "coords": [
+      -90.0715,
+      29.9511
+    ],
+    "fictionalName": "Saint Denis",
+    "era": "reddead",
+    "note": "River city, old streets, and humid air. Saint Denis is the frontier's idea of a metropolis arriving early.",
+    "image": "newOrleans"
+  },
+  {
+    "id": "london",
+    "realName": "London, England",
+    "coords": [
+      -0.1276,
+      51.5072
+    ],
+    "fictionalName": "GTA London 1969",
+    "era": "vicecity",
+    "note": "The early expansion traded American crime for period London: tight streets, British cars, and a very different soundtrack.",
+    "image": "london"
+  },
+  {
+    "id": "new-england",
+    "realName": "New England college towns",
+    "coords": [
+      -71.0589,
+      42.3601
+    ],
+    "fictionalName": "Bullworth",
+    "era": "bully",
+    "note": "Old brick, prep schools, and small-town hierarchy. Bullworth compresses that atmosphere into a single campus.",
+    "image": "boston"
+  }
+]

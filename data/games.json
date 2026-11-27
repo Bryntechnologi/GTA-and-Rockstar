@@ -1,0 +1,319 @@
+[
+  {
+    "slug": "gta-classic",
+    "name": "Classic GTA",
+    "shortName": "1997–2001",
+    "year": "1997–2001",
+    "era": "gta6",
+    "theme": "classic",
+    "order": 6,
+    "blurb": "Top-down origins, London expansions, Anywhere City, and the 3D debut.",
+    "description": "The first era runs from the top-down original and its London expansions through GTA2's retro-futurist Anywhere City and GTA III's 3D Liberty City. It is the foundation of the entire series: steal cars, take jobs, outrun the consequences.",
+    "characters": [
+      "Claude",
+      "Catalina",
+      "Claude Speed"
+    ],
+    "locations": [
+      "Liberty City",
+      "London",
+      "Anywhere City"
+    ],
+    "loreIds": [
+      "franchise-1997",
+      "rockstar-games"
+    ],
+    "storyIds": [
+      "london-1961",
+      "london-1969",
+      "gta1-1997-liberty",
+      "gta1-1997-chase",
+      "gta2-1999-anywhere",
+      "gta3-2001-betrayal",
+      "gta3-2001-families",
+      "gta3-2001-cartel",
+      "gta3-2001-exchange"
+    ],
+    "wikiTitle": "Grand Theft Auto",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto",
+    "release": 1997,
+    "image": "london"
+  },
+  {
+    "slug": "vice-city",
+    "name": "Grand Theft Auto: Vice City",
+    "shortName": "Vice City",
+    "year": "1986",
+    "era": "vicecity",
+    "theme": "vicecity",
+    "order": 2,
+    "blurb": "Pastel suits, synth-pop, and Tommy Vercetti's rise through a sunlit empire.",
+    "description": "The 2002 classic turned the series into a period piece. Tommy Vercetti arrives in Vice City expecting a debt to be settled and decides to collect the city instead. Clubs, property, betrayal, and a radio dial that became as memorable as the skyline.",
+    "characters": [
+      "Tommy Vercetti",
+      "Lance Vance",
+      "Sonny Forelli"
+    ],
+    "locations": [
+      "Vice City",
+      "Starfish Island",
+      "Ocean Beach"
+    ],
+    "loreIds": [
+      "vice-city-1986",
+      "tommy-vercetti",
+      "vercetti-gang"
+    ],
+    "storyIds": [
+      "vc-1986-arrival",
+      "vc-1986-rise",
+      "vc-1986-lance",
+      "vc-1986-finale",
+      "vcs-1984-arrival",
+      "vcs-1984-empire"
+    ],
+    "wikiTitle": "Grand Theft Auto: Vice City",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City",
+    "release": 2002,
+    "image": "miami"
+  },
+  {
+    "slug": "san-andreas",
+    "name": "Grand Theft Auto: San Andreas",
+    "shortName": "San Andreas",
+    "year": "1992",
+    "era": "sanandreas",
+    "theme": "sanandreas",
+    "order": 3,
+    "blurb": "Three cities, one state, and a homecoming story about family and territory.",
+    "description": "San Andreas is a road trip through a fictional state: Los Santos, San Fierro, and Las Venturas each bring a different rhythm. CJ returns home to a family in crisis and gets pulled into a gang war, a drug network, and a police conspiracy.",
+    "characters": [
+      "Carl Johnson",
+      "Sweet",
+      "Big Smoke",
+      "Mike Toreno"
+    ],
+    "locations": [
+      "Los Santos",
+      "Grove Street",
+      "San Fierro",
+      "Las Venturas"
+    ],
+    "loreIds": [
+      "san-andreas-1992",
+      "carl-johnson",
+      "grove-street"
+    ],
+    "storyIds": [
+      "sa-1992-return",
+      "sa-1992-grove",
+      "sa-1992-san-fierro",
+      "sa-1992-venturas",
+      "sa-1992-homecoming"
+    ],
+    "wikiTitle": "Grand Theft Auto: San Andreas",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas",
+    "release": 2004,
+    "image": "losAngeles"
+  },
+  {
+    "slug": "the-warriors",
+    "name": "The Warriors",
+    "shortName": "The Warriors",
+    "year": "1979",
+    "era": "warriors",
+    "theme": "warriors",
+    "order": 7,
+    "blurb": "A long, dangerous night across a stylized 1979 New York.",
+    "description": "Rockstar's brawler expands Walter Hill's cult film into a city full of gangs, subway lines, and turf. The journey home becomes the whole story, told through graffiti, turnstiles, and fluorescent light.",
+    "characters": [
+      "The Warriors",
+      "The Rogues"
+    ],
+    "locations": [
+      "Coney Island",
+      "Union Square",
+      "Grand Central",
+      "Tremont"
+    ],
+    "loreIds": [
+      "warriors-1979",
+      "warriors-gangs"
+    ],
+    "storyIds": [],
+    "wikiTitle": "The Warriors (video game)",
+    "source": "https://en.wikipedia.org/wiki/The_Warriors_(video_game)",
+    "release": 2005,
+    "image": "coneyIsland"
+  },
+  {
+    "slug": "bully",
+    "name": "Bully",
+    "shortName": "Bully",
+    "year": "2006",
+    "era": "bully",
+    "theme": "bully",
+    "order": 9,
+    "blurb": "School corridors, cliques, and small-town hierarchy at full scale.",
+    "description": "Bully trades city blocks for Bullworth Academy, where the social hierarchy is absurdly serious and the calendar is a weapon. Jimmy Hopkins navigates cliques, teachers, and town gossip in a smaller-scale Rockstar satire.",
+    "characters": [
+      "Jimmy Hopkins",
+      "Gary Smith",
+      "Pete Kowalski"
+    ],
+    "locations": [
+      "Bullworth Academy",
+      "Bullworth Town",
+      "Old Bullworth Vale"
+    ],
+    "loreIds": [
+      "bullworth-2006",
+      "bullworth-cliques"
+    ],
+    "storyIds": [],
+    "wikiTitle": "Bully (video game)",
+    "source": "https://en.wikipedia.org/wiki/Bully_(video_game)",
+    "release": 2006,
+    "image": "boston"
+  },
+  {
+    "slug": "gta-iv",
+    "name": "Grand Theft Auto IV",
+    "shortName": "GTA IV",
+    "year": "2008",
+    "era": "gta4",
+    "theme": "gta4",
+    "order": 5,
+    "blurb": "Niko Bellic arrives in a colder Liberty City chasing a promise and a debt.",
+    "description": "GTA IV trades sunshine for overcast steel. Niko comes to Liberty City for his cousin's promised success and finds a dense immigrant story about war, loyalty, and the cost of leaving a past behind.",
+    "characters": [
+      "Niko Bellic",
+      "Roman Bellic",
+      "Dimitri Rascalov"
+    ],
+    "locations": [
+      "Liberty City",
+      "Hove Beach",
+      "Bohan",
+      "Algonquin"
+    ],
+    "loreIds": [
+      "liberty-city-2008",
+      "niko-bellic",
+      "the-lost"
+    ],
+    "storyIds": [
+      "gta4-2008-arrival",
+      "gta4-2008-debts",
+      "gta4-2008-choice",
+      "gta4-2008-diamonds",
+      "eflc-2009-lost",
+      "eflc-2009-tony"
+    ],
+    "wikiTitle": "Grand Theft Auto IV",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV",
+    "release": 2008,
+    "image": "newYork"
+  },
+  {
+    "slug": "gta-v",
+    "name": "Grand Theft Auto V",
+    "shortName": "GTA V",
+    "year": "2013",
+    "era": "gta5",
+    "theme": "gta5",
+    "order": 4,
+    "blurb": "Three protagonists, one satirical metropolis, and a heist sandbox.",
+    "description": "Michael, Franklin, and Trevor move through Los Santos and Blaine County in a story about ambition, reinvention, and the entertainment industry's appetite for spectacle. The heist structure turns preparation and improvisation into the main event.",
+    "characters": [
+      "Michael De Santa",
+      "Franklin Clinton",
+      "Trevor Philips"
+    ],
+    "locations": [
+      "Los Santos",
+      "Vinewood",
+      "Sandy Shores"
+    ],
+    "loreIds": [
+      "los-santos-2013",
+      "the-v-trio"
+    ],
+    "storyIds": [
+      "gta5-2013-reunion",
+      "gta5-2013-first-heists",
+      "gta5-2013-trevor",
+      "gta5-2013-agency",
+      "gta5-2013-endings"
+    ],
+    "wikiTitle": "Grand Theft Auto V",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_V",
+    "release": 2013,
+    "image": "losAngeles"
+  },
+  {
+    "slug": "red-dead",
+    "name": "Red Dead Redemption II",
+    "shortName": "Red Dead",
+    "year": "1899",
+    "era": "reddead",
+    "theme": "reddead",
+    "order": 8,
+    "blurb": "A gang, a frontier, and the slow end of an era.",
+    "description": "A prequel about the Van der Linde gang trying to stay useful while the world builds fences and railroads around it. Snow, swamp, prairie, and city share the same slow rhythm, and the frontier becomes a story people keep telling themselves.",
+    "characters": [
+      "Arthur Morgan",
+      "Dutch van der Linde",
+      "John Marston"
+    ],
+    "locations": [
+      "Valentine",
+      "Saint Denis",
+      "Blackwater",
+      "Tall Trees"
+    ],
+    "loreIds": [
+      "frontier-1899"
+    ],
+    "storyIds": [],
+    "wikiTitle": "Red Dead Redemption 2",
+    "source": "https://en.wikipedia.org/wiki/Red_Dead_Redemption_2",
+    "release": 2018,
+    "image": "newOrleans"
+  },
+  {
+    "slug": "gta-vi",
+    "name": "Grand Theft Auto VI",
+    "shortName": "GTA VI",
+    "year": "2026",
+    "era": "gta6",
+    "theme": "gta6",
+    "order": 1,
+    "blurb": "Jason and Lucia, the state of Leonida, and the neon return to Vice City.",
+    "description": "The next mainline GTA returns to Vice City and expands it into the state of Leonida: causeways, wetlands, small towns, and a modern coastline. The revealed story follows Jason and Lucia through a partnership built on trust in a place designed to test it.",
+    "characters": [
+      "Jason",
+      "Lucia"
+    ],
+    "locations": [
+      "Vice City",
+      "Leonida Keys",
+      "Grassrivers",
+      "Port Gellhorn"
+    ],
+    "loreIds": [
+      "leonida-vice-city",
+      "jason-lucia"
+    ],
+    "storyIds": [
+      "gta6-2026-premise",
+      "gta6-2026-leonida",
+      "gta6-2026-score",
+      "gta6-2026-world"
+    ],
+    "wikiTitle": "Grand Theft Auto VI",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+    "release": 2026,
+    "image": "miami"
+  }
+]

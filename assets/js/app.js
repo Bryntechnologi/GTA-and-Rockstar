@@ -12,17 +12,20 @@
     return;
   }
 
-  const { eras, eraOrder, questions, fakeFacts, atlas, timeline, badges, chatter, site } = DATA;
+  const { featuredLore, featuredStory, eras, eraOrder, questions, fakeFacts, atlas, timeline, badges, chatter, site } = DATA;  const SERVICES = window.CS_SERVICES || null;
 
   const STORAGE = {
     settings: "channelsurf.settings.v1",
-    stats: "channelsurf.stats.v1"
+    stats: "channelsurf.stats.v1",
+    disclaimer: "channelsurf.disclaimer.v1"
   };
 
   const DEFAULT_SETTINGS = {
     era: "gta6",
     sound: false,
-    autoMorph: false
+    autoMorph: false,
+    storySpoilers: false,
+    storyFollowEra: true
   };
 
   const DEFAULT_STATS = {
@@ -38,7 +41,9 @@
     vaultSolves: 0,
     vaultStreak: 0,
     gridSolves: 0,
-    gridBestPar: null
+    gridBestPar: null,
+    dossierSolves: 0,
+    dossierStreak: 0
   };
 
   const ERA_ACCENTS = {
@@ -49,7 +54,20 @@
     gta4: "#eab308",
     warriors: "#d23b2f",
     reddead: "#8f2f21",
-    bully: "#d4af37"
+    bully: "#d4af37",
+    classic: "#b6f34a"
+  };
+
+  const ERA_IMAGES = {
+    gta6: "/assets/images/palm-sunset.jpg",
+    vicecity: "/assets/images/miami-neon.jpg",
+    sanandreas: "/assets/images/desert-highway.jpg",
+    gta5: "/assets/images/boardwalk.jpg",
+    gta4: "/assets/images/rain-city.jpg",
+    warriors: "/assets/images/subway-train.jpg",
+    reddead: "/assets/images/new-orleans.jpg",
+    bully: "/assets/images/autumn-campus.jpg",
+    classic: "/assets/images/london.jpg"
   };
 
   const CREW_COLORS = ["var(--accent)", "var(--accent-2)", "var(--accent-3)", "#8f86ff"];
@@ -105,7 +123,12 @@
   };
 
   const ROUTE_TITLES = {
-    arcade: "CHANNEL SURF — Unofficial Rockstar Universe Arcade",
+    home: "CHANNEL SURF — Unofficial Rockstar Lore Archive & Arcade",
+    games: "Games — CHANNEL SURF",
+    lore: "The Wire Archive — CHANNEL SURF",
+    story: "Story Timeline — CHANNEL SURF",
+    reel: "Real vs Reel — CHANNEL SURF",
+    play: "Arcade — CHANNEL SURF",
     trivia: "Trivia Arena — CHANNEL SURF",
     puzzles: "Puzzles & Safehouse — CHANNEL SURF",
     atlas: "The Era Atlas — CHANNEL SURF",
@@ -124,6 +147,53 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
   const icon = (name, cls = "icon") => `<svg class="${cls}" aria-hidden="true"><use href="#i-${name}"></use></svg>`;
+
+  let avatarSeq = 0;
+
+  function avatarHTML(name, era) {
+    const hash = hashString(String(name));
+    const gradientId = `av-${++avatarSeq}`;
+    const accent = ERA_ACCENTS[era] || "#ff5d7e";
+    const skin = ["#f0c9a5", "#d9a06f", "#b97848", "#8d5a3b", "#6a4128"][hash % 5];
+    const hair = ["#161616", "#3b2416", "#6e4523", "#a9a9a9", "#4a1f2f"][(hash >> 3) % 5];
+    const shirt = ["#1d2733", "#2a1d2e", "#20302a", "#33281c", "#1a1a1a"][(hash >> 6) % 5];
+    const style = (hash >> 2) % 6;
+    const accessory = (hash >> 5) % 6;
+    const hairShape = [
+      `<path d="M18 28c0-10 6-16 14-16s14 6 14 16c-3-6-8-8-14-8s-11 2-14 8Z" fill="${hair}"/>`,
+      `<path d="M17 27c1-10 7-17 15-17 9 0 15 7 15 18-3-2-5-7-5-12-3 5-7 7-11 7-5 0-8-2-9-7-1 5-2 9-5 11Z" fill="${hair}"/>`,
+      `<g fill="${hair}"><circle cx="22" cy="21" r="5"/><circle cx="28" cy="16" r="5"/><circle cx="35" cy="15" r="5"/><circle cx="42" cy="21" r="5"/><path d="M18 28c0-9 6-15 14-15s14 6 14 15c-4-4-8-6-14-6s-10 2-14 6Z"/></g>`,
+      `<path d="M17 25c0-9 6-16 15-16s16 7 16 17v17c-3-2-5-7-5-12-3 4-6 5-10 5s-7-1-10-5c0 5-2 10-6 12Z" fill="${hair}"/>`,
+      `<path d="M18 30c-2-11 4-20 14-20s16 9 14 20c-3-4-5-8-6-12-2 3-5 5-8 5s-6-2-8-5c-1 4-3 8-6 12Z" fill="${hair}" opacity=".9"/>`,
+      `<path d="M27 13h10l4 10H23l4-10Z" fill="${hair}"/><circle cx="32" cy="13" r="4" fill="${hair}"/>`
+    ][style];
+    const accessoryShape = [
+      "",
+      `<g fill="#111"><rect x="20" y="27" width="10" height="4" rx="2"/><rect x="34" y="27" width="10" height="4" rx="2"/><path d="M30 29h4" stroke="#111" stroke-width="2"/></g>`,
+      `<g fill="none" stroke="${accent}" stroke-width="2"><path d="M18 26a14 14 0 0 1 28 0"/><rect x="15" y="25" width="5" height="10" rx="2" fill="${accent}" stroke="none"/><rect x="44" y="25" width="5" height="10" rx="2" fill="${accent}" stroke="none"/></g>`,
+      `<g fill="${accent}"><path d="M18 22h28l-2-3H20l-2 3Z"/><path d="M20 22h24v3H20z"/></g>`,
+      `<path d="M20 33c3 6 7 9 12 9s9-3 12-9c-3 3-7 4-12 4s-9-1-12-4Z" fill="${hair}"/>`,
+      `<g fill="${accent}"><circle cx="16" cy="35" r="2"/><circle cx="48" cy="35" r="2"/></g>`
+    ][accessory];
+    return `<span class="avatar avatar-portrait" style="--avatar-accent:${accent}" aria-hidden="true">
+      <svg viewBox="0 0 64 64" focusable="false">
+        <defs>
+          <linearGradient id="${gradientId}" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="${accent}"/>
+            <stop offset="100%" stop-color="#101015"/>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" fill="url(#${gradientId})"/>
+        <path d="M4 64c2-14 13-21 28-21s26 7 28 21Z" fill="${shirt}"/>
+        <circle cx="32" cy="29" r="14" fill="${skin}"/>
+        ${hairShape}
+        <circle cx="26" cy="29" r="1.6" fill="#151515"/>
+        <circle cx="38" cy="29" r="1.6" fill="#151515"/>
+        <path d="M28 36c2 2 6 2 8 0" fill="none" stroke="#5b3428" stroke-width="1.6" stroke-linecap="round"/>
+        ${accessoryShape}
+      </svg>
+    </span>`;
+  }
 
   function escapeHTML(value) {
     return String(value)
@@ -244,13 +314,38 @@
   const state = {
     settings: loadSettings(),
     stats: loadStats(),
-    currentView: "arcade",
+    currentView: "home",
     triviaSetup: { mode: "classic", filter: "all" },
     trivia: null,
     vault: null,
     grid: null,
     puzzleTab: "vault",
     atlasSelected: null,
+    atlasMode: "atlas",
+    atlasInteractive: false,
+    lore: null,
+    games: null,
+    loreFilter: "all",
+    contentBaseEra: null,
+    contentSource: null,
+    loreType: "all",
+    loreQuery: "",
+    loreSelected: null,
+    story: null,
+    storyIndex: 0,
+    storyFilter: "all",
+    storySelected: null,
+    searchOpen: false,
+    realWorld: null,
+    imageCredits: null,
+    streams: null,
+    leafletPromise: null,
+    maplibrePromise: null,
+    leafletMap: null,
+    geoLayer: null,
+    maplibreMap: null,
+    geo: null,
+    currentStream: null,
     timelineFilter: "All",
     timelineSelected: "t-2026",
     heist: {
@@ -311,6 +406,294 @@
   }
 
   /* ---------------------------------------------------------------------
+     DISCLAIMER + PWA + OPTIONAL DATA LOADERS
+     --------------------------------------------------------------------- */
+  function initDisclaimer() {
+    const banner = $("#noticeBanner");
+    if (!banner) return;
+    let dismissed = false;
+    try {
+      dismissed = localStorage.getItem(STORAGE.disclaimer) === "dismissed";
+    } catch (error) {
+      /* ignore */
+    }
+    if (!dismissed) banner.hidden = false;
+
+    const dismiss = () => {
+      banner.hidden = true;
+      try {
+        localStorage.setItem(STORAGE.disclaimer, "dismissed");
+      } catch (error) {
+        /* ignore */
+      }
+    };
+    $("#noticeDismiss")?.addEventListener("click", dismiss);
+    $("#noticeRead")?.addEventListener("click", () => {
+      dismiss();
+      navigate("about");
+      window.setTimeout(() => $("#aboutDisclaimer")?.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
+    });
+    $("#footerDisclaimerBtn")?.addEventListener("click", () => {
+      navigate("about");
+      window.setTimeout(() => $("#aboutDisclaimer")?.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
+    });
+  }
+
+  function registerServiceWorker() {
+    if (!("serviceWorker" in navigator)) return;
+    if (!/^https?:$/.test(window.location.protocol)) return;
+    navigator.serviceWorker.register("sw.js").catch(() => {
+      /* offline support is optional */
+    });
+  }
+
+  function loadStyleOnce(href) {
+    if (document.querySelector(`link[data-dynamic="${href}"]`)) return Promise.resolve();
+    return new Promise((resolve) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.dataset.dynamic = href;
+      link.onload = () => resolve();
+      link.onerror = () => resolve();
+      document.head.appendChild(link);
+    });
+  }
+
+  function loadScriptOnce(src) {
+    if (document.querySelector(`script[data-dynamic="${src}"]`)) return Promise.resolve(true);
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.dataset.dynamic = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  }
+
+  function ensureLeaflet() {
+    if (window.L) return Promise.resolve(true);
+    if (state.leafletPromise) return state.leafletPromise;
+    state.leafletPromise = loadStyleOnce("assets/vendor/leaflet/leaflet.css")
+      .then(() => loadScriptOnce("assets/vendor/leaflet/leaflet.js"))
+      .then((ok) => Boolean(ok && window.L));
+    return state.leafletPromise;
+  }
+
+  function ensureMapLibre() {
+    if (window.maplibregl) return Promise.resolve(true);
+    if (state.maplibrePromise) return state.maplibrePromise;
+    state.maplibrePromise = loadStyleOnce("assets/vendor/maplibre/maplibre-gl.css")
+      .then(() => loadScriptOnce("assets/vendor/maplibre/maplibre-gl.js"))
+      .then((ok) => Boolean(ok && window.maplibregl));
+    return state.maplibrePromise;
+  }
+
+  async function ensureLore() {
+    if (state.lore) return state.lore;
+    state.lore = SERVICES ? (await SERVICES.getLore()) || [] : [];
+    return state.lore;
+  }
+
+  async function ensureRealWorld() {
+    if (state.realWorld) return state.realWorld;
+    state.realWorld = SERVICES ? (await SERVICES.getRealWorld()) || [] : [];
+    return state.realWorld;
+  }
+
+  async function ensureStreams() {
+    if (state.streams) return state.streams;
+    state.streams = SERVICES ? (await SERVICES.getStreams()) || [] : [];
+    return state.streams;
+  }
+
+  async function ensureImageCredits() {
+    if (state.imageCredits) return state.imageCredits;
+    state.imageCredits = SERVICES ? (await SERVICES.getImageCredits()) || {} : {};
+    return state.imageCredits;
+  }
+
+  async function ensureStory() {
+    if (state.story) return state.story;
+    state.story = SERVICES ? (await SERVICES.getStoryTimeline()) || [] : [];
+    return state.story;
+  }
+
+  async function ensureGames() {
+    if (state.games) return state.games;
+    state.games = SERVICES ? (await SERVICES.getGames()) || [] : [];
+    return state.games;
+  }
+
+  async function ensureLoreArchive() {
+    const lore = await ensureLore();
+    return lore;
+  }
+
+  function resolveCssVars(svg) {
+    const cs = getComputedStyle(document.documentElement);
+    const vars = ["--bg", "--bg-2", "--surface-solid", "--surface-2", "--accent", "--accent-2", "--accent-3", "--muted", "--ink", "--text", "--border", "--line", "--on-accent"];
+    let output = svg;
+    vars.forEach((name) => {
+      const value = (cs.getPropertyValue(name) || "").trim();
+      if (value) output = output.split(`var(${name})`).join(value);
+    });
+    return output;
+  }
+
+  function withAlpha(color, alpha) {
+    const value = String(color).trim();
+    const hex = value.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (hex) {
+      let raw = hex[1];
+      if (raw.length === 3) raw = raw.split("").map((c) => c + c).join("");
+      const r = parseInt(raw.slice(0, 2), 16);
+      const g = parseInt(raw.slice(2, 4), 16);
+      const b = parseInt(raw.slice(4, 6), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    if (/^rgb\(/i.test(value)) return value.replace(/^rgb\(/i, "rgba(").replace(/\)$/, `, ${alpha})`);
+    return value;
+  }
+
+  function inlineMapSvg(svg) {
+    const cs = getComputedStyle(document.documentElement);
+    const token = (name, fallback) => (cs.getPropertyValue(name) || "").trim() || fallback;
+    const bg = token("--bg-2", token("--bg", "#050914"));
+    const accent = token("--accent", "#ff5d7e");
+    const accent2 = token("--accent-2", "#23e0f2");
+    const accent3 = token("--accent-3", "#ffc36b");
+    const style = `<style>
+      .map-water{fill:${bg};opacity:.7}
+      .map-land{fill:${withAlpha(accent3, 0.16)};stroke:${withAlpha(accent3, 0.5)};stroke-width:1.5}
+      .map-land-soft{fill:${withAlpha(accent2, 0.1)};stroke:${withAlpha(accent2, 0.3)};stroke-width:1}
+      .map-lake{fill:${withAlpha(accent2, 0.28)};stroke:${withAlpha(accent2, 0.5)};stroke-width:1}
+      .map-road{fill:none;stroke:${withAlpha(accent3, 0.4)};stroke-width:2;stroke-linecap:round;stroke-dasharray:2 5}
+      .map-pin .pin-dot{fill:${accent};stroke:${bg};stroke-width:1.5}
+      .map-pin .pin-ring{fill:none;stroke:${accent2};stroke-opacity:.55}
+      .map-pin .pin-label{fill:${accent2}}
+      .atlas-compass circle,.atlas-compass path{stroke:${accent2};fill:none}
+    </style>`;
+    const resolved = resolveCssVars(svg);
+    return resolved.replace(/^(<svg[^>]*>)/, `$1${style}`);
+  }
+
+
+  function wrapLines(ctx, text, maxWidth) {
+    const words = String(text).split(/\s+/);
+    const lines = [];
+    let line = "";
+    for (const word of words) {
+      const next = line ? `${line} ${word}` : word;
+      if (ctx.measureText(next).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = next;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function saveResultCard(payload) {
+    const cs = getComputedStyle(document.documentElement);
+    const token = (name, fallback) => (cs.getPropertyValue(name) || "").trim() || fallback;
+    const bg = token("--bg", "#050914");
+    const surface = token("--surface-solid", "#0d1c32");
+    const text = token("--text", "#f4f7fb");
+    const muted = token("--muted", "#9eb5ca");
+    const accent = token("--accent", "#ff5d7e");
+    const accent2 = token("--accent-2", "#23e0f2");
+    const display = token("--font-display", "Impact, sans-serif");
+    const mono = token("--font-mono", "Consolas, monospace");
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080;
+    canvas.height = 1350;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, 1080, 1350);
+    const glow = ctx.createRadialGradient(880, 180, 0, 880, 180, 620);
+    glow.addColorStop(0, accent);
+    glow.addColorStop(0.45, "rgba(0,0,0,0)");
+    ctx.globalAlpha = 0.28;
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, 1080, 1350);
+    ctx.globalAlpha = 1;
+
+    ctx.strokeStyle = accent;
+    ctx.lineWidth = 6;
+    ctx.strokeRect(42, 42, 996, 1266);
+    ctx.fillStyle = accent;
+    ctx.fillRect(42, 42, 210, 10);
+
+    ctx.fillStyle = accent;
+    ctx.font = `600 26px ${mono}`;
+    ctx.fillText("CHANNEL SURF // UNOFFICIAL FAN ARCADE", 84, 138);
+
+    ctx.fillStyle = text;
+    ctx.font = `900 76px ${display}`;
+    const titleLines = wrapLines(ctx, payload.title || "Run complete", 900).slice(0, 3);
+    titleLines.forEach((line, index) => ctx.fillText(line, 84, 248 + index * 84));
+
+    let y = 290 + titleLines.length * 84;
+    if (payload.subtitle) {
+      ctx.fillStyle = muted;
+      ctx.font = `400 30px ${mono}`;
+      wrapLines(ctx, payload.subtitle, 900).slice(0, 2).forEach((line) => {
+        ctx.fillText(line, 84, y);
+        y += 42;
+      });
+    }
+
+    y += 40;
+    const stats = payload.stats || [];
+    stats.forEach((stat, index) => {
+      const col = index % 2;
+      const row = Math.floor(index / 2);
+      const x = 84 + col * 470;
+      const sy = y + row * 190;
+      ctx.fillStyle = surface;
+      ctx.fillRect(x, sy, 430, 154);
+      ctx.fillStyle = index % 2 ? accent2 : accent;
+      ctx.fillRect(x, sy, 6, 154);
+      ctx.fillStyle = text;
+      ctx.font = `900 62px ${display}`;
+      ctx.fillText(String(stat.value), x + 34, sy + 84);
+      ctx.fillStyle = muted;
+      ctx.font = `400 24px ${mono}`;
+      ctx.fillText(String(stat.label).toUpperCase(), x + 34, sy + 124);
+    });
+
+    ctx.fillStyle = muted;
+    ctx.font = `400 24px ${mono}`;
+    const foot = payload.footnote || "Unofficial fan project. Not affiliated with Rockstar Games or Take-Two Interactive.";
+    wrapLines(ctx, foot, 900).forEach((line, index) => ctx.fillText(line, 84, 1190 + index * 34));
+
+    ctx.fillStyle = accent2;
+    ctx.font = `600 22px ${mono}`;
+    ctx.fillText(payload.era ? payload.era.toUpperCase() : "", 84, 1284);
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `channel-surf-${(payload.slug || "result").replace(/[^a-z0-9-]+/gi, "-").toLowerCase()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+      showToast("<strong>Card saved.</strong> Drop it anywhere.");
+    }, "image/png");
+  }
+
+  /* ---------------------------------------------------------------------
      AUDIO — synthesized only. No files, no licensing, no autoplay.
      --------------------------------------------------------------------- */
   let audioCtx = null;
@@ -341,46 +724,60 @@
     osc.stop(ctx.currentTime + start + duration + 0.03);
   }
 
+  const SFX_PROFILES = {
+    gta6: { pitch: 1.0, gain: 1.0 },
+    vicecity: { pitch: 1.12, gain: 1.0 },
+    sanandreas: { pitch: 0.94, gain: 1.05 },
+    gta5: { pitch: 1.04, gain: 1.0 },
+    gta4: { pitch: 0.9, gain: 0.95 },
+    warriors: { pitch: 0.82, gain: 1.15 },
+    reddead: { pitch: 0.78, gain: 0.9 },
+    bully: { pitch: 1.08, gain: 0.95 }
+  };
+
   function sfx(kind) {
     if (!state.settings.sound) return;
+    const profile = SFX_PROFILES[document.documentElement.dataset.era] || SFX_PROFILES.gta6;
+    const note = (freq, start, duration, type = "triangle", volume = 0.025) =>
+      tone(freq * profile.pitch, start, duration, type, volume * profile.gain);
     switch (kind) {
       case "click":
-        tone(520, 0, 0.045, "triangle", 0.022);
+        note(520, 0, 0.045, "triangle", 0.022);
         break;
       case "tick":
-        tone(760, 0, 0.025, "square", 0.012);
+        note(760, 0, 0.025, "square", 0.012);
         break;
       case "tune":
-        tone(280, 0, 0.1, "triangle", 0.025);
-        tone(520, 0.05, 0.12, "sine", 0.025);
+        note(280, 0, 0.1, "triangle", 0.025);
+        note(520, 0.05, 0.12, "sine", 0.025);
         break;
       case "correct":
-        tone(660, 0, 0.09, "triangle", 0.03);
-        tone(990, 0.08, 0.16, "sine", 0.028);
+        note(660, 0, 0.09, "triangle", 0.03);
+        note(990, 0.08, 0.16, "sine", 0.028);
         break;
       case "wrong":
-        tone(190, 0, 0.16, "sawtooth", 0.025);
-        tone(130, 0.1, 0.2, "triangle", 0.02);
+        note(190, 0, 0.16, "sawtooth", 0.025);
+        note(130, 0.1, 0.2, "triangle", 0.02);
         break;
       case "win":
-        tone(523, 0, 0.1, "triangle", 0.032);
-        tone(659, 0.09, 0.1, "triangle", 0.032);
-        tone(784, 0.18, 0.14, "triangle", 0.032);
-        tone(1047, 0.29, 0.24, "sine", 0.03);
+        note(523, 0, 0.1, "triangle", 0.032);
+        note(659, 0.09, 0.1, "triangle", 0.032);
+        note(784, 0.18, 0.14, "triangle", 0.032);
+        note(1047, 0.29, 0.24, "sine", 0.03);
         break;
       case "loss":
-        tone(220, 0, 0.16, "triangle", 0.03);
-        tone(165, 0.14, 0.28, "sine", 0.028);
+        note(220, 0, 0.16, "triangle", 0.03);
+        note(165, 0.14, 0.28, "sine", 0.028);
         break;
       case "move":
-        tone(430, 0, 0.035, "triangle", 0.018);
+        note(430, 0, 0.035, "triangle", 0.018);
         break;
       case "unlock":
-        tone(420, 0, 0.05, "square", 0.015);
-        tone(620, 0.05, 0.08, "triangle", 0.025);
+        note(420, 0, 0.05, "square", 0.015);
+        note(620, 0.05, 0.08, "triangle", 0.025);
         break;
       default:
-        tone(500, 0, 0.04, "sine", 0.02);
+        note(500, 0, 0.04, "sine", 0.02);
     }
   }
 
@@ -395,7 +792,8 @@
     star: "star",
     bolt: "bolt",
     book: "book",
-    eye: "eye"
+    eye: "eye",
+    target: "target"
   };
 
   function awardBadge(id, quiet = false) {
@@ -583,7 +981,7 @@
      THEME ENGINE
      --------------------------------------------------------------------- */
   function setEra(era, options = {}) {
-    const { persist = true, flash = true, track = true, silent = false } = options;
+    const { persist = true, flash = false, track = true, silent = false } = options;
     if (!eras[era]) return;
 
     const root = document.documentElement;
@@ -592,6 +990,8 @@
 
     if (persist) {
       state.settings.era = era;
+      state.contentBaseEra = null;
+      state.contentSource = null;
       saveSettings();
     }
     if (track) trackEra(era);
@@ -609,8 +1009,10 @@
     const profile = eras[era];
     const freq = $("#tunerFreq");
     const station = $("#tunerStation");
+    const short = $("#tunerShort");
     if (freq) freq.textContent = profile.freq;
     if (station) station.textContent = profile.station;
+    if (short) short.textContent = profile.short;
 
     renderAmbient(era);
     renderOnAir(era);
@@ -621,11 +1023,51 @@
       if (!silent) sfx("tune");
     }
 
-    if (state.currentView === "arcade") {
+    if (state.currentView === "home") {
       renderSpotlight();
       renderEraRack();
     }
     if (state.currentView === "atlas") renderAtlas();
+    if (state.currentView === "toolkit" || state.currentView === "home") renderRadioList();
+    updateThemeMode();
+  }
+
+  function contentBaseEra() {
+    return document.documentElement.dataset.era === "home"
+      ? state.settings.era
+      : document.documentElement.dataset.era;
+  }
+
+  function previewContentEra(era, source) {
+    if (!eras[era]) return;
+    if (!state.contentBaseEra) state.contentBaseEra = contentBaseEra();
+    state.contentSource = source || "content";
+    if (document.documentElement.dataset.era !== era) {
+      setEra(era, { persist: false, flash: false, track: true, silent: true });
+    }
+    updateThemeMode();
+  }
+
+  function restoreContentEra(source) {
+    if (source && state.contentSource && state.contentSource !== source) return;
+    if (state.contentBaseEra && state.contentBaseEra !== document.documentElement.dataset.era) {
+      setEra(state.contentBaseEra, { persist: false, flash: false, track: false, silent: true });
+    }
+    state.contentBaseEra = null;
+    state.contentSource = null;
+    updateThemeMode();
+  }
+
+  function updateThemeMode() {
+    const el = $("#themeMode");
+    if (!el) return;
+    let text = "Theme: locked";
+    if (document.documentElement.dataset.era === "home") text = "Theme: home";
+    else if (state.contentSource) text = "Theme: content";
+    else if (state.currentView === "story" && state.settings.storyFollowEra) text = "Theme: following story";
+    else if (state.currentView === "trivia" && state.trivia?.forcedMorph) text = "Theme: following trivia";
+    el.textContent = text;
+    el.dataset.following = String(text !== "Theme: locked");
   }
 
   function flashSignal() {
@@ -640,7 +1082,7 @@
     if (!rail) return;
     rail.innerHTML = eraOrder.map((key) => {
       const era = eras[key];
-      return `<button class="station-btn" type="button" role="tab" aria-selected="${document.documentElement.dataset.era === key}" data-station="${key}" title="${escapeHTML(era.name)} — ${escapeHTML(era.station)}">${escapeHTML(era.short)}</button>`;
+      return `<button class="station-btn" type="button" role="tab" aria-selected="${document.documentElement.dataset.era === key}" data-station="${key}" title="${escapeHTML(era.name)} - ${escapeHTML(era.station)}"><span class="station-btn-short">${escapeHTML(era.short)}</span><span class="station-btn-name">${escapeHTML(era.name)}</span></button>`;
     }).join("");
   }
 
@@ -696,7 +1138,8 @@
   };
 
   function renderSpotlight() {
-    const era = document.documentElement.dataset.era;
+    const activeEra = document.documentElement.dataset.era;
+    const era = activeEra === "home" ? state.settings.era : activeEra;
     const profile = eras[era];
     const data = atlas[era];
     if (!profile || !data) return;
@@ -718,16 +1161,467 @@
   }
 
   /* ---------------------------------------------------------------------
-     HOME RENDERERS
+     GAMES HUB
      --------------------------------------------------------------------- */
+  function renderGames() {
+    Promise.all([ensureGames(), ensureImageCredits()]).then(() => {
+      if (state.currentView === "games") renderGamesGrid();
+    });
+    renderGamesGrid();
+  }
+
+  function renderGamesGrid() {
+    const grid = $("#gamesContent");
+    if (!grid) return;
+    const games = state.games || [];
+    const count = $("#gamesCount");
+    if (count && games.length) count.textContent = pad2(games.length);
+    if (!games.length) {
+      grid.innerHTML = '<p class="panel small muted">Game pages could not load. The lore and story hubs still work.</p>';
+      return;
+    }
+    const ordered = [...games].sort((a, b) => (a.release || 0) - (b.release || 0));
+    grid.innerHTML = ordered.map((game) => {
+      const era = eras[game.theme] || eras.gta6;
+      const accent = ERA_ACCENTS[game.theme] || "var(--accent)";
+      const credit = (state.imageCredits || {})[game.image];
+      const art = credit
+        ? `<div class="game-dossier-art"><img src="${escapeHTML(credit.file)}" alt="${escapeHTML(credit.alt)}" loading="lazy"><a class="photo-credit" href="${escapeHTML(credit.source)}" target="_blank" rel="noopener noreferrer">Real-world inspiration · ${escapeHTML(credit.artist)}</a></div>`
+        : `<div class="game-dossier-art">${eraPosterArt(game.theme)}</div>`;
+      return `<article class="game-dossier" style="--game-accent:${accent}">
+        ${art}
+        <div class="game-dossier-head">
+          <span class="game-dossier-year">${escapeHTML(String(game.release || game.year))}</span>
+          <span class="tag">${escapeHTML(era.short)}</span>
+        </div>
+        <h3>${avatarHTML(game.shortName, game.theme)} ${escapeHTML(game.name)}</h3>
+        <p>${escapeHTML(game.blurb)}</p>
+        <p class="game-dossier-meta">${escapeHTML((game.characters || []).slice(0, 3).join(" · "))}</p>
+        <div class="game-dossier-foot">
+          <a class="btn btn-ghost btn-sm" href="games/${escapeHTML(game.slug)}/">Open game page</a>
+          <span class="text-link">${escapeHTML(game.shortName)} →</span>
+        </div>
+      </article>`;
+    }).join("");
+  }
+
+  /* ---------------------------------------------------------------------
+     LORE HUB
+     --------------------------------------------------------------------- */
+  const LORE_TYPES = ["all", "location", "character", "faction", "franchise"];
+
+  function renderLoreHub() {
+    syncLoreTheme();
+    ensureLoreArchive().then(() => {
+      if (state.currentView !== "lore") return;
+      renderLoreFilters();
+      renderLoreGrid();
+      renderLoreDetail();
+    });
+    renderLoreFilters();
+    renderLoreGrid();
+  }
+
+  function renderLoreFilters() {
+    const eraBar = $("#loreEraFilters");
+    if (eraBar) {
+      eraBar.innerHTML = [`<button class="chip" type="button" data-lore-era="all" aria-pressed="${state.loreFilter === "all"}">All eras</button>`]
+        .concat(eraOrder.map((key) => `<button class="chip" type="button" data-lore-era="${key}" aria-pressed="${state.loreFilter === key}">${escapeHTML(eras[key].short)}</button>`))
+        .join("");
+    }
+    const typeBar = $("#loreTypeFilters");
+    if (typeBar) {
+      typeBar.innerHTML = LORE_TYPES.map((type) => `
+        <button class="chip" type="button" data-lore-type="${type}" aria-pressed="${state.loreType === type}">${type === "all" ? "Everything" : type.charAt(0).toUpperCase() + type.slice(1)}</button>
+      `).join("");
+    }
+    const search = $("#loreSearch");
+    if (search && search.value !== state.loreQuery) search.value = state.loreQuery;
+  }
+
+  function loreMatches(item) {
+    if (state.loreFilter !== "all" && item.era !== state.loreFilter) return false;
+    if (state.loreType !== "all" && item.type !== state.loreType) return false;
+    const query = state.loreQuery.trim().toLowerCase();
+    if (!query) return true;
+    return `${item.title} ${item.summary} ${(item.tags || []).join(" ")} ${item.type || ""}`.toLowerCase().includes(query);
+  }
+
+  function renderLoreGrid() {
+    const grid = $("#loreContent");
+    if (!grid) return;
+    const lore = state.lore || [];
+    if (!lore.length) {
+      grid.innerHTML = '<p class="small muted panel">The archive could not load. Core play still works.</p>';
+      return;
+    }
+    const filtered = lore.filter(loreMatches);
+    const count = $("#loreCount");
+    if (count) count.textContent = filtered.length;
+    if (!filtered.length) {
+      grid.innerHTML = '<p class="small muted panel">No entries match that filter.</p>';
+      return;
+    }
+    grid.innerHTML = filtered.map((item) => `
+      <div class="lore-card ${state.loreSelected === item.id ? "is-active" : ""}" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0">
+        <div class="lore-card-head">${avatarHTML(item.title, item.era)}<span class="lore-type">${escapeHTML(item.type || "lore")}</span></div>
+        <h3>${escapeHTML(item.title)}</h3>
+        <p>${escapeHTML(item.summary)}</p>
+        <div class="lore-card-foot">
+          <span>${escapeHTML(eras[item.era]?.name || item.era)}</span>
+          <span class="text-link">Read →</span>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function renderLoreDetail() {
+    const box = $("#loreDetail");
+    if (!box) return;
+    const item = (state.lore || []).find((entry) => entry.id === state.loreSelected);
+    if (!item) {
+      box.classList.add("hidden");
+      box.innerHTML = "";
+      return;
+    }
+    previewContentEra(item.era, "lore");
+    box.classList.remove("hidden");
+    box.innerHTML = `
+      <div class="lore-detail-head">
+        <div class="lore-detail-title">
+          ${avatarHTML(item.title, item.era)}
+          <div>
+            <span class="detail-kicker">${escapeHTML(item.type || "lore")} · ${escapeHTML(eras[item.era]?.name || item.era)}</span>
+            <h3>${escapeHTML(item.title)}</h3>
+          </div>
+        </div>
+        <button class="btn btn-quiet btn-sm" type="button" data-lore-close>Close</button>
+      </div>
+      <p>${escapeHTML(item.summary)}</p>
+      <div class="chip-row">${(item.tags || []).map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join("")}</div>
+      <div class="lore-actions">
+        <button class="btn btn-quiet btn-sm" type="button" data-lore-wiki="${escapeHTML(item.wikiTitle)}">Live summary</button>
+        <a class="text-link" href="${escapeHTML(item.source)}" target="_blank" rel="noopener noreferrer">Source</a>
+        <button class="btn btn-ghost btn-sm" type="button" data-route="atlas">Open atlas</button>
+        <button class="btn btn-ghost btn-sm" type="button" data-route="play">Play the arcade</button>
+      </div>
+      <div class="live-lore" id="loreLive" hidden></div>
+    `;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) box.scrollIntoView({ block: "nearest" });
+    else box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  /* ---------------------------------------------------------------------
+     STORY TIMELINE
+     --------------------------------------------------------------------- */
+  function storyEvents() {
+    const story = state.story || [];
+    return state.storyFilter === "all" ? story : story.filter((event) => event.era === state.storyFilter);
+  }
+
+  function updateStoryToggles() {
+    const spoiler = $("#storySpoilerToggle");
+    if (spoiler) {
+      spoiler.textContent = `Spoilers: ${state.settings.storySpoilers ? "on" : "off"}`;
+      spoiler.setAttribute("aria-pressed", String(state.settings.storySpoilers));
+    }
+    const follow = $("#storyFollowToggle");
+    if (follow) {
+      follow.textContent = `Follow era: ${state.settings.storyFollowEra ? "on" : "off"}`;
+      follow.setAttribute("aria-pressed", String(state.settings.storyFollowEra));
+    }
+  }
+
+  function storyCardHTML(event, index, active) {
+    return `<button class="story-card ${active ? "is-active" : ""}" type="button" data-story-id="${escapeHTML(event.id)}" style="--story-accent:${ERA_ACCENTS[event.era] || "var(--accent)"}">
+      <span class="story-card-top"><span class="story-card-year">${escapeHTML(String(event.year))}</span><span class="story-card-era">${escapeHTML(eras[event.era]?.short || event.era)}</span></span>
+      <strong>${escapeHTML(event.title)}</strong>
+      <small>${escapeHTML(event.game)}</small>
+      <span class="story-card-index">${pad2(index + 1)}</span>
+    </button>`;
+  }
+
+  function renderStoryView() {
+    const content = $("#storyContent");
+    if (!content) return;
+    updateStoryToggles();
+
+    if (!state.story) {
+      content.innerHTML = '<p class="panel small muted">Loading the story timeline…</p>';
+      ensureStory().then(() => {
+        if (state.currentView === "story") renderStoryView();
+      });
+      return;
+    }
+
+    if (!state.storyBaseEra) state.storyBaseEra = contentBaseEra();
+    const events = storyEvents();
+    if (!events.length) {
+      content.innerHTML = '<p class="panel small muted">No story beats match that filter.</p>';
+      return;
+    }
+
+    if (!events.some((event) => event.id === state.storySelected)) {
+      state.storySelected = events[0].id;
+      state.storyIndex = 0;
+    }
+
+    const eraChips = [`<button class="chip" type="button" data-story-era="all" aria-pressed="${state.storyFilter === "all"}">All eras</button>`]
+      .concat(eraOrder.map((key) => `<button class="chip" type="button" data-story-era="${key}" aria-pressed="${state.storyFilter === key}">${escapeHTML(eras[key].short)}</button>`))
+      .join("");
+
+    const selected = events.find((event) => event.id === state.storySelected) || events[0];
+
+    content.innerHTML = `
+      <div class="story-toolbar">
+        <div class="chip-row" id="storyFilters" role="group" aria-label="Filter story by era">${eraChips}</div>
+        <div class="story-nav">
+          <button class="btn btn-ghost btn-sm" type="button" data-story-prev aria-label="Previous story beat">← Prev</button>
+          <span class="story-counter" id="storyCounter">1 / ${events.length}</span>
+          <button class="btn btn-ghost btn-sm" type="button" data-story-next aria-label="Next story beat">Next →</button>
+        </div>
+      </div>
+      <div class="story-stage">
+        <div class="story-backdrop" id="storyBackdrop" aria-hidden="true">${eraPosterArt(selected.era)}</div>
+        <div class="story-rail" id="storyRail" tabindex="0" aria-label="Story timeline, horizontally scrollable">
+          ${events.map((event, index) => storyCardHTML(event, index, event.id === state.storySelected)).join("")}
+        </div>
+      </div>
+      <div class="story-progress" id="storyProgress" role="tablist" aria-label="Story beats">
+        ${events.map((event, index) => `<button class="story-dot ${event.id === state.storySelected ? "is-active" : ""}" type="button" data-story-id="${escapeHTML(event.id)}" aria-label="${escapeHTML(event.title)}"><span>${pad2(index + 1)}</span></button>`).join("")}
+      </div>
+      <div class="story-detail" id="storyDetail" aria-live="polite"></div>
+    `;
+
+    renderStoryDetail();
+    bindStoryRail();
+    if (state.settings.storyFollowEra) {
+      const active = currentStoryEvent();
+      if (active) setEra(active.era, { persist: false, flash: false, track: true, silent: true });
+    }
+    window.setTimeout(() => {
+      const active = content.querySelector(".story-card.is-active");
+      if (active) active.scrollIntoView({ behavior: "auto", block: "nearest", inline: "center" });
+    }, 30);
+  }
+
+  function currentStoryEvent() {
+    return (state.story || []).find((event) => event.id === state.storySelected) || storyEvents()[0] || null;
+  }
+
+  function renderStoryDetail() {
+    const box = $("#storyDetail");
+    if (!box) return;
+    const event = currentStoryEvent();
+    if (!event) {
+      box.innerHTML = "";
+      return;
+    }
+    const revealed = state.settings.storySpoilers || !event.spoiler;
+    box.innerHTML = `
+      <div class="story-detail-art">${eraPosterArt(event.era)}</div>
+      <div class="story-detail-body">
+        <span class="detail-kicker">${escapeHTML(event.game)} · ${escapeHTML(String(event.year))}</span>
+        <h3>${escapeHTML(event.title)}</h3>
+        <p>${escapeHTML(event.summary)}</p>
+        ${revealed
+          ? `<p class="story-full">${escapeHTML(event.detail)}</p>`
+          : `<div class="spoiler-box"><p><strong>Spoiler warning.</strong> This entry contains story details.</p><button class="btn btn-quiet btn-sm" type="button" data-story-reveal>Reveal this entry</button></div>`}
+        <div class="chip-row">
+          ${(event.characters || []).map((name) => `<span class="tag tag-avatar">${avatarHTML(name, event.era)}${escapeHTML(name)}</span>`).join("")}
+          ${(event.locations || []).map((name) => `<span class="tag">${escapeHTML(name)}</span>`).join("")}
+        </div>
+        <div class="story-detail-actions">
+          <button class="btn btn-ghost btn-sm" type="button" data-story-prev>← Previous</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-story-next>Next →</button>
+          <button class="btn btn-quiet btn-sm" type="button" data-route="atlas">Open atlas</button>
+          <button class="btn btn-quiet btn-sm" type="button" data-route="play">Play the arcade</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function activateStoryEvent(id, options = {}) {
+    const events = storyEvents();
+    const index = events.findIndex((event) => event.id === id);
+    if (index < 0) return;
+    const event = events[index];
+    state.storyIndex = index;
+    state.storySelected = event.id;
+
+    const content = $("#storyContent");
+    content?.querySelectorAll(".story-card").forEach((card) => {
+      card.classList.toggle("is-active", card.dataset.storyId === event.id);
+    });
+    content?.querySelectorAll(".story-dot").forEach((dot) => {
+      dot.classList.toggle("is-active", dot.dataset.storyId === event.id);
+    });
+    const counter = $("#storyCounter");
+    if (counter) counter.textContent = `${index + 1} / ${events.length}`;
+    const backdrop = $("#storyBackdrop");
+    if (backdrop) backdrop.innerHTML = eraPosterArt(event.era);
+
+    renderStoryDetail();
+    if (state.settings.storyFollowEra) {
+      setEra(event.era, { persist: false, flash: false, track: true, silent: true });
+    }
+    if (options.scroll) {
+      const card = content?.querySelector(`.story-card[data-story-id="${event.id}"]`);
+      card?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+    if (options.focus) {
+      const card = content?.querySelector(`.story-card[data-story-id="${event.id}"]`);
+      card?.focus({ preventScroll: true });
+    }
+  }
+
+  function stepStory(direction) {
+    const events = storyEvents();
+    if (!events.length) return;
+    const next = (state.storyIndex + direction + events.length) % events.length;
+    activateStoryEvent(events[next].id, { scroll: true });
+  }
+
+  function bindStoryRail() {
+    const rail = $("#storyRail");
+    if (!rail) return;
+    let frame = null;
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = null;
+        if (!state.story || state.currentView !== "story") return;
+        const cards = Array.from(rail.querySelectorAll(".story-card"));
+        if (!cards.length) return;
+        const center = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+        let best = cards[0];
+        let bestDistance = Infinity;
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          const distance = Math.abs(rect.left + rect.width / 2 - center);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            best = card;
+          }
+        });
+        if (best && best.dataset.storyId !== state.storySelected) {
+          activateStoryEvent(best.dataset.storyId, { scroll: false });
+        }
+      });
+    };
+    rail.addEventListener("scroll", onScroll, { passive: true });
+    rail.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") { event.preventDefault(); stepStory(1); }
+      if (event.key === "ArrowLeft") { event.preventDefault(); stepStory(-1); }
+      if (event.key === "Home") { event.preventDefault(); activateStoryEvent(storyEvents()[0]?.id, { scroll: true }); }
+      if (event.key === "End") { event.preventDefault(); const events = storyEvents(); activateStoryEvent(events[events.length - 1]?.id, { scroll: true }); }
+    });
+  }
+
+  function restoreStoryEra() {
+    if (!state.settings.storyFollowEra) return;
+    if (state.storyBaseEra && state.storyBaseEra !== document.documentElement.dataset.era) {
+      setEra(state.storyBaseEra, { persist: false, flash: false, track: false, silent: true });
+    }
+    state.storyBaseEra = null;
+  }
+
+  /* ---------------------------------------------------------------------
+     REAL VS REEL PAGE
+     --------------------------------------------------------------------- */
+  function renderReelPage() {
+    const container = $("#reelContent");
+    if (!container) return;
+    container.innerHTML = `
+      <section class="panel reel-panel" aria-label="Real world inspiration map">
+        <div class="atlas-map-head">
+          <div>
+            <h3>Real vs Reel</h3>
+            <p>Real-world cities that echo the fictional map. Live vector map via MapLibre and OpenFreeMap.</p>
+          </div>
+          <span class="tag">MapLibre · OpenFreeMap</span>
+        </div>
+        <div class="reel-map" id="reelMap"></div>
+        <p class="small muted" id="reelStatus">Loading real-world map…</p>
+        <div class="reel-cards" id="reelCards"></div>
+        <p class="small muted reel-attribution">Map data © OpenStreetMap contributors · tiles by OpenFreeMap. Comparison notes are original editorial commentary.</p>
+      </section>`;
+    initReelView();
+  }
+
+  /* ---------------------------------------------------------------------
+     ARCADE HUB
+     --------------------------------------------------------------------- */
+  function renderPlay() {
+    renderHomeGameCards();
+    renderToolCards();
+    renderBadgeShelf();
+  }
   function renderHome() {
     renderDaily();
     updateStatsUI();
     renderSpotlight();
-    renderHomeGameCards();
-    renderToolCards();
     renderEraRack();
-    renderBadgeShelf();
+
+    ensureLoreArchive().then(() => {
+      renderHomeLore();
+      const metaLore = $("#metaLore");
+      if (metaLore) metaLore.textContent = pad2((state.lore || []).length);
+    });
+    ensureStory().then(() => {
+      renderHomeStoryStrip();
+      const metaStory = $("#metaStory");
+      if (metaStory) metaStory.textContent = (state.story || []).length;
+    });
+
+    renderHomeLore();
+    renderHomeStoryStrip();
+  }
+
+  function renderHomeLore() {
+    const grid = $("#homeLoreCards");
+    if (!grid) return;
+    const lore = state.lore && state.lore.length ? state.lore : featuredLore;
+    if (!lore.length) {
+      grid.innerHTML = '<p class="small muted">Loading the archive…</p>';
+      return;
+    }
+    const featured = ["leonida-vice-city", "tommy-vercetti", "grove-street", "jason-lucia"]
+      .map((id) => lore.find((item) => item.id === id))
+      .filter(Boolean);
+    const picks = featured.length ? featured : lore.slice(0, 4);
+    grid.innerHTML = picks.map((item) => `
+      <div class="lore-card" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0">
+        <div class="lore-card-head">${avatarHTML(item.title, item.era)}<span class="lore-type">${escapeHTML(item.type || "lore")}</span></div>
+        <h3>${escapeHTML(item.title)}</h3>
+        <p>${escapeHTML(item.summary)}</p>
+        <div class="lore-card-foot">
+          <span>${escapeHTML(eras[item.era]?.name || item.era)}</span>
+          <span class="text-link">Read →</span>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function renderHomeStoryStrip() {
+    const strip = $("#homeStoryStrip");
+    if (!strip) return;
+    const story = state.story && state.story.length ? state.story : featuredStory;
+    if (!story.length) {
+      strip.innerHTML = '<p class="small muted">Loading the timeline…</p>';
+      return;
+    }
+    const picks = story.length <= 5 ? story : [story[0], story[4], story[12], story[20], story[story.length - 1]].filter(Boolean);
+    strip.innerHTML = picks.map((event, index) => `
+      <button class="home-story-card" type="button" data-story-jump="${escapeHTML(event.id)}">
+        <span class="home-story-year">${escapeHTML(String(event.year))}</span>
+        <span class="home-story-copy">
+          <strong>${escapeHTML(event.title)}</strong>
+          <small>${escapeHTML(event.game)}</small>
+        </span>
+        <span class="home-story-index">${pad2(index + 1)}</span>
+      </button>
+    `).join("");
   }
 
   function renderDaily() {
@@ -803,6 +1697,16 @@
         accent: "var(--accent-2)"
       },
       {
+        open: "puzzles",
+        tab: "dossier",
+        icon: "target",
+        title: "Clue Dossier",
+        copy: "Three field notes, four districts, two tries. Read the vibe and name the place before the file goes cold.",
+        meta: "Deduction",
+        score: `${stats.dossierSolves} closed`,
+        accent: "var(--accent)"
+      },
+      {
         open: "atlas",
         icon: "atlas",
         title: "The Era Atlas",
@@ -822,10 +1726,10 @@
       }
     ];
 
-    const grid = $("#homeGameGrid");
+    const grid = $("#playGameGrid");
     if (!grid) return;
     grid.innerHTML = cards.map((card) => `
-      <article class="game-card" role="button" tabindex="0" data-open="${card.open}"${card.mode ? ` data-mode="${card.mode}"` : ""}${card.tab ? ` data-tab="${card.tab}"` : ""} style="--card-accent:${card.accent}">
+      <div class="game-card" role="button" tabindex="0" data-open="${card.open}"${card.mode ? ` data-mode="${card.mode}"` : ""}${card.tab ? ` data-tab="${card.tab}"` : ""} style="--card-accent:${card.accent}">
         <span class="game-icon">${icon(card.icon)}</span>
         <h3>${escapeHTML(card.title)}</h3>
         <p>${escapeHTML(card.copy)}</p>
@@ -834,7 +1738,7 @@
           <span class="score">${escapeHTML(card.score)}</span>
           <span class="play-mark">${icon("arrow")}</span>
         </div>
-      </article>
+      </div>
     `).join("");
   }
 
@@ -865,12 +1769,12 @@
     const grid = $("#toolGrid");
     if (!grid) return;
     grid.innerHTML = tools.map((tool) => `
-      <article class="tool-card" role="button" tabindex="0" data-open="${tool.open}">
+      <div class="tool-card" role="button" tabindex="0" data-open="${tool.open}">
         <span class="tool-number">${tool.number}</span>
         <h3>${escapeHTML(tool.title)}</h3>
         <p>${escapeHTML(tool.copy)}</p>
         <span class="text-link">${escapeHTML(tool.link)} →</span>
-      </article>
+      </div>
     `).join("");
   }
 
@@ -880,7 +1784,7 @@
     rack.innerHTML = eraOrder.map((key) => {
       const era = eras[key];
       const visited = state.stats.erasSeen.includes(key);
-      return `<button class="era-tile" type="button" data-era-tile="${key}" data-visited="${visited}" style="--tile-accent:${ERA_ACCENTS[key]}">
+      return `<button class="era-tile" type="button" data-era-tile="${key}" data-visited="${visited}" style="--tile-accent:${ERA_ACCENTS[key]};--tile-image:url('${ERA_IMAGES[key]}')">
         <span>
           <strong>${escapeHTML(era.name)}</strong>
           <small>${escapeHTML(era.station)} · ${escapeHTML(era.year)}</small>
@@ -907,24 +1811,31 @@
   /* ---------------------------------------------------------------------
      ROUTER
      --------------------------------------------------------------------- */
-  const ROUTES = ["arcade", "trivia", "puzzles", "atlas", "timeline", "toolkit", "about"];
+  const ROUTES = ["home", "games", "lore", "story", "reel", "play", "trivia", "puzzles", "atlas", "timeline", "toolkit", "about"];
 
   function navigate(view, options = {}) {
-    if (!ROUTES.includes(view)) view = "arcade";
+    if (!ROUTES.includes(view)) view = "home";
     const previous = state.currentView;
     state.currentView = view;
+    const navView = view === "reel" ? "atlas" : (view === "lore" ? "games" : (view === "trivia" || view === "puzzles" ? "play" : view));
 
     $$(".view").forEach((panel) => {
       panel.classList.toggle("is-active", panel.dataset.view === view);
     });
 
     $$(".nav-link").forEach((link) => {
-      const active = link.dataset.route === view;
+      const active = link.dataset.route === navView;
       if (active) link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     });
 
-    document.title = ROUTE_TITLES[view] || ROUTE_TITLES.arcade;
+    $$(".atlas-subnav [data-route]").forEach((link) => {
+      const active = link.dataset.route === (view === "reel" ? "reel" : "atlas");
+      if (active) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+
+    document.title = ROUTE_TITLES[view] || ROUTE_TITLES.home;
 
     if (!options.fromHash && window.location.hash !== "#" + view) {
       try {
@@ -942,13 +1853,29 @@
       menuButton.setAttribute("aria-label", "Open navigation");
     }
 
+    if (previous === "story" && view !== "story") restoreStoryEra();
+    if (previous === "lore" && view !== "lore") restoreContentEra("lore");
+    if (previous === "trivia" && view !== "trivia" && state.trivia?.baseEra && state.trivia.baseEra !== document.documentElement.dataset.era) {
+      setEra(state.trivia.baseEra, { persist: false, flash: false, track: false, silent: true });
+    }
+    if (view === "home") {
+      setEra("home", { persist: false, flash: false, track: false, silent: true });
+    } else if (previous === "home" && document.documentElement.dataset.era === "home") {
+      setEra(state.settings.era, { persist: false, flash: false, track: false, silent: true });
+    }
+    if (view === "home") renderHome();
+    if (view === "games") renderGames();
+    if (view === "lore") renderLoreHub();
+    if (view === "story") renderStoryView();
+    if (view === "reel") renderReelPage();
+    if (view === "play") renderPlay();
     if (view === "trivia") renderTriviaSetup();
     if (view === "puzzles") renderPuzzleTab();
     if (view === "atlas") renderAtlas();
     if (view === "timeline") renderTimeline();
     if (view === "toolkit") renderHeist();
     if (view === "about") renderAbout();
-    if (view === "arcade") renderHome();
+    updateThemeMode();
 
     if (!options.noScroll) {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1013,7 +1940,7 @@
     if (brand) {
       brand.addEventListener("click", (event) => {
         event.preventDefault();
-        navigate("arcade");
+        navigate("home");
       });
     }
 
@@ -1032,6 +1959,14 @@
     });
   }
 
+  function setEraPanel(open) {
+    const panel = $("#eraPanel");
+    const toggle = $("#eraToggle");
+    if (!panel || !toggle) return;
+    panel.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+  }
+
   function initTuner() {
     renderStationButtons();
 
@@ -1039,8 +1974,26 @@
     if (rail) {
       rail.addEventListener("click", (event) => {
         const button = event.target.closest("[data-station]");
-        if (button) setEra(button.dataset.station);
+        if (button) {
+          setEra(button.dataset.station);
+          setEraPanel(false);
+        }
       });
+    }
+
+    const eraToggle = $("#eraToggle");
+    const eraPanel = $("#eraPanel");
+    if (eraToggle && eraPanel) {
+      eraToggle.addEventListener("click", () => setEraPanel(eraPanel.hidden));
+      document.addEventListener("click", (event) => {
+        if (eraPanel.hidden) return;
+        if (event.target.closest("#eraPanel") || event.target.closest("#eraToggle")) return;
+        setEraPanel(false);
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setEraPanel(false);
+      });
+      $("#menuToggle")?.addEventListener("click", () => setEraPanel(false));
     }
 
     const rotate = (direction) => {
@@ -1059,8 +2012,9 @@
       auto.addEventListener("change", () => {
         state.settings.autoMorph = auto.checked;
         saveSettings();
+        updateThemeMode();
         sfx("click");
-        showToast(auto.checked ? "<strong>Auto-morph on</strong> — each trivia question changes the signal." : "Auto-morph off — the tuner is yours.");
+        showToast(auto.checked ? "<strong>Follow trivia era on</strong> — trivia questions can change the signal." : "Follow trivia era off — the tuner is yours.");
       });
     }
   }
@@ -1109,9 +2063,12 @@
     }
 
     $("#streakChip")?.addEventListener("click", () => {
-      navigate("arcade");
+      navigate("home");
       window.setTimeout(() => $("#dailyCard")?.scrollIntoView({ behavior: "smooth", block: "center" }), 150);
     });
+
+    $("#heroLoreBtn")?.addEventListener("click", () => navigate("lore"));
+    $("#heroStoryBtn")?.addEventListener("click", () => navigate("story"));
 
     $("#heroDailyBtn")?.addEventListener("click", () => {
       navigate("trivia");
@@ -1136,10 +2093,12 @@
       startDailyVault();
     });
 
+    $("#dailyDossierBtn")?.addEventListener("click", startDailyDossier);
+
     $("#onairAtlas")?.addEventListener("click", () => navigate("atlas"));
     $("#spotlightBtn")?.addEventListener("click", () => navigate("atlas"));
 
-    const homeGrid = $("#homeGameGrid");
+    const playGrid = $("#playGameGrid");
     const toolGrid = $("#toolGrid");
     const rack = $("#eraRack");
 
@@ -1150,7 +2109,7 @@
       event.preventDefault();
       openContent(card.dataset.open, card.dataset);
     };
-    homeGrid?.addEventListener("keydown", handleCardKey);
+    playGrid?.addEventListener("keydown", handleCardKey);
     toolGrid?.addEventListener("keydown", handleCardKey);
 
     rack?.addEventListener("click", (event) => {
@@ -1183,15 +2142,353 @@
   }
 
   /* ---------------------------------------------------------------------
+     SIGNAL RADIO — optional, user-initiated, license-labelled
+     --------------------------------------------------------------------- */
+  /* ---------------------------------------------------------------------
+     LORE + STORY EVENTS
+     --------------------------------------------------------------------- */
+  function syncLoreTheme() {
+    const item = (state.lore || []).find((entry) => entry.id === state.loreSelected);
+    if (state.loreFilter !== "all") {
+      previewContentEra(state.loreFilter, "lore");
+    } else if (item) {
+      previewContentEra(item.era, "lore");
+    } else {
+      restoreContentEra("lore");
+    }
+  }
+
+  function initLoreStoryEvents() {
+    document.addEventListener("click", (event) => {
+      const loreOpen = event.target.closest("[data-lore-open]");
+      if (loreOpen) {
+        state.loreSelected = loreOpen.dataset.loreOpen;
+        navigate("lore");
+        renderLoreHub();
+        renderLoreDetail();
+        return;
+      }      const storyJump = event.target.closest("[data-story-jump]");
+      if (storyJump) {
+        state.storySelected = storyJump.dataset.storyJump;
+        state.storyFilter = "all";
+        navigate("story");
+        return;
+      }
+      if (event.target.closest("[data-lore-close]")) {
+        state.loreSelected = null;
+        syncLoreTheme();
+        renderLoreDetail();
+        renderLoreGrid();
+        return;
+      }
+      const wiki = event.target.closest("[data-lore-wiki]");
+      if (wiki) {
+        loadWikiInto($("#loreLive"), wiki.dataset.loreWiki);
+      }
+    });
+
+    $("#loreEraFilters")?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-lore-era]");
+      if (!button) return;
+      state.loreFilter = button.dataset.loreEra;
+      syncLoreTheme();
+      renderLoreFilters();
+      renderLoreGrid();
+    });
+
+    $("#loreTypeFilters")?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-lore-type]");
+      if (!button) return;
+      state.loreType = button.dataset.loreType;
+      renderLoreFilters();
+      renderLoreGrid();
+    });
+
+    $("#loreSearch")?.addEventListener("input", (event) => {
+      state.loreQuery = event.target.value;
+      renderLoreGrid();
+    });
+
+    $("#storyContent")?.addEventListener("click", (event) => {
+      const eraButton = event.target.closest("[data-story-era]");
+      if (eraButton) {
+        state.storyFilter = eraButton.dataset.storyEra;
+        state.storySelected = null;
+        renderStoryView();
+        return;
+      }
+      if (event.target.closest("[data-story-prev]")) { stepStory(-1); return; }
+      if (event.target.closest("[data-story-next]")) { stepStory(1); return; }
+      if (event.target.closest("[data-story-reveal]")) {
+        state.settings.storySpoilers = true;
+        saveSettings();
+        updateStoryToggles();
+        renderStoryDetail();
+        return;
+      }
+      const card = event.target.closest("[data-story-id]");
+      if (card) activateStoryEvent(card.dataset.storyId, { scroll: true });
+    });
+
+    $("#storySpoilerToggle")?.addEventListener("click", () => {
+      state.settings.storySpoilers = !state.settings.storySpoilers;
+      saveSettings();
+      updateStoryToggles();
+      renderStoryDetail();
+      sfx("click");
+    });
+
+    $("#storyFollowToggle")?.addEventListener("click", () => {
+      state.settings.storyFollowEra = !state.settings.storyFollowEra;
+      saveSettings();
+      updateStoryToggles();
+      if (state.settings.storyFollowEra) {
+        const event = currentStoryEvent();
+        if (event) setEra(event.era, { persist: false, flash: false, track: true, silent: true });
+      } else {
+        restoreStoryEra();
+      }
+      updateThemeMode();
+      sfx("click");
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest("[data-lore-open]");
+      if (!card) return;
+      event.preventDefault();
+      state.loreSelected = card.dataset.loreOpen;
+      navigate("lore");
+      renderLoreHub();
+      renderLoreDetail();
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+     SEARCH / COMMAND PALETTE
+     --------------------------------------------------------------------- */
+  function buildSearchIndex() {
+    const items = [
+      { type: "view", title: "Home", subtitle: "Lore-first landing page", view: "home" },
+      { type: "view", title: "Games", subtitle: "Theme-per-game dossiers", view: "games" },
+      { type: "view", title: "Rockstar Elsewhere", subtitle: "Max Payne, Manhunt, Midnight Club", href: "elsewhere.html" },
+      { type: "view", title: "Lore", subtitle: "The Wire Archive", view: "lore" },
+      { type: "view", title: "Atlas", subtitle: "Fictional map and Geo-Guess", view: "atlas" },
+      { type: "view", title: "Story Timeline", subtitle: "In-universe chronology", view: "story" },
+      { type: "view", title: "Real vs Reel", subtitle: "Real-world map comparisons", view: "reel" },
+      { type: "view", title: "Arcade", subtitle: "Trivia, puzzles, and tools", view: "play" },
+      { type: "view", title: "About / Disclaimer", subtitle: "Project and IP notice", view: "about" }
+    ];
+    eraOrder.forEach((key) => {
+      items.push({ type: "era", title: eras[key].name, subtitle: `${eras[key].short} · ${eras[key].year}`, era: key });
+    });
+    (state.lore || []).forEach((item) => {
+      items.push({ type: item.type || "lore", title: item.title, subtitle: `${eras[item.era]?.name || item.era} · ${item.summary}`, view: "lore", loreId: item.id });
+    });
+    (state.story || []).forEach((event) => {
+      items.push({ type: "story", title: `${event.year} · ${event.title}`, subtitle: event.game, view: "story", storyId: event.id });
+    });
+    (state.games || []).forEach((game) => {
+      items.push({ type: "game", title: game.name, subtitle: `${game.year} · ${game.blurb}`, view: "games", href: `games/${game.slug}/` });
+    });
+    return items;
+  }
+
+  function renderSearchResults(query) {
+    const results = $("#searchResults");
+    if (!results) return;
+    const q = String(query || "").trim().toLowerCase();
+    const items = buildSearchIndex();
+    const filtered = (q
+      ? items.filter((item) => `${item.title} ${item.subtitle} ${item.type}`.toLowerCase().includes(q))
+      : items).slice(0, 12);
+    if (!filtered.length) {
+      results.innerHTML = '<p class="small muted search-empty">No matches. Try a game, era, person, or place.</p>';
+      return;
+    }
+    results.innerHTML = filtered.map((item, index) => `
+      <button class="search-result" type="button" data-search-index="${index}">
+        <span class="search-type">${escapeHTML(item.type)}</span>
+        <span class="search-copy"><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.subtitle)}</small></span>
+        <span class="search-go">→</span>
+      </button>
+    `).join("");
+    results.querySelectorAll("[data-search-index]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const item = filtered[Number(button.dataset.searchIndex)];
+        if (!item) return;
+        closeSearch();
+        if (item.era) {
+          setEra(item.era);
+          showToast(`<strong>Tuned to ${escapeHTML(eras[item.era].name)}.</strong>`);
+          return;
+        }
+        if (item.loreId) state.loreSelected = item.loreId;
+        if (item.storyId) {
+          state.storySelected = item.storyId;
+          state.storyFilter = "all";
+        }
+        if (item.href) {
+          window.location.href = item.href;
+          return;
+        }
+        navigate(item.view);
+      });
+    });
+  }
+
+  function openSearch() {
+    const overlay = $("#searchOverlay");
+    const input = $("#searchInput");
+    if (!overlay || !input) return;
+    overlay.hidden = false;
+    state.searchOpen = true;
+    input.value = "";
+    input.focus();
+    renderSearchResults("");
+    Promise.all([ensureLoreArchive(), ensureStory()]).then(() => {
+      if (state.searchOpen) renderSearchResults(input.value);
+    });
+  }
+
+  function closeSearch() {
+    const overlay = $("#searchOverlay");
+    if (overlay) overlay.hidden = true;
+    state.searchOpen = false;
+  }
+
+  function initSearch() {
+    $("#searchBtn")?.addEventListener("click", openSearch);
+    const overlay = $("#searchOverlay");
+    const input = $("#searchInput");
+    overlay?.addEventListener("click", (event) => {
+      if (event.target === overlay) closeSearch();
+    });
+    input?.addEventListener("input", () => renderSearchResults(input.value));
+    input?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const first = $("#searchResults .search-result");
+        if (first) first.click();
+      }
+      if (event.key === "Escape") closeSearch();
+    });
+    document.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        openSearch();
+      } else if (event.key === "Escape" && state.searchOpen) {
+        closeSearch();
+      }
+    });
+  }
+
+  function updateRadioUI() {
+    const stream = state.currentStream;
+    const now = $("#radioNow");
+    const license = $("#radioLicense");
+    const stop = $("#radioStop");
+    if (now) now.textContent = stream ? `Tuned to ${stream.name}` : "No station tuned.";
+    if (license) {
+      if (stream) {
+        license.innerHTML = `${escapeHTML(stream.license)} · ${escapeHTML(stream.attribution)} · <a class="text-link" href="${escapeHTML(stream.homepage)}" target="_blank" rel="noopener noreferrer">station page</a>`;
+      } else {
+        license.textContent = "Station licenses and links appear here.";
+      }
+    }
+    if (stop) stop.disabled = !stream;
+    $$("[data-radio-id]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(Boolean(stream && button.dataset.radioId === stream.id)));
+    });
+  }
+
+  function renderRadioList() {
+    const list = $("#radioList");
+    if (!list) return;
+    const streams = state.streams || [];
+    if (!streams.length) {
+      list.innerHTML = '<p class="small muted">Stations unavailable offline. The synthesized ambience still works.</p>';
+      return;
+    }
+    const era = document.documentElement.dataset.era;
+    const sorted = [...streams].sort((a, b) => Number(b.era === era) - Number(a.era === era));
+    list.innerHTML = sorted.map((stream) => `
+      <button class="radio-station ${stream.era === era ? "is-current" : ""}" type="button" data-radio-id="${escapeHTML(stream.id)}" aria-pressed="false">
+        <span>${escapeHTML(stream.name)}</span>
+        <small>${escapeHTML(stream.license)}</small>
+      </button>
+    `).join("");
+    updateRadioUI();
+  }
+
+  async function initRadio() {
+    const list = $("#radioList");
+    if (!list) return;
+    await ensureStreams();
+    renderRadioList();
+
+    list.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-radio-id]");
+      if (button) playStream(button.dataset.radioId);
+    });
+
+    $("#radioStop")?.addEventListener("click", stopStream);
+
+    const audio = $("#radioAudio");
+    if (audio) {
+      audio.volume = 0.55;
+      audio.addEventListener("playing", () => {
+        const now = $("#radioNow");
+        if (now && state.currentStream) now.textContent = `Tuned to ${state.currentStream.name}`;
+      });
+      audio.addEventListener("error", () => {
+        const now = $("#radioNow");
+        if (now) now.textContent = "Stream unavailable. Try another station, or use the synthesized ambience.";
+        sfx("wrong");
+      });
+    }
+  }
+
+  function playStream(id) {
+    const stream = (state.streams || []).find((item) => item.id === id);
+    const audio = $("#radioAudio");
+    if (!stream || !audio) return;
+    state.currentStream = stream;
+    audio.src = stream.url;
+    audio.play().then(() => {
+      updateRadioUI();
+      sfx("click");
+    }).catch(() => {
+      const now = $("#radioNow");
+      if (now) now.textContent = "That stream would not start. It may be offline or blocked here.";
+      updateRadioUI();
+      sfx("wrong");
+    });
+  }
+
+  function stopStream() {
+    const audio = $("#radioAudio");
+    if (audio) {
+      audio.pause();
+      audio.removeAttribute("src");
+      audio.load();
+    }
+    state.currentStream = null;
+    updateRadioUI();
+    sfx("click");
+  }
+
+  /* ---------------------------------------------------------------------
      BOOT
      --------------------------------------------------------------------- */
   function init() {
-    const footer = $("#footerDisclaimer");
-    if (footer) footer.textContent = site.disclaimer;
     const aboutDisclaimer = $("#aboutDisclaimer");
     if (aboutDisclaimer) aboutDisclaimer.textContent = site.disclaimer;
     const metaEras = $("#metaEras");
     if (metaEras) metaEras.textContent = pad2(eraOrder.length);
+
+    initDisclaimer();
+    registerServiceWorker();
 
     initTuner();
     initSound();
@@ -1208,12 +2505,25 @@
     initHeistEvents();
     initAboutEvents();
     initKeyboard();
+    initRadio();
+    initLoreStoryEvents();
+    initSearch();
+
+    ensureLore().then(() => {
+      if (state.currentView === "atlas") renderAtlas();
+      if (state.currentView === "lore") renderLoreHub();
+    });
+    ensureStory();
+    ensureGames();
+    ensureRealWorld();
+    ensureStreams();
+    ensureImageCredits();
 
     setEra(state.settings.era, { persist: false, flash: false, track: true, silent: true });
     renderHome();
 
     const hashView = window.location.hash.replace("#", "");
-    const initialView = ROUTES.includes(hashView) ? hashView : "arcade";
+    const initialView = ROUTES.includes(hashView) ? hashView : "home";
     navigate(initialView, { fromHash: true, noScroll: true });
   }
 
@@ -1332,6 +2642,9 @@
       if (action.dataset.triviaAction === "share") {
         shareTriviaResult();
       }
+      if (action.dataset.triviaAction === "card") {
+        saveTriviaCard();
+      }
     });
   }
 
@@ -1361,6 +2674,7 @@
     state.triviaSetup.filter = filter;
 
     if (state.trivia?.timerId) window.clearInterval(state.trivia.timerId);
+    const previousTriviaBase = state.trivia?.baseEra || null;
 
     let items = [];
     let isFake = mode === "fake";
@@ -1405,13 +2719,16 @@
       timeLeft: 60,
       timerId: null,
       lastTick: Date.now(),
-      baseEra: document.documentElement.dataset.era,
-      forcedMorph: mode === "channel" || mode === "daily" || state.settings.autoMorph,
+      baseEra: previousTriviaBase || contentBaseEra(),
+      forcedMorph: mode === "channel" || state.settings.autoMorph,
       seed,
       newBest: false
     };
 
     const setup = $("#triviaSetup");
+    if (filter !== "all" && mode !== "channel" && mode !== "daily") {
+      setEra(filter, { persist: false, flash: false, track: true, silent: true });
+    }
     const game = $("#triviaGame");
     const result = $("#triviaResult");
     setup?.classList.add("hidden");
@@ -1420,6 +2737,7 @@
     game?.classList.remove("hidden");
 
     renderTriviaQuestion();
+    updateThemeMode();
     if (mode === "blitz") startBlitzTimer();
     if (state.currentView !== "trivia") navigate("trivia", { noScroll: true });
   }
@@ -1464,7 +2782,7 @@
 
     const q = trivia.items[trivia.index];
     if (trivia.forcedMorph) {
-      setEra(q.era, { persist: false, flash: true, track: true, silent: false });
+      setEra(q.era, { persist: false, flash: false, track: true, silent: false });
     }
 
     const game = $("#triviaGame");
@@ -1676,6 +2994,7 @@
             <button class="btn btn-primary" type="button" data-trivia-action="again">${icon("refresh")} Play again</button>
             <button class="btn btn-ghost" type="button" data-trivia-action="setup">Change setup</button>
             <button class="btn btn-quiet" type="button" data-trivia-action="share">${icon("copy")} Copy result</button>
+            <button class="btn btn-quiet" type="button" data-trivia-action="card">${icon("star")} Save card</button>
           </div>
         </article>
       `;
@@ -1706,13 +3025,35 @@
     });
   }
 
+  function saveTriviaCard() {
+    const trivia = state.trivia;
+    if (!trivia) return;
+    const mode = MODE_LABELS[trivia.mode] || "Run";
+    const accuracy = trivia.answered ? Math.round((trivia.correct / trivia.answered) * 100) : 0;
+    const rank = getRank(trivia.correct, trivia.answered);
+    saveResultCard({
+      kicker: mode,
+      title: rank.title,
+      subtitle: rank.text,
+      stats: [
+        { label: "score", value: trivia.score },
+        { label: "correct", value: `${trivia.correct}/${trivia.answered}` },
+        { label: "best streak", value: trivia.bestStreak },
+        { label: "accuracy", value: `${accuracy}%` }
+      ],
+      era: eras[document.documentElement.dataset.era]?.name,
+      slug: `trivia-${trivia.mode}`
+    });
+  }
+
   function exitTrivia() {
     const trivia = state.trivia;
     if (trivia?.timerId) window.clearInterval(trivia.timerId);
-    if (trivia?.forcedMorph && trivia.baseEra && trivia.baseEra !== document.documentElement.dataset.era) {
+    if (trivia?.baseEra && trivia.baseEra !== document.documentElement.dataset.era) {
       setEra(trivia.baseEra, { persist: false, flash: false, track: false, silent: true });
     }
     state.trivia = null;
+    updateThemeMode();
     $("#triviaSetup")?.classList.remove("hidden");
     $("#triviaGame")?.classList.add("hidden");
     const result = $("#triviaResult");
@@ -1838,6 +3179,9 @@
         }).join("");
       }
     }
+
+    const vaultCard = $("#vaultCard");
+    if (vaultCard) vaultCard.disabled = !ended;
   }
 
   function handleVaultKey(key) {
@@ -2059,6 +3403,9 @@
         status.innerHTML = `Move orthogonally to the <strong>safehouse</strong>. Patrols block the street. Arrow keys or WASD work too.`;
       }
     }
+
+    const gridCard = $("#gridCard");
+    if (gridCard) gridCard.disabled = !grid.solved;
   }
 
   function moveGrid(index) {
@@ -2122,6 +3469,183 @@
   }
 
   /* ---------------------------------------------------------------------
+     CLUE DOSSIER — deduction puzzle built from the era atlas.
+     --------------------------------------------------------------------- */
+  function generateDossier(options = {}) {
+    const seed = options.seed || randomSeed();
+    const rng = rngFrom(seed);
+    const eraPool = options.era && atlas[options.era] ? [options.era] : eraOrder;
+    const era = eraPool[Math.floor(rng() * eraPool.length)];
+    const locations = atlas[era].locations;
+    const answer = locations[Math.floor(rng() * locations.length)];
+    const others = shuffle(locations.filter((item) => item.id !== answer.id), rng).slice(0, 3);
+    state.dossier = {
+      seed,
+      era,
+      daily: Boolean(options.daily),
+      answerId: answer.id,
+      answerName: answer.name,
+      clues: [
+        answer.kind,
+        answer.note,
+        `${eras[era].name} — ${eras[era].year}`
+      ],
+      options: shuffle([answer, ...others], rng).map((item) => ({ id: item.id, name: item.name })),
+      wrong: [],
+      tries: 2,
+      solved: false,
+      title: atlas[era].title,
+      message: ""
+    };
+    if (document.documentElement.dataset.era !== era) {
+      setEra(era, { persist: false, flash: false, track: true, silent: true });
+    }
+    renderDossier();
+  }
+
+  function renderDossier() {
+    const dossier = state.dossier;
+    if (!dossier) return;
+
+    const scene = $("#dossierScenario");
+    if (scene) {
+      scene.innerHTML = `${icon("book")}<span><strong>${escapeHTML(dossier.title)}</strong> — read the notes, name the district. Two tries.</span>`;
+    }
+
+    const clues = $("#dossierClues");
+    if (clues) {
+      clues.innerHTML = dossier.clues.map((clue, index) => `
+        <li><span class="dossier-num">0${index + 1}</span><span>${escapeHTML(clue)}</span></li>
+      `).join("");
+    }
+
+    const options = $("#dossierOptions");
+    if (options) {
+      options.innerHTML = dossier.options.map((option) => {
+        const classes = ["answer", "dossier-option"];
+        if (dossier.solved && option.id === dossier.answerId) classes.push("is-correct");
+        if (dossier.wrong.includes(option.id)) classes.push("is-wrong");
+        return `<button class="${classes.join(" ")}" type="button" data-dossier-option="${option.id}" ${dossier.solved || dossier.wrong.includes(option.id) ? "disabled" : ""}><span>${escapeHTML(option.name)}</span></button>`;
+      }).join("");
+    }
+
+    const tries = $("#dossierTries");
+    if (tries) {
+      tries.textContent = dossier.solved
+        ? (dossier.tries > 0 ? "Closed" : "Cold case")
+        : `${dossier.tries} ${dossier.tries === 1 ? "try" : "tries"}`;
+    }
+
+    const status = $("#dossierStatus");
+    if (status) {
+      status.className = "vault-status";
+      if (dossier.message) {
+        status.textContent = dossier.message;
+        const tone = dossier.solved && dossier.tries > 0 ? "is-win" : (dossier.tries > 0 ? "" : "is-loss");
+        if (tone) status.classList.add(tone);
+      } else {
+        status.textContent = "Pick the district the field notes describe.";
+      }
+    }
+
+    const card = $("#dossierCard");
+    if (card) card.disabled = !dossier.solved;
+  }
+
+  function handleDossierPick(id) {
+    const dossier = state.dossier;
+    if (!dossier || dossier.solved || dossier.wrong.includes(id)) return;
+
+    if (id === dossier.answerId) {
+      dossier.solved = true;
+      state.stats.dossierSolves++;
+      state.stats.dossierStreak++;
+      saveStats();
+      if (!dossier.wrong.length) awardBadge("profiler");
+      dossier.message = `File closed: ${dossier.answerName}.`;
+      sfx("unlock");
+      window.setTimeout(() => sfx("win"), 120);
+    } else {
+      dossier.wrong.push(id);
+      dossier.tries--;
+      if (dossier.tries <= 0) {
+        dossier.solved = true;
+        state.stats.dossierStreak = 0;
+        saveStats();
+        dossier.message = `Case cold. The district was ${dossier.answerName}.`;
+        sfx("loss");
+      } else {
+        dossier.message = "Not that one. One try left.";
+        sfx("wrong");
+      }
+    }
+
+    renderDossier();
+    updatePuzzleStats();
+  }
+
+  function startDailyDossier() {
+    navigate("puzzles");
+    switchPuzzleTab("dossier");
+    generateDossier({ seed: `daily-dossier-${todayUTC()}`, daily: true });
+    showToast("<strong>Daily dossier loaded.</strong> Same case for everyone until 00:00 UTC.");
+  }
+
+  function dossierCardPayload() {
+    const dossier = state.dossier;
+    if (!dossier || !dossier.solved) return;
+    saveResultCard({
+      kicker: "Clue Dossier",
+      title: dossier.answerName,
+      subtitle: `${dossier.title} · ${dossier.wrong.length ? "solved with a miss" : "clean read"}`,
+      stats: [
+        { label: "tries used", value: dossier.tries > 0 ? dossier.wrong.length + 1 : 2 },
+        { label: "district", value: dossier.answerName },
+        { label: "dossier streak", value: state.stats.dossierStreak },
+        { label: "era", value: eras[dossier.era].name }
+      ],
+      era: eras[dossier.era].name,
+      slug: "dossier"
+    });
+  }
+
+  function saveVaultCard() {
+    const vault = state.vault;
+    if (!vault || !(vault.solved || vault.failed)) return;
+    saveResultCard({
+      kicker: "Vault Cracker",
+      title: vault.solved ? "Vault open" : "Locked out",
+      subtitle: `${vault.scenario.name} · ${vault.daily ? "daily vault" : "free play"}`,
+      stats: [
+        { label: "guesses", value: `${vault.guesses.length}/${vault.maxTries}` },
+        { label: "result", value: vault.solved ? "cracked" : "locked" },
+        { label: "code", value: vault.code.join("") },
+        { label: "vault streak", value: state.stats.vaultStreak }
+      ],
+      era: eras[document.documentElement.dataset.era]?.name,
+      slug: "vault"
+    });
+  }
+
+  function saveGridCard() {
+    const grid = state.grid;
+    if (!grid || !grid.solved) return;
+    saveResultCard({
+      kicker: "Heat Grid",
+      title: grid.moves <= grid.par ? "Ghost Run" : "Safehouse reached",
+      subtitle: `${grid.size}×${grid.size} board · ${GRID_LEVELS[grid.level]?.label || "Heat"}`,
+      stats: [
+        { label: "moves", value: grid.moves },
+        { label: "par", value: grid.par },
+        { label: "board", value: `${grid.size}×${grid.size}` },
+        { label: "routes cleared", value: state.stats.gridSolves }
+      ],
+      era: eras[document.documentElement.dataset.era]?.name,
+      slug: "heat-grid"
+    });
+  }
+
+  /* ---------------------------------------------------------------------
      PUZZLE VIEW
      --------------------------------------------------------------------- */
   function updatePuzzleStats() {
@@ -2136,20 +3660,28 @@
     set("sideGridSolves", stats.gridSolves);
     set("sideVaultStreak", stats.vaultStreak);
     set("sideGridBest", stats.gridBestPar === null ? "—" : `${stats.gridBestPar} moves`);
+    set("dossierSolveCount", stats.dossierSolves);
+    set("sideDossierSolves", stats.dossierSolves);
+    set("sideDossierStreak", stats.dossierStreak);
   }
 
   function switchPuzzleTab(tab) {
-    if (tab !== "vault" && tab !== "grid") tab = "vault";
+    if (!["vault", "grid", "dossier"].includes(tab)) tab = "vault";
     state.puzzleTab = tab;
     $$("[data-puzzle-tab]").forEach((button) => {
       button.setAttribute("aria-selected", String(button.dataset.puzzleTab === tab));
     });
     $("#vaultPanel")?.classList.toggle("hidden", tab !== "vault");
     $("#gridPanel")?.classList.toggle("hidden", tab !== "grid");
+    $("#dossierPanel")?.classList.toggle("hidden", tab !== "dossier");
     if (tab === "vault" && !state.vault) startVault();
     if (tab === "grid") {
       if (!state.grid) generateHeatGrid("heat");
       else renderGrid();
+    }
+    if (tab === "dossier") {
+      if (!state.dossier) generateDossier();
+      else renderDossier();
     }
     if (tab === "vault") renderVault();
     updatePuzzleStats();
@@ -2162,12 +3694,16 @@
     });
     $("#vaultPanel")?.classList.toggle("hidden", state.puzzleTab !== "vault");
     $("#gridPanel")?.classList.toggle("hidden", state.puzzleTab !== "grid");
+    $("#dossierPanel")?.classList.toggle("hidden", state.puzzleTab !== "dossier");
     if (state.puzzleTab === "vault") {
       if (!state.vault) startVault();
       else renderVault();
-    } else {
+    } else if (state.puzzleTab === "grid") {
       if (!state.grid) generateHeatGrid("heat");
       else renderGrid();
+    } else {
+      if (!state.dossier) generateDossier();
+      else renderDossier();
     }
     updatePuzzleStats();
   }
@@ -2204,6 +3740,20 @@
       sfx("click");
     });
     $("#gridReset")?.addEventListener("click", resetGridRoute);
+
+    $("#dossierOptions")?.addEventListener("click", (event) => {
+      const option = event.target.closest("[data-dossier-option]");
+      if (option) handleDossierPick(option.dataset.dossierOption);
+    });
+    $("#dossierNew")?.addEventListener("click", () => {
+      generateDossier();
+      sfx("click");
+    });
+    $("#dossierDaily")?.addEventListener("click", startDailyDossier);
+    $("#dossierCard")?.addEventListener("click", dossierCardPayload);
+
+    $("#vaultCard")?.addEventListener("click", saveVaultCard);
+    $("#gridCard")?.addEventListener("click", saveGridCard);
 
     startVault();
     generateHeatGrid("heat");
@@ -2265,6 +3815,17 @@
 
   function eraPosterArt(era) {
     const wrapper = 'viewBox="0 0 640 300" preserveAspectRatio="xMidYMid slice" role="img"';
+    if (era === "gta6") {
+      return `<svg ${wrapper} aria-label="Abstract neon Leonida coastline">
+        <rect width="640" height="300" fill="var(--surface-solid)"/>
+        <circle cx="490" cy="140" r="96" fill="var(--accent)" opacity=".22"/>
+        <path d="M0 208c120-40 240-24 340 14s220 26 300-20v98H0Z" fill="var(--accent-2)" opacity=".1"/>
+        <g fill="var(--accent)" opacity=".32"><rect x="60" y="168" width="26" height="132"/><rect x="94" y="140" width="52" height="160"/><rect x="156" y="190" width="30" height="110"/><rect x="196" y="152" width="70" height="148"/><rect x="278" y="202" width="28" height="98"/><rect x="316" y="170" width="62" height="130"/></g>
+        <g fill="var(--accent-2)" opacity=".55"><path d="M560 300c-8-64 0-120 26-172" fill="none" stroke="var(--accent-2)" stroke-width="6"/><path d="M586 128c-48-30-86-24-118-2 46-4 82 6 108 26Z"/><path d="M586 128c8-44 38-68 80-68-30 16-50 40-60 70Z"/></g>
+        <g stroke="var(--accent-3)" stroke-opacity=".22" stroke-width="2"><path d="M0 252h640M0 272h640"/></g>
+        <circle cx="120" cy="70" r="2" fill="var(--accent-2)" opacity=".6"/><circle cx="210" cy="46" r="1.6" fill="var(--accent-3)" opacity=".5"/>
+      </svg>`;
+    }
     if (era === "vicecity") {
       return `<svg ${wrapper} aria-label="Abstract pastel Vice City skyline">
         <rect width="640" height="300" fill="var(--surface-solid)"/>
@@ -2337,9 +3898,61 @@
     </svg>`;
   }
 
+  function atlasLoreHTML(era) {
+    const items = (state.lore || []).filter((item) => item.era === era);
+    const item = items.find((entry) => entry.id !== "franchise-1997" && entry.id !== "rockstar-games") || items[0];
+    if (!item) return "";
+    return `<div class="atlas-lore" id="atlasLore">
+      <div class="lore-head">
+        <p class="eyebrow">Wire archive</p>
+        <h4>${escapeHTML(item.title)}</h4>
+      </div>
+      <p>${escapeHTML(item.summary)}</p>
+      <div class="lore-actions">
+        <button class="btn btn-quiet btn-sm" type="button" data-atlas-wiki="${escapeHTML(item.wikiTitle)}">Live summary</button>
+        <a class="text-link" href="${escapeHTML(item.source)}" target="_blank" rel="noopener noreferrer">Source</a>
+      </div>
+      <div class="live-lore" id="atlasLiveLore" hidden></div>
+    </div>`;
+  }
+
+  function atlasDetailHTML(era, selected) {
+    return `<span class="detail-kicker">${escapeHTML(eras[era].name)} // ${escapeHTML(selected.kind)}</span>
+      <h3>${escapeHTML(selected.name)}</h3>
+      <p>${escapeHTML(selected.note)}</p>
+      <div class="detail-tags">
+        <span class="tag">${escapeHTML(eras[era].year)}</span>
+        <span class="tag">${escapeHTML(eras[era].station)}</span>
+        <span class="tag">Fan atlas</span>
+      </div>
+      ${atlasLoreHTML(era)}
+      <button class="btn btn-ghost btn-sm" type="button" data-atlas-start="${era}" style="margin-top:1rem">
+        ${icon("play")} Start a ${escapeHTML(eras[era].short)} trivia run
+      </button>`;
+  }
+
+  function updateAtlasDetail(location) {
+    const detail = document.querySelector(".atlas-detail");
+    if (!detail) return;
+    const era = document.documentElement.dataset.era;
+    detail.innerHTML = atlasDetailHTML(era, location);
+  }
+
+  function geoStatusHTML() {
+    if (!state.geo) return "";
+    if (!state.geo.done) return `Clue: ${escapeHTML(state.geo.kind)}. Click the map.`;
+    return `Score <strong>${state.geo.score}</strong> — answer: ${escapeHTML(state.geo.answerName)}.`;
+  }
+
+  function renderGeoStatus() {
+    const status = $("#geoStatus");
+    if (status) status.innerHTML = geoStatusHTML();
+  }
+
   function renderAtlas() {
     const container = $("#atlasContent");
     if (!container) return;
+
     const era = document.documentElement.dataset.era;
     const data = atlas[era] || atlas.gta6;
     const locations = data.locations;
@@ -2350,9 +3963,20 @@
       <button class="chip" type="button" data-atlas-era="${key}" aria-pressed="${key === era}">${escapeHTML(eras[key].short)} · ${escapeHTML(eras[key].name)}</button>
     `).join("");
 
-    const mapPanel = era === "gta6"
-      ? `<div class="atlas-map">${leonidaMapHTML(selected.id)}</div>`
-      : `<div class="atlas-art">${eraPosterArt(era)}<span class="art-caption">Fan-made vector postcard · not official art</span></div>`;
+    let mapPanel = "";
+    if (era === "gta6") {
+      mapPanel = `
+        <div class="atlas-map" id="atlasMapWrap">
+          ${state.atlasInteractive ? '<div id="leafletMap" class="leaflet-atlas" aria-label="Interactive fan map of Leonida"></div>' : leonidaMapHTML(selected.id)}
+        </div>
+        <div class="atlas-map-actions">
+          <button class="btn btn-ghost btn-sm" type="button" data-atlas-interactive>${state.atlasInteractive ? "Static map" : "Interactive map"}</button>
+          ${state.atlasInteractive ? '<button class="btn btn-quiet btn-sm" type="button" data-geo-start>Geo-Guess</button>' : ""}
+          <span class="geo-status small muted" id="geoStatus" aria-live="polite">${geoStatusHTML()}</span>
+        </div>`;
+    } else {
+      mapPanel = `<div class="atlas-art">${eraPosterArt(era)}<span class="art-caption">Fan-made vector postcard · not official art</span></div>`;
+    }
 
     container.innerHTML = `
       <div class="atlas-era-bar" id="atlasEraBar" role="group" aria-label="Atlas era">${eraBar}</div>
@@ -2363,22 +3987,12 @@
               <h3>${escapeHTML(data.title)}</h3>
               <p>${escapeHTML(data.subtitle)}</p>
             </div>
-            <span class="tag">${era === "gta6" ? "Custom SVG" : "District dossier"}</span>
+            <span class="tag">${era === "gta6" ? (state.atlasInteractive ? "Leaflet · custom SVG" : "Custom SVG") : "District dossier"}</span>
           </div>
           ${mapPanel}
         </section>
         <aside class="panel atlas-detail">
-          <span class="detail-kicker">${escapeHTML(eras[era].name)} // ${escapeHTML(selected.kind)}</span>
-          <h3>${escapeHTML(selected.name)}</h3>
-          <p>${escapeHTML(selected.note)}</p>
-          <div class="detail-tags">
-            <span class="tag">${escapeHTML(eras[era].year)}</span>
-            <span class="tag">${escapeHTML(eras[era].station)}</span>
-            <span class="tag">Fan atlas</span>
-          </div>
-          <button class="btn btn-ghost btn-sm" type="button" data-atlas-start="${era}" style="margin-top:1rem">
-            ${icon("play")} Start a ${escapeHTML(eras[era].short)} trivia run
-          </button>
+          ${atlasDetailHTML(era, selected)}
         </aside>
       </div>
       <div class="district-grid" id="atlasDistrictGrid">
@@ -2391,6 +4005,172 @@
         `).join("")}
       </div>
     `;
+
+    if (era === "gta6" && state.atlasInteractive) {
+      window.setTimeout(initLeafletAtlas, 0);
+    }
+  }
+
+  async function initLeafletAtlas() {
+    const wrap = $("#leafletMap");
+    if (!wrap) return;
+    const ok = await ensureLeaflet();
+    if (!ok || !state.atlasInteractive || state.currentView !== "atlas") return;
+    if (!$("#leafletMap")) return;
+
+    if (state.leafletMap) {
+      try { state.leafletMap.remove(); } catch (error) { /* detached container */ }
+      state.leafletMap = null;
+      state.geoLayer = null;
+    }
+
+    const L = window.L;
+    const cs = getComputedStyle(document.documentElement);
+    const accent = (cs.getPropertyValue("--accent") || "#ff5d7e").trim();
+    const accent2 = (cs.getPropertyValue("--accent-2") || "#23e0f2").trim();
+
+    let svg = leonidaMapHTML(null).replace(/<g class="map-pin[\s\S]*?<\/g>\s*/g, "");
+    svg = inlineMapSvg(svg);
+    const blob = new Blob([svg], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+
+    const map = L.map(wrap, {
+      crs: L.CRS.Simple,
+      minZoom: -1,
+      maxZoom: 2,
+      zoomSnap: 0.25,
+      zoomControl: true,
+      attributionControl: false
+    });
+    const bounds = [[0, 0], [440, 640]];
+    const overlay = L.imageOverlay(url, bounds).addTo(map);
+    overlay.on("load", () => URL.revokeObjectURL(url));
+    map.fitBounds(bounds);
+    map.setMaxBounds([[-120, -120], [560, 760]]);
+
+    atlas.gta6.locations.forEach((location) => {
+      const marker = L.circleMarker([440 - location.y, location.x], {
+        radius: 8,
+        color: accent,
+        weight: 2,
+        fillColor: accent2,
+        fillOpacity: 0.85
+      }).addTo(map);
+      marker.bindTooltip(escapeHTML(location.name), { direction: "top", offset: [0, -6] });
+      marker.on("click", () => {
+        state.atlasSelected = location.id;
+        updateAtlasDetail(location);
+        sfx("click");
+      });
+    });
+
+    map.on("click", (event) => handleGeoClick(event.latlng.lng, event.latlng.lat));
+    state.geoLayer = L.layerGroup().addTo(map);
+    state.leafletMap = map;
+  }
+
+  function startGeoGuess() {
+    const locations = atlas.gta6.locations;
+    const answer = locations[Math.floor(Math.random() * locations.length)];
+    if (state.geoLayer) state.geoLayer.clearLayers();
+    state.geo = {
+      answerId: answer.id,
+      answerName: answer.name,
+      kind: answer.kind,
+      done: false,
+      score: 0
+    };
+    renderGeoStatus();
+    sfx("click");
+  }
+
+  function handleGeoClick(x, y) {
+    if (!state.geo || state.geo.done || !state.leafletMap || !window.L) return;
+    const answer = atlas.gta6.locations.find((location) => location.id === state.geo.answerId);
+    if (!answer) return;
+    const dx = x - answer.x;
+    const dy = y - (440 - answer.y);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const score = Math.max(0, Math.round(100 - distance * 0.55));
+
+    const L = window.L;
+    const cs = getComputedStyle(document.documentElement);
+    const accent = (cs.getPropertyValue("--accent") || "#ff5d7e").trim();
+    L.circleMarker([y, x], { radius: 7, color: accent, weight: 2, fillColor: accent, fillOpacity: 0.4 }).addTo(state.geoLayer || state.leafletMap);
+    L.circleMarker([440 - answer.y, answer.x], { radius: 8, color: accent, weight: 2, fillColor: "transparent" })
+      .addTo(state.geoLayer || state.leafletMap)
+      .bindTooltip(`${answer.name} · ${score}/100`, { permanent: true, direction: "top" })
+      .openTooltip();
+
+    state.geo.done = true;
+    state.geo.score = score;
+    renderGeoStatus();
+    sfx(score >= 60 ? "win" : "loss");
+  }
+
+  function reelPhotoHTML(item, credits) {
+    const credit = credits[item.image];
+    if (!credit) return "";
+    return `<div class="reel-photo"><img src="${escapeHTML(credit.file)}" alt="${escapeHTML(credit.alt)}" loading="lazy"><a class="photo-credit" href="${escapeHTML(credit.source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(credit.artist)} · ${escapeHTML(credit.license)}</a></div>`;
+  }
+
+  async function initReelView() {
+    const cards = $("#reelCards");
+    const status = $("#reelStatus");
+    const data = await ensureRealWorld();
+    const credits = await ensureImageCredits();
+
+    if (cards) {
+      cards.innerHTML = data.map((item) => `
+        <article class="reel-card">${reelPhotoHTML(item, credits)}
+          <span class="detail-kicker">${escapeHTML(eras[item.era]?.name || item.era)}</span>
+          <h4>${escapeHTML(item.realName)} ↔ ${escapeHTML(item.fictionalName)}</h4>
+          <p>${escapeHTML(item.note)}</p>
+        </article>
+      `).join("");
+    }
+
+    const ok = await ensureMapLibre();
+    if (!ok) {
+      if (status) status.textContent = "Live map unavailable. The comparison cards below still work.";
+      return;
+    }
+    const container = $("#reelMap");
+    if (!container || state.currentView !== "reel") return;
+
+    if (state.maplibreMap) {
+      try { state.maplibreMap.remove(); } catch (error) { /* detached container */ }
+      state.maplibreMap = null;
+    }
+
+    const maplibregl = window.maplibregl;
+    try {
+      const map = new maplibregl.Map({
+        container,
+        style: "https://tiles.openfreemap.org/styles/liberty",
+        center: [-45, 34],
+        zoom: 1.5,
+        attributionControl: true
+      });
+      map.addControl(new maplibregl.NavigationControl(), "top-right");
+      map.on("error", () => {
+        if (status) status.textContent = "Map tiles could not load. Comparison cards remain available.";
+      });
+      map.on("load", () => {
+        data.forEach((item) => {
+          const el = document.createElement("div");
+          el.className = "reel-marker";
+          const popup = new maplibregl.Popup({ offset: 16 }).setHTML(
+            `<strong>${escapeHTML(item.realName)}</strong><br>${escapeHTML(item.fictionalName)}<br><span>${escapeHTML(item.note)}</span>`
+          );
+          new maplibregl.Marker({ element: el }).setLngLat(item.coords).setPopup(popup).addTo(map);
+        });
+        if (status) status.textContent = "Click a marker to compare the real city with its fictional echo.";
+      });
+      state.maplibreMap = map;
+    } catch (error) {
+      if (status) status.textContent = "Live map unavailable. The comparison cards below still work.";
+    }
   }
 
   function initAtlasEvents() {
@@ -2400,8 +4180,25 @@
       const eraButton = event.target.closest("[data-atlas-era]");
       if (eraButton) {
         state.atlasSelected = null;
+        state.geo = null;
         setEra(eraButton.dataset.atlasEra);
         renderAtlas();
+        return;
+      }
+      const toggle = event.target.closest("[data-atlas-interactive]");
+      if (toggle) {
+        state.atlasInteractive = !state.atlasInteractive;
+        renderAtlas();
+        return;
+      }
+      const geo = event.target.closest("[data-geo-start]");
+      if (geo) {
+        startGeoGuess();
+        return;
+      }
+      const wiki = event.target.closest("[data-atlas-wiki]");
+      if (wiki) {
+        loadLiveLore(wiki.dataset.atlasWiki);
         return;
       }
       const location = event.target.closest("[data-atlas-loc]");
@@ -2429,6 +4226,38 @@
       renderAtlas();
       sfx("click");
     });
+  }
+
+  function loadLiveLore(title) {
+    loadWikiInto($("#atlasLiveLore"), title);
+  }
+
+  async function loadWikiInto(box, title) {
+    if (!box || !SERVICES) return;
+    box.hidden = false;
+    box.textContent = "Fetching live summary...";
+    const summary = await SERVICES.getWikiSummary(title);
+    if (!summary) {
+      box.textContent = "Live summary unavailable right now. The curated archive above still works.";
+      return;
+    }
+    box.innerHTML = "";
+    const text = document.createElement("p");
+    text.textContent = summary.extract;
+    box.appendChild(text);
+    const credit = document.createElement("p");
+    credit.className = "small muted";
+    credit.textContent = "Lore via Wikipedia (CC BY-SA). ";
+    if (summary.page) {
+      const link = document.createElement("a");
+      link.href = summary.page;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = "text-link";
+      link.textContent = "Read the source";
+      credit.appendChild(link);
+    }
+    box.appendChild(credit);
   }
 
   /* ---------------------------------------------------------------------

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "cc-gfoss",
+    "era": "gta6",
+    "name": "GFOSS Creative Commons Radio",
+    "url": "https://ccradio.ellak.gr/listen/gfoss_ccradio/radio.mp3",
+    "homepage": "https://ccradio.ellak.gr/",
+    "license": "Creative Commons radio",
+    "attribution": "GFOSS Creative Commons Radio",
+    "note": "Community CC radio. If the stream is unavailable, the player falls back to the built-in synth ambience."
+  },
+  {
+    "id": "cc-theradio",
+    "era": "gta4",
+    "name": "TheRadio.CC",
+    "url": "https://mp3.theradio.cc/",
+    "homepage": "https://theradio.cc/",
+    "license": "Creative Commons radio",
+    "attribution": "TheRadio.CC",
+    "note": "Long-running CC-focused station. Stream availability can vary by region."
+  },
+  {
+    "id": "soma-u80s",
+    "era": "vicecity",
+    "name": "SomaFM Underground 80s",
+    "url": "https://ice1.somafm.com/u80s-128-mp3",
+    "homepage": "https://somafm.com/u80s/",
+    "license": "Free listener-supported stream (not CC)",
+    "attribution": "SomaFM — Underground 80s",
+    "note": "Synth, post-punk, and new wave. Free, listener-supported, and link-friendly."
+  },
+  {
+    "id": "soma-fluid",
+    "era": "sanandreas",
+    "name": "SomaFM Fluid",
+    "url": "https://ice1.somafm.com/fluid-128-mp3",
+    "homepage": "https://somafm.com/fluid/",
+    "license": "Free listener-supported stream (not CC)",
+    "attribution": "SomaFM — Fluid",
+    "note": "Instrumental hip-hop and downtempo. A good low-end backdrop for a West Coast drive."
+  },
+  {
+    "id": "soma-groove",
+    "era": "gta5",
+    "name": "SomaFM Groove Salad",
+    "url": "https://ice1.somafm.com/groovesalad-128-mp3",
+    "homepage": "https://somafm.com/groovesalad/",
+    "license": "Free listener-supported stream (not CC)",
+    "attribution": "SomaFM — Groove Salad",
+    "note": "Ambient and downtempo. Reliable, ad-free, and listener-supported."
+  },
+  {
+    "id": "soma-seventies",
+    "era": "warriors",
+    "name": "SomaFM Left Coast 70s",
+    "url": "https://ice1.somafm.com/seventies-128-mp3",
+    "homepage": "https://somafm.com/seventies/",
+    "license": "Free listener-supported stream (not CC)",
+    "attribution": "SomaFM — Left Coast 70s",
+    "note": "Mellow 70s album rock. Period-adjacent without pretending to be a game soundtrack."
+  },
+  {
+    "id": "soma-bootliquor",
+    "era": "reddead",
+    "name": "SomaFM Boot Liquor",
+    "url": "https://ice1.somafm.com/bootliquor-128-mp3",
+    "homepage": "https://somafm.com/bootliquor/",
+    "license": "Free listener-supported stream (not CC)",
+    "attribution": "SomaFM — Boot Liquor",
+    "note": "Americana, country, and western swing. A frontier-adjacent backdrop."
+  },
+  {
+    "id": "soma-defcon",
+    "era": "bully",
+    "name": "SomaFM DEF CON Radio",
+    "url": "https://ice1.somafm.com/defcon-128-mp3",
+    "homepage": "https://somafm.com/defcon/",
+    "license": "Free listener-supported stream (not CC)",
+    "attribution": "SomaFM — DEF CON Radio",
+    "note": "Electronic and experimental. For when the school year needs a stranger soundtrack."
+  }
+]

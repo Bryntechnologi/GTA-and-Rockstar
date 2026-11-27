@@ -1,0 +1,154 @@
+{
+  "miami": {
+    "file": "assets/images/miami.jpg",
+    "title": "Miami skyline 20080328",
+    "artist": "Averette",
+    "license": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Miami_skyline_20080328.jpg",
+    "alt": "Miami skyline at dusk"
+  },
+  "floridaKeys": {
+    "file": "assets/images/florida-keys.jpg",
+    "title": "HDR of Bridge in Florida Keys",
+    "artist": "EdoDodo",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:HDR_of_Bridge_in_Florida_Keys.jpg",
+    "alt": "Bridge crossing the Florida Keys"
+  },
+  "newYork": {
+    "file": "assets/images/new-york.jpg",
+    "title": "Skyline-New-York-City",
+    "artist": "Martin Dürrschnabel",
+    "license": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:Skyline-New-York-City.jpg",
+    "alt": "New York City skyline"
+  },
+  "coneyIsland": {
+    "file": "assets/images/coney-island.jpg",
+    "title": "Riegelmann Boardwalk (Coney Island, New York) 003",
+    "artist": "Leonard J. DeFrancisci",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Riegelmann_Boardwalk_(Coney_Island,_New_York)_003.jpg",
+    "alt": "Coney Island boardwalk"
+  },
+  "losAngeles": {
+    "file": "assets/images/los-angeles.jpg",
+    "title": "Skyline of Los Angeles, Downtown Los Angeles, California 13",
+    "artist": "Levi Clancy",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Skyline_of_Los_Angeles,_Downtown_Los_Angeles,_California_13.jpg",
+    "alt": "Downtown Los Angeles skyline"
+  },
+  "sanFrancisco": {
+    "file": "assets/images/san-francisco.jpg",
+    "title": "San Francisco with approaching fog",
+    "artist": "Brocken Inaglory",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:San_Francisco_with_approaching_fog.jpg",
+    "alt": "San Francisco skyline with fog"
+  },
+  "lasVegas": {
+    "file": "assets/images/las-vegas.jpg",
+    "title": "Las Vegas Strip at night, 2012",
+    "artist": "Clément Bardot",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Las_Vegas_Strip_at_night,_2012.jpg",
+    "alt": "Las Vegas Strip at night"
+  },
+  "newOrleans": {
+    "file": "assets/images/new-orleans.jpg",
+    "title": "Bourbon St, French Quarter, New Orleans, USA2",
+    "artist": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bourbon_St,_French_Quarter,_New_Orleans,_USA2.jpg",
+    "alt": "Bourbon Street in the French Quarter"
+  },
+  "london": {
+    "file": "assets/images/london.jpg",
+    "title": "London Skyline from Waterloo Bridge",
+    "artist": "Diliff",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Skyline_from_Waterloo_Bridge,_London,_UK_-_Diliff.jpg",
+    "alt": "London skyline from Waterloo Bridge"
+  },
+  "boston": {
+    "file": "assets/images/boston.jpg",
+    "title": "Boston skyline from Cambridge November 2015 panorama 1",
+    "artist": "King of Hearts",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Boston_skyline_from_Cambridge_November_2015_panorama_1.jpg",
+    "alt": "Boston skyline from Cambridge"
+  },
+  "miamiNeon": {
+    "file": "assets/images/miami-neon.jpg",
+    "title": "Boulevard Hotel (Neon sign), Miami Beach",
+    "artist": "Radomianin",
+    "license": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:Boulevard_Hotel_(Neon_sign),_Miami_Beach.jpg",
+    "alt": "Neon hotel sign in Miami Beach"
+  },
+  "palmSunset": {
+    "file": "assets/images/palm-sunset.jpg",
+    "title": "Sunset behind palm trees",
+    "artist": "Benjamin D. Esham",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunset_behind_palm_trees.jpg",
+    "alt": "Sunset behind palm trees"
+  },
+  "desertHighway": {
+    "file": "assets/images/desert-highway.jpg",
+    "title": "Old Spanish Trail Highway Emigrant Pass",
+    "artist": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Old_Spanish_Trail_Highway_Emigrant_Pass.jpg",
+    "alt": "Desert highway through the Mojave"
+  },
+  "subwayTrain": {
+    "file": "assets/images/subway-train.jpg",
+    "title": "86st station",
+    "artist": "Daniel Schwen",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:86st_station.jpg",
+    "alt": "New York City subway station"
+  },
+  "autumnCampus": {
+    "file": "assets/images/autumn-campus.jpg",
+    "title": "GCC campus in fall",
+    "artist": "Mike Sheridan",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:GCC_campus_in_fall.jpg",
+    "alt": "Autumn college campus"
+  },
+  "rainCity": {
+    "file": "assets/images/rain-city.jpg",
+    "title": "Rainy Night",
+    "artist": "Billie Grace Ward",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Rainy_Night_(31046988540).jpg",
+    "alt": "Rainy city street at night"
+  },
+  "boardwalk": {
+    "file": "assets/images/boardwalk.jpg",
+    "title": "Venice Beach and Boardwalk, Los Angeles",
+    "artist": "Diliff",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Venice_Beach_and_Boardwalk,_Los_Angeles_-_Nov_2005.jpg",
+    "alt": "Venice Beach boardwalk"
+  },
+  "everglades": {
+    "file": "assets/images/everglades.jpg",
+    "title": "Everglades National Park EVER1503",
+    "artist": "National Park Service",
+    "license": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:Everglades_National_Park_EVER1503.jpg",
+    "alt": "Everglades wetland"
+  },
+  "noirHotel": {
+    "file": "assets/images/noir-hotel.jpg",
+    "title": "RKO backlot - tall hotel",
+    "artist": "Bill Wrigley",
+    "license": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:RKO_backlot_-_tall_hotel.jpg",
+    "alt": "Noir film-set hotel facade"
+  }
+}
