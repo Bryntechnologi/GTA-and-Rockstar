@@ -171,3 +171,14 @@ npm run test:browser
 - Credits page renders the image gallery and links every original file.
 - Related links and “Further reading” links appear in the archive, story page, game pages, and lore detail.
 - Static pages and the SPA footer expose share/copy tools, positive-only reactions stored in localStorage, and a reading-progress bar on long pages.
+- The contrast toggle sets `data-contrast="high"`, persists across reloads, and layers over the active era theme.
+
+## CSP, contrast, and Markdown
+
+- `npm run audit:csp` passes and writes `CSP_AUDIT.md`.
+- `_headers` uses an enforced `Content-Security-Policy`, not Report-Only.
+- The policy allows self-hosted assets, inline boot scripts/styles, Wikipedia, GTA Wiki, OpenFreeMap, OpenStreetMap, MapLibre, and the radio stream hosts.
+- No `eval` or `new Function` usage is present.
+- Markdown supports headings, lists, quotes, fenced code, bold/italic, links, and `[[wiki links]]`.
+- Raw HTML in Markdown is escaped; `javascript:` links are rejected.
+- Browser Markdown wiki links open the matching lore entry; static Markdown links point to the archive anchor.

@@ -37,6 +37,9 @@ The site leads with the archive, not the arcade:
 - **Universal chrome** — the same header, footer, breadcrumbs, theme tuner, and mobile navigation on the SPA and every static page.
 - **Project pages** — a version-only [changelog](changelog.html), [image credits](credits.html), and a [contact page](contact.html) that routes through Brynsites.
 - **Share and reactions** — Web Share API with a copy-link fallback, plus positive-only localStorage reactions. Long pages show a reading-progress bar.
+- **Contrast preference** — a high-contrast toggle that layers over every era theme and persists in localStorage.
+- **Markdown and wiki links** — safe Markdown rendering for lore, story, and game copy, including `[[Topic]]` links that resolve to archive entries.
+- **CSP audit** — `npm run audit:csp` checks the enforced policy against actual scripts, styles, external origins, streams, and map/API hosts.
 
 ### Theme behaviour
 The era theme is stable by default and changes with the content you open. Lore filters and lore detail use that entry’s era; trivia uses the selected era filter; the story timeline follows the active beat; atlas chips switch the era. Exiting a content view restores the previous theme, and manual tuning wins. “Follow trivia era” only lets trivia questions change the signal, and Channel Surf still does it by design. Registered CSS custom properties crossfade the palette over ~0.55s, so theme changes are smooth rather than snapping. Static game pages bake their theme into the HTML, so there is no flicker or global theme drift.
@@ -143,6 +146,7 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 ├── tests/                  # Node/jsdom + browser regression tests
 ├── scripts/
 │   ├── build-static.mjs    # Regenerates static pages, changelog, search index, sitemap, llms.txt
+│   ├── csp-audit.mjs       # Audits the enforced CSP and writes CSP_AUDIT.md
 │   └── site-chrome.mjs     # Shared header/footer/breadcrumb markup for static pages
 ├── assets/
 │   ├── favicon.svg
@@ -158,6 +162,7 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 │       ├── services.js     # Cached fetch + Wikipedia + GTA Wiki + local JSON loaders
 │       ├── data.js         # Core eras, questions, fake facts, atlas, timeline, badges
 │       ├── app.js          # State, routing, themes, games, maps, radio, sharing
+│       ├── markdown-core.js # Safe Markdown + [[wiki link]] renderer
 │       ├── chrome.js       # Universal static-page header/footer, tuner, search
 │       └── search-index.js # Generated static-page search index
 ├── data/
@@ -223,12 +228,14 @@ npm run test:browser
 npm run test:transitions
 npm run test:header
 npm run test:static
+npm run audit:csp
 ```
 
 - `test:browser` verifies blocked Wikipedia, blocked map tiles, and the offline app shell.
 - `test:transitions` verifies registered-token crossfades and content-era restoration in Chromium.
 - `test:header` snapshots and asserts header layout at 360-1440px (images go to `tests/snapshots/`).
 - `test:static` checks universal chrome, the version-only changelog, the contact and credits pages, and the static theme tuner.
+- `audit:csp` verifies the enforced CSP against inline scripts/styles, external origins, media streams, and map/API hosts.
 
 ### Static archive / SEO regeneration
 

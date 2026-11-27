@@ -22,6 +22,9 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - The archive is explicitly partial; it is not a complete lore database.
 - Changelog uses versions only, not dates.
 - GTA Wiki is used for outbound links and optional attributed summaries, not wholesale import.
+- Contrast is a layer over era themes, not a replacement for them.
+- Markdown is a small safe subset with wiki-link resolution; raw HTML is escaped.
+- CSP is enforced with a practical inline allowance and a repeatable audit.
 
 ## Milestones
 
@@ -42,6 +45,9 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - [x] Related-entry links, GTA Wiki links, and attributed summaries
 - [x] Contact page and image-credits page
 - [x] Fuzzy static-page search and global error boundary
+- [x] High-contrast preference layered over era themes
+- [x] Safe Markdown rendering and `[[wiki links]]`
+- [x] Enforced CSP with a repeatable audit
 - [ ] Final production domain
 - [ ] Final project rename
 
