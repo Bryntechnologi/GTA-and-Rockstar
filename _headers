@@ -1,0 +1,6 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Content-Security-Policy-Report-Only: default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://en.wikipedia.org https://gta.fandom.com https://tiles.openfreemap.org https://*.openstreetmap.org; worker-src 'self';

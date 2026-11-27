@@ -6025,3 +6025,194 @@ html[data-era="bully"] {
 html[data-era="sanandreas"] .hero h1 em {
   font-family: "UnifrakturMaguntia", "Pirata One", Georgia, serif;
 }
+
+/* --------------------------------------------------------------------------
+   SITE-WIDE CHROME, RELATED LINKS, AND STATIC PAGE UTILITIES
+   -------------------------------------------------------------------------- */
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem 2rem;
+  justify-content: end;
+  text-align: left;
+}
+.footer-col {
+  display: grid;
+  align-content: start;
+  gap: 0.32rem;
+}
+.footer-heading {
+  margin: 0 0 0.25rem;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.footer-note,
+.footer-umbrella {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  line-height: 1.55;
+}
+.footer-umbrella a,
+.footer-note a {
+  color: var(--accent-2);
+}
+.external-mark {
+  color: var(--accent);
+  font-size: 0.62em;
+}
+.nav-link.is-active {
+  color: var(--accent);
+}
+.related-links {
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+.related-links p {
+  margin: 0.25rem 0;
+  line-height: 1.55;
+}
+.related-links strong {
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.related-links a,
+.source-links a,
+.reading-related a {
+  color: var(--accent-2);
+}
+.source-links {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+.reading-related {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.chrome-error {
+  position: fixed;
+  z-index: 200;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: min(480px, calc(100vw - 2rem));
+  padding: 0.75rem 0.9rem;
+  color: var(--ink);
+  background: var(--surface-solid);
+  border: 1px solid var(--accent);
+  border-radius: calc(var(--radius) * 0.7);
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.8);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+.chrome-error button {
+  flex: 0 0 auto;
+  padding: 0;
+  color: var(--accent);
+  background: transparent;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+.search-results .search-result {
+  text-decoration: none;
+}
+@media (max-width: 760px) {
+  .footer-grid {
+    flex-direction: column;
+  }
+  .footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+}
+@media (max-width: 460px) {
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Page tools, positive reactions, and reading progress */
+.page-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem 1.4rem;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.page-tool-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.page-tool-label {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.page-tool {
+  padding: 0.32rem 0.55rem;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.page-tool:hover,
+.page-tool:focus-visible,
+.page-tool.is-active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.page-tool-status {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+}
+.reading-progress {
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: transparent;
+  pointer-events: none;
+}
+.reading-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 10px var(--accent);
+  transition: width 0.1s linear;
+}

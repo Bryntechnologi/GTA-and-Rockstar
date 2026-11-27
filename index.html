@@ -44,7 +44,12 @@
         "alternateName": "CHANNEL SURF - Unofficial Rockstar Lore Archive & Arcade",
         "url": "./",
         "description": "An independent, non-commercial fan archive and arcade for the Rockstar universe, with lore, story beats, an era atlas, real-world comparisons, trivia, and puzzles.",
-        "inLanguage": "en"
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "Organization",
+          "name": "Brynsites",
+          "url": "https://brynsites.com/"
+        }
       },
       {
         "@type": "WebPage",
@@ -134,12 +139,14 @@
 
       <nav class="primary-nav" id="primaryNav" aria-label="Primary">
         <div class="nav-inner">
-          <button class="nav-link" data-route="home" type="button">Home</button>
-          <button class="nav-link" data-route="games" type="button">Games</button>
-          <button class="nav-link" data-route="story" type="button">Story</button>
-          <button class="nav-link" data-route="atlas" type="button">Atlas</button>
-          <button class="nav-link" data-route="play" type="button">Arcade</button>
-          <button class="nav-link" data-route="about" type="button">About</button>
+          <a class="nav-link" data-route="home" href="#home">Home</a>
+          <a class="nav-link" data-route="games" href="#games">Games</a>
+          <a class="nav-link" data-route="lore" href="#lore">Lore</a>
+          <a class="nav-link" data-route="story" href="#story">Story</a>
+          <a class="nav-link" data-route="atlas" href="#atlas">Atlas</a>
+          <a class="nav-link" data-route="reel" href="#reel">Real vs Reel</a>
+          <a class="nav-link" data-route="play" href="#play">Arcade</a>
+          <a class="nav-link" data-route="about" href="#about">About</a>
         </div>
       </nav>
 
@@ -877,6 +884,15 @@
 
       <div class="about-grid">
         <article class="panel prose">
+          <p class="eyebrow">The project</p>
+          <h3>A Brynsites miscellany project.</h3>
+          <p>CHANNEL SURF is a personal miscellany project made for fun, part of <a href="https://brynsites.com/" rel="noopener">Brynsites</a>. It is a <strong>partial archive</strong>, not a complete lore database, and it is updated when time allows.</p>
+          <p>Corrections, permissions, and takedown requests go through the <a href="https://brynsites.com/contact" rel="noopener">Brynsites contact page</a>. No email address is published on this subdomain.</p>
+        </article>
+      </div>
+
+      <div class="about-grid">
+        <article class="panel prose">
           <p class="eyebrow">The idea</p>
           <h3>One skeleton, eight personalities.</h3>
           <p>The entire visual system is driven by CSS custom properties and a single <code>data-era</code> attribute. Switching signals swaps colors, type, corner radii, shadows, ambient SVG art, and even the sound palette.</p>
@@ -940,26 +956,41 @@
         <div class="footer-brand">
           <strong>CHANNEL SURF</strong>
           <p id="footerDisclaimer">An independent, non-commercial fan project and portfolio piece. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All game names, characters, locations, and trademarks belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. Original writing, code, CSS, and vector art only. <button class="text-link" type="button" id="footerDisclaimerBtn">Full disclaimer</button></p>
+          <p class="footer-note">A partial, fan-made archive. Not exhaustive, and may lag behind new releases. Updated when time allows.</p>
+          <p class="footer-umbrella">A <a href="https://brynsites.com/" rel="noopener">Brynsites</a> miscellany project, made for fun.</p>
         </div>
-        <div class="footer-links" aria-label="Footer navigation">
-          <button type="button" data-route="home">Home</button>
-          <button type="button" data-route="games">Games</button>
-          <button type="button" data-route="lore">Lore</button>
-          <button type="button" data-route="atlas">Atlas</button>
-          <button type="button" data-route="story">Story Timeline</button>
-          <button type="button" data-route="reel">Real vs Reel</button>
-          <button type="button" data-route="play">Arcade</button>
-          <button type="button" data-route="timeline">Franchise Timeline</button>
-          <button type="button" data-route="toolkit">Field Kit</button>
-          <a class="footer-link" href="story.html">Story reading mode</a>
-          <a class="footer-link" href="elsewhere.html">Rockstar Elsewhere</a>
-          <a class="footer-link" href="changelog.html">Changelog</a>
-          <a class="footer-link" href="archive.html">Full-text archive</a>
-          <button type="button" data-route="about">About / IP</button>
-        </div>
+        <nav class="footer-links footer-columns" aria-label="Footer navigation">
+          <div class="footer-col">
+            <p class="footer-heading">Explore</p>
+            <a href="#home" data-route="home">Home</a>
+            <a href="#games" data-route="games">Games</a>
+            <a href="#lore" data-route="lore">Lore</a>
+            <a href="#story" data-route="story">Story</a>
+            <a href="#atlas" data-route="atlas">Atlas</a>
+            <a href="#reel" data-route="reel">Real vs Reel</a>
+            <a href="#play" data-route="play">Arcade</a>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Project</p>
+            <a href="#about" data-route="about">About</a>
+            <a href="changelog.html">Changelog</a>
+            <a href="credits.html">Image credits</a>
+            <a href="contact.html">Contact</a>
+            <a href="archive.html">Full-text archive</a>
+            <a href="story.html">Story reading mode</a>
+            <a href="elsewhere.html">Rockstar Elsewhere</a>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Elsewhere</p>
+            <a href="https://brynsites.com/" rel="noopener">Brynsites <span class="external-mark" aria-hidden="true">↗</span></a>
+            <a href="https://brynsites.com/contact" rel="noopener">Contact <span class="external-mark" aria-hidden="true">↗</span></a>
+            <a href="https://github.com/Bryntechnologi/GTA-and-Rockstar" rel="noopener">GitHub <span class="external-mark" aria-hidden="true">↗</span></a>
+            <a href="llms.txt">llms.txt</a>
+          </div>
+        </nav>
       </div>
       <div class="footer-bottom">
-        <span>Zero backend · zero trackers · zero ripped assets</span>
+        <span>A partial, fan-made archive. Updated when time allows.</span>
         <span>Unofficial fan project</span>
       </div>
     </div>
@@ -1019,5 +1050,6 @@
   <script src="assets/js/services.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/engagement.js"></script>
 </body>
 </html>

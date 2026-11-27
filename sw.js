@@ -3,13 +3,16 @@
    App-shell offline support. External APIs, map tiles, and audio streams are
    deliberately network-only so they never go stale silently.
    ------------------------------------------------------------------------- */
-const VERSION = "channelsurf-v18";
+const VERSION = "channelsurf-v19";
 const CORE = [
   "./",
   "index.html",
   "archive.html",
   "story.html",
   "elsewhere.html",
+  "changelog.html",
+  "contact.html",
+  "credits.html",
   "manifest.webmanifest",
   "assets/favicon.svg",
   "assets/og-cover.png",
@@ -17,6 +20,9 @@ const CORE = [
   "assets/fonts/fonts.css",
   "assets/js/services.js",
   "assets/js/data.js",
+  "assets/js/chrome.js",
+  "assets/js/engagement.js",
+  "assets/js/search-index.js",
   "assets/js/app.js",
   "assets/icons/icon-192.png",
   "assets/icons/icon-512.png",
@@ -30,7 +36,8 @@ const CORE = [
   "data/streams.json",
   "data/story-timeline.json",
   "data/games.json",
-  "data/image-credits.json"
+  "data/image-credits.json",
+  "data/changelog.json"
 ];
 
 self.addEventListener("install", (event) => {
