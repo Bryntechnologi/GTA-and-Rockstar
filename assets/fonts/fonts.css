@@ -400,3 +400,12 @@
   font-display: swap;
   src: url("Abril-Fatface-400-latin.woff2") format("woff2");
 }
+
+/* Additional open display/copy faces */
+@font-face { font-family: "Bowlby One SC"; font-style: normal; font-weight: 400; font-display: swap; src: url("Bowlby-One-SC-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "Bangers"; font-style: normal; font-weight: 400; font-display: swap; src: url("Bangers-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "Permanent Marker"; font-style: normal; font-weight: 400; font-display: swap; src: url("Permanent-Marker-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "Comic Neue"; font-style: normal; font-weight: 400; font-display: swap; src: url("Comic-Neue-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "Comic Neue"; font-style: normal; font-weight: 700; font-display: swap; src: url("Comic-Neue-700-latin.woff2") format("woff2"); }
+@font-face { font-family: "UnifrakturMaguntia"; font-style: normal; font-weight: 400; font-display: swap; src: url("UnifrakturMaguntia-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "Rock Salt"; font-style: normal; font-weight: 400; font-display: swap; src: url("Rock-Salt-400-latin.woff2") format("woff2"); }

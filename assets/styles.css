@@ -6000,3 +6000,28 @@ html[data-era="classic"] {
   --display-spacing: 0.04em;
   --body-art: linear-gradient(180deg, #070b14, #0c1424);
 }
+
+/* Pricedown-style and graffiti/comic alternatives */
+html[data-era="home"] {
+  --font-display: "Bowlby One SC", "Titan One", "Arial Black", sans-serif;
+  --display-weight: 400;
+}
+html[data-era="warriors"] {
+  --font-display: "Bangers", "Permanent Marker", "Arial Black", sans-serif;
+  --font-ui: "Comic Neue", "Comic Sans MS", "Segoe UI", sans-serif;
+  --font-mono: "Special Elite", "Courier New", monospace;
+  --display-weight: 400;
+  --display-spacing: 0.04em;
+}
+html[data-era="warriors"] .hero h1 em {
+  font-family: "Permanent Marker", "Comic Neue", cursive;
+}
+html[data-era="bully"] {
+  --font-display: "Graduate", Georgia, serif;
+  --font-ui: "Comic Neue", "Comic Sans MS", "Segoe UI", sans-serif;
+  --font-mono: "Courier Prime", "Courier New", monospace;
+  --display-weight: 400;
+}
+html[data-era="sanandreas"] .hero h1 em {
+  font-family: "UnifrakturMaguntia", "Pirata One", Georgia, serif;
+}
