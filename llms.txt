@@ -40,7 +40,7 @@ Full text archive: https://channelsurf.pages.dev/archive.html
 - Live Wikipedia summaries, when requested, are CC BY-SA and are attributed with a source link.
 - Live GTA Wiki summaries, when requested, are CC BY-SA via Fandom and are attributed with a source link.
 - This is a partial archive and does not cover every game, character, location, or story beat.
-- Map comparisons use OpenFreeMap and OpenStreetMap data with attribution.
+- Map comparisons use a local Natural Earth basemap with attribution.
 - Game titles, characters, locations, and trademarks remain the property of their respective owners.
 
 ## Disclaimer

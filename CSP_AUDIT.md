@@ -26,7 +26,7 @@ default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self';
 - Inline event-handler attributes: 0
 - Unique script hashes: 15
 - Unique style hashes: 7
-- External origins referenced: https://brynsites.com, https://ccradio.ellak.gr, https://channelsurf.pages.dev, https://commons.wikimedia.org, https://en.wikipedia.org, https://github.com, https://gta.fandom.com, https://ice1.somafm.com, https://mp3.theradio.cc, https://schema.org, https://somafm.com, https://theradio.cc, https://tiles.openfreemap.org, https://your-subdomain.example
+- External origins referenced: https://brynsites.com, https://ccradio.ellak.gr, https://channelsurf.pages.dev, https://commons.wikimedia.org, https://en.wikipedia.org, https://github.com, https://gta.fandom.com, https://ice1.somafm.com, https://mp3.theradio.cc, https://schema.org, https://somafm.com, https://theradio.cc, https://your-subdomain.example
 - `eval` / `new Function` hits: none
 
 ## External origins observed
@@ -43,7 +43,6 @@ default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self';
 - `https://schema.org` — 1 reference(s)
 - `https://somafm.com` — 6 reference(s)
 - `https://theradio.cc` — 1 reference(s)
-- `https://tiles.openfreemap.org` — 1 reference(s)
 - `https://your-subdomain.example` — 1 reference(s)
 
 ## Remaining hardening work

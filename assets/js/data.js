@@ -1024,138 +1024,174 @@ window.CS_DATA = (() => {
 
   /* ---------------------------------------------------------------------
      ERA ATLAS
-     Leonida gets coordinates for the custom SVG map. Other eras use cards.
+     Every era carries a real in-game map image plus percentage pin
+     coordinates. Coordinates are approximations, not official cartography.
      --------------------------------------------------------------------- */
   const atlas = {
     gta6: {
       title: "The State of Leonida",
-      subtitle: "A stylized fan atlas — not to scale.",
+      subtitle: "Official GTA VI map · fan annotations, not to scale.",
+      map: {
+        src: "assets/maps/gta6.jpg",
+        width: 1400,
+        height: 1917,
+        credit: "Map artwork © Rockstar Games, via the GTA Wiki",
+        source: "https://gta.fandom.com/wiki/File:StateofLeonida-GTAVI-OfficialMap.jpg"
+      },
       locations: [
         {
           id: "vice-city",
           name: "Vice City",
           kind: "Neon capital",
-          x: 482,
-          y: 322,
+          x: 62,
+          y: 52,
           note: "The main stage. Causeways, condo towers, club queues, and a skyline that treats every sunset like a premiere."
         },
         {
           id: "vice-beach",
           name: "Vice Beach",
           kind: "Barrier island",
-          x: 548,
-          y: 278,
+          x: 80,
+          y: 49,
           note: "Sand, rollerblades, and oceanfront trouble. The postcard version of Leonida is always hiding a second story."
         },
         {
           id: "leonida-keys",
           name: "Leonida Keys",
           kind: "Island chain",
-          x: 424,
-          y: 404,
+          x: 26,
+          y: 82,
           note: "A string of causeways and small islands where the mainland feels very far away — until someone recognizes your car."
         },
         {
           id: "grassrivers",
           name: "Grassrivers",
           kind: "Wetland maze",
-          x: 303,
-          y: 286,
+          x: 44,
+          y: 67,
           note: "Airboats, alligators, and water roads. A place where the map ends and the local knowledge begins."
         },
         {
           id: "port-gellhorn",
           name: "Port Gellhorn",
           kind: "Salt-worn docks",
-          x: 142,
-          y: 288,
+          x: 29,
+          y: 36,
           note: "Working docks, cheap motels, and a gulf-coast rhythm that does not care about your schedule."
         },
         {
           id: "ambrosia",
           name: "Ambrosia",
           kind: "Industrial edge",
-          x: 176,
-          y: 146,
+          x: 53,
+          y: 32,
           note: "Refineries and freight by day; long shadows and side deals after dark. The state's unglamorous engine room."
         },
         {
           id: "mount-kalaga",
           name: "Mount Kalaga",
           kind: "National park",
-          x: 329,
-          y: 91,
+          x: 42,
+          y: 23,
           note: "Pine ridges, switchbacks, and the kind of quiet that makes every distant engine sound suspicious."
         },
         {
           id: "lake-leonida",
           name: "Lake Leonida",
           kind: "Inland water",
-          x: 274,
-          y: 210,
+          x: 59,
+          y: 29,
           note: "A dark blue lung in the middle of the state, ringed by small towns and very specific local rumors."
         }
       ]
     },
     vicecity: {
       title: "Vice City, 1986",
-      subtitle: "Pastel coastline, dangerous business.",
+      subtitle: "Official GTA: Vice City map · fan annotations.",
+      map: {
+        src: "assets/maps/vice-city.jpg",
+        width: 1400,
+        height: 1400,
+        credit: "Map artwork © Rockstar Games, via the GTA Wiki",
+        source: "https://gta.fandom.com/wiki/File:ViceCity-GTAVC-MapHD.jpg"
+      },
       locations: [
-        { id: "ocean-beach", name: "Ocean Beach", kind: "Beachfront strip", note: "Neon hotels, rented convertibles, and the feeling that everyone is either somebody or about to pretend to be." },
-        { id: "starfish-island", name: "Starfish Island", kind: "Gated wealth", note: "Mansions behind gates and palms. The shortest route between two crimes is often a driveway." },
-        { id: "little-havana", name: "Little Havana", kind: "Cuban quarter", note: "Coffee, cigars, car culture, and a community with its own rules about who gets respect." },
-        { id: "little-haiti", name: "Little Haiti", kind: "Northern district", note: "A neighborhood under pressure, with turf lines drawn in paint, money, and mutual distrust." },
-        { id: "downtown", name: "Downtown", kind: "Glass and ambition", note: "Office towers, construction cranes, and a skyline that looks best through the windshield of a stolen car." },
-        { id: "malibu-club", name: "Malibu Club", kind: "Nightlife", note: "A neon landmark where the music is loud enough to drown out at least three ongoing conspiracies." },
-        { id: "escobar-airport", name: "Escobar International", kind: "Airport", note: "Arrivals, departures, and the occasional package that never appears on a manifest." },
-        { id: "vice-port", name: "Vice Port", kind: "Docks", note: "Containers, forklifts, and the kind of quiet that gets interrupted by a car chase." }
+        { id: "ocean-beach", name: "Ocean Beach", kind: "Beachfront strip", x: 75, y: 68, note: "Neon hotels, rented convertibles, and the feeling that everyone is either somebody or about to pretend to be." },
+        { id: "starfish-island", name: "Starfish Island", kind: "Gated wealth", x: 50, y: 57, note: "Mansions behind gates and palms. The shortest route between two crimes is often a driveway." },
+        { id: "little-havana", name: "Little Havana", kind: "Cuban quarter", x: 25, y: 68, note: "Coffee, cigars, car culture, and a community with its own rules about who gets respect." },
+        { id: "little-haiti", name: "Little Haiti", kind: "Northern district", x: 29, y: 32, note: "A neighborhood under pressure, with turf lines drawn in paint, money, and mutual distrust." },
+        { id: "downtown", name: "Downtown", kind: "Glass and ambition", x: 62, y: 45, note: "Office towers, construction cranes, and a skyline that looks best through the windshield of a stolen car." },
+        { id: "malibu-club", name: "Malibu Club", kind: "Nightlife", x: 70, y: 21, note: "A neon landmark where the music is loud enough to drown out at least three ongoing conspiracies." },
+        { id: "escobar-airport", name: "Escobar International", kind: "Airport", x: 21, y: 82, note: "Arrivals, departures, and the occasional package that never appears on a manifest." },
+        { id: "vice-port", name: "Vice Port", kind: "Docks", x: 32, y: 89, note: "Containers, forklifts, and the kind of quiet that gets interrupted by a car chase." }
       ]
     },
     sanandreas: {
       title: "San Andreas, 1992",
-      subtitle: "Three cities, one long state of mind.",
+      subtitle: "Official GTA: San Andreas map · fan annotations.",
+      map: {
+        src: "assets/maps/san-andreas.jpg",
+        width: 1400,
+        height: 1400,
+        credit: "Map artwork © Rockstar Games, via the GTA Wiki",
+        source: "https://gta.fandom.com/wiki/File:StateofSanAndreas-GTASA-StreetMap.png"
+      },
       locations: [
-        { id: "los-santos", name: "Los Santos", kind: "Sprawl", note: "Freeways, palms, and neighborhoods where history is measured in blocks." },
-        { id: "grove-street", name: "Grove Street", kind: "Home turf", note: "Green paint, cul-de-sacs, and a family name that carries weight both inside and outside the block." },
-        { id: "san-fierro", name: "San Fierro", kind: "Coastal city", note: "Hills, bridges, fog, and a colder social climate than Los Santos." },
-        { id: "las-venturas", name: "Las Venturas", kind: "Casino strip", note: "Neon carpet, all-night buffets, and the house always having a plan." },
-        { id: "red-county", name: "Red County", kind: "Rural", note: "Orchards, dirt roads, and small-town deputies with very long memories." },
-        { id: "bone-county", name: "Bone County", kind: "Desert", note: "Heat shimmer, abandoned mines, and a military installation nobody is supposed to discuss." },
-        { id: "mount-chiliad", name: "Mount Chiliad", kind: "Peak", note: "The state's high point and a favorite finish line for bad ideas." },
-        { id: "area-69", name: "Area 69", kind: "Restricted", note: "Fences, guard towers, and enough secrecy to make a conspiracy theorist feel seen." }
+        { id: "los-santos", name: "Los Santos", kind: "Sprawl", x: 76, y: 75, note: "Freeways, palms, and neighborhoods where history is measured in blocks." },
+        { id: "grove-street", name: "Grove Street", kind: "Home turf", x: 78, y: 82, note: "Green paint, cul-de-sacs, and a family name that carries weight both inside and outside the block." },
+        { id: "san-fierro", name: "San Fierro", kind: "Coastal city", x: 13, y: 37, note: "Hills, bridges, fog, and a colder social climate than Los Santos." },
+        { id: "las-venturas", name: "Las Venturas", kind: "Casino strip", x: 80, y: 21, note: "Neon carpet, all-night buffets, and the house always having a plan." },
+        { id: "red-county", name: "Red County", kind: "Rural", x: 54, y: 57, note: "Orchards, dirt roads, and small-town deputies with very long memories." },
+        { id: "bone-county", name: "Bone County", kind: "Desert", x: 54, y: 29, note: "Heat shimmer, abandoned mines, and a military installation nobody is supposed to discuss." },
+        { id: "mount-chiliad", name: "Mount Chiliad", kind: "Peak", x: 32, y: 77, note: "The state's high point and a favorite finish line for bad ideas." },
+        { id: "area-69", name: "Area 69", kind: "Restricted", x: 59, y: 35, note: "Fences, guard towers, and enough secrecy to make a conspiracy theorist feel seen." }
       ]
     },
     gta5: {
       title: "Los Santos & Blaine County",
-      subtitle: "Sunshine with a body count.",
+      subtitle: "Official GTA V map · fan annotations.",
+      map: {
+        src: "assets/maps/los-santos.jpg",
+        width: 1400,
+        height: 1400,
+        credit: "Map artwork © Rockstar Games, via the GTA Wiki",
+        source: "https://gta.fandom.com/wiki/File:SouthernSanAndreas-GTAV-Map.jpg"
+      },
       locations: [
-        { id: "downtown-ls", name: "Downtown Los Santos", kind: "Skyscrapers", note: "Glass towers, construction sites, and enough traffic to make a helicopter feel reasonable." },
-        { id: "vinewood", name: "Vinewood Hills", kind: "Celebrity", note: "Hillside mansions and billboard smiles. The view is expensive; the neighbors are worse." },
-        { id: "vespucci", name: "Vespucci Beach", kind: "Boardwalk", note: "Muscle beach, skate parks, and a boardwalk economy built on sunglasses and optimism." },
-        { id: "del-perro", name: "Del Perro Pier", kind: "Coastline", note: "Ferris wheel lights, tourist crowds, and the Pacific doing its best to look peaceful." },
-        { id: "sandy-shores", name: "Sandy Shores", kind: "Desert town", note: "Dust, dive bars, and a lake that is more of a rumor than a resort." },
-        { id: "paleto-bay", name: "Paleto Bay", kind: "Small town", note: "A sleepy northern town where a bank job feels like the biggest event of the decade." },
-        { id: "grapeseed", name: "Grapeseed", kind: "Farmland", note: "Fields, barns, and a lot of open space for things to go wrong." },
-        { id: "fort-zancudo", name: "Fort Zancudo", kind: "Military base", note: "Restricted airspace, armed guards, and a standing invitation to leave immediately." }
+        { id: "downtown-ls", name: "Downtown Los Santos", kind: "Skyscrapers", x: 40, y: 76, note: "Glass towers, construction sites, and enough traffic to make a helicopter feel reasonable." },
+        { id: "vinewood", name: "Vinewood Hills", kind: "Celebrity", x: 36, y: 66, note: "Hillside mansions and billboard smiles. The view is expensive; the neighbors are worse." },
+        { id: "vespucci", name: "Vespucci Beach", kind: "Boardwalk", x: 28, y: 79, note: "Muscle beach, skate parks, and a boardwalk economy built on sunglasses and optimism." },
+        { id: "del-perro", name: "Del Perro Pier", kind: "Coastline", x: 31, y: 84, note: "Ferris wheel lights, tourist crowds, and the Pacific doing its best to look peaceful." },
+        { id: "sandy-shores", name: "Sandy Shores", kind: "Desert town", x: 59, y: 41, note: "Dust, dive bars, and a lake that is more of a rumor than a resort." },
+        { id: "paleto-bay", name: "Paleto Bay", kind: "Small town", x: 41, y: 15, note: "A sleepy northern town where a bank job feels like the biggest event of the decade." },
+        { id: "grapeseed", name: "Grapeseed", kind: "Farmland", x: 66, y: 18, note: "Fields, barns, and a lot of open space for things to go wrong." },
+        { id: "fort-zancudo", name: "Fort Zancudo", kind: "Military base", x: 25, y: 43, note: "Restricted airspace, armed guards, and a standing invitation to leave immediately." }
       ]
     },
     gta4: {
       title: "Liberty City, 2008",
-      subtitle: "The cold city and its warmest lies.",
+      subtitle: "Official GTA IV map · fan annotations.",
+      map: {
+        src: "assets/maps/liberty-city.jpg",
+        width: 1400,
+        height: 887,
+        credit: "Map artwork © Rockstar Games, via the GTA Wiki",
+        source: "https://gta.fandom.com/wiki/File:LibertyCity-GTAIV-Map2008.jpg"
+      },
       locations: [
-        { id: "broker", name: "Broker", kind: "Borough", note: "Niko and Roman's first neighborhood: tight streets, louder arguments, and rent that is always due." },
-        { id: "dukes", name: "Dukes", kind: "Borough", note: "Industrial edges and residential pockets, with a skyline that never lets you forget where you are." },
-        { id: "bohan", name: "Bohan", kind: "Borough", note: "Crowded blocks and a hard-won sense of community. Also a very good place not to owe someone money." },
-        { id: "algonquin", name: "Algonquin", kind: "Manhattan stand-in", note: "Vertical city: media towers, museums, and a million windows into other people's business." },
-        { id: "alderney", name: "Alderney", kind: "Industrial", note: "Factories, highways, and the kind of gray that settles into your jacket." },
-        { id: "hove-beach", name: "Hove Beach", kind: "Immigrant quarter", note: "Russian storefronts, boardwalk air, and the first taste of Liberty City's promise for Niko." },
-        { id: "middle-park", name: "Middle Park", kind: "Green space", note: "A rare patch of quiet in a city that rarely rewards stillness." },
-        { id: "star-junction", name: "Star Junction", kind: "Neon crossing", note: "Billboards, crowds, and the feeling of being a very small story in a very large city." }
+        { id: "broker", name: "Broker", kind: "Borough", x: 70, y: 63, note: "Niko and Roman's first neighborhood: tight streets, louder arguments, and rent that is always due." },
+        { id: "dukes", name: "Dukes", kind: "Borough", x: 75, y: 41, note: "Industrial edges and residential pockets, with a skyline that never lets you forget where you are." },
+        { id: "bohan", name: "Bohan", kind: "Borough", x: 56, y: 21, note: "Crowded blocks and a hard-won sense of community. Also a very good place not to owe someone money." },
+        { id: "algonquin", name: "Algonquin", kind: "Manhattan stand-in", x: 41, y: 47, note: "Vertical city: media towers, museums, and a million windows into other people's business." },
+        { id: "alderney", name: "Alderney", kind: "Industrial", x: 18, y: 47, note: "Factories, highways, and the kind of gray that settles into your jacket." },
+        { id: "hove-beach", name: "Hove Beach", kind: "Immigrant quarter", x: 64, y: 59, note: "Russian storefronts, boardwalk air, and the first taste of Liberty City's promise for Niko." },
+        { id: "middle-park", name: "Middle Park", kind: "Green space", x: 42, y: 34, note: "A rare patch of quiet in a city that rarely rewards stillness." },
+        { id: "star-junction", name: "Star Junction", kind: "Neon crossing", x: 41, y: 51, note: "Billboards, crowds, and the feeling of being a very small story in a very large city." }
       ]
     },
     warriors: {
       title: "New York, 1979",
-      subtitle: "A city with the lights on and the doors locked.",
+      subtitle: "No official world map — a fan-made signal postcard and district dossier.",
       locations: [
         { id: "coney-island", name: "Coney Island", kind: "Home turf", note: "Boardwalk rides and the long way home. The Warriors' entire night is measured by the distance back to this place." },
         { id: "riverside-park", name: "Riverside Park", kind: "Park", note: "Trees, benches, and the kind of shadows that make a shortcut look like a mistake." },
@@ -1169,30 +1205,44 @@ window.CS_DATA = (() => {
     },
     reddead: {
       title: "The Frontier, 1899",
-      subtitle: "A map running out of blank space.",
+      subtitle: "Official Red Dead Redemption 2 map · fan annotations.",
+      map: {
+        src: "assets/maps/frontier.jpg",
+        width: 1400,
+        height: 1050,
+        credit: "Map artwork © Rockstar Games, via the Red Dead Wiki",
+        source: "https://reddead.fandom.com/wiki/File:RDR_2_World_Map.jpg"
+      },
       locations: [
-        { id: "valentine", name: "Valentine", kind: "Frontier town", note: "Muddy streets, cattle auctions, and a saloon that has seen better men and worse decisions." },
-        { id: "rhodes", name: "Rhodes", kind: "Southern town", note: "Sun-bleached storefronts and old grudges wearing their Sunday best." },
-        { id: "saint-denis", name: "Saint Denis", kind: "Industrial city", note: "Electric light, streetcars, and the uncomfortable future arriving ahead of schedule." },
-        { id: "blackwater", name: "Blackwater", kind: "Town", note: "A prosperous waterfront with a short memory and a long list of people who want something from you." },
-        { id: "armadillo", name: "Armadillo", kind: "Desert town", note: "Heat, dust, and the kind of silence that suggests everyone is armed." },
-        { id: "emerald-ranch", name: "Emerald Ranch", kind: "Ranchland", note: "Open fields and honest work, at least until somebody brings a problem through the gate." },
-        { id: "annesburg", name: "Annesburg", kind: "Mining town", note: "Coal dust, company housing, and a town built around someone else's profit." },
-        { id: "tall-trees", name: "Tall Trees", kind: "Wilderness", note: "Old forest and older violence. The law is a rumor out here." }
+        { id: "valentine", name: "Valentine", kind: "Frontier town", x: 59, y: 33, note: "Muddy streets, cattle auctions, and a saloon that has seen better men and worse decisions." },
+        { id: "rhodes", name: "Rhodes", kind: "Southern town", x: 74, y: 56, note: "Sun-bleached storefronts and old grudges wearing their Sunday best." },
+        { id: "saint-denis", name: "Saint Denis", kind: "Industrial city", x: 86, y: 54, note: "Electric light, streetcars, and the uncomfortable future arriving ahead of schedule." },
+        { id: "blackwater", name: "Blackwater", kind: "Town", x: 52, y: 55, note: "A prosperous waterfront with a short memory and a long list of people who want something from you." },
+        { id: "armadillo", name: "Armadillo", kind: "Desert town", x: 37, y: 70, note: "Heat, dust, and the kind of silence that suggests everyone is armed." },
+        { id: "emerald-ranch", name: "Emerald Ranch", kind: "Ranchland", x: 68, y: 41, note: "Open fields and honest work, at least until somebody brings a problem through the gate." },
+        { id: "annesburg", name: "Annesburg", kind: "Mining town", x: 85, y: 25, note: "Coal dust, company housing, and a town built around someone else's profit." },
+        { id: "tall-trees", name: "Tall Trees", kind: "Wilderness", x: 49, y: 45, note: "Old forest and older violence. The law is a rumor out here." }
       ]
     },
     bully: {
       title: "Bullworth Academy",
-      subtitle: "A small town with a very long social ladder.",
+      subtitle: "Official Bully map · fan annotations.",
+      map: {
+        src: "assets/maps/bullworth.jpg",
+        width: 1400,
+        height: 1038,
+        credit: "Map artwork © Rockstar Games, via the Bully Wiki",
+        source: "https://bully.fandom.com/wiki/File:Bullworth-Map.jpg"
+      },
       locations: [
-        { id: "bullworth-academy", name: "Bullworth Academy", kind: "Boarding school", note: "Gothic halls, detention slips, and a hierarchy more complicated than most governments." },
-        { id: "bullworth-town", name: "Bullworth Town", kind: "Town center", note: "A quiet main street, a comic shop, and the occasional perfectly ordinary errand that goes sideways." },
-        { id: "old-bullworth-vale", name: "Old Bullworth Vale", kind: "Affluent district", note: "Manicured lawns and old money, where a PTA meeting can feel like a border dispute." },
-        { id: "new-coventry", name: "New Coventry", kind: "Greaser turf", note: "Garages, chain-link fences, and a neighborhood that does not hand out trust for free." },
-        { id: "blue-skies", name: "Blue Skies Industrial Park", kind: "Industry", note: "Warehouses, fumes, and enough empty space for a very bad plan to find room to grow." },
-        { id: "harrington-house", name: "Harrington House", kind: "Old estate", note: "Portraits, polished wood, and family secrets with excellent posture." },
-        { id: "carnival", name: "Bullworth Carnival", kind: "Fairground", note: "Lights, games, and the strange freedom of a fairground after dark." },
-        { id: "happy-volts", name: "Happy Volts Asylum", kind: "Institution", note: "A hulking building on the edge of town that everyone mentions and nobody wants to visit." }
+        { id: "bullworth-academy", name: "Bullworth Academy", kind: "Boarding school", x: 51, y: 57, note: "Gothic halls, detention slips, and a hierarchy more complicated than most governments." },
+        { id: "bullworth-town", name: "Bullworth Town", kind: "Town center", x: 51, y: 21, note: "A quiet main street, a comic shop, and the occasional perfectly ordinary errand that goes sideways." },
+        { id: "old-bullworth-vale", name: "Old Bullworth Vale", kind: "Affluent district", x: 18, y: 29, note: "Manicured lawns and old money, where a PTA meeting can feel like a border dispute." },
+        { id: "new-coventry", name: "New Coventry", kind: "Greaser turf", x: 80, y: 63, note: "Garages, chain-link fences, and a neighborhood that does not hand out trust for free." },
+        { id: "blue-skies", name: "Blue Skies Industrial Park", kind: "Industry", x: 75, y: 83, note: "Warehouses, fumes, and enough empty space for a very bad plan to find room to grow." },
+        { id: "harrington-house", name: "Harrington House", kind: "Old estate", x: 18, y: 19, note: "Portraits, polished wood, and family secrets with excellent posture." },
+        { id: "carnival", name: "Bullworth Carnival", kind: "Fairground", x: 13, y: 62, note: "Lights, games, and the strange freedom of a fairground after dark." },
+        { id: "happy-volts", name: "Happy Volts Asylum", kind: "Institution", x: 71, y: 29, note: "A hulking building on the edge of town that everyone mentions and nobody wants to visit." }
       ]
     }
   };

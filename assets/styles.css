@@ -3041,10 +3041,111 @@ main {
     color-mix(in srgb, var(--bg) 65%, var(--surface-solid));
 }
 
-.atlas-map svg {
+.atlas-map > svg {
   width: 100%;
   height: auto;
   aspect-ratio: 640 / 440;
+}
+
+.atlas-image-map {
+  display: grid;
+  place-items: center;
+  padding: 0.3rem;
+}
+
+.atlas-image {
+  position: relative;
+  width: 100%;
+  max-width: calc(64vh * (var(--map-aspect)));
+  aspect-ratio: var(--map-aspect);
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.atlas-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--bg-2);
+}
+
+.atlas-pin {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.atlas-pin.is-right {
+  flex-direction: row-reverse;
+}
+
+.atlas-pin-dot {
+  flex: 0 0 auto;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.atlas-pin-label {
+  padding: 0.16rem 0.32rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(2px);
+}
+
+.atlas-pin:hover .atlas-pin-dot,
+.atlas-pin:focus-visible .atlas-pin-dot,
+.atlas-pin.is-active .atlas-pin-dot {
+  background: var(--accent-2);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-2) 42%, transparent);
+  transform: scale(1.22);
+}
+
+.atlas-pin.is-active .atlas-pin-label {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+}
+
+.atlas-map-credit {
+  margin: 0.55rem 0 0;
+  font-size: 0.56rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .atlas-pin-label {
+    display: none;
+  }
+  .atlas-pin.is-active .atlas-pin-label,
+  .atlas-pin:focus-visible .atlas-pin-label {
+    display: inline-block;
+  }
 }
 
 .map-water {
@@ -4297,14 +4398,29 @@ html[data-era="bully"] .brand-mark {
   background: var(--bg-2, var(--bg));
   margin-top: 0.8rem;
 }
+.reel-marker-wrap {
+  background: none;
+  border: 0;
+}
 .reel-marker {
-  width: 16px;
-  height: 16px;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  place-items: center;
   border-radius: 50%;
   background: var(--accent-2);
   border: 3px solid var(--accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
   cursor: pointer;
+}
+.reel-card .reel-fly {
+  margin-top: 0.75rem;
 }
 .reel-cards {
   display: grid;
@@ -4404,6 +4520,14 @@ html[data-era="bully"] .brand-mark {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 0.9rem;
+}
+.lore-notice {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--accent-3);
+  background: color-mix(in srgb, var(--surface-solid) 70%, transparent);
+  border-radius: 0 calc(var(--radius) * 0.5) calc(var(--radius) * 0.5) 0;
 }
 .lore-card {
   display: flex;
@@ -5360,19 +5484,19 @@ html[data-era="bully"] .brand-mark {
 @property --radius { syntax: "<length>"; inherits: true; initial-value: 12px; }
 
 html {
-  transition-property: --bg, --bg-2, --surface, --surface-solid, --header-bg, --ink, --muted, --accent, --accent-2, --accent-3, --on-accent, --line, --line-strong, --radius;
-  transition-duration: 0.55s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: --bg, --bg-2, --surface, --surface-solid, --header-bg, --ink, --muted, --accent, --accent-2, --accent-3, --on-accent, --line, --line-strong;
+  transition-duration: 0.34s;
+  transition-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
 }
 body {
-  transition: background-color 0.55s cubic-bezier(0.4, 0, 0.2, 1), color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.34s cubic-bezier(0.33, 0, 0.2, 1), color 0.34s cubic-bezier(0.33, 0, 0.2, 1);
 }
 .site-header {
-  transition: background 0.55s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.55s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.55s ease;
+  transition: background 0.34s cubic-bezier(0.33, 0, 0.2, 1), border-color 0.34s cubic-bezier(0.33, 0, 0.2, 1), box-shadow 0.25s ease;
 }
 .ambient svg,
 .ambient svg * {
-  transition: fill 0.55s ease, stroke 0.55s ease, opacity 0.55s ease;
+  transition: fill 0.34s ease, stroke 0.34s ease, opacity 0.34s ease;
 }
 .panel,
 .on-air-card,
@@ -5389,13 +5513,13 @@ body {
 .era-toggle,
 .utility-cluster,
 .nav-inner {
-  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease, box-shadow 0.45s ease, transform 0.2s ease;
+  transition: background-color 0.28s ease, border-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease, transform 0.2s ease;
 }
 .panel svg *,
 .story-detail-art svg *,
 .atlas-art svg *,
 .atlas-map svg * {
-  transition: fill 0.55s ease, stroke 0.55s ease;
+  transition: fill 0.34s ease, stroke 0.34s ease;
 }
 
 /* --------------------------------------------------------------------------
@@ -5421,7 +5545,7 @@ body {
   background: linear-gradient(180deg, var(--accent-2), var(--accent));
 }
 .view.is-active {
-  animation: viewIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: viewIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes viewIn {
   from { opacity: 0; transform: translateY(10px); }

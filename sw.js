@@ -3,7 +3,7 @@
    App-shell offline support. External APIs, map tiles, and audio streams are
    deliberately network-only so they never go stale silently.
    ------------------------------------------------------------------------- */
-const VERSION = "channelsurf-v20";
+const VERSION = "channelsurf-v22";
 const CORE = [
   "./",
   "index.html",
@@ -30,8 +30,14 @@ const CORE = [
   "assets/icons/maskable-512.png",
   "assets/vendor/leaflet/leaflet.js",
   "assets/vendor/leaflet/leaflet.css",
-  "assets/vendor/maplibre/maplibre-gl.js",
-  "assets/vendor/maplibre/maplibre-gl.css",
+  "assets/maps/gta6.jpg",
+  "assets/maps/vice-city.jpg",
+  "assets/maps/san-andreas.jpg",
+  "assets/maps/los-santos.jpg",
+  "assets/maps/liberty-city.jpg",
+  "assets/maps/frontier.jpg",
+  "assets/maps/bullworth.jpg",
+  "assets/maps/world.svg",
   "data/lore.json",
   "data/real-world.json",
   "data/streams.json",
@@ -82,6 +88,24 @@ self.addEventListener("fetch", (event) => {
           return response;
         })
         .catch(() => caches.match(request).then((hit) => hit || caches.match("index.html")))
+    );
+    return;
+  }
+
+  const destination = request.destination;
+  const networkFirst = destination === "script" || destination === "style" || destination === "worker";
+
+  if (networkFirst) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(VERSION).then((cache) => cache.put(request, copy)).catch(() => {});
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
     );
     return;
   }

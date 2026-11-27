@@ -138,7 +138,7 @@ test("real vs reel renders comparison cards", async () => {
   nav(doc, "reel");
   await new Promise((resolve) => setTimeout(resolve, 600));
   assert.equal(doc.querySelectorAll(".reel-card").length, 10);
-  assert.match(doc.querySelector(".reel-attribution")?.textContent || "", /OpenStreetMap/);
+  assert.match(doc.querySelector(".reel-attribution")?.textContent || "", /Natural Earth/);
   assert.equal(errors.length, 0, errors.join("\n"));
   window.close();
 });
@@ -163,8 +163,9 @@ test("offline data failures degrade gracefully", async () => {
   const { window, doc, errors } = await loadSite({ online: false });
   assert.equal(errors.length, 0, errors.join("\n"));
   nav(doc, "lore");
-  await new Promise((resolve) => setTimeout(resolve, 200));
-  assert.match(doc.querySelector("#loreContent")?.textContent || "", /could not load/i);
+  await waitFor(() => /featured entries only/i.test(doc.querySelector("#loreContent")?.textContent || ""));
+  assert.match(doc.querySelector("#loreContent")?.textContent || "", /featured entries only/i);
+  assert.ok(doc.querySelectorAll("#loreContent .lore-card").length >= 1, "featured lore should still render offline");
   nav(doc, "reel");
   await new Promise((resolve) => setTimeout(resolve, 300));
   assert.ok(doc.querySelector("#reelContent"));

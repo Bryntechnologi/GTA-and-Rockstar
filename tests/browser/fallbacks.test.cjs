@@ -55,12 +55,13 @@ if (!executablePath) {
 
   await page.goto(BASE + "#reel", { waitUntil: "domcontentloaded" });
   await page.waitForSelector("#reelCards .reel-card", { timeout: 15000 });
+  await page.waitForSelector("#reelMap .reel-marker", { timeout: 15000 });
   await page.waitForFunction(
-    () => /tiles could not load|unavailable/i.test(document.querySelector("#reelStatus")?.textContent || ""),
-    { timeout: 20000 }
+    () => /marker|comparison/i.test(document.querySelector("#reelStatus")?.textContent || ""),
+    { timeout: 15000 }
   );
   const reelStatus = (await page.locator("#reelStatus").textContent()).trim();
-  assert.match(reelStatus, /tiles could not load|unavailable/i, "map fallback should render");
+  assert.match(reelStatus, /marker|comparison/i, "map status should render");
   assert.equal(await page.locator(".reel-card").count(), 10, "comparison cards should remain");
   assert.deepEqual(pageErrors, [], "no page errors during fallback");
   await context.close();

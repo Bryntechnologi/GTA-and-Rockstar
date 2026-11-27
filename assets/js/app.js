@@ -349,7 +349,10 @@
     atlasSelected: null,
     atlasMode: "atlas",
     atlasInteractive: false,
+    atlasToken: 0,
+    atlasMarkers: null,
     lore: null,
+    loreStatus: "idle",
     games: null,
     loreFilter: "all",
     contentBaseEra: null,
@@ -366,10 +369,10 @@
     imageCredits: null,
     streams: null,
     leafletPromise: null,
-    maplibrePromise: null,
     leafletMap: null,
     geoLayer: null,
-    maplibreMap: null,
+    reelMap: null,
+    reelMarkers: null,
     geo: null,
     currentStream: null,
     timelineFilter: "All",
@@ -530,18 +533,20 @@
     return state.leafletPromise;
   }
 
-  function ensureMapLibre() {
-    if (window.maplibregl) return Promise.resolve(true);
-    if (state.maplibrePromise) return state.maplibrePromise;
-    state.maplibrePromise = loadStyleOnce("assets/vendor/maplibre/maplibre-gl.css")
-      .then(() => loadScriptOnce("assets/vendor/maplibre/maplibre-gl.js"))
-      .then((ok) => Boolean(ok && window.maplibregl));
-    return state.maplibrePromise;
-  }
-
   async function ensureLore() {
-    if (state.lore) return state.lore;
-    state.lore = SERVICES ? (await SERVICES.getLore()) || [] : [];
+    if (state.lore && state.lore.length) return state.lore;
+    state.loreStatus = "loading";
+    const lore = SERVICES ? (await SERVICES.getLore()) || [] : [];
+    if (Array.isArray(lore) && lore.length) {
+      state.lore = lore;
+      state.loreStatus = "ready";
+    } else if (Array.isArray(featuredLore) && featuredLore.length) {
+      state.lore = featuredLore;
+      state.loreStatus = "fallback";
+    } else {
+      state.lore = null;
+      state.loreStatus = "error";
+    }
     return state.lore;
   }
 
@@ -579,55 +584,6 @@
     const lore = await ensureLore();
     return lore;
   }
-
-  function resolveCssVars(svg) {
-    const cs = getComputedStyle(document.documentElement);
-    const vars = ["--bg", "--bg-2", "--surface-solid", "--surface-2", "--accent", "--accent-2", "--accent-3", "--muted", "--ink", "--text", "--border", "--line", "--on-accent"];
-    let output = svg;
-    vars.forEach((name) => {
-      const value = (cs.getPropertyValue(name) || "").trim();
-      if (value) output = output.split(`var(${name})`).join(value);
-    });
-    return output;
-  }
-
-  function withAlpha(color, alpha) {
-    const value = String(color).trim();
-    const hex = value.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
-    if (hex) {
-      let raw = hex[1];
-      if (raw.length === 3) raw = raw.split("").map((c) => c + c).join("");
-      const r = parseInt(raw.slice(0, 2), 16);
-      const g = parseInt(raw.slice(2, 4), 16);
-      const b = parseInt(raw.slice(4, 6), 16);
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
-    if (/^rgb\(/i.test(value)) return value.replace(/^rgb\(/i, "rgba(").replace(/\)$/, `, ${alpha})`);
-    return value;
-  }
-
-  function inlineMapSvg(svg) {
-    const cs = getComputedStyle(document.documentElement);
-    const token = (name, fallback) => (cs.getPropertyValue(name) || "").trim() || fallback;
-    const bg = token("--bg-2", token("--bg", "#050914"));
-    const accent = token("--accent", "#ff5d7e");
-    const accent2 = token("--accent-2", "#23e0f2");
-    const accent3 = token("--accent-3", "#ffc36b");
-    const style = `<style>
-      .map-water{fill:${bg};opacity:.7}
-      .map-land{fill:${withAlpha(accent3, 0.16)};stroke:${withAlpha(accent3, 0.5)};stroke-width:1.5}
-      .map-land-soft{fill:${withAlpha(accent2, 0.1)};stroke:${withAlpha(accent2, 0.3)};stroke-width:1}
-      .map-lake{fill:${withAlpha(accent2, 0.28)};stroke:${withAlpha(accent2, 0.5)};stroke-width:1}
-      .map-road{fill:none;stroke:${withAlpha(accent3, 0.4)};stroke-width:2;stroke-linecap:round;stroke-dasharray:2 5}
-      .map-pin .pin-dot{fill:${accent};stroke:${bg};stroke-width:1.5}
-      .map-pin .pin-ring{fill:none;stroke:${accent2};stroke-opacity:.55}
-      .map-pin .pin-label{fill:${accent2}}
-      .atlas-compass circle,.atlas-compass path{stroke:${accent2};fill:none}
-    </style>`;
-    const resolved = resolveCssVars(svg);
-    return resolved.replace(/^(<svg[^>]*>)/, `$1${style}`);
-  }
-
 
   function wrapLines(ctx, text, maxWidth) {
     const words = String(text).split(/\s+/);
@@ -1298,19 +1254,28 @@
   function renderLoreGrid() {
     const grid = $("#loreContent");
     if (!grid) return;
-    const lore = state.lore || [];
+    if (!state.lore) {
+      grid.innerHTML = state.loreStatus === "error"
+        ? '<p class="small muted panel">The archive could not load. <button class="text-link" type="button" data-lore-retry>Try again</button> Core play still works.</p>'
+        : '<p class="small muted panel">Loading the archive…</p>';
+      return;
+    }
+    const lore = state.lore;
     if (!lore.length) {
-      grid.innerHTML = '<p class="small muted panel">The archive could not load. Core play still works.</p>';
+      grid.innerHTML = '<p class="small muted panel">The archive is empty right now. Core play still works.</p>';
       return;
     }
     const filtered = lore.filter(loreMatches);
     const count = $("#loreCount");
     if (count) count.textContent = filtered.length;
+    const notice = state.loreStatus === "fallback"
+      ? `<p class="small muted lore-notice">Showing featured entries only. <a class="text-link" href="archive.html">Open the full static archive</a> for all 20 entries, or run the local preview server.</p>`
+      : "";
     if (!filtered.length) {
-      grid.innerHTML = '<p class="small muted panel">No entries match that filter.</p>';
+      grid.innerHTML = `${notice}<p class="small muted panel">No entries match that filter.</p>`;
       return;
     }
-    grid.innerHTML = filtered.map((item) => `
+    grid.innerHTML = notice + filtered.map((item) => `
       <div class="lore-card ${state.loreSelected === item.id ? "is-active" : ""}" data-lore-open="${escapeHTML(item.id)}" role="button" tabindex="0">
         <div class="lore-card-head">${avatarHTML(item.title, item.era)}<span class="lore-type">${escapeHTML(item.type || "lore")}</span></div>
         <h3>${escapeHTML(item.title)}</h3>
@@ -1631,14 +1596,14 @@
         <div class="atlas-map-head">
           <div>
             <h3>Real vs Reel</h3>
-            <p>Real-world cities that echo the fictional map. Live vector map via MapLibre and OpenFreeMap.</p>
+            <p>Real-world cities that echo the fictional map. Click the numbered markers to compare.</p>
           </div>
-          <span class="tag">MapLibre · OpenFreeMap</span>
+          <span class="tag">Leaflet · Natural Earth</span>
         </div>
         <div class="reel-map" id="reelMap"></div>
         <p class="small muted" id="reelStatus">Loading real-world map…</p>
         <div class="reel-cards" id="reelCards"></div>
-        <p class="small muted reel-attribution">Map data © OpenStreetMap contributors · tiles by OpenFreeMap. Comparison notes are original editorial commentary.</p>
+        <p class="small muted reel-attribution">Basemap: Natural Earth (public domain) · city photos via Wikimedia Commons. Comparison notes are original editorial commentary.</p>
       </section>`;
     initReelView();
   }
@@ -1945,6 +1910,8 @@
 
     if (previous === "story" && view !== "story") restoreStoryEra();
     if (previous === "lore" && view !== "lore") restoreContentEra("lore");
+    if (previous === "atlas" && view !== "atlas") destroyAtlasMap();
+    if (previous === "reel" && view !== "reel") destroyReelMap();
     if (previous === "trivia" && view !== "trivia" && state.trivia?.baseEra && state.trivia.baseEra !== document.documentElement.dataset.era) {
       setEra(state.trivia.baseEra, { persist: false, flash: false, track: false, silent: true });
     }
@@ -2010,6 +1977,11 @@
       const openButton = event.target.closest("[data-open]");
       if (openButton) {
         openContent(openButton.dataset.open, openButton.dataset);
+        return;
+      }
+      const reelButton = event.target.closest("[data-reel-fly]");
+      if (reelButton) {
+        flyToReel(reelButton.dataset.reelFly);
         return;
       }
       const eraTile = event.target.closest("[data-era-tile]");
@@ -2250,6 +2222,18 @@
 
   function initLoreStoryEvents() {
     document.addEventListener("click", (event) => {
+      if (event.target.closest("[data-lore-retry]")) {
+        state.lore = null;
+        state.loreStatus = "loading";
+        renderLoreGrid();
+        ensureLoreArchive().then(() => {
+          if (state.currentView !== "lore") return;
+          renderLoreFilters();
+          renderLoreGrid();
+          renderLoreDetail();
+        });
+        return;
+      }
       const loreOpen = event.target.closest("[data-lore-open]");
       if (loreOpen) {
         state.loreSelected = loreOpen.dataset.loreOpen;
@@ -3870,54 +3854,47 @@
   /* ---------------------------------------------------------------------
      ERA ATLAS
      --------------------------------------------------------------------- */
-  function leonidaMapHTML(activeId) {
-    const data = atlas.gta6;
-    const pins = data.locations.map((location) => {
-      const active = location.id === activeId;
-      const anchor = location.x > 520 ? "end" : "start";
-      const dx = anchor === "end" ? -12 : 12;
-      const dy = location.y > 390 ? -16 : -10;
-      return `<g class="map-pin ${active ? "is-active" : ""}" data-atlas-loc="${location.id}" tabindex="0" role="button" aria-label="Open ${escapeHTML(location.name)}">
-        <circle class="pin-ring" cx="${location.x}" cy="${location.y}" r="13"/>
-        <circle class="pin-dot" cx="${location.x}" cy="${location.y}" r="4.5"/>
-        <text class="pin-label" x="${location.x + dx}" y="${location.y + dy}" text-anchor="${anchor}">${escapeHTML(location.name).toUpperCase()}</text>
-      </g>`;
-    }).join("");
+  function destroyAtlasMap() {
+    state.atlasToken += 1;
+    state.atlasMarkers = null;
+    if (state.leafletMap) {
+      try { state.leafletMap.remove(); } catch (error) { /* detached container */ }
+      state.leafletMap = null;
+      state.geoLayer = null;
+    }
+  }
 
-    return `<svg viewBox="0 0 640 440" role="group" aria-label="Interactive stylized, unofficial fan map of the state of Leonida">
-      <defs>
-        <pattern id="mapgrid" width="32" height="32" patternUnits="userSpaceOnUse">
-          <path d="M32 0H0v32" fill="none" stroke="currentColor" stroke-opacity=".06" stroke-width="1"/>
-        </pattern>
-        <radialGradient id="seaglow" cx="50%" cy="50%">
-          <stop offset="0%" stop-color="var(--accent-2)" stop-opacity=".13"/>
-          <stop offset="100%" stop-color="var(--accent-2)" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect class="map-water" width="640" height="440"/>
-      <rect width="640" height="440" fill="url(#mapgrid)" color="var(--muted)"/>
-      <ellipse cx="430" cy="300" rx="250" ry="180" fill="url(#seaglow)"/>
-      <path class="map-land" d="M92 44 250 28l50 36 90-16 75 34 40 42 70 26-32 64 37 46-32 52-56 20-30 50-76 14-42-36-74 12-52-40-60 10-26-50-44-30 22-50-38-44 32-48Z"/>
-      <path class="map-land-soft" d="M548 270c18 7 30 19 27 32-4 16-22 22-34 12-10-8-8-25 7-44Z"/>
-      <ellipse class="map-land-soft" cx="424" cy="404" rx="14" ry="6"/>
-      <ellipse class="map-land-soft" cx="450" cy="414" rx="10" ry="5"/>
-      <ellipse class="map-land-soft" cx="402" cy="418" rx="8" ry="4"/>
-      <ellipse class="map-lake" cx="280" cy="210" rx="38" ry="23"/>
-      <path class="map-road" d="M482 322c-63-21-135-58-200-76M482 322c-23-51-63-99-124-142M142 288c53-4 110-31 160-58M176 146c36 34 76 55 124 64M274 210c35-19 72-35 124-52"/>
-      <path class="map-road" d="M142 288c5 28 2 52 20 74M482 322c-12 27-25 50-43 74M303 286c39 7 84 21 132 44"/>
-      <g opacity=".48" fill="var(--muted)" font-family="var(--font-mono)" font-size="7" letter-spacing=".18em">
-        <text x="42" y="388">GULF</text>
-        <text x="556" y="108">ATLANTIC</text>
-      </g>
-      <g class="atlas-compass" transform="translate(592 376)">
-        <circle cx="0" cy="0" r="19" fill="none"/>
-        <path d="M0-15 4-3 0 0-4-3Z" fill="var(--accent)" stroke="none"/>
-        <path d="M0 15 4 3 0 0-4 3Z"/>
-        <text x="0" y="-23" text-anchor="middle">N</text>
-      </g>
-      <text x="320" y="428" text-anchor="middle" fill="var(--muted)" font-family="var(--font-mono)" font-size="7" letter-spacing=".14em">STYLIZED FAN ATLAS · NOT TO SCALE</text>
-      ${pins}
-    </svg>`;
+  function atlasPinHTML(location, activeId) {
+    const active = location.id === activeId;
+    const label = location.name.length > 22 ? `${location.name.slice(0, 20)}…` : location.name;
+    const right = location.x > 72;
+    return `<button class="atlas-pin ${active ? "is-active" : ""} ${right ? "is-right" : ""}" type="button" data-atlas-loc="${escapeHTML(location.id)}" style="--x:${location.x}%;--y:${location.y}%" aria-label="Open ${escapeHTML(location.name)}">
+      <span class="atlas-pin-dot" aria-hidden="true"></span>
+      <span class="atlas-pin-label">${escapeHTML(label)}</span>
+    </button>`;
+  }
+
+  function atlasImageMapHTML(data, selectedId) {
+    const map = data.map;
+    return `<div class="atlas-map atlas-image-map" id="atlasMapWrap">
+      <div class="atlas-image" style="--map-aspect:${map.width} / ${map.height}">
+        <img src="${escapeHTML(map.src)}" width="${map.width}" height="${map.height}" alt="${escapeHTML(data.title)} — in-game map" decoding="async">
+        ${data.locations.map((location) => atlasPinHTML(location, selectedId)).join("")}
+      </div>
+    </div>`;
+  }
+
+  function atlasInteractiveMapHTML(data) {
+    return `<div class="atlas-map atlas-map-interactive" id="atlasMapWrap">
+      <div id="leafletMap" class="leaflet-atlas" role="application" aria-label="Pan and zoom map: ${escapeHTML(data.title)}"></div>
+    </div>`;
+  }
+
+  function atlasMapCreditHTML(data) {
+    if (!data.map) {
+      return `<p class="atlas-map-credit small muted">No official world map exists for this game. The postcard above is original fan art.</p>`;
+    }
+    return `<p class="atlas-map-credit small muted">${escapeHTML(data.map.credit)}. <a href="${escapeHTML(data.map.source)}" target="_blank" rel="noopener noreferrer">Map source ↗</a></p>`;
   }
 
   function eraPosterArt(era) {
@@ -4024,13 +4001,14 @@
   }
 
   function atlasDetailHTML(era, selected) {
+    const hasMap = Boolean(atlas[era]?.map);
     return `<span class="detail-kicker">${escapeHTML(eras[era].name)} // ${escapeHTML(selected.kind)}</span>
       <h3>${escapeHTML(selected.name)}</h3>
       <p>${escapeHTML(selected.note)}</p>
       <div class="detail-tags">
         <span class="tag">${escapeHTML(eras[era].year)}</span>
         <span class="tag">${escapeHTML(eras[era].station)}</span>
-        <span class="tag">Fan atlas</span>
+        <span class="tag">${hasMap ? "Official map · fan notes" : "Fan atlas"}</span>
       </div>
       ${atlasLoreHTML(era)}
       <button class="btn btn-ghost btn-sm" type="button" data-atlas-start="${era}" style="margin-top:1rem">
@@ -4060,6 +4038,8 @@
     const container = $("#atlasContent");
     if (!container) return;
 
+    destroyAtlasMap();
+
     const era = document.documentElement.dataset.era;
     const data = atlas[era] || atlas.gta6;
     const locations = data.locations;
@@ -4071,19 +4051,24 @@
     `).join("");
 
     let mapPanel = "";
-    if (era === "gta6") {
+    if (data.map) {
       mapPanel = `
-        <div class="atlas-map" id="atlasMapWrap">
-          ${state.atlasInteractive ? '<div id="leafletMap" class="leaflet-atlas" aria-label="Interactive fan map of Leonida"></div>' : leonidaMapHTML(selected.id)}
-        </div>
+        ${state.atlasInteractive ? atlasInteractiveMapHTML(data) : atlasImageMapHTML(data, selected.id)}
         <div class="atlas-map-actions">
-          <button class="btn btn-ghost btn-sm" type="button" data-atlas-interactive>${state.atlasInteractive ? "Static map" : "Interactive map"}</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-atlas-interactive>${state.atlasInteractive ? "Static view" : "Pan & zoom"}</button>
           ${state.atlasInteractive ? '<button class="btn btn-quiet btn-sm" type="button" data-geo-start>Geo-Guess</button>' : ""}
+          <a class="text-link" href="${escapeHTML(data.map.src)}" target="_blank" rel="noopener noreferrer">Full map ↗</a>
           <span class="geo-status small muted" id="geoStatus" aria-live="polite">${geoStatusHTML()}</span>
-        </div>`;
+        </div>
+        ${atlasMapCreditHTML(data)}`;
     } else {
-      mapPanel = `<div class="atlas-art">${eraPosterArt(era)}<span class="art-caption">Fan-made vector postcard · not official art</span></div>`;
+      mapPanel = `<div class="atlas-art">${eraPosterArt(era)}<span class="art-caption">Fan-made vector postcard · not official art</span></div>
+        ${atlasMapCreditHTML(data)}`;
     }
+
+    const mapTag = data.map
+      ? (state.atlasInteractive ? "Official map · pan & zoom" : "Official map")
+      : "District dossier";
 
     container.innerHTML = `
       <div class="atlas-era-bar" id="atlasEraBar" role="group" aria-label="Atlas era">${eraBar}</div>
@@ -4094,7 +4079,7 @@
               <h3>${escapeHTML(data.title)}</h3>
               <p>${escapeHTML(data.subtitle)}</p>
             </div>
-            <span class="tag">${era === "gta6" ? (state.atlasInteractive ? "Leaflet · custom SVG" : "Custom SVG") : "District dossier"}</span>
+            <span class="tag">${mapTag}</span>
           </div>
           ${mapPanel}
         </section>
@@ -4113,74 +4098,105 @@
       </div>
     `;
 
-    if (era === "gta6" && state.atlasInteractive) {
-      window.setTimeout(initLeafletAtlas, 0);
+    if (data.map && state.atlasInteractive) {
+      window.setTimeout(() => initLeafletAtlas(era), 0);
     }
   }
 
-  async function initLeafletAtlas() {
+  function selectAtlasLocation(id) {
+    const era = document.documentElement.dataset.era;
+    const data = atlas[era] || atlas.gta6;
+    const location = data.locations.find((entry) => entry.id === id);
+    if (!location) return;
+    state.atlasSelected = id;
+    updateAtlasDetail(location);
+
+    $$("#atlasDistrictGrid .district-card").forEach((card) => {
+      card.classList.toggle("is-active", card.dataset.atlasLoc === id);
+    });
+    $$("#atlasMapWrap .atlas-pin").forEach((pin) => {
+      pin.classList.toggle("is-active", pin.dataset.atlasLoc === id);
+    });
+    if (state.atlasMarkers) {
+      state.atlasMarkers.forEach((marker, markerId) => {
+        marker.setStyle({ radius: markerId === id ? 11 : 8, weight: markerId === id ? 3 : 2 });
+      });
+    }
+    sfx("click");
+  }
+
+  async function initLeafletAtlas(era) {
+    const data = atlas[era];
+    if (!data || !data.map) return;
     const wrap = $("#leafletMap");
     if (!wrap) return;
+    const token = state.atlasToken;
     const ok = await ensureLeaflet();
-    if (!ok || !state.atlasInteractive || state.currentView !== "atlas") return;
+    if (!ok || token !== state.atlasToken || !state.atlasInteractive || state.currentView !== "atlas") return;
     if (!$("#leafletMap")) return;
 
     if (state.leafletMap) {
       try { state.leafletMap.remove(); } catch (error) { /* detached container */ }
       state.leafletMap = null;
       state.geoLayer = null;
+      state.atlasMarkers = null;
     }
 
     const L = window.L;
     const cs = getComputedStyle(document.documentElement);
     const accent = (cs.getPropertyValue("--accent") || "#ff5d7e").trim();
     const accent2 = (cs.getPropertyValue("--accent-2") || "#23e0f2").trim();
-
-    let svg = leonidaMapHTML(null).replace(/<g class="map-pin[\s\S]*?<\/g>\s*/g, "");
-    svg = inlineMapSvg(svg);
-    const blob = new Blob([svg], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(blob);
+    const width = data.map.width;
+    const height = data.map.height;
+    const bounds = [[0, 0], [height, width]];
 
     const map = L.map(wrap, {
       crs: L.CRS.Simple,
-      minZoom: -1,
+      minZoom: -2,
       maxZoom: 2,
       zoomSnap: 0.25,
       zoomControl: true,
       attributionControl: false
     });
-    const bounds = [[0, 0], [440, 640]];
-    const overlay = L.imageOverlay(url, bounds).addTo(map);
-    overlay.on("load", () => URL.revokeObjectURL(url));
+    const overlay = L.imageOverlay(data.map.src, bounds, { alt: data.title }).addTo(map);
+    overlay.on("error", () => {
+      wrap.innerHTML = '<p class="small muted" style="padding:1rem">The map image could not load. The district cards below still work.</p>';
+    });
     map.fitBounds(bounds);
-    map.setMaxBounds([[-120, -120], [560, 760]]);
+    map.setMaxBounds([[-height * 0.4, -width * 0.4], [height * 1.4, width * 1.4]]);
 
-    atlas.gta6.locations.forEach((location) => {
-      const marker = L.circleMarker([440 - location.y, location.x], {
-        radius: 8,
+    const markers = new Map();
+    data.locations.forEach((location) => {
+      const y = height * (1 - location.y / 100);
+      const x = width * (location.x / 100);
+      const marker = L.circleMarker([y, x], {
+        radius: location.id === state.atlasSelected ? 11 : 8,
         color: accent,
-        weight: 2,
+        weight: location.id === state.atlasSelected ? 3 : 2,
         fillColor: accent2,
-        fillOpacity: 0.85
+        fillOpacity: 0.88
       }).addTo(map);
       marker.bindTooltip(escapeHTML(location.name), { direction: "top", offset: [0, -6] });
-      marker.on("click", () => {
-        state.atlasSelected = location.id;
-        updateAtlasDetail(location);
-        sfx("click");
-      });
+      marker.on("click", () => selectAtlasLocation(location.id));
+      markers.set(location.id, marker);
     });
 
-    map.on("click", (event) => handleGeoClick(event.latlng.lng, event.latlng.lat));
+    map.on("click", (event) => handleGeoClick(event.latlng.lng, event.latlng.lat, width, height));
     state.geoLayer = L.layerGroup().addTo(map);
+    state.atlasMarkers = markers;
     state.leafletMap = map;
+    window.setTimeout(() => map.invalidateSize(), 60);
   }
 
   function startGeoGuess() {
-    const locations = atlas.gta6.locations;
+    const era = document.documentElement.dataset.era;
+    const data = atlas[era] || atlas.gta6;
+    if (!data.map) return;
+    const locations = data.locations;
     const answer = locations[Math.floor(Math.random() * locations.length)];
     if (state.geoLayer) state.geoLayer.clearLayers();
     state.geo = {
+      era,
       answerId: answer.id,
       answerName: answer.name,
       kind: answer.kind,
@@ -4191,22 +4207,26 @@
     sfx("click");
   }
 
-  function handleGeoClick(x, y) {
+  function handleGeoClick(x, y, width, height) {
     if (!state.geo || state.geo.done || !state.leafletMap || !window.L) return;
-    const answer = atlas.gta6.locations.find((location) => location.id === state.geo.answerId);
+    const data = atlas[state.geo.era] || atlas.gta6;
+    const answer = data.locations.find((location) => location.id === state.geo.answerId);
     if (!answer) return;
-    const dx = x - answer.x;
-    const dy = y - (440 - answer.y);
+    const answerX = width * (answer.x / 100);
+    const answerY = height * (1 - answer.y / 100);
+    const dx = x - answerX;
+    const dy = y - answerY;
     const distance = Math.sqrt(dx * dx + dy * dy);
-    const score = Math.max(0, Math.round(100 - distance * 0.55));
+    const diagonal = Math.sqrt(width * width + height * height);
+    const score = Math.max(0, Math.round(100 - (distance / diagonal) * 100 * 3.2));
 
     const L = window.L;
     const cs = getComputedStyle(document.documentElement);
     const accent = (cs.getPropertyValue("--accent") || "#ff5d7e").trim();
-    L.circleMarker([y, x], { radius: 7, color: accent, weight: 2, fillColor: accent, fillOpacity: 0.4 }).addTo(state.geoLayer || state.leafletMap);
-    L.circleMarker([440 - answer.y, answer.x], { radius: 8, color: accent, weight: 2, fillColor: "transparent" })
+    L.circleMarker([y, x], { radius: 8, color: accent, weight: 2, fillColor: accent, fillOpacity: 0.4 }).addTo(state.geoLayer || state.leafletMap);
+    L.circleMarker([answerY, answerX], { radius: 10, color: accent, weight: 2, fillColor: "transparent" })
       .addTo(state.geoLayer || state.leafletMap)
-      .bindTooltip(`${answer.name} · ${score}/100`, { permanent: true, direction: "top" })
+      .bindTooltip(`${escapeHTML(answer.name)} · ${score}/100`, { permanent: true, direction: "top" })
       .openTooltip();
 
     state.geo.done = true;
@@ -4221,63 +4241,111 @@
     return `<div class="reel-photo"><img src="${escapeHTML(credit.file)}" alt="${escapeHTML(credit.alt)}" loading="lazy"><a class="photo-credit" href="${escapeHTML(credit.source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(credit.artist)} · ${escapeHTML(credit.license)}</a></div>`;
   }
 
+  const REEL_WORLD = {
+    src: "assets/maps/world.svg",
+    width: 1400,
+    height: 700
+  };
+
+  function reelPoint(coords) {
+    const lon = Number(coords[0]);
+    const lat = Number(coords[1]);
+    return [REEL_WORLD.height * ((lat + 90) / 180), REEL_WORLD.width * ((lon + 180) / 360)];
+  }
+
+  function destroyReelMap() {
+    state.reelMarkers = null;
+    if (state.reelMap) {
+      try { state.reelMap.remove(); } catch (error) { /* detached container */ }
+      state.reelMap = null;
+    }
+  }
+
+  function flyToReel(id) {
+    const item = (state.realWorld || []).find((entry) => entry.id === id);
+    if (!item || !state.reelMap) return;
+    state.reelMap.flyTo(reelPoint(item.coords), 3.5, { duration: 0.8 });
+    const marker = state.reelMarkers?.get(id);
+    if (marker) marker.openPopup();
+  }
+
   async function initReelView() {
     const cards = $("#reelCards");
     const status = $("#reelStatus");
     const data = await ensureRealWorld();
     const credits = await ensureImageCredits();
+    const list = Array.isArray(data) ? data : [];
 
     if (cards) {
-      cards.innerHTML = data.map((item) => `
-        <article class="reel-card">${reelPhotoHTML(item, credits)}
-          <span class="detail-kicker">${escapeHTML(eras[item.era]?.name || item.era)}</span>
-          <h4>${escapeHTML(item.realName)} ↔ ${escapeHTML(item.fictionalName)}</h4>
-          <p>${escapeHTML(item.note)}</p>
-        </article>
-      `).join("");
+      cards.innerHTML = list.length
+        ? list.map((item) => `
+          <article class="reel-card">${reelPhotoHTML(item, credits)}
+            <span class="detail-kicker">${escapeHTML(eras[item.era]?.name || item.era)}</span>
+            <h4>${escapeHTML(item.realName)} ↔ ${escapeHTML(item.fictionalName)}</h4>
+            <p>${escapeHTML(item.note)}</p>
+            <button class="btn btn-quiet btn-sm reel-fly" type="button" data-reel-fly="${escapeHTML(item.id)}">Show on map</button>
+          </article>
+        `).join("")
+        : '<p class="small muted">Comparison notes could not load. The atlas and lore archive still work.</p>';
     }
 
-    const ok = await ensureMapLibre();
-    if (!ok) {
-      if (status) status.textContent = "Live map unavailable. The comparison cards below still work.";
-      return;
-    }
+    const ok = await ensureLeaflet();
     const container = $("#reelMap");
     if (!container || state.currentView !== "reel") return;
 
-    if (state.maplibreMap) {
-      try { state.maplibreMap.remove(); } catch (error) { /* detached container */ }
-      state.maplibreMap = null;
+    destroyReelMap();
+
+    if (!ok) {
+      if (status) status.textContent = "Map unavailable. The comparison cards below still work.";
+      return;
     }
 
-    const maplibregl = window.maplibregl;
-    try {
-      const map = new maplibregl.Map({
-        container,
-        style: "https://tiles.openfreemap.org/styles/liberty",
-        center: [-45, 34],
-        zoom: 1.5,
-        attributionControl: true
+    const L = window.L;
+    const map = L.map(container, {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 6,
+      zoomSnap: 0.25,
+      zoomControl: true,
+      attributionControl: false
+    });
+    const bounds = [[0, 0], [REEL_WORLD.height, REEL_WORLD.width]];
+    const overlay = L.imageOverlay(REEL_WORLD.src, bounds, { alt: "World map with real-world inspiration cities" }).addTo(map);
+    map.fitBounds(bounds, { padding: [8, 8] });
+    map.setMaxBounds([[-REEL_WORLD.height * 0.35, -REEL_WORLD.width * 0.2], [REEL_WORLD.height * 1.35, REEL_WORLD.width * 1.2]]);
+
+    const markers = new Map();
+    const points = [];
+    overlay.on("load", () => {
+      map.invalidateSize();
+      if (status) status.textContent = "Click a numbered marker, or a \u201cShow on map\u201d button, to compare real and fictional places.";
+    });
+    overlay.on("error", () => {
+      if (status) status.textContent = "The world map image could not load. The comparison cards below still work.";
+    });
+
+    list.forEach((item, index) => {
+      if (!Array.isArray(item.coords) || item.coords.length !== 2) return;
+      const point = reelPoint(item.coords);
+      points.push(point);
+      const icon = L.divIcon({
+        className: "reel-marker-wrap",
+        html: `<button class="reel-marker" type="button" aria-label="${escapeHTML(item.realName)} — ${escapeHTML(item.fictionalName)}">${index + 1}</button>`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11],
+        popupAnchor: [0, -10]
       });
-      map.addControl(new maplibregl.NavigationControl(), "top-right");
-      map.on("error", () => {
-        if (status) status.textContent = "Map tiles could not load. Comparison cards remain available.";
-      });
-      map.on("load", () => {
-        data.forEach((item) => {
-          const el = document.createElement("div");
-          el.className = "reel-marker";
-          const popup = new maplibregl.Popup({ offset: 16 }).setHTML(
-            `<strong>${escapeHTML(item.realName)}</strong><br>${escapeHTML(item.fictionalName)}<br><span>${escapeHTML(item.note)}</span>`
-          );
-          new maplibregl.Marker({ element: el }).setLngLat(item.coords).setPopup(popup).addTo(map);
-        });
-        if (status) status.textContent = "Click a marker to compare the real city with its fictional echo.";
-      });
-      state.maplibreMap = map;
-    } catch (error) {
-      if (status) status.textContent = "Live map unavailable. The comparison cards below still work.";
+      const marker = L.marker(point, { icon, title: `${item.realName} — ${item.fictionalName}` }).addTo(map);
+      marker.bindPopup(`<strong>${escapeHTML(item.realName)}</strong><br>${escapeHTML(item.fictionalName)}<br><span>${escapeHTML(item.note)}</span>`);
+      markers.set(item.id, marker);
+    });
+
+    if (points.length > 1) {
+      map.fitBounds(L.latLngBounds(points), { padding: [50, 50], maxZoom: 3 });
     }
+    state.reelMarkers = markers;
+    state.reelMap = map;
+    window.setTimeout(() => map.invalidateSize(), 80);
   }
 
   function initAtlasEvents() {
@@ -4289,7 +4357,6 @@
         state.atlasSelected = null;
         state.geo = null;
         setEra(eraButton.dataset.atlasEra);
-        renderAtlas();
         return;
       }
       const toggle = event.target.closest("[data-atlas-interactive]");
@@ -4310,9 +4377,7 @@
       }
       const location = event.target.closest("[data-atlas-loc]");
       if (location) {
-        state.atlasSelected = location.dataset.atlasLoc;
-        renderAtlas();
-        sfx("click");
+        selectAtlasLocation(location.dataset.atlasLoc);
         return;
       }
       const start = event.target.closest("[data-atlas-start]");
@@ -4326,12 +4391,10 @@
 
     container.addEventListener("keydown", (event) => {
       if (event.key !== "Enter" && event.key !== " ") return;
-      const pin = event.target.closest(".map-pin[data-atlas-loc]");
+      const pin = event.target.closest(".map-pin[data-atlas-loc], .atlas-pin[data-atlas-loc]");
       if (!pin) return;
       event.preventDefault();
-      state.atlasSelected = pin.dataset.atlasLoc;
-      renderAtlas();
-      sfx("click");
+      selectAtlasLocation(pin.dataset.atlasLoc);
     });
   }
 
@@ -4848,3 +4911,4 @@
     init();
   });
 })();
+
