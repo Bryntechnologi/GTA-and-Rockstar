@@ -9,6 +9,7 @@
     "test:transitions": "node tests/browser/theme-transitions.test.cjs",
     "test:header": "node tests/browser/header-breakpoints.test.cjs",
     "test:static": "node tests/browser/static-chrome.test.cjs",
+    "audit:csp": "node scripts/csp-audit.mjs",
     "build:static": "node scripts/build-static.mjs"
   },
   "devDependencies": {
