@@ -175,9 +175,15 @@ npm run test:browser
 
 ## CSP, contrast, and Markdown
 
+- `npm run dev` serves the site over HTTP and handles clean folder URLs; use it instead of opening `index.html` directly.
+- `CSP=1 npm run dev` tests the generated CSP locally.
+- `npm run build:static` regenerates `_headers` with SHA-256 hashes for every inline script and style block.
 - `npm run audit:csp` passes and writes `CSP_AUDIT.md`.
 - `_headers` uses an enforced `Content-Security-Policy`, not Report-Only.
-- The policy allows self-hosted assets, inline boot scripts/styles, Wikipedia, GTA Wiki, OpenFreeMap, OpenStreetMap, MapLibre, and the radio stream hosts.
+- `script-src` and `style-src` no longer use `'unsafe-inline'`; inline blocks are hashed.
+- `script-src-attr 'none'` blocks inline event handlers.
+- `style-src-attr 'unsafe-inline'` remains for the current inline style attributes and is called out in the audit.
+- The policy allows self-hosted assets, Wikipedia, GTA Wiki, OpenFreeMap, OpenStreetMap, MapLibre, and the radio stream hosts.
 - No `eval` or `new Function` usage is present.
 - Markdown supports headings, lists, quotes, fenced code, bold/italic, links, and `[[wiki links]]`.
 - Raw HTML in Markdown is escaped; `javascript:` links are rejected.

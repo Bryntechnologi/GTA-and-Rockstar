@@ -144,9 +144,12 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 ├── site.config.json        # Production SITE_URL, umbrella, and archive note
 ├── TESTING.md              # Smoke-test checklist
 ├── tests/                  # Node/jsdom + browser regression tests
+├── CSP_AUDIT.md            # Generated CSP enforcement report
+├── KIT_PLAN.md             # Plan for extracting the reusable static-site kit
 ├── scripts/
-│   ├── build-static.mjs    # Regenerates static pages, changelog, search index, sitemap, llms.txt
+│   ├── build-static.mjs    # Regenerates static pages, changelog, search index, sitemap, llms.txt, _headers
 │   ├── csp-audit.mjs       # Audits the enforced CSP and writes CSP_AUDIT.md
+│   ├── dev-server.mjs      # Local preview server for `npm run dev`
 │   └── site-chrome.mjs     # Shared header/footer/breadcrumb markup for static pages
 ├── assets/
 │   ├── favicon.svg
@@ -178,27 +181,42 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 └── README.md
 ```
 
-No required build step and no server logic. Core content is synchronous in `data.js`; optional
-content is fetched as JSON with graceful fallbacks. `scripts/build-static.mjs` only regenerates
-the static SEO archive files after content changes.
+No required build step for local play; core content is synchronous in `data.js`. Optional content is
+fetched as JSON with graceful fallbacks. Run `npm run build:static` after changing HTML or content so
+the static pages, CSP hashes, sitemap, and search index stay in sync.
 
 ---
 
 ## Run locally
 
-Serve the folder so JSON loading and the service worker behave like production. Opening
-`index.html` directly still works for the core arcade, but optional JSON, maps, and PWA features
-need HTTP.
+The reliable way to preview is the built-in dev server. It serves the folder over HTTP, adds the
+security headers, and handles clean folder URLs:
 
 ```bash
-# Python
-python -m http.server 4173
-
-# or Node
-npx serve .
+npm install
+npm run dev
 ```
 
-Then visit <http://localhost:4173>.
+Then open <http://127.0.0.1:4173/>.
+
+Use a different port if needed:
+
+```bash
+PORT=5000 npm run dev
+```
+
+To test the generated CSP during preview:
+
+```bash
+CSP=1 npm run dev
+```
+
+In VS Code/VSCodium you can run **Terminal → Run Task → dev server** instead of typing the
+command. The task is defined in `.vscode/tasks.json`.
+
+Opening `index.html` directly with `file://` still works for the core arcade, but optional JSON,
+maps, the service worker, and clean folder routes need HTTP. If you see “data failed to load” in a
+preview, start `npm run dev` and use the URL it prints.
 
 ### Validation
 

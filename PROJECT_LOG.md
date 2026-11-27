@@ -24,7 +24,8 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - GTA Wiki is used for outbound links and optional attributed summaries, not wholesale import.
 - Contrast is a layer over era themes, not a replacement for them.
 - Markdown is a small safe subset with wiki-link resolution; raw HTML is escaped.
-- CSP is enforced with a practical inline allowance and a repeatable audit.
+- CSP is enforced with hashed inline scripts/styles and a repeatable audit.
+- `npm run dev` is the supported local preview path; opening the HTML directly is not the primary workflow.
 
 ## Milestones
 
@@ -48,6 +49,7 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - [x] High-contrast preference layered over era themes
 - [x] Safe Markdown rendering and `[[wiki links]]`
 - [x] Enforced CSP with a repeatable audit
+- [x] One-command local preview server (`npm run dev`)
 - [ ] Final production domain
 - [ ] Final project rename
 
@@ -68,3 +70,4 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 4. Deploy to Cloudflare Pages.
 5. Re-run Lighthouse and PWA installability checks on production.
 6. Consider share buttons, positive-only reactions, and reading progress as later enhancements.
+7. Extract the reusable static-site kit after a second Brynsites site proves the seams; see `KIT_PLAN.md`.
