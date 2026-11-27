@@ -3,7 +3,7 @@
    App-shell offline support. External APIs, map tiles, and audio streams are
    deliberately network-only so they never go stale silently.
    ------------------------------------------------------------------------- */
-const VERSION = "channelsurf-v17";
+const VERSION = "channelsurf-v18";
 const CORE = [
   "./",
   "index.html",

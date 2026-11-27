@@ -87,7 +87,7 @@ if (!executablePath) {
   await offline.setOffline(true);
   await offlinePage.reload({ waitUntil: "domcontentloaded" });
   await offlinePage.waitForTimeout(800);
-  assert.match((await offlinePage.locator("#home-title").textContent()).trim(), /story/i, "offline shell should render");
+  assert.match((await offlinePage.locator("#home-title").textContent()).trim(), /archived/i, "offline shell should render");
   assert.equal(await offlinePage.locator("#homeLoreCards .lore-card").count(), 4, "offline lore should render");
   const bg = await offlinePage.evaluate(() => getComputedStyle(document.body).backgroundColor);
   assert.equal(bg, "rgb(12, 11, 10)", "offline home theme CSS should load");

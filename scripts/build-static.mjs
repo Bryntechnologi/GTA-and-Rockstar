@@ -275,11 +275,11 @@ function storyPage() {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GTA Story Timeline - 1961 to 2026 | CHANNEL SURF</title>
-  <meta name="description" content="A graphical reading timeline of 35 major in-universe GTA story beats, from 1961 London through Vice City, San Andreas, Liberty City, Los Santos, and 2026 Leonida.">
+  <meta name="description" content="A graphical reading timeline of major in-universe GTA story beats, from 1961 London through Vice City, San Andreas, Liberty City, Los Santos, and 2026 Leonida.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
   <meta property="og:title" content="GTA Story Timeline - CHANNEL SURF">
-  <meta property="og:description" content="35 story beats, full spoilers, and a theme that shifts as you scroll.">
+  <meta property="og:description" content="Major story beats, full spoilers, and a theme that shifts as you scroll.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -318,7 +318,7 @@ function storyPage() {
     "@type": "CollectionPage",
     "name": "GTA Story Timeline - CHANNEL SURF",
     "url": "${canonical}",
-    "description": "35 in-universe Grand Theft Auto story beats in chronological order.",
+    "description": "In-universe Grand Theft Auto story beats in chronological order.",
     "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
     "inLanguage": "en",
     "about": ["Grand Theft Auto", "Rockstar Games", "story timeline"]
@@ -331,7 +331,7 @@ function storyPage() {
     <p class="reading-kicker">READING MODE</p>
     <header class="reading-hero">
       <h1>The story, from 1961 to 2026.</h1>
-      <p class="lede">35 major in-universe GTA story beats, in chronological order. The page theme shifts as each chapter enters view. Full story details follow.</p>
+      <p class="lede">Major in-universe GTA story beats, in chronological order. The page theme shifts as each chapter enters view. Full story details follow.</p>
       <div class="reading-meta"><span class="tag">${story.length} story beats</span><span class="tag">Full spoilers</span><span class="tag">Original summaries</span></div>
       <div class="reading-actions"><a class="btn btn-primary btn-sm" href="./#story">Open interactive timeline</a><a class="btn btn-ghost btn-sm" href="archive.html">Full-text archive</a><a class="btn btn-quiet btn-sm" href="./">Back to the site</a></div>
     </header>
@@ -373,7 +373,7 @@ const archive = `<!DOCTYPE html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CHANNEL SURF - Full Text Archive (Lore and GTA Story Timeline)</title>
-  <meta name="description" content="Full text archive of CHANNEL SURF: 20 curated Rockstar lore entries and 35 in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida.">
+  <meta name="description" content="Full text archive of CHANNEL SURF: curated Rockstar lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${siteUrl}archive.html">
   <meta property="og:title" content="CHANNEL SURF - Full Text Archive">
@@ -451,6 +451,7 @@ const sitemapUrls = [
   { loc: `${siteUrl}archive.html`, priority: "0.9" },
   { loc: `${siteUrl}elsewhere.html`, priority: "0.7" },
   { loc: `${siteUrl}story.html`, priority: "0.8" },
+  { loc: `${siteUrl}changelog.html`, priority: "0.4" },
   ...games.map((game) => ({ loc: `${siteUrl}games/${game.slug}/`, priority: "0.8" }))
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -472,7 +473,7 @@ Sitemap: ${siteUrl}sitemap.xml
 
 const llms = `# CHANNEL SURF
 
-> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It contains 20 curated lore entries and 35 in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is not affiliated with Rockstar Games or Take-Two Interactive.
+> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: ${siteUrl}
 Full text archive: ${siteUrl}archive.html
@@ -480,11 +481,12 @@ Full text archive: ${siteUrl}archive.html
 ## What is here
 
 - [Lore archive](${siteUrl}archive.html#lore): locations, characters, factions, and franchise history, with sources.
-- [Story timeline](${siteUrl}archive.html#story): 35 chronological GTA story beats, including full spoiler details.
+- [Story timeline](${siteUrl}archive.html#story): chronological GTA story beats, including full spoiler details.
 - [Story reading mode](${siteUrl}story.html): a graphical scroll-driven timeline page.
 - [Games](${siteUrl}#games): theme-per-game dossiers.
 - [Rockstar Elsewhere](${siteUrl}elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
 - [Interactive site](${siteUrl}): theme-morphing lore hub, horizontal story timeline, atlas, Real vs Reel map, trivia, and puzzles.
+- [Changelog](${siteUrl}changelog.html): public release history.
 
 ## Game pages
 
@@ -492,8 +494,8 @@ ${games.map((game) => `- [${game.name}](${siteUrl}games/${game.slug}/): ${game.b
 
 ## Content inventory
 
-- 20 lore entries: ${lore.map((item) => item.title).join(", ")}.
-- 35 story beats from ${story[0].year} to ${story[story.length - 1].year}: ${story.map((event) => `${event.year} ${event.title}`).join("; ")}.
+- Lore entries: ${lore.map((item) => item.title).join(", ")}.
+- Story beats from ${story[0].year} to ${story[story.length - 1].year}: ${story.map((event) => `${event.year} ${event.title}`).join("; ")}.
 
 ## Sourcing and license
 

@@ -1,6 +1,6 @@
 # CHANNEL SURF
 
-> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It contains 20 curated lore entries and 35 in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is not affiliated with Rockstar Games or Take-Two Interactive.
+> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, plus an era atlas, real-vs-reel city comparisons, trivia, and puzzles. It is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: https://channelsurf.pages.dev/
 Full text archive: https://channelsurf.pages.dev/archive.html
@@ -8,11 +8,12 @@ Full text archive: https://channelsurf.pages.dev/archive.html
 ## What is here
 
 - [Lore archive](https://channelsurf.pages.dev/archive.html#lore): locations, characters, factions, and franchise history, with sources.
-- [Story timeline](https://channelsurf.pages.dev/archive.html#story): 35 chronological GTA story beats, including full spoiler details.
+- [Story timeline](https://channelsurf.pages.dev/archive.html#story): chronological GTA story beats, including full spoiler details.
 - [Story reading mode](https://channelsurf.pages.dev/story.html): a graphical scroll-driven timeline page.
 - [Games](https://channelsurf.pages.dev/#games): theme-per-game dossiers.
 - [Rockstar Elsewhere](https://channelsurf.pages.dev/elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
 - [Interactive site](https://channelsurf.pages.dev/): theme-morphing lore hub, horizontal story timeline, atlas, Real vs Reel map, trivia, and puzzles.
+- [Changelog](https://channelsurf.pages.dev/changelog.html): public release history.
 
 ## Game pages
 
@@ -28,8 +29,8 @@ Full text archive: https://channelsurf.pages.dev/archive.html
 
 ## Content inventory
 
-- 20 lore entries: Leonida & Vice City, Vice City, 1986, San Andreas, 1992, Los Santos, 2013, Liberty City, 2008, The Warriors, 1979, The Frontier, 1899, Bullworth Academy, 2006, The franchise, from 1997, Rockstar Games, Tommy Vercetti, Carl 'CJ' Johnson, Niko Bellic, Michael, Franklin & Trevor, Jason & Lucia, Grove Street Families, The Lost MC, The Vercetti Organisation, The gangs of 1979, Bullworth's cliques.
-- 35 story beats from 1961 to 2026: 1961 London, before the storm; 1969 Swinging London, wrong side of the river; 1984 Victor Vance arrives; 1984 The Vance empire; 1986 Tommy Vercetti gets out; 1986 The Vercetti rise; 1986 Lance Vance changes sides; 1986 The last stand at the mansion; 1992 CJ comes home; 1992 Grove Street vs the Ballas; 1992 San Fierro and the Loco Syndicate; 1992 The Caligula's heist; 1992 The homecoming; 1997 Liberty City, top-down; 1997 Three cities, one getaway; 1999 Anywhere City; 2001 Claude is betrayed; 2001 Working for the families; 2001 The Cartel war; 2001 The exchange; 2008 Niko Bellic arrives; 2008 Blood and debts; 2008 Deal or revenge; 2008 The diamond deal; 2009 The Lost MC fractures; 2009 Nightlife on the edge; 2013 Three men, one city; 2013 The first scores; 2013 Trevor finds out; 2013 The agency years; 2013 Three ways out; 2026 Jason and Lucia; 2026 The state of Leonida; 2026 The next score; 2026 A world that keeps moving.
+- Lore entries: Leonida & Vice City, Vice City, 1986, San Andreas, 1992, Los Santos, 2013, Liberty City, 2008, The Warriors, 1979, The Frontier, 1899, Bullworth Academy, 2006, The franchise, from 1997, Rockstar Games, Tommy Vercetti, Carl 'CJ' Johnson, Niko Bellic, Michael, Franklin & Trevor, Jason & Lucia, Grove Street Families, The Lost MC, The Vercetti Organisation, The gangs of 1979, Bullworth's cliques.
+- Story beats from 1961 to 2026: 1961 London, before the storm; 1969 Swinging London, wrong side of the river; 1984 Victor Vance arrives; 1984 The Vance empire; 1986 Tommy Vercetti gets out; 1986 The Vercetti rise; 1986 Lance Vance changes sides; 1986 The last stand at the mansion; 1992 CJ comes home; 1992 Grove Street vs the Ballas; 1992 San Fierro and the Loco Syndicate; 1992 The Caligula's heist; 1992 The homecoming; 1997 Liberty City, top-down; 1997 Three cities, one getaway; 1999 Anywhere City; 2001 Claude is betrayed; 2001 Working for the families; 2001 The Cartel war; 2001 The exchange; 2008 Niko Bellic arrives; 2008 Blood and debts; 2008 Deal or revenge; 2008 The diamond deal; 2009 The Lost MC fractures; 2009 Nightlife on the edge; 2013 Three men, one city; 2013 The first scores; 2013 Trevor finds out; 2013 The agency years; 2013 Three ways out; 2026 Jason and Lucia; 2026 The state of Leonida; 2026 The next score; 2026 A world that keeps moving.
 
 ## Sourcing and license
 

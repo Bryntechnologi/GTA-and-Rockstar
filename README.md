@@ -1,7 +1,7 @@
 # CHANNEL SURF
 
 **An unofficial Rockstar-universe arcade and portfolio piece.**
-Tune the era. Play the city.
+An unofficial Rockstar archive.
 
 CHANNEL SURF is a 100% client-side, zero-backend web app built as a playable tribute to the
 cities, crews, frontiers, and radio static of the Rockstar universe. The entire interface morphs
@@ -23,10 +23,10 @@ properties, inline SVG ambience, and synthesized Web Audio sound effects.
 The site leads with the archive, not the arcade:
 
 - **Home** — a signature home-only theme, featured lore, a story preview, a signal radio, the era rack, and clear atlas/arcade CTAs.
-- **Games** — a hub of nine static, theme-per-game dossier pages in release order. Each page has its own metadata, canonical URL, era theme, characters, locations, lore, and story beats.
-- **Rockstar Elsewhere** — a static dossier page covering Max Payne, Manhunt, Midnight Club, and L.A. Noire without adding new global theme eras.
-- **Lore** — 20 curated entries across locations, characters, factions, and franchise history, with era/type filters, search, sources, and optional live Wikipedia summaries.
-- **Story Timeline** — 35 in-universe story beats from 1961 London to 2026 Leonida, presented as a horizontal, theme-morphing carousel. Full spoilers are available behind a persisted toggle. A static **reading mode** at `story.html` presents the same chronology as a scroll-driven, theme-shifting page.
+- **Games** - a hub of static, theme-per-game dossier pages in release order. Each page has its own metadata, canonical URL, era theme, characters, locations, lore, and story beats.
+- **Rockstar Elsewhere** - a static dossier page covering Max Payne, Manhunt, Midnight Club, and L.A. Noire without adding new global theme eras.
+- **Lore** - curated entries across locations, characters, factions, and franchise history, with era/type filters, search, sources, and optional live Wikipedia summaries.
+- **Story Timeline** - in-universe story beats from 1961 London to 2026 Leonida, presented as a horizontal, theme-morphing carousel. Full spoilers are available behind a persisted toggle. A static **reading mode** at `story.html` presents the same chronology as a scroll-driven, theme-shifting page.
 - **Atlas** — the fictional map, Leaflet mode, and Geo-Guess, with Real vs Reel as a sub-tab.
 - **Real vs Reel** — MapLibre + OpenFreeMap comparisons, now grouped under Atlas.
 - **Arcade** — trivia, vault, heat grid, clue dossier, heist splitter, and badges.
@@ -36,7 +36,7 @@ The site leads with the archive, not the arcade:
 The era theme is stable by default and changes with the content you open. Lore filters and lore detail use that entry’s era; trivia uses the selected era filter; the story timeline follows the active beat; atlas chips switch the era. Exiting a content view restores the previous theme, and manual tuning wins. “Follow trivia era” only lets trivia questions change the signal, and Channel Surf still does it by design. Registered CSS custom properties crossfade the palette over ~0.55s, so theme changes are smooth rather than snapping. Static game pages bake their theme into the HTML, so there is no flicker or global theme drift.
 
 ### Era-morphing theme engine
-Eight era presets, each with its own palette, typography, corner radius, card treatment, and
+Era presets, each with its own palette, typography, corner radius, card treatment, and
 animated SVG backdrop. Each era also uses a distinct self-hosted open font pairing — no GTA font
 files are included.
 
@@ -98,7 +98,7 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 - Synthesized Web Audio SFX (clicks, tumbler ticks, success chimes, error buzzes) with a mute
   toggle — no audio files. Each era shifts the pitch and gain of the sound palette.
 - `localStorage` persistence for high scores, daily streaks, unlocked era badges, and settings.
-- Nine unlockable badges.
+- Unlockable badges.
 - Toasts, result screens, clipboard sharing, and one-click PNG result cards for trivia and every
   puzzle (canvas-rendered, no image assets).
 - Keyboard controls (1–4 / A–D for trivia, arrow keys or WASD for the grid, Escape to exit).
@@ -198,7 +198,7 @@ npm test
 - Real vs Reel cards and atlas subnav
 - global search
 - offline data fallbacks
-- indexability files, sitemap URLs, all nine game pages, the Elsewhere dossier, and the story reading page
+- indexability files, sitemap URLs, all game pages, the Elsewhere dossier, and the story reading page
 Browser-level fallback tests:
 
 ```bash
@@ -230,7 +230,7 @@ This updates `archive.html`, `elsewhere.html`, `games/<slug>/index.html`, `sitem
 - Each game page is a static, theme-baked page with unique title, description, canonical, and JSON-LD.
 - `elsewhere.html` is a static Rockstar Elsewhere dossier with its own metadata.
 - `story.html` is a static, scroll-driven story timeline with its own metadata.
-- `archive.html` is a static, JavaScript-free full-text archive of all 20 lore entries and all 35 story beats.
+- `archive.html` is a static, JavaScript-free full-text archive of all lore entries and story beats.
 - `robots.txt`, `sitemap.xml`, and `llms.txt` are included.
 - The `<noscript>` block contains a real content summary and a link to the archive.
 

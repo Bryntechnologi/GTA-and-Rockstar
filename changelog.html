@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-era="home">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changelog — CHANNEL SURF</title>
+  <meta name="description" content="Public changelog for CHANNEL SURF, an unofficial Rockstar lore archive and arcade.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://channelsurf.pages.dev/changelog.html">
+  <meta property="og:title" content="Changelog — CHANNEL SURF">
+  <meta property="og:description" content="Release history for the CHANNEL SURF lore archive and arcade.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://channelsurf.pages.dev/changelog.html">
+  <meta property="og:image" content="https://channelsurf.pages.dev/assets/og-cover.png">
+  <meta name="theme-color" content="#050914">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .changelog-main { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .changelog-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .changelog-main .lede { color: var(--muted); font-size: 1.05rem; max-width: 68ch; }
+    .changelog-release { margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+    .changelog-release h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 0.3rem; }
+    .changelog-date { color: var(--muted); font-family: var(--font-mono); font-size: 0.76rem; }
+    .changelog-release h3 { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-2); margin: 1.5rem 0 0.6rem; }
+    .changelog-release ul { padding-left: 1.1rem; line-height: 1.75; }
+    .changelog-release li { margin-bottom: 0.35rem; }
+    .changelog-main a { color: var(--accent-2); }
+    .changelog-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="changelog-main">
+    <nav class="changelog-breadcrumb" aria-label="Breadcrumb">
+      <a href="./">Home</a> / Changelog
+    </nav>
+    <h1>Changelog</h1>
+    <p class="lede">Release history for CHANNEL SURF. The machine-readable source also lives in <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
+
+    <section class="changelog-release">
+      <h2>1.0.0</h2>
+      <p class="changelog-date">27 November 2026</p>
+
+      <h3>Added</h3>
+      <ul>
+        <li>Lore-first home page with a dedicated home theme.</li>
+        <li>Games hub with static, theme-per-game pages in release order.</li>
+        <li>Rockstar Elsewhere dossier for Max Payne, Manhunt, Midnight Club, and L.A. Noire.</li>
+        <li>Lore archive with era/type filters, search, sources, and optional live Wikipedia summaries.</li>
+        <li>In-universe story timeline carousel with era-following themes and spoiler controls.</li>
+        <li>Static, scroll-driven <a href="story.html">story reading timeline</a> and full-text <a href="archive.html">archive</a>.</li>
+        <li>Interactive Leonida atlas with optional Leaflet mode and Geo-Guess.</li>
+        <li>Real vs Reel page with MapLibre/OpenFreeMap and comparison cards.</li>
+        <li>Trivia Arena modes: Classic, Blitz, Sudden Death, Mythbuster, Channel Surf, and Daily.</li>
+        <li>Vault Cracker, Heat Grid, and Clue Dossier puzzles, plus a crew and heist splitter.</li>
+        <li>Global search and keyboard command palette.</li>
+        <li>Self-hosted open-licence fonts with per-era pairings.</li>
+        <li>Local Wikimedia Commons imagery with visible credit and source links.</li>
+        <li>Generated SVG character portraits.</li>
+        <li>Themed scrollbars, footer atmosphere, and crossfading theme transitions.</li>
+        <li>PWA manifest, maskable icons, app-shell service worker, and offline fallback.</li>
+        <li>Static game, story, Elsewhere, archive, sitemap, robots, and <code>llms.txt</code> outputs.</li>
+        <li>jsdom regression tests, Playwright fallback/transition tests, and header breakpoint snapshots.</li>
+      </ul>
+
+      <h3>Changed</h3>
+      <ul>
+        <li>Rebuilt the header as a single bar with a game-signal popover.</li>
+        <li>Made game pages and local JSON the primary content sources, with fetch fallbacks.</li>
+        <li>Simplified UI copy and removed decorative counters and slogan-style headings.</li>
+        <li>Updated the game library to real release order.</li>
+        <li>Moved Signal Radio to the home page.</li>
+        <li>Clarified that the signal selector changes both theme and game focus.</li>
+      </ul>
+
+      <h3>Fixed</h3>
+      <ul>
+        <li>Theme restoration when leaving lore, story, and trivia views.</li>
+        <li>Manual theme selection overriding content previews.</li>
+        <li>Duplicate and legacy font and image paths.</li>
+        <li>Offline and blocked-network fallbacks for lore, maps, and radio.</li>
+      </ul>
+
+      <h3>Notes</h3>
+      <ul>
+        <li>No GTA screenshots, official artwork, audio, or proprietary fonts are included.</li>
+        <li>All trivia, lore summaries, code, CSS, and vector art are original.</li>
+        <li>Production domain and project umbrella naming are intentionally pending.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
