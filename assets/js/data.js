@@ -1291,7 +1291,7 @@ window.CS_DATA = (() => {
   const site = {
     name: "CHANNEL SURF",
     fullName: "CHANNEL SURF — Unofficial Rockstar Lore Archive & Arcade",
-    tagline: "Tune the era. Play the city.",
+    tagline: "An unofficial Rockstar archive.",
     disclaimer: "CHANNEL SURF is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games, Take-Two Interactive, or any of their subsidiaries. I do not own, operate, or claim any rights to Grand Theft Auto, Red Dead, The Warriors, Bully, Max Payne, L.A. Noire, Midnight Club, or any related games, characters, locations, logos, trademarks, or other intellectual property. All such rights belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. All quizzes, puzzle logic, original code, CSS, and vector art on this site were created for this project. References to games, lore, characters, and settings are included for commentary, criticism, education, and entertainment only. No game assets, audio, models, textures, screenshots, or copied dialogue are included. This site is a personal hobby/portfolio showcase, not a commercial product. If a rights holder believes anything here oversteps, contact me and I will remove or change it promptly."
   };
 

@@ -65,9 +65,8 @@ test("home leads with lore and story previews", async () => {
   assert.equal(doc.querySelectorAll("#homeLoreCards .lore-card").length, 4);
   assert.equal(doc.querySelectorAll("#homeStoryStrip .home-story-card").length, 5);
   assert.equal(doc.querySelectorAll(".photo-strip img").length, 5);
-  assert.equal(doc.querySelector("#metaLore")?.textContent, "20");
-  assert.equal(doc.querySelector("#metaStory")?.textContent, "35");
-  assert.match(doc.querySelector(".hero h1")?.textContent || "", /story/i);
+  assert.doesNotMatch(doc.querySelector(".hero")?.textContent || "", /\b(20|35|08)\b\s*(lore|story|era)/i);
+  assert.match(doc.querySelector(".hero h1")?.textContent || "", /archived/i);
   assert.equal(errors.length, 0, errors.join("\n"));
   window.close();
 });

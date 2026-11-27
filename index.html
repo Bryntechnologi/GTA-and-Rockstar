@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CHANNEL SURF - Unofficial Rockstar Lore Archive &amp; Arcade</title>
-  <meta name="description" content="A fan-made Rockstar lore archive and arcade: nine theme-per-game pages, 20 lore entries, 35 story beats, an era atlas, real-vs-reel maps, trivia, and puzzles.">
+  <meta name="description" content="A fan-made Rockstar lore archive and arcade: theme-per-game pages, lore entries, a story timeline, an era atlas, real-world comparisons, trivia, and puzzles.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="author" content="CHANNEL SURF">
   <meta name="keywords" content="GTA lore, Rockstar Games, Grand Theft Auto story timeline, Vice City, Leonida, GTA VI, Max Payne, Manhunt, Midnight Club, fan archive">
@@ -43,7 +43,7 @@
         "name": "CHANNEL SURF",
         "alternateName": "CHANNEL SURF - Unofficial Rockstar Lore Archive & Arcade",
         "url": "./",
-        "description": "An independent, non-commercial fan archive and arcade for the Rockstar universe: 20 lore entries, 35 story beats, an era atlas, real-vs-reel maps, trivia, and puzzles.",
+        "description": "An independent, non-commercial fan archive and arcade for the Rockstar universe, with lore, story beats, an era atlas, real-world comparisons, trivia, and puzzles.",
         "inLanguage": "en"
       },
       {
@@ -87,7 +87,7 @@
             "name": "What does the CHANNEL SURF story timeline cover?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "It covers 35 major in-universe GTA story beats in chronological order, from the 1961 London expansion through Vice City, San Andreas, Liberty City, Los Santos, and the 2026 Leonida era."
+              "text": "It covers major in-universe GTA story beats in chronological order, from the 1961 London expansion through Vice City, San Andreas, Liberty City, Los Santos, and the 2026 Leonida era."
             }
           },
           {
@@ -202,8 +202,8 @@
       <div class="hero">
         <div class="hero-copy">
           <p class="eyebrow"><span class="live-dot"></span> An unofficial Rockstar archive</p>
-          <h1 id="home-title">The story,<br><em>not the score.</em></h1>
-          <p class="lede">An original fan archive of the cities, crews, and turning points that shaped the Rockstar universe. Start with the lore, follow the timeline, then step into the arcade when you feel like playing.</p>
+          <h1 id="home-title">The Rockstar universe,<br><em>archived.</em></h1>
+          <p class="lede">Lore, characters, locations, and story beats from across the Rockstar catalog, with an interactive atlas, timeline, and arcade.</p>
           <div class="hero-actions">
             <button class="btn btn-primary" id="heroLoreBtn" type="button">
               <svg class="icon" aria-hidden="true"><use href="#i-book"></use></svg>
@@ -213,11 +213,6 @@
               <svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg>
               Open the story timeline
             </button>
-          </div>
-          <div class="hero-meta">
-            <div><b id="metaEras">08</b><span>era skins</span></div>
-            <div><b id="metaLore">20</b><span>lore entries</span></div>
-            <div><b id="metaStory">35</b><span>story beats</span></div>
           </div>
         </div>
 
@@ -248,10 +243,10 @@
       <div class="home-grid">
         <article class="panel daily-card" id="dailyCard">
           <div>
-            <p class="eyebrow">Daily signal</p>
+            <p class="eyebrow">Daily trivia</p>
             <div class="daily-date" id="dailyDate">—</div>
-            <h2>One seed. Five questions.</h2>
-            <p>Everyone gets the same UTC-seeded run. Come back tomorrow for a fresh mix from across the archive.</p>
+            <h2>Daily run</h2>
+            <p>The same questions for everyone, refreshed at 00:00 UTC.</p>
           </div>
           <div class="daily-actions">
             <button class="btn btn-primary" id="dailyStartBtn" type="button">Play daily trivia</button>
@@ -267,8 +262,8 @@
         <article class="panel stat-card">
           <div>
             <p class="eyebrow">Your dossier</p>
-            <h3>Local. Private. Persistent.</h3>
-            <p>Everything you earn stays in this browser. No account, no tracking, no server-side personality test.</p>
+            <h3>Stored in this browser</h3>
+            <p>No account required. Progress and preferences stay in local storage.</p>
           </div>
           <dl class="stat-list">
             <div class="stat-row"><dt>Daily streak</dt><dd id="statStreak">0 days</dd></div>
@@ -305,9 +300,9 @@
         <div class="section-head">
           <div>
             <p class="eyebrow">The long view</p>
-            <h2 id="home-story-title">Follow the story, left to right.</h2>
+            <h2 id="home-story-title">Story timeline</h2>
           </div>
-          <p>35 story beats from 1961 London to 2026 Leonida. <button class="text-link" type="button" data-route="story">Open the full timeline →</button></p>
+          <p>Story beats from 1961 London to 2026 Leonida. <button class="text-link" type="button" data-route="story">Open the full timeline →</button></p>
         </div>
         <div class="home-story-strip" id="homeStoryStrip"></div>
       </section>
@@ -348,7 +343,7 @@
         <div class="section-head">
           <div>
             <p class="eyebrow">Signal radio</p>
-            <h2 id="radio-home-title">Put something on.</h2>
+            <h2 id="radio-home-title">Signal radio</h2>
           </div>
           <p>Curated CC and free streams. Click to play — nothing autoplays.</p>
         </div>
@@ -367,7 +362,7 @@
         <div class="section-head">
           <div>
             <p class="eyebrow">The era rack</p>
-            <h2 id="eras-title">Eight ways to look out a windshield.</h2>
+            <h2 id="eras-title">Era themes</h2>
           </div>
           <p>Every tile is a full site reskin. Visit them all to earn <strong>Tuned In</strong>.</p>
         </div>
@@ -377,8 +372,8 @@
       <section class="section" aria-labelledby="arcade-teaser-title">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Pick a direction</p>
-            <h2 id="arcade-teaser-title">Three ways in.</h2>
+            <p class="eyebrow">Explore</p>
+            <h2 id="arcade-teaser-title">The archive</h2>
           </div>
           <p>Read the map, play the city, or compare the fiction with the real world.</p>
         </div>
@@ -412,10 +407,6 @@
           <h2 id="games-title">Every city has its own page.</h2>
           <p>Stable, theme-per-game dossiers in release order. Open a game to read its setting, people, and story beats, then jump into the interactive atlas or timeline.</p>
         </div>
-        <div class="page-head-side">
-          <b id="gamesCount">09</b>
-          game pages
-        </div>
       </div>
       <div class="games-layout">
         <div class="games-grid" id="gamesContent"></div>
@@ -444,10 +435,6 @@
           <p class="eyebrow">The wire archive</p>
           <h2 id="lore-title">Every city has a story.</h2>
           <p>Original summaries of places, people, and factions. Filter by era or type, search the archive, and follow the source links for more.</p>
-        </div>
-        <div class="page-head-side">
-          <b id="loreCount">20</b>
-          entries
         </div>
       </div>
       <div class="lore-toolbar">
@@ -510,12 +497,8 @@
       <div class="page-head">
         <div>
           <p class="eyebrow">The arcade</p>
-          <h2 id="play-title">Pick a frequency.</h2>
+          <h2 id="play-title">Arcade</h2>
           <p>Fast trivia, safe-cracking, route puzzles, deduction, and a heist calculator. Everything runs client-side and saves locally.</p>
-        </div>
-        <div class="page-head-side">
-          <b>09</b>
-          play loops
         </div>
       </div>
       <div class="game-grid" id="playGameGrid"></div>
@@ -541,7 +524,7 @@
         <div class="section-head" style="margin-bottom:0">
           <div>
             <p class="eyebrow">Badge shelf</p>
-            <h2 id="badges-title" style="font-size:clamp(1.5rem,2.5vw,2rem)">Proof of a misspent evening.</h2>
+            <h2 id="badges-title" style="font-size:clamp(1.5rem,2.5vw,2rem)">Badges</h2>
           </div>
           <p>Stored only in localStorage. Earned badges light up.</p>
         </div>
@@ -557,11 +540,7 @@
         <div>
           <p class="eyebrow">Know the streets</p>
           <h2 id="trivia-title">Trivia Arena</h2>
-          <p>Six formats. Eight signals. Written from public franchise knowledge, with a lore note after every answer. No copied script dialogue — just the good stuff.</p>
-        </div>
-        <div class="page-head-side">
-          <b id="triviaBankCount">0</b>
-          questions in the bank
+          <p>Trivia formats across every era, written from public franchise knowledge, with a source note after each answer.</p>
         </div>
       </div>
 
@@ -610,17 +589,7 @@
         <div>
           <p class="eyebrow">Side jobs</p>
           <h2 id="puzzles-title">Puzzles &amp; safehouses</h2>
-          <p>Three quick loops with real logic underneath: crack a four-digit safe, plot a route through patrols to the safehouse, or deduce a district from field notes. Deterministic daily variants included.</p>
-        </div>
-        <div class="page-head-side">
-          <b id="vaultSolveCount">0</b>
-          safes cracked
-          <br>
-          <b id="gridSolveCount" style="margin-top:0.3rem">0</b>
-          routes cleared
-          <br>
-          <b id="dossierSolveCount" style="margin-top:0.3rem">0</b>
-          dossiers closed
+          <p>Puzzle modes: crack a safe, plot a route through patrols, or deduce a district from field notes. Daily variants included.</p>
         </div>
       </div>
 
@@ -720,7 +689,7 @@
         <aside class="puzzle-side">
           <div class="panel">
             <p class="eyebrow">Side job notes</p>
-            <h3>Small loops, real logic.</h3>
+            <h3>Puzzle notes</h3>
             <div class="side-note">
               <h4>Vault Cracker</h4>
               <p>Each guess reports exact positions and misplaced digits. Six tries, unique digits. Daily vaults use a UTC date seed.</p>
@@ -760,10 +729,6 @@
           <h2 id="atlas-title">Every city has a tell.</h2>
           <p>A stylized, original fan atlas of districts, landmarks, and moods. The Leonida map is custom SVG, with an optional Leaflet mode; the Real vs Reel tab adds keyless MapLibre comparisons. None of it is official cartography.</p>
         </div>
-        <div class="page-head-side">
-          <b id="atlasEraCount">08</b>
-          eras mapped
-        </div>
       </div>
       <div class="atlas-subnav" role="navigation" aria-label="Atlas sections">
         <button type="button" data-route="atlas" aria-current="page">Fictional Atlas</button>
@@ -789,10 +754,6 @@
           <h2 id="timeline-title">A timeline with road noise.</h2>
           <p>From top-down mayhem in 1997 to the neon return of Vice City. Filter by franchise, pick an entry, and tune the site to that era.</p>
         </div>
-        <div class="page-head-side">
-          <b id="timelineCount">0</b>
-          milestones
-        </div>
       </div>
       <div class="timeline-toolbar">
         <div class="chip-row" id="timelineFilters" role="group" aria-label="Filter timeline"></div>
@@ -812,7 +773,7 @@
         <div>
           <p class="eyebrow">Field kit</p>
           <h2 id="toolkit-title">Crew &amp; Heist Splitter</h2>
-          <p>A very serious calculator for a very fictional score. Set the take, subtract the prep costs, then weight each crew member's share. Percentages normalize automatically — no spreadsheet arguments required.</p>
+          <p>Set the take, subtract prep costs, then weight each crew member's share. Percentages normalize automatically.</p>
         </div>
         <div class="page-head-side">
           <b id="resetDate">—</b>
@@ -992,13 +953,14 @@
           <button type="button" data-route="toolkit">Field Kit</button>
           <a class="footer-link" href="story.html">Story reading mode</a>
           <a class="footer-link" href="elsewhere.html">Rockstar Elsewhere</a>
+          <a class="footer-link" href="changelog.html">Changelog</a>
           <a class="footer-link" href="archive.html">Full-text archive</a>
           <button type="button" data-route="about">About / IP</button>
         </div>
       </div>
       <div class="footer-bottom">
         <span>Zero backend · zero trackers · zero ripped assets</span>
-        <span>Built for the love of the signal</span>
+        <span>Unofficial fan project</span>
       </div>
     </div>
   </footer>
@@ -1018,7 +980,7 @@
     <div class="container" style="padding:2rem 0">
       <h2>CHANNEL SURF — Unofficial Rockstar Lore Archive &amp; Arcade</h2>
       <p>This is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim.</p>
-      <p>The site contains 20 curated lore entries, 35 in-universe GTA story beats from 1961 London to 2026 Leonida, nine theme-per-game dossier pages, an era atlas, real-vs-reel city comparisons, trivia, and puzzles.</p>
+      <p>The site contains curated lore entries, in-universe GTA story beats from 1961 London to 2026 Leonida, theme-per-game dossier pages, an era atlas, real-vs-reel city comparisons, trivia, and puzzles.</p>
       <p><a href="archive.html">Read the full-text archive</a> (all lore and story entries, no JavaScript required). Game pages live at <a href="games/gta-vi/">/games/gta-vi/</a> and similar paths.</p>
       <p>JavaScript is required for the interactive map, timeline, trivia, and puzzles.</p>
     </div>

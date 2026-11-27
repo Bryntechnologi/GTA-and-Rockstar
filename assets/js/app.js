@@ -1565,13 +1565,9 @@
 
     ensureLoreArchive().then(() => {
       renderHomeLore();
-      const metaLore = $("#metaLore");
-      if (metaLore) metaLore.textContent = pad2((state.lore || []).length);
     });
     ensureStory().then(() => {
       renderHomeStoryStrip();
-      const metaStory = $("#metaStory");
-      if (metaStory) metaStory.textContent = (state.story || []).length;
     });
 
     renderHomeLore();
@@ -1661,7 +1657,7 @@
         mode: "classic",
         icon: "trivia",
         title: "Trivia Arena",
-        copy: "Six formats, eight signals, and a lore note after every answer. Classic, Blitz, Sudden Death, and more.",
+        copy: "Trivia formats across every era, with a source note after each answer. Classic, Blitz, Sudden Death, and more.",
         meta: "6 modes",
         score: stats.highScores.classic ? `Best ${stats.highScores.classic}` : "No best yet",
         accent: "var(--accent)"
@@ -1719,7 +1715,7 @@
         open: "toolkit",
         icon: "split",
         title: "Crew Splitter",
-        copy: "Set the take, subtract the prep, weight the crew, and get an instant, shareable split. No spreadsheet.",
+        copy: "Set the take, subtract the prep, weight the crew, and get an instant, copyable split.",
         meta: "Utility",
         score: "Do the math",
         accent: "var(--accent-3)"
@@ -2484,8 +2480,6 @@
   function init() {
     const aboutDisclaimer = $("#aboutDisclaimer");
     if (aboutDisclaimer) aboutDisclaimer.textContent = site.disclaimer;
-    const metaEras = $("#metaEras");
-    if (metaEras) metaEras.textContent = pad2(eraOrder.length);
 
     initDisclaimer();
     registerServiceWorker();
