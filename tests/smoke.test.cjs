@@ -264,7 +264,29 @@ test("static indexability files and archive are present", () => {
   assert.match(archive, /application\/ld\+json/);
 
   const sitemap = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 13);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 16);
+  assert.match(sitemap, /credits\.html/);
+  assert.match(sitemap, /contact\.html/);
+
+  for (const file of ["archive.html", "story.html", "elsewhere.html", "changelog.html", "contact.html", "credits.html"]) {
+    const page = fs.readFileSync(path.join(ROOT, file), "utf8");
+    assert.match(page, /<header class="site-header">/, `${file} should have the universal header`);
+    assert.match(page, /<footer class="site-footer">/, `${file} should have the universal footer`);
+    assert.match(page, /Brynsites/, `${file} should link the umbrella project`);
+    assert.match(page, /assets\/js\/chrome\.js/, `${file} should load the shared chrome script`);
+  }
+
+  const changelog = fs.readFileSync(path.join(ROOT, "changelog.html"), "utf8");
+  assert.match(changelog, /v1\.0\.0/);
+  assert.match(changelog, /v0\.1\.0/);
+  assert.doesNotMatch(changelog, /\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/);
+  assert.match(changelog, /partial|fan-made/i);
+
+  const contact = fs.readFileSync(path.join(ROOT, "contact.html"), "utf8");
+  assert.match(contact, /brynsites\.com\/contact/);
+
+  const creditsPage = fs.readFileSync(path.join(ROOT, "credits.html"), "utf8");
+  assert.match(creditsPage, /ImageGallery/);
 
   const elsewhere = fs.readFileSync(path.join(ROOT, "elsewhere.html"), "utf8");
   assert.equal((elsewhere.match(/class="elsewhere-card"/g) || []).length, 4);
