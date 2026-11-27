@@ -114,6 +114,7 @@
   {
     "id": "franchise-1997",
     "era": "gta6",
+    "scope": "franchise",
     "title": "The franchise, from 1997",
     "summary": "Grand Theft Auto began as a top-down crime game from DMA Design and grew into one of the most recognizable open-world series in the medium. Each era added a new city, a new voice, and a new way to measure freedom: from arcade chaos to cinematic scale.",
     "wikiTitle": "Grand Theft Auto",
@@ -128,6 +129,7 @@
   {
     "id": "rockstar-games",
     "era": "gta6",
+    "scope": "franchise",
     "title": "Rockstar Games",
     "summary": "Rockstar Games was established as a publishing label under Take-Two Interactive in 1998. Its studios have built a catalog across crime, westerns, noir, and schoolyard satire, with a house style that favors dense worlds, strong radio soundtracks, and sharply observed fiction.",
     "wikiTitle": "Rockstar Games",
@@ -277,6 +279,380 @@
       "cliques",
       "2006",
       "school"
+    ]
+  },
+  {
+    "id": "liberty-city-1997",
+    "era": "classic",
+    "scope": "game",
+    "type": "location",
+    "title": "Liberty City, 1997",
+    "summary": "The original Liberty City was a top-down grid of three islands, built for short, chaotic crime sprees rather than a cinematic story. Its paper-thin premise — rise through the criminal ranks by any means — set the template the series would spend decades refining.",
+    "wikiTitle": "Grand Theft Auto (video game)",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_(video_game)",
+    "sourceLicense": "CC BY-SA 4.0",
+    "attribution": "Adapted from Wikipedia, \"Grand Theft Auto (video game)\"",
+    "tags": [
+      "Liberty City",
+      "1997",
+      "top-down"
+    ]
+  },
+  {
+    "id": "london-1969",
+    "era": "classic",
+    "scope": "game",
+    "type": "location",
+    "title": "London, 1969",
+    "summary": "The London expansion traded Liberty City for a period British capital of tight streets, mod culture, and very different cars. It was an early sign that the series could reskin its formula around a specific place and era instead of just another American city.",
+    "wikiTitle": "Grand Theft Auto: London 1969",
+    "source": "https://en.wikipedia.org/wiki/Grand_Theft_Auto%3A_London_1969",
+    "sourceLicense": "CC BY-SA 4.0",
+    "attribution": "Adapted from Wikipedia, \"Grand Theft Auto: London 1969\"",
+    "tags": [
+      "London",
+      "1969",
+      "expansion"
+    ]
+  },
+  {
+    "id": "ricardo-diaz",
+    "era": "vicecity",
+    "scope": "game",
+    "type": "character",
+    "title": "Ricardo Diaz",
+    "summary": "A wealthy Vice City drug baron whose mansion, connections, and paranoia make him both a useful patron and an obvious target. Diaz represents the older criminal order that Tommy Vercetti learns to read, then replace.",
+    "fandomTitle": "Ricardo Diaz",
+    "source": "https://gta.fandom.com/wiki/Ricardo_Diaz",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Ricardo Diaz\"",
+    "tags": [
+      "Vice City",
+      "drug baron",
+      "antagonist"
+    ]
+  },
+  {
+    "id": "lance-vance",
+    "era": "vicecity",
+    "scope": "game",
+    "type": "character",
+    "title": "Lance Vance",
+    "summary": "A charming, resentful partner whose family history ties him to Vice City's drug trade. Lance works best as a mirror for Tommy: both want a way in, but only one is willing to wait for it.",
+    "fandomTitle": "Lance Vance",
+    "source": "https://gta.fandom.com/wiki/Lance_Vance",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Lance Vance\"",
+    "tags": [
+      "Vice City",
+      "partner",
+      "betrayal"
+    ]
+  },
+  {
+    "id": "malibu-club",
+    "era": "vicecity",
+    "scope": "game",
+    "type": "location",
+    "title": "The Malibu Club",
+    "summary": "A neon nightclub on Vice City's waterfront that doubles as a front for planning bigger jobs. Buying the Malibu is one of the story's clearest status shifts: from hired muscle to someone with a venue, a crew, and a reason to be feared.",
+    "fandomTitle": "Malibu Club",
+    "source": "https://gta.fandom.com/wiki/Malibu_Club",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Malibu Club\"",
+    "tags": [
+      "Vice City",
+      "nightlife",
+      "property"
+    ]
+  },
+  {
+    "id": "big-smoke",
+    "era": "sanandreas",
+    "scope": "game",
+    "type": "character",
+    "title": "Big Smoke",
+    "summary": "A larger-than-life Grove Street figure whose appetites and ambitions slowly pull him away from the neighbourhood. His arc is one of the series' sharpest arguments that loyalty and self-interest can wear the same face for years.",
+    "fandomTitle": "Big Smoke",
+    "source": "https://gta.fandom.com/wiki/Big_Smoke",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Big Smoke\"",
+    "tags": [
+      "San Andreas",
+      "Grove Street",
+      "betrayal"
+    ]
+  },
+  {
+    "id": "ryder",
+    "era": "sanandreas",
+    "scope": "game",
+    "type": "character",
+    "title": "Ryder",
+    "summary": "A restless Grove Street member with a short fuse and a long memory. Ryder's streetwise bravado hides how quickly the ground under the set is shifting, making him one of San Andreas' most complicated early allies.",
+    "fandomTitle": "Ryder",
+    "source": "https://gta.fandom.com/wiki/Ryder",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Ryder\"",
+    "tags": [
+      "San Andreas",
+      "Grove Street",
+      "crew"
+    ]
+  },
+  {
+    "id": "frank-tenpenny",
+    "era": "sanandreas",
+    "scope": "game",
+    "type": "character",
+    "title": "Frank Tenpenny",
+    "summary": "A corrupt Los Santos police officer who treats the law as a private enforcement tool. Tenpenny is the system-level villain of San Andreas: not a rival gang, but the person supposedly keeping the city in order.",
+    "fandomTitle": "Frank Tenpenny",
+    "source": "https://gta.fandom.com/wiki/Frank_Tenpenny",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Frank Tenpenny\"",
+    "tags": [
+      "San Andreas",
+      "police",
+      "antagonist"
+    ]
+  },
+  {
+    "id": "ballas",
+    "era": "sanandreas",
+    "scope": "game",
+    "type": "faction",
+    "title": "The Ballas",
+    "summary": "A rival Los Santos set defined by colour, territory, and a long-running feud with Grove Street. The Ballas are less a single organisation than a pressure system that shapes every block in the city.",
+    "fandomTitle": "Ballas",
+    "source": "https://gta.fandom.com/wiki/Ballas",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Ballas\"",
+    "tags": [
+      "San Andreas",
+      "Los Santos",
+      "gangs"
+    ]
+  },
+  {
+    "id": "roman-bellic",
+    "era": "gta4",
+    "scope": "game",
+    "type": "character",
+    "title": "Roman Bellic",
+    "summary": "Niko's cousin and the source of Liberty City's warmest and most unreliable promises. Roman sells optimism as a survival strategy, which makes his setbacks feel less like plot twists and more like the city doing what it does.",
+    "fandomTitle": "Roman Bellic",
+    "source": "https://gta.fandom.com/wiki/Roman_Bellic",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Roman Bellic\"",
+    "tags": [
+      "GTA IV",
+      "Liberty City",
+      "family"
+    ]
+  },
+  {
+    "id": "pegorino-family",
+    "era": "gta4",
+    "scope": "game",
+    "type": "faction",
+    "title": "The Pegorino Family",
+    "summary": "An old-guard Liberty City crime family trying to stay relevant while newer crews rewrite the rules. Their declining influence is a useful window into GTA IV's central idea: the city rewards the next arrangement, not the last one.",
+    "fandomTitle": "Pegorino Family",
+    "source": "https://gta.fandom.com/wiki/Pegorino_Family",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Pegorino Family\"",
+    "tags": [
+      "GTA IV",
+      "Liberty City",
+      "crime family"
+    ]
+  },
+  {
+    "id": "lamar-davis",
+    "era": "gta5",
+    "scope": "game",
+    "type": "character",
+    "title": "Lamar Davis",
+    "summary": "Franklin's friend, business partner, and occasional liability, with a comic rhythm that masks real ambition. Lamar keeps the Los Santos story grounded in the block even when the protagonists are flying between heists.",
+    "fandomTitle": "Lamar Davis",
+    "source": "https://gta.fandom.com/wiki/Lamar_Davis",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Lamar Davis\"",
+    "tags": [
+      "GTA V",
+      "Los Santos",
+      "crew"
+    ]
+  },
+  {
+    "id": "blaine-county",
+    "era": "gta5",
+    "scope": "game",
+    "type": "location",
+    "title": "Blaine County",
+    "summary": "The desert-and-farmland half of GTA V's map, where small towns, meth labs, and long empty roads sit beside a national park. It is the series' most deliberate contrast to a city: the same freedom, with fewer people to perform for.",
+    "fandomTitle": "Blaine County",
+    "source": "https://gta.fandom.com/wiki/Blaine_County",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Blaine County\"",
+    "tags": [
+      "GTA V",
+      "Los Santos",
+      "desert"
+    ]
+  },
+  {
+    "id": "leonida-keys",
+    "era": "gta6",
+    "scope": "game",
+    "type": "location",
+    "title": "The Leonida Keys",
+    "summary": "A chain of islands and causeways at the southern edge of Leonida, shown in GTA VI's map material as a slower, stranger counterpoint to Vice City. Long water roads and small communities make it the kind of place where local knowledge matters more than horsepower.",
+    "fandomTitle": "Leonida Keys",
+    "source": "https://gta.fandom.com/wiki/Leonida_Keys",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Leonida Keys\"",
+    "tags": [
+      "GTA VI",
+      "Leonida",
+      "islands"
+    ]
+  },
+  {
+    "id": "grassrivers",
+    "era": "gta6",
+    "scope": "game",
+    "type": "location",
+    "title": "Grassrivers",
+    "summary": "Leonida's wetland interior, built around airboats, alligators, and roads that disappear into water. The area gives GTA VI a rural counterweight to the neon coast and a reminder that the state is bigger than its skyline.",
+    "fandomTitle": "Grassrivers",
+    "source": "https://gta.fandom.com/wiki/Grassrivers",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Grassrivers\"",
+    "tags": [
+      "GTA VI",
+      "Leonida",
+      "wetlands"
+    ]
+  },
+  {
+    "id": "arthur-morgan",
+    "era": "reddead",
+    "scope": "game",
+    "type": "character",
+    "title": "Arthur Morgan",
+    "summary": "A career outlaw and the emotional centre of Red Dead Redemption 2, caught between loyalty to his gang and the evidence that the world is closing around it. Arthur's story is less about redemption as a prize than about choosing what kind of person to be before the end.",
+    "fandomTitle": "Arthur Morgan",
+    "source": "https://gta.fandom.com/wiki/Arthur_Morgan",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Arthur Morgan\"",
+    "tags": [
+      "Red Dead",
+      "Van der Linde gang",
+      "outlaw"
+    ]
+  },
+  {
+    "id": "dutch-van-der-linde",
+    "era": "reddead",
+    "scope": "game",
+    "type": "character",
+    "title": "Dutch van der Linde",
+    "summary": "The charismatic leader whose vision of freedom keeps a gang together long after the plan has stopped working. Dutch is the frontier's answer to a GTA kingpin: a man whose confidence is both the reason people follow and the reason they cannot leave.",
+    "fandomTitle": "Dutch van der Linde",
+    "source": "https://gta.fandom.com/wiki/Dutch_van_der_Linde",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Dutch van der Linde\"",
+    "tags": [
+      "Red Dead",
+      "Van der Linde gang",
+      "leader"
+    ]
+  },
+  {
+    "id": "saint-denis",
+    "era": "reddead",
+    "scope": "game",
+    "type": "location",
+    "title": "Saint Denis",
+    "summary": "Red Dead's New Orleans analogue: a humid, industrial city of streetcars, press, and old money. It is the point where the frontier stops feeling like an escape and starts looking like a system with paperwork.",
+    "fandomTitle": "Saint Denis",
+    "source": "https://gta.fandom.com/wiki/Saint_Denis",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Saint Denis\"",
+    "tags": [
+      "Red Dead",
+      "city",
+      "New Orleans"
+    ]
+  },
+  {
+    "id": "jimmy-hopkins",
+    "era": "bully",
+    "scope": "game",
+    "type": "character",
+    "title": "Jimmy Hopkins",
+    "summary": "A teenager dropped into Bullworth Academy and forced to learn its hierarchy faster than he can make friends. Jimmy is a Rockstar protagonist in miniature: stubborn, resourceful, and happier solving a problem with a plan than with an apology.",
+    "fandomTitle": "Jimmy Hopkins",
+    "source": "https://gta.fandom.com/wiki/Jimmy_Hopkins",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Jimmy Hopkins\"",
+    "tags": [
+      "Bully",
+      "Bullworth",
+      "student"
+    ]
+  },
+  {
+    "id": "gary-smith",
+    "era": "bully",
+    "scope": "game",
+    "type": "character",
+    "title": "Gary Smith",
+    "summary": "Bullworth's most manipulative student, who treats every clique as a lever and every friendship as a temporary tool. Gary turns the school's social map into a strategy game, then dares everyone else to keep up.",
+    "fandomTitle": "Gary Smith",
+    "source": "https://gta.fandom.com/wiki/Gary_Smith",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Gary Smith\"",
+    "tags": [
+      "Bully",
+      "Bullworth",
+      "antagonist"
+    ]
+  },
+  {
+    "id": "swan",
+    "era": "warriors",
+    "scope": "game",
+    "type": "character",
+    "title": "Swan",
+    "summary": "The Warriors' acting leader on the long ride home, carrying the weight of a crew that has just been framed. Swan's quiet authority is the centre of the story: less a loud hero than the person everyone checks for before making a move.",
+    "fandomTitle": "Swan",
+    "source": "https://gta.fandom.com/wiki/Swan",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Swan\"",
+    "tags": [
+      "The Warriors",
+      "Coney Island",
+      "crew"
+    ]
+  },
+  {
+    "id": "luther",
+    "era": "warriors",
+    "scope": "game",
+    "type": "character",
+    "title": "Luther",
+    "summary": "The Rogues leader whose shot at the rally turns a citywide gathering into a nightlong manhunt. Luther is a small-time operator with a talent for making other people pay for his ambition.",
+    "fandomTitle": "Luther",
+    "source": "https://gta.fandom.com/wiki/Luther",
+    "sourceLicense": "CC BY-SA 3.0",
+    "attribution": "Adapted from GTA Wiki, \"Luther\"",
+    "tags": [
+      "The Warriors",
+      "Rogues",
+      "antagonist"
     ]
   }
 ]

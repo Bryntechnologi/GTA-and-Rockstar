@@ -20,8 +20,8 @@
       "Anywhere City"
     ],
     "loreIds": [
-      "franchise-1997",
-      "rockstar-games"
+      "liberty-city-1997",
+      "london-1969"
     ],
     "storyIds": [
       "london-1961",
@@ -62,7 +62,10 @@
     "loreIds": [
       "vice-city-1986",
       "tommy-vercetti",
-      "vercetti-gang"
+      "vercetti-gang",
+      "ricardo-diaz",
+      "lance-vance",
+      "malibu-club"
     ],
     "storyIds": [
       "vc-1986-arrival",
@@ -102,7 +105,11 @@
     "loreIds": [
       "san-andreas-1992",
       "carl-johnson",
-      "grove-street"
+      "grove-street",
+      "big-smoke",
+      "ryder",
+      "frank-tenpenny",
+      "ballas"
     ],
     "storyIds": [
       "sa-1992-return",
@@ -138,7 +145,9 @@
     ],
     "loreIds": [
       "warriors-1979",
-      "warriors-gangs"
+      "warriors-gangs",
+      "swan",
+      "luther"
     ],
     "storyIds": [],
     "wikiTitle": "The Warriors (video game)",
@@ -168,7 +177,9 @@
     ],
     "loreIds": [
       "bullworth-2006",
-      "bullworth-cliques"
+      "bullworth-cliques",
+      "jimmy-hopkins",
+      "gary-smith"
     ],
     "storyIds": [],
     "wikiTitle": "Bully (video game)",
@@ -200,7 +211,9 @@
     "loreIds": [
       "liberty-city-2008",
       "niko-bellic",
-      "the-lost"
+      "the-lost",
+      "roman-bellic",
+      "pegorino-family"
     ],
     "storyIds": [
       "gta4-2008-arrival",
@@ -237,7 +250,9 @@
     ],
     "loreIds": [
       "los-santos-2013",
-      "the-v-trio"
+      "the-v-trio",
+      "lamar-davis",
+      "blaine-county"
     ],
     "storyIds": [
       "gta5-2013-reunion",
@@ -273,7 +288,10 @@
       "Tall Trees"
     ],
     "loreIds": [
-      "frontier-1899"
+      "frontier-1899",
+      "arthur-morgan",
+      "dutch-van-der-linde",
+      "saint-denis"
     ],
     "storyIds": [],
     "wikiTitle": "Red Dead Redemption 2",
@@ -303,7 +321,9 @@
     ],
     "loreIds": [
       "leonida-vice-city",
-      "jason-lucia"
+      "jason-lucia",
+      "leonida-keys",
+      "grassrivers"
     ],
     "storyIds": [
       "gta6-2026-premise",

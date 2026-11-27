@@ -11,7 +11,7 @@ const { renderMarkdown } = require("../assets/js/markdown-core.js");
 const root = process.cwd();
 const configPath = path.join(root, "site.config.json");
 const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, "utf8")) : {};
-const siteUrl = (process.env.SITE_URL || config.siteUrl || "https://channelsurf.pages.dev/").replace(/\/?$/, "/");
+const siteUrl = (process.env.SITE_URL || config.siteUrl || "https://fivestarwanted.pages.dev/").replace(/\/?$/, "/");
 const site = {
   siteUrl,
   umbrella: config.umbrella || { name: "Brynsites", url: "https://brynsites.com/", contactUrl: "https://brynsites.com/contact" },
@@ -44,6 +44,7 @@ const fandomUrl = (title) => `https://gta.fandom.com/wiki/${encodeURIComponent(S
 const wikiUrl = (title) => `https://en.wikipedia.org/wiki/${encodeURIComponent(String(title || "").trim().replace(/\s+/g, "_"))}`;
 
 function gameForItem(item) {
+  if (item.scope === "franchise") return null;
   return gameByEra.get(item.era) || gameByTheme.get(item.era) || null;
 }
 
@@ -182,9 +183,10 @@ const loreSections = loreByType.map((type) => {
     <h2>${esc(type.charAt(0).toUpperCase() + type.slice(1))} entries</h2>
     ${items.map((item) => `<article id="lore-${esc(item.id)}">
       <h3>${esc(item.title)}</h3>
-      <p class="meta">${esc(eraNames[item.era] || item.era)} · ${esc(item.type || "lore")}</p>
+      <p class="meta">${esc(item.scope === "franchise" ? "All games" : (eraNames[item.era] || item.era))} · ${esc(item.type || "lore")}</p>
       <div class="md">${md(item.summary)}</div>
       ${item.tags ? `<p class="tags">${item.tags.map(esc).join(" · ")}</p>` : ""}
+      ${item.sourceLicense ? `<p class="license-note">${esc(item.attribution || "Adapted from an external source")} · ${esc(item.sourceLicense)} · changes may have been made.</p>` : ""}
       ${relatedMarkup(item)}
     </article>`).join("")}
   </section>`;
@@ -212,7 +214,8 @@ function gamePage(game) {
   const loreBlocks = gameLore.map((item) => `<article class="game-entry">    <p class="meta">${esc(item.type || "lore")}</p>
     <h3>${esc(item.title)}</h3>
     <div class="md">${md(item.summary, relative)}</div>
-    <p class="source-links"><a href="${esc(wikiUrl(item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="${esc(fandomUrl(item.fandomTitle || item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
+    ${item.sourceLicense ? `<p class="license-note">${esc(item.attribution || "Adapted from an external source")} · ${esc(item.sourceLicense)} · changes may have been made.</p>` : ""}
+    <p class="source-links">${item.wikiTitle ? `<a href="${esc(wikiUrl(item.wikiTitle))}" rel="noopener noreferrer" target="_blank">Wikipedia</a> · ` : ""}<a href="${esc(fandomUrl(item.fandomTitle || item.wikiTitle || item.title))}" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
   </article>`).join("");
   const storyBlocks = gameStory.map((event) => `<article class="game-entry">
     <h3><span class="year">${esc(event.year)}</span> ${esc(event.title)}</h3>
@@ -252,6 +255,7 @@ function gamePage(game) {
     .game-entry .year { color: var(--accent); margin-right: 0.4rem; }
     .game-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.2rem; }
     .game-page a { color: var(--accent-2); }
+    .game-page .license-note { color: var(--muted); font-family: var(--font-mono); font-size: 0.64rem; line-height: 1.55; }
     .game-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
     .game-disclaimer { margin-top: 2rem; padding: 1rem; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
   </style>
@@ -262,7 +266,7 @@ function gamePage(game) {
     "name": "${esc(seo.title)}",
     "url": "${canonical}",
     "description": "${esc(seo.description)}",
-    "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+    "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
     "about": { "@type": "VideoGame", "name": "${esc(game.name)}", "description": "${esc(game.description)}" },
     "inLanguage": "en"
   }
@@ -274,7 +278,7 @@ function gamePage(game) {
       <a href="${relative}">Home</a> / <a href="${relative}#games">Games</a> / ${esc(game.shortName)}
     </nav>
     <header class="game-hero">
-      <p class="game-breadcrumb">CHANNEL SURF // GAME DOSSIER</p>
+      <p class="game-breadcrumb">FIVE STAR WANTED // GAME DOSSIER</p>
       <h1>${esc(game.name)}</h1>
       <p class="lede">${md(game.description, relative)}</p>
       <div class="game-meta">
@@ -307,7 +311,7 @@ function gamePage(game) {
       <p class="source-links"><strong>Further reading:</strong> <a href="${esc(wikiUrl(game.wikiTitle || game.name))}" rel="noopener noreferrer" target="_blank">Wikipedia</a> · <a href="${esc(fandomUrl(game.wikiTitle || game.name))}" rel="noopener noreferrer" target="_blank">GTA Wiki</a></p>
     </section>
 
-    <p class="game-disclaimer">A partial, fan-made dossier. Not every game, character, or location is covered. Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. Summaries are original editorial writing for this project.</p>
+    <p class="game-disclaimer">A partial, fan-made dossier. Not every game, character, or location is covered. Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. Summaries are original or adapted from CC BY-SA sources; see each entry's attribution and source links.</p>
   </main>
 </body>
 </html>`, { prefix: relative, active: "games", lockEra: true, site });
@@ -317,14 +321,15 @@ function elsewherePage() {
   const canonical = `${siteUrl}elsewhere.html`;
   const cards = elsewhere.map((item) => {
     const credit = imageCredits[item.image];
-    return `<article class="elsewhere-card" style="--elsewhere-accent:${esc(item.accent)};--card-display:'${esc(item.font || "Oswald")}'">
+    return `<article class="elsewhere-card" id="${esc(item.slug)}" style="--elsewhere-accent:${esc(item.accent)};--card-display:'${esc(item.font || "Oswald")}'">
     ${credit ? `<img class="elsewhere-photo" src="${esc(credit.file)}" alt="${esc(credit.alt)}" loading="lazy">` : ""}
     <div class="elsewhere-head">
       <h2>${esc(item.name)}</h2>
       <span class="elsewhere-year">${esc(item.year)}</span>
     </div>
     <p class="elsewhere-genre">${esc(item.genre)}</p>
-    <p>${md(item.description)}</p>
+    <div class="md">${md(item.description)}</div>
+    ${item.keyGames ? `<p class="elsewhere-games"><strong>Key games:</strong> ${item.keyGames.map(esc).join(" · ")}</p>` : ""}
     <p class="elsewhere-tags">${item.themes.map(esc).join(" · ")}</p>
     ${credit ? `<p class="elsewhere-credit">Photo: ${esc(credit.artist)} (${esc(credit.license)}) · <a href="${esc(credit.source)}" rel="noopener noreferrer">source</a></p>` : ""}
     <a href="${esc(item.source)}" rel="noopener noreferrer">Source</a>
@@ -335,13 +340,13 @@ function elsewherePage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rockstar Beyond GTA: Max Payne, Manhunt &amp; Midnight Club</title>
-  <meta name="description" content="Explore Rockstar games beyond GTA: Max Payne's noir, Manhunt's stealth horror, Midnight Club street racing, and more, with sources and context.">
+  <title>Rockstar Beyond GTA: Max Payne, Manhunt, Midnight Club &amp; L.A. Noire</title>
+  <meta name="description" content="Explore Rockstar games beyond GTA: Max Payne's noir, Manhunt's stealth horror, Midnight Club street racing, and L.A. Noire's detective work, with sources and context.">
   <meta name="keywords" content="Max Payne, Manhunt, Midnight Club, L.A. Noire, Rockstar games, Rockstar beyond GTA">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Rockstar Beyond GTA: Max Payne, Manhunt &amp; Midnight Club">
-  <meta property="og:description" content="Max Payne, Manhunt, and Midnight Club: three sides of Rockstar beyond GTA.">
+  <meta property="og:title" content="Rockstar Beyond GTA: Max Payne, Manhunt, Midnight Club &amp; L.A. Noire">
+  <meta property="og:description" content="Four Rockstar series outside GTA: Max Payne, Manhunt, Midnight Club, and L.A. Noire.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -360,7 +365,8 @@ function elsewherePage() {
     .elsewhere-credit { color: var(--muted); font-family: var(--font-mono); font-size: 0.66rem; }
     .elsewhere-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
     .elsewhere-card h2 { margin: 0; font-size: clamp(1.3rem, 3vw, 1.8rem); font-family: var(--card-display, var(--font-display)); }
-    .elsewhere-year, .elsewhere-genre, .elsewhere-tags { color: var(--muted); font-family: var(--font-mono); font-size: 0.78rem; }
+    .elsewhere-year, .elsewhere-genre, .elsewhere-tags, .elsewhere-games { color: var(--muted); font-family: var(--font-mono); font-size: 0.78rem; }
+    .elsewhere-games { margin: 0.7rem 0 0.4rem; line-height: 1.6; }
     .elsewhere-card p { line-height: 1.65; }
     .elsewhere-card a { color: var(--accent-2); }
     .elsewhere-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
@@ -370,25 +376,25 @@ function elsewherePage() {
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Rockstar Elsewhere — Max Payne, Manhunt, Midnight Club",
+    "name": "Rockstar Beyond GTA - Max Payne, Manhunt, Midnight Club, and L.A. Noire",
     "url": "${canonical}",
-    "description": "A lightweight dossier covering three Rockstar series beyond GTA.",
-    "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+    "description": "A dossier covering four Rockstar series beyond GTA.",
+    "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
     "inLanguage": "en",
-    "about": ["Max Payne", "Manhunt", "Midnight Club", "Rockstar Games"]
+    "about": ["Max Payne", "Manhunt", "Midnight Club", "L.A. Noire", "Rockstar Games"]
   }
   </script>
 </head>
 <body>
   <main class="elsewhere-main">
     <nav class="elsewhere-breadcrumb" aria-label="Breadcrumb">
-      <a href="./">Home</a> / <a href="./#games">Games</a> / Rockstar Elsewhere
+      <a href="./">Home</a> / <a href="./#games">Games</a> / Rockstar Beyond GTA
     </nav>
-    <p class="elsewhere-breadcrumb" style="margin-top:1.2rem">CHANNEL SURF // ROCKSTAR ELSEWHERE</p>
-    <h1>Three doorways out of the city.</h1>
-    <p class="lede">A lightweight dossier for Rockstar series that sit outside the GTA story timeline. Not new site-wide themes — just a look at the other edges of the catalog.</p>
+    <p class="elsewhere-breadcrumb" style="margin-top:1.2rem">FIVE STAR WANTED // ROCKSTAR BEYOND GTA</p>
+    <h1>Beyond the GTA city limits.</h1>
+    <p class="lede">Four Rockstar series that sit outside the GTA story timeline, treated as part of the catalogue rather than a footnote: Max Payne, Manhunt, Midnight Club, and L.A. Noire. Each entry covers the games, the mood, and where to start.</p>
     <div class="elsewhere-grid">${cards}</div>
-    <p class="disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. Summaries are original editorial writing for this project.</p>
+    <p class="disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. Summaries are original or adapted from CC BY-SA sources; see each entry's attribution and source links.</p>
     <p class="elsewhere-breadcrumb"><a href="./">Return to the interactive archive</a> · <a href="archive.html">Full-text archive</a></p>
   </main>
 </body>
@@ -455,10 +461,10 @@ function storyPage() {
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "GTA Story Timeline - CHANNEL SURF",
+    "name": "GTA Story Timeline - FIVE STAR WANTED",
     "url": "${canonical}",
     "description": "In-universe Grand Theft Auto story beats in chronological order.",
-    "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+    "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
     "inLanguage": "en",
     "about": ["Grand Theft Auto", "Rockstar Games", "story timeline"]
   }
@@ -466,7 +472,7 @@ function storyPage() {
 </head>
 <body>
   <main class="reading-main">
-    <div class="reading-bar"><span>CHANNEL SURF // STORY TIMELINE</span><span>Era: <b id="readingEra">GTA VI</b></span></div>
+    <div class="reading-bar"><span>FIVE STAR WANTED // STORY TIMELINE</span><span>Era: <b id="readingEra">GTA VI</b></span></div>
     <p class="reading-kicker">READING MODE</p>
     <header class="reading-hero">
       <h1>The story, from 1961 to 2026.</h1>
@@ -475,7 +481,7 @@ function storyPage() {
       <div class="reading-actions"><a class="btn btn-primary btn-sm" href="./#story">Open interactive timeline</a><a class="btn btn-ghost btn-sm" href="archive.html">Full-text archive</a><a class="btn btn-quiet btn-sm" href="./">Back to the site</a></div>
     </header>
     <div class="reading-timeline">${cards}</div>
-    <p class="reading-disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All summaries are original editorial writing for this project.</p>
+    <p class="reading-disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. Summaries are original or adapted from CC BY-SA sources; see each entry's attribution and source links.</p>
   </main>
   <script>
     (function () {
@@ -562,7 +568,7 @@ function changelogPage() {
   <main class="changelog-main">
     <nav class="changelog-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Changelog</nav>
     <h1>Changelog</h1>
-    <p class="lede">Version-only release history for CHANNEL SURF. The machine-readable source also lives in <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
+    <p class="lede">Version-only release history for FIVE STAR WANTED. The machine-readable source also lives in <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
     ${sections}
   </main>
 </body>
@@ -604,7 +610,7 @@ function contactPage() {
   <main class="contact-main">
     <nav class="contact-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Contact</nav>
     <h1>Contact</h1>
-    <p>CHANNEL SURF is a personal fan project, not a company. Contact is handled through the ${esc(site.umbrella.name)} umbrella site so the details stay in one place.</p>
+    <p>FIVE STAR WANTED is a personal fan project, not a company. Contact is handled through the ${esc(site.umbrella.name)} umbrella site so the details stay in one place.</p>
     <div class="contact-card">
       <h2>Corrections, permissions, and takedowns</h2>
       <p>If something here is wrong, misattributed, or needs to be removed, use the ${esc(site.umbrella.name)} contact page. Please include the page URL and the specific issue.</p>
@@ -631,13 +637,13 @@ function creditsPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GTA Fan Archive Image Credits &amp; Photo Licences</title>
-  <meta name="description" content="Photo credits and licences for the real-world images used across the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle pages.">
-  <meta name="keywords" content="GTA fan archive image credits, photo licences, Wikimedia Commons credits">
+  <title>Credits, Sources &amp; Licences</title>
+  <meta name="description" content="Image credits plus text-source and licence details for the GTA lore archive: Wikimedia Commons photos, Wikipedia CC BY-SA 4.0, and GTA Wiki CC BY-SA 3.0.">
+  <meta name="keywords" content="GTA fan archive credits, image licences, Wikipedia CC BY-SA, GTA Wiki CC BY-SA, content sources">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="GTA Fan Archive Image Credits &amp; Photo Licences">
-  <meta property="og:description" content="Photo credits and licences for the real-world images used across the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle pages.">
+  <meta property="og:title" content="Credits, Sources &amp; Licences">
+  <meta property="og:description" content="Image credits plus text-source and licence details for the GTA lore archive.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -658,24 +664,38 @@ function creditsPage() {
     .credit-card p { margin: 0.2rem 0; color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; }
     .credit-card a { color: var(--accent-2); }
     .credits-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+    .credits-sources { max-width: 860px; margin-top: 2rem; }
+    .credits-sources h2 { margin-top: 0; }
+    .credits-sources a { color: var(--accent-2); }
   </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    "name": "CHANNEL SURF image credits",
+    "@type": "WebPage",
+    "name": "FIVE STAR WANTED credits and licences",
     "url": "${canonical}",
-    "description": "Photo credits and licences for real-world images used on CHANNEL SURF.",
-    "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" }
+    "description": "Image credits and text-source licences for FIVE STAR WANTED.",
+    "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" }
   }
   </script>
 </head>
 <body>
   <main class="credits-main">
-    <nav class="credits-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Image credits</nav>
-    <h1>Image credits</h1>
-    <p class="lede">These are real-world photos used as mood and place references. They are not GTA screenshots, official artwork, or game assets. Each image is credited to its photographer and licence.</p>
+    <nav class="credits-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Credits &amp; licences</nav>
+    <h1>Credits, sources &amp; licences</h1>
+    <p class="lede">These are real-world photos used as mood and place references, plus the text sources behind adapted lore entries. Images are not GTA screenshots, official artwork, or game assets.</p>
     <div class="credit-grid">${cards}</div>
+    <section class="panel prose credits-sources" aria-labelledby="text-sources-title">
+      <h2 id="text-sources-title">Text sources and licences</h2>
+      <p>Lore entries are a mix of original editorial writing and adaptations from community references. Entries marked CC BY-SA carry an attribution and source link on the entry itself. Changes may have been made for length, clarity, and house style.</p>
+      <ul>
+        <li><strong>Wikipedia</strong> — adapted text is <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">CC BY-SA 4.0</a>, with a link to the source article.</li>
+        <li><strong>GTA Wiki / Fandom</strong> — adapted text is <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener noreferrer" target="_blank">CC BY-SA 3.0</a>, with a link to the source page.</li>
+        <li><strong>Original code, CSS, SVG, and story notes</strong> — created for this project and not copied from the games.</li>
+        <li><strong>Game titles, characters, and locations</strong> — trademarks of their respective owners; used here for commentary and reference.</li>
+      </ul>
+      <p>If you reuse adapted lore text from this site, keep the source attribution and the same CC BY-SA licence. For corrections or takedowns, use the <a href="contact.html">contact page</a>.</p>
+    </section>
   </main>
 </body>
 </html>`, { prefix: "", active: "credits", site });
@@ -735,7 +755,7 @@ function arcadePage() {
         "url": "${canonical}",
         "name": "Play Free GTA Trivia Quiz & Rockstar Puzzle Games",
         "description": "A free browser arcade with a GTA trivia quiz across every Rockstar era and three Rockstar puzzle games: Vault Cracker, Heat Grid, and Clue Dossier.",
-        "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+        "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
         "inLanguage": "en"
       },
       {
@@ -747,7 +767,7 @@ function arcadePage() {
       },
       {
         "@type": "ItemList",
-        "name": "CHANNEL SURF arcade games",
+        "name": "FIVE STAR WANTED arcade games",
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -782,9 +802,9 @@ function arcadePage() {
 <body>
   <main class="arcade-main">
     <nav class="arcade-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / Arcade</nav>
-    <p class="arcade-breadcrumb" style="margin-top:1.2rem">CHANNEL SURF // ARCADE</p>
+    <p class="arcade-breadcrumb" style="margin-top:1.2rem">FIVE STAR WANTED // ARCADE</p>
     <h1>Play free GTA trivia and Rockstar puzzle games.</h1>
-    <p class="lede">CHANNEL SURF is a fan-made Rockstar lore archive with a free browser arcade. Test your GTA trivia knowledge across Vice City, San Andreas, Liberty City, Los Santos, and Leonida, or switch to Rockstar puzzle games and crack a vault, plot a patrol route, or deduce a district from field notes. No account and no download.</p>
+    <p class="lede">FIVE STAR WANTED is a fan-made Rockstar lore archive with a free browser arcade. Test your GTA trivia knowledge across Vice City, San Andreas, Liberty City, Los Santos, and Leonida, or switch to Rockstar puzzle games and crack a vault, plot a patrol route, or deduce a district from field notes. No account and no download.</p>
     <div class="arcade-actions">
       <a class="btn btn-primary" href="../#trivia">Play the GTA trivia quiz</a>
       <a class="btn btn-ghost" href="../#puzzles">Play the puzzle games</a>
@@ -799,7 +819,7 @@ function arcadePage() {
           <p>A free GTA trivia quiz written from public franchise knowledge, with a source note after each answer. Filter by era or play the daily run that refreshes at 00:00 UTC.</p>
           <ul>
             <li>Era filters: Vice City, San Andreas, GTA IV, GTA V, GTA VI, and classic GTA.</li>
-            <li>Multiple formats, including fast runs, streak runs, and Channel Surf mode.</li>
+            <li>Multiple formats, including fast runs, streak runs, and Five Star Wanted mode.</li>
             <li>Keyboard-friendly, mobile-friendly, and replayable with local best scores.</li>
           </ul>
           <a class="btn btn-primary btn-sm" href="../#trivia">Start a trivia run</a>
@@ -853,7 +873,7 @@ function atlasPage() {
     const locations = (entry.locations || []).map((spot) => `<li><strong>${esc(spot.name)}</strong> — ${esc(spot.kind)}. ${esc(spot.note)}</li>`).join("");
     const image = entry.map && entry.map.src
       ? `<figure class="map-shot"><img src="../${esc(entry.map.src)}" alt="${esc(entry.title)} map with fan-annotated districts and landmarks" loading="lazy" decoding="async"><figcaption>${esc(entry.map.credit)} · <a href="${esc(entry.map.source)}" rel="noopener noreferrer" target="_blank">map source</a></figcaption></figure>`
-      : `<p class="arcade-note">No official world map for this entry — a fan-made signal postcard and district dossier instead.</p>`;
+      : `<p class="arcade-note">No official world map for this entry - a fan-made theme postcard and district dossier instead.</p>`;
     return `<article class="map-card" id="map-${esc(era)}">
       ${image}
       <div class="map-copy">
@@ -917,7 +937,7 @@ function atlasPage() {
         "url": "${canonical}",
         "name": "GTA Maps: Leonida, Vice City, San Andreas, Los Santos & Liberty City",
         "description": "Fan-annotated maps for every GTA era, with districts, landmarks, and links to the real-world cities that inspired them.",
-        "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+        "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
         "inLanguage": "en"
       },
       {
@@ -1010,7 +1030,7 @@ function realWorldPage() {
         "url": "${canonical}",
         "name": "GTA vs Real Life: the cities behind Vice City, Liberty City, and Los Santos",
         "description": "A side-by-side comparison of real cities and their GTA counterparts, with photos, notes, and map links.",
-        "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+        "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
         "inLanguage": "en"
       },
       {
@@ -1077,16 +1097,17 @@ const archive = decoratePage(`<!DOCTYPE html>
     .archive-main .year { color: var(--accent); font-family: var(--font-mono); margin-right: 0.5rem; }
     .archive-main .disclaimer { padding: 1rem; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
     .archive-main a { color: var(--accent-2); }
+    .license-note { color: var(--muted); font-family: var(--font-mono); font-size: 0.64rem; line-height: 1.55; }
     .archive-nav { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0 2rem; }
   </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "CHANNEL SURF - Full Text Archive",
+    "name": "FIVE STAR WANTED - Full Text Archive",
     "url": "${siteUrl}archive.html",
-    "description": "All curated lore entries and the full in-universe GTA story timeline from CHANNEL SURF.",
-    "isPartOf": { "@type": "WebSite", "name": "CHANNEL SURF", "url": "${siteUrl}" },
+    "description": "All curated lore entries and the full in-universe GTA story timeline from FIVE STAR WANTED.",
+    "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
     "inLanguage": "en",
     "about": ["Grand Theft Auto", "Rockstar Games", "video game lore"]
   }
@@ -1094,10 +1115,10 @@ const archive = decoratePage(`<!DOCTYPE html>
 </head>
 <body>
   <main class="archive-main">
-    <p class="meta">CHANNEL SURF // FULL TEXT ARCHIVE</p>
+    <p class="meta">FIVE STAR WANTED // FULL TEXT ARCHIVE</p>
     <h1>The story, in plain text.</h1>
     <p>This page is a static, JavaScript-free archive of the lore entries and story beats currently on the site. It is a partial archive, not a complete lore database. It exists so the content can be read, linked, indexed, and summarised without running the app.</p>
-    <p class="disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. All summaries below are original editorial writing for this project.</p>
+    <p class="disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. The games and their lore are not my work and are not part of any project I own or claim. All game names, characters, locations, and trademarks belong to their respective owners. Summaries below are original or adapted from CC BY-SA sources; see each entry's attribution and source links.</p>
     <p class="meta">This archive contains full story details. Treat it as a spoiler zone.</p>
     <nav class="archive-nav">
       <a href="./">Interactive site</a>
@@ -1150,9 +1171,9 @@ Disallow:
 Sitemap: ${siteUrl}sitemap.xml
 `;
 
-const llms = `# CHANNEL SURF
+const llms = `# FIVE STAR WANTED
 
-> CHANNEL SURF is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a GTA map atlas of Leonida, Vice City, San Andreas, Los Santos, and Liberty City, GTA vs real life city comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
+> FIVE STAR WANTED is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a GTA map atlas of Leonida, Vice City, San Andreas, Los Santos, and Liberty City, GTA vs real life city comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: ${siteUrl}
 GTA map atlas: ${siteUrl}atlas/
@@ -1169,10 +1190,10 @@ Full text archive: ${siteUrl}archive.html
 - [GTA vs real life](${siteUrl}real-vs-reel/): Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, and London compared with their GTA counterparts.
 - [Arcade](${siteUrl}arcade/): play a free GTA trivia quiz and Rockstar puzzle games, including daily challenges.
 - [Games](${siteUrl}#games): theme-per-game dossiers.
-- [Rockstar Elsewhere](${siteUrl}elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
+- [Rockstar Beyond GTA](${siteUrl}elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
 - [Interactive site](${siteUrl}): theme-morphing lore hub, horizontal story timeline, GTA map atlas, GTA vs real life map, trivia quiz, and puzzle games.
 - [Changelog](${siteUrl}changelog.html): public release history.
-- [Image credits](${siteUrl}credits.html): local photo sources and licences.
+- [Credits and licences](${siteUrl}credits.html): image credits, text sources, and CC BY-SA licence terms.
 - [Contact](${siteUrl}contact.html): corrections and permissions via ${site.umbrella.name}.
 
 ## Game pages
@@ -1186,7 +1207,8 @@ ${games.map((game) => `- [${game.name}](${siteUrl}games/${game.slug}/): ${game.b
 
 ## Sourcing and license
 
-- All lore summaries and story notes are original editorial writing for this project.
+- Lore summaries are a mix of original writing and adaptations from CC BY-SA sources (Wikipedia 4.0, GTA Wiki/Fandom 3.0). Each adapted entry carries an attribution and source link. Story notes remain original editorial writing.
+- Adapted text is shared under the same CC BY-SA terms as its source; changes may have been made.
 - Live Wikipedia summaries, when requested, are CC BY-SA and are attributed with a source link.
 - Live GTA Wiki summaries, when requested, are CC BY-SA via Fandom and are attributed with a source link.
 - This is a partial archive and does not cover every game, character, location, or story beat.
@@ -1199,7 +1221,7 @@ This is a personal hobby and portfolio project, not a commercial product and not
 `;
 
 function changelogMarkdown() {
-  const lines = ["# Changelog", "", "Version-only release history for CHANNEL SURF.", ""];
+  const lines = ["# Changelog", "", "Version-only release history for FIVE STAR WANTED.", ""];
   changelog.forEach((release) => {
     lines.push(`## v${release.version}${release.label ? ` — ${release.label}` : ""}`, "");
     const block = (title, items) => {
@@ -1229,9 +1251,9 @@ const searchIndex = [
   { title: "About", subtitle: "Project and IP notes", href: `${searchBase}#about`, type: "Page", keywords: "about disclaimer" },
   { title: "Full-text archive", subtitle: "Static lore and story reading page", href: `${searchBase}archive.html`, type: "Page", keywords: "archive static full text" },
   { title: "Story reading mode", subtitle: "Scroll-driven timeline", href: `${searchBase}story.html`, type: "Page", keywords: "story reading" },
-  { title: "Rockstar Elsewhere", subtitle: "Max Payne, Manhunt, Midnight Club, L.A. Noire", href: `${searchBase}elsewhere.html`, type: "Page", keywords: "elsewhere max payne manhunt midnight club la noire" },
+  { title: "Rockstar Beyond GTA", subtitle: "Max Payne, Manhunt, Midnight Club, L.A. Noire", href: `${searchBase}elsewhere.html`, type: "Page", keywords: "elsewhere max payne manhunt midnight club la noire" },
   { title: "Changelog", subtitle: "Version-only release history", href: `${searchBase}changelog.html`, type: "Page", keywords: "changelog releases versions" },
-  { title: "Image credits", subtitle: "Photo sources and licences", href: `${searchBase}credits.html`, type: "Page", keywords: "credits images photos licences" },
+  { title: "Credits and licences", subtitle: "Photo sources, text sources, and CC BY-SA terms", href: `${searchBase}credits.html`, type: "Page", keywords: "credits images photos licences sources Wikipedia GTA Wiki CC BY-SA" },
   { title: "Contact", subtitle: "Corrections and permissions", href: `${searchBase}contact.html`, type: "Page", keywords: "contact corrections takedown" },
   ...lore.map((item) => ({ title: item.title, subtitle: item.summary, href: `${searchBase}archive.html#lore-${item.id}`, type: "Lore", keywords: [item.era, item.type, ...(item.tags || [])].join(" ") })),
   ...story.map((event) => ({ title: `${event.year} — ${event.title}`, subtitle: event.summary, href: `${searchBase}archive.html#story-${event.id}`, type: "Story", keywords: [event.game, event.era, ...(event.characters || []), ...(event.locations || [])].join(" ") })),

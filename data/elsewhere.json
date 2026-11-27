@@ -6,7 +6,7 @@
     "genre": "Noir third-person shooter",
     "accent": "#8f86ff",
     "blurb": "A grieving cop, a blizzard, and a city that answers questions with gunfire.",
-    "description": "Remedy's noir shooter turned slow motion into a signature and a metaphor: a man moving through a nightmare at half speed. The comic-panel storytelling, winter New York, and Valkyr conspiracy gave Rockstar's catalog one of its coldest, most stylish voices.",
+    "description": "Remedy's noir shooter turned slow motion into a signature and a metaphor: a man moving through a nightmare at half speed. The comic-panel storytelling, winter New York, and Valkyr conspiracy gave Rockstar's catalog one of its coldest, most stylish voices.\n\nMax Payne is also the bridge between Rockstar's publishing instincts and its appetite for auteur-driven worlds. The writing leans hard into pulp, but the loneliness under the one-liners is what keeps the series memorable.",
     "themes": [
       "noir",
       "bullet time",
@@ -15,7 +15,12 @@
     ],
     "source": "https://en.wikipedia.org/wiki/Max_Payne_(video_game)",
     "image": "noirHotel",
-    "font": "Anton"
+    "font": "Anton",
+    "keyGames": [
+      "Max Payne (2001)",
+      "Max Payne 2: The Fall of Max Payne (2003)",
+      "Max Payne 3 (2012)"
+    ]
   },
   {
     "slug": "manhunt",
@@ -24,7 +29,7 @@
     "genre": "Stealth horror",
     "accent": "#d23b2f",
     "blurb": "A surveillance-state nightmare staged as a snuff film, with the player as the audience.",
-    "description": "Manhunt is Rockstar at its most confrontational: stealth, execution, and a camera that never lets you forget you are watching. Its critique of violence and spectatorship is uncomfortable by design, and it remains the studio's darkest experiment.",
+    "description": "Manhunt is Rockstar at its most confrontational: stealth, execution, and a camera that never lets you forget you are watching. Its critique of violence and spectatorship is uncomfortable by design, and it remains the studio's darkest experiment.\n\nThe game's influence is less about shock value than about tension: sound, sightlines, and the feeling of being recorded. It is the Rockstar catalogue's horror room, and it earns that reputation.",
     "themes": [
       "stealth",
       "surveillance",
@@ -33,7 +38,11 @@
     ],
     "source": "https://en.wikipedia.org/wiki/Manhunt_(video_game)",
     "image": "rainCity",
-    "font": "Rubik Glitch"
+    "font": "Rubik Glitch",
+    "keyGames": [
+      "Manhunt (2003)",
+      "Manhunt 2 (2007)"
+    ]
   },
   {
     "slug": "midnight-club",
@@ -42,7 +51,7 @@
     "genre": "Street racing",
     "accent": "#23e0f2",
     "blurb": "Illegal street racing, city lights, and a love of speed before the open-world boom.",
-    "description": "Midnight Club brought Rockstar's sense of place to racing: real-city inspiration, night-time streets, and a culture of custom cars and rival crews. It is the bridge between arcade racing and the studio's later city-building instincts.",
+    "description": "Midnight Club brought Rockstar's sense of place to racing: real-city inspiration, night-time streets, and a culture of custom cars and rival crews. It is the bridge between arcade racing and the studio's later city-building instincts.\n\nThe series matters because it treats a city as a track. Landmarks, shortcuts, and skyline become gameplay, long before the open-world arms race made that standard.",
     "themes": [
       "racing",
       "street culture",
@@ -51,7 +60,13 @@
     ],
     "source": "https://en.wikipedia.org/wiki/Midnight_Club:_Street_Racing",
     "image": "miamiNeon",
-    "font": "Russo One"
+    "font": "Russo One",
+    "keyGames": [
+      "Midnight Club: Street Racing (2000)",
+      "Midnight Club II (2003)",
+      "Midnight Club 3: DUB Edition (2005)",
+      "Midnight Club: Los Angeles (2008)"
+    ]
   },
   {
     "slug": "la-noire",
@@ -61,7 +76,7 @@
     "accent": "#eab308",
     "font": "Poiret One",
     "blurb": "A detective story where faces are evidence.",
-    "description": "Team Bondi and Rockstar built a 1947 Los Angeles of interrogations, traffic desks, and performance-captured faces. The city is warm and corrupt, and the truth is usually behind a lie.",
+    "description": "Team Bondi and Rockstar built a 1947 Los Angeles of interrogations, traffic desks, and performance-captured faces. The city is warm and corrupt, and the truth is usually behind a lie.\n\nNoire is the most procedural of Rockstar's worlds: evidence, testimony, and the small tells that decide whether a case closes. It is a detective game first and a crime sandbox second, which is exactly why it still stands apart.",
     "themes": [
       "detective",
       "1947",
@@ -69,6 +84,11 @@
       "noir"
     ],
     "image": "losAngeles",
-    "source": "https://en.wikipedia.org/wiki/L.A._Noire"
+    "source": "https://en.wikipedia.org/wiki/L.A._Noire",
+    "keyGames": [
+      "L.A. Noire (2011)",
+      "L.A. Noire: The Complete Edition",
+      "L.A. Noire: The VR Case Files"
+    ]
   }
 ]
