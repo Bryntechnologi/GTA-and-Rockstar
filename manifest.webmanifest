@@ -1,0 +1,56 @@
+{
+  "name": "CHANNEL SURF - Unofficial Rockstar Lore Archive & Arcade",
+  "short_name": "CHANNEL SURF",
+  "description": "A fan-made Rockstar lore archive and arcade: story timeline, lore, atlas, real-vs-reel maps, trivia, and puzzles.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050914",
+  "theme_color": "#050914",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daily Signal",
+      "short_name": "Daily",
+      "url": "./#trivia"
+    },
+    {
+      "name": "Puzzles",
+      "short_name": "Puzzles",
+      "url": "./#puzzles"
+    },
+    {
+      "name": "Era Atlas",
+      "short_name": "Atlas",
+      "url": "./#atlas"
+    }
+  ]
+}
