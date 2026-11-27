@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://channelsurf.pages.dev/sitemap.xml
+Sitemap: https://fivestarwanted.pages.dev/sitemap.xml

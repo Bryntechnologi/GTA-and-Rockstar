@@ -77,7 +77,7 @@ window.CS_SEARCH_INDEX = [
     "keywords": "story reading"
   },
   {
-    "title": "Rockstar Elsewhere",
+    "title": "Rockstar Beyond GTA",
     "subtitle": "Max Payne, Manhunt, Midnight Club, L.A. Noire",
     "href": "/elsewhere.html",
     "type": "Page",
@@ -91,11 +91,11 @@ window.CS_SEARCH_INDEX = [
     "keywords": "changelog releases versions"
   },
   {
-    "title": "Image credits",
-    "subtitle": "Photo sources and licences",
+    "title": "Credits and licences",
+    "subtitle": "Photo sources, text sources, and CC BY-SA terms",
     "href": "/credits.html",
     "type": "Page",
-    "keywords": "credits images photos licences"
+    "keywords": "credits images photos licences sources Wikipedia GTA Wiki CC BY-SA"
   },
   {
     "title": "Contact",
@@ -243,6 +243,160 @@ window.CS_SEARCH_INDEX = [
     "href": "/archive.html#lore-bullworth-cliques",
     "type": "Lore",
     "keywords": "bully faction cliques 2006 school"
+  },
+  {
+    "title": "Liberty City, 1997",
+    "subtitle": "The original Liberty City was a top-down grid of three islands, built for short, chaotic crime sprees rather than a cinematic story. Its paper-thin premise — rise through the criminal ranks by any means — set the template the series would spend decades refining.",
+    "href": "/archive.html#lore-liberty-city-1997",
+    "type": "Lore",
+    "keywords": "classic location Liberty City 1997 top-down"
+  },
+  {
+    "title": "London, 1969",
+    "subtitle": "The London expansion traded Liberty City for a period British capital of tight streets, mod culture, and very different cars. It was an early sign that the series could reskin its formula around a specific place and era instead of just another American city.",
+    "href": "/archive.html#lore-london-1969",
+    "type": "Lore",
+    "keywords": "classic location London 1969 expansion"
+  },
+  {
+    "title": "Ricardo Diaz",
+    "subtitle": "A wealthy Vice City drug baron whose mansion, connections, and paranoia make him both a useful patron and an obvious target. Diaz represents the older criminal order that Tommy Vercetti learns to read, then replace.",
+    "href": "/archive.html#lore-ricardo-diaz",
+    "type": "Lore",
+    "keywords": "vicecity character Vice City drug baron antagonist"
+  },
+  {
+    "title": "Lance Vance",
+    "subtitle": "A charming, resentful partner whose family history ties him to Vice City's drug trade. Lance works best as a mirror for Tommy: both want a way in, but only one is willing to wait for it.",
+    "href": "/archive.html#lore-lance-vance",
+    "type": "Lore",
+    "keywords": "vicecity character Vice City partner betrayal"
+  },
+  {
+    "title": "The Malibu Club",
+    "subtitle": "A neon nightclub on Vice City's waterfront that doubles as a front for planning bigger jobs. Buying the Malibu is one of the story's clearest status shifts: from hired muscle to someone with a venue, a crew, and a reason to be feared.",
+    "href": "/archive.html#lore-malibu-club",
+    "type": "Lore",
+    "keywords": "vicecity location Vice City nightlife property"
+  },
+  {
+    "title": "Big Smoke",
+    "subtitle": "A larger-than-life Grove Street figure whose appetites and ambitions slowly pull him away from the neighbourhood. His arc is one of the series' sharpest arguments that loyalty and self-interest can wear the same face for years.",
+    "href": "/archive.html#lore-big-smoke",
+    "type": "Lore",
+    "keywords": "sanandreas character San Andreas Grove Street betrayal"
+  },
+  {
+    "title": "Ryder",
+    "subtitle": "A restless Grove Street member with a short fuse and a long memory. Ryder's streetwise bravado hides how quickly the ground under the set is shifting, making him one of San Andreas' most complicated early allies.",
+    "href": "/archive.html#lore-ryder",
+    "type": "Lore",
+    "keywords": "sanandreas character San Andreas Grove Street crew"
+  },
+  {
+    "title": "Frank Tenpenny",
+    "subtitle": "A corrupt Los Santos police officer who treats the law as a private enforcement tool. Tenpenny is the system-level villain of San Andreas: not a rival gang, but the person supposedly keeping the city in order.",
+    "href": "/archive.html#lore-frank-tenpenny",
+    "type": "Lore",
+    "keywords": "sanandreas character San Andreas police antagonist"
+  },
+  {
+    "title": "The Ballas",
+    "subtitle": "A rival Los Santos set defined by colour, territory, and a long-running feud with Grove Street. The Ballas are less a single organisation than a pressure system that shapes every block in the city.",
+    "href": "/archive.html#lore-ballas",
+    "type": "Lore",
+    "keywords": "sanandreas faction San Andreas Los Santos gangs"
+  },
+  {
+    "title": "Roman Bellic",
+    "subtitle": "Niko's cousin and the source of Liberty City's warmest and most unreliable promises. Roman sells optimism as a survival strategy, which makes his setbacks feel less like plot twists and more like the city doing what it does.",
+    "href": "/archive.html#lore-roman-bellic",
+    "type": "Lore",
+    "keywords": "gta4 character GTA IV Liberty City family"
+  },
+  {
+    "title": "The Pegorino Family",
+    "subtitle": "An old-guard Liberty City crime family trying to stay relevant while newer crews rewrite the rules. Their declining influence is a useful window into GTA IV's central idea: the city rewards the next arrangement, not the last one.",
+    "href": "/archive.html#lore-pegorino-family",
+    "type": "Lore",
+    "keywords": "gta4 faction GTA IV Liberty City crime family"
+  },
+  {
+    "title": "Lamar Davis",
+    "subtitle": "Franklin's friend, business partner, and occasional liability, with a comic rhythm that masks real ambition. Lamar keeps the Los Santos story grounded in the block even when the protagonists are flying between heists.",
+    "href": "/archive.html#lore-lamar-davis",
+    "type": "Lore",
+    "keywords": "gta5 character GTA V Los Santos crew"
+  },
+  {
+    "title": "Blaine County",
+    "subtitle": "The desert-and-farmland half of GTA V's map, where small towns, meth labs, and long empty roads sit beside a national park. It is the series' most deliberate contrast to a city: the same freedom, with fewer people to perform for.",
+    "href": "/archive.html#lore-blaine-county",
+    "type": "Lore",
+    "keywords": "gta5 location GTA V Los Santos desert"
+  },
+  {
+    "title": "The Leonida Keys",
+    "subtitle": "A chain of islands and causeways at the southern edge of Leonida, shown in GTA VI's map material as a slower, stranger counterpoint to Vice City. Long water roads and small communities make it the kind of place where local knowledge matters more than horsepower.",
+    "href": "/archive.html#lore-leonida-keys",
+    "type": "Lore",
+    "keywords": "gta6 location GTA VI Leonida islands"
+  },
+  {
+    "title": "Grassrivers",
+    "subtitle": "Leonida's wetland interior, built around airboats, alligators, and roads that disappear into water. The area gives GTA VI a rural counterweight to the neon coast and a reminder that the state is bigger than its skyline.",
+    "href": "/archive.html#lore-grassrivers",
+    "type": "Lore",
+    "keywords": "gta6 location GTA VI Leonida wetlands"
+  },
+  {
+    "title": "Arthur Morgan",
+    "subtitle": "A career outlaw and the emotional centre of Red Dead Redemption 2, caught between loyalty to his gang and the evidence that the world is closing around it. Arthur's story is less about redemption as a prize than about choosing what kind of person to be before the end.",
+    "href": "/archive.html#lore-arthur-morgan",
+    "type": "Lore",
+    "keywords": "reddead character Red Dead Van der Linde gang outlaw"
+  },
+  {
+    "title": "Dutch van der Linde",
+    "subtitle": "The charismatic leader whose vision of freedom keeps a gang together long after the plan has stopped working. Dutch is the frontier's answer to a GTA kingpin: a man whose confidence is both the reason people follow and the reason they cannot leave.",
+    "href": "/archive.html#lore-dutch-van-der-linde",
+    "type": "Lore",
+    "keywords": "reddead character Red Dead Van der Linde gang leader"
+  },
+  {
+    "title": "Saint Denis",
+    "subtitle": "Red Dead's New Orleans analogue: a humid, industrial city of streetcars, press, and old money. It is the point where the frontier stops feeling like an escape and starts looking like a system with paperwork.",
+    "href": "/archive.html#lore-saint-denis",
+    "type": "Lore",
+    "keywords": "reddead location Red Dead city New Orleans"
+  },
+  {
+    "title": "Jimmy Hopkins",
+    "subtitle": "A teenager dropped into Bullworth Academy and forced to learn its hierarchy faster than he can make friends. Jimmy is a Rockstar protagonist in miniature: stubborn, resourceful, and happier solving a problem with a plan than with an apology.",
+    "href": "/archive.html#lore-jimmy-hopkins",
+    "type": "Lore",
+    "keywords": "bully character Bully Bullworth student"
+  },
+  {
+    "title": "Gary Smith",
+    "subtitle": "Bullworth's most manipulative student, who treats every clique as a lever and every friendship as a temporary tool. Gary turns the school's social map into a strategy game, then dares everyone else to keep up.",
+    "href": "/archive.html#lore-gary-smith",
+    "type": "Lore",
+    "keywords": "bully character Bully Bullworth antagonist"
+  },
+  {
+    "title": "Swan",
+    "subtitle": "The Warriors' acting leader on the long ride home, carrying the weight of a crew that has just been framed. Swan's quiet authority is the centre of the story: less a loud hero than the person everyone checks for before making a move.",
+    "href": "/archive.html#lore-swan",
+    "type": "Lore",
+    "keywords": "warriors character The Warriors Coney Island crew"
+  },
+  {
+    "title": "Luther",
+    "subtitle": "The Rogues leader whose shot at the rally turns a citywide gathering into a nightlong manhunt. Luther is a small-time operator with a talent for making other people pay for his ambition.",
+    "href": "/archive.html#lore-luther",
+    "type": "Lore",
+    "keywords": "warriors character The Warriors Rogues antagonist"
   },
   {
     "title": "1961 — London, before the storm",
