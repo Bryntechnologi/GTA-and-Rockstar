@@ -141,7 +141,7 @@ npm run test:browser
 - Leaving home restores the saved game era; returning home restores the home theme.
 - Games hub is ordered by real release year: 1997, 2002, 2004, 2005, 2006, 2008, 2013, 2018, 2026.
 - Signal radio is surfaced on the home page and remains click-to-play.
-- Character avatars are generated from initials and era colours; no official likenesses are used.
+- Character avatars are unique generated SVG portraits, not initials; no official likenesses are used.
 
 ## Imagery and attribution
 
@@ -155,8 +155,19 @@ npm run test:browser
 
 - `assets/fonts/fonts.css` loads self-hosted open fonts.
 - Each era uses a distinct display/body/mono font pairing.
-- Home uses Titan One + Barlow; GTA VI uses Syne; Vice City uses Yellowtail; San Andreas uses Pirata One; GTA V uses Bebas Neue + Montserrat; GTA IV uses Oswald + Inter; Warriors uses Black Ops One + Special Elite; Red Dead uses Rye + Crimson Text; Bully uses Graduate; Classic GTA uses Orbitron + Michroma.
+- Home uses Bowlby One SC; GTA VI uses Syne; Vice City uses Yellowtail; San Andreas uses Pirata One / UnifrakturMaguntia; GTA V uses Bebas Neue + Montserrat; GTA IV uses Oswald + Inter; Warriors uses Bangers + Permanent Marker with Comic Neue copy; Red Dead uses Rye + Crimson Text; Bully uses Graduate + Comic Neue; Classic GTA uses Orbitron + Michroma.
 - Elsewhere card fonts: Anton, Rubik Glitch, Russo One, Poiret One.
 - 19 CC/PD Wikimedia photos are present in `assets/images/`.
 - Every image has artist, licence, source, and alt text in `data/image-credits.json`.
 - Era rack tiles, home photo strip, Real vs Reel, game pages, and Elsewhere use photos.
+
+## Universal chrome and project pages
+
+- `npm run test:static` checks that the changelog, contact, credits, and game pages render the universal header/footer.
+- Static pages expose the full era tuner and keep their content theme on first load.
+- Static search finds lore entries through `assets/js/search-index.js`.
+- The changelog is version-only; both `v1.0.0` and `v0.1.0` are present and no month names appear.
+- Contact links to `https://brynsites.com/contact`; no email is published on the subdomain.
+- Credits page renders the image gallery and links every original file.
+- Related links and “Further reading” links appear in the archive, story page, game pages, and lore detail.
+- Static pages and the SPA footer expose share/copy tools, positive-only reactions stored in localStorage, and a reading-progress bar on long pages.

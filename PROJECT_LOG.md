@@ -7,7 +7,8 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - **Current project name:** CHANNEL SURF
 - **Status:** Unofficial fan archive and front-end portfolio project
 - **Deployment target:** static host, intended for Cloudflare Pages
-- **Planned root/umbrella:** `brynsites.com` (pending final decision)
+- **Umbrella:** [Brynsites](https://brynsites.com/) (`brynsites.com`)
+- **Contact route:** [brynsites.com/contact](https://brynsites.com/contact)
 - **Production domain:** not finalised; `site.config.json` currently points at the placeholder `https://channelsurf.pages.dev/`
 
 ## Product direction
@@ -18,6 +19,9 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - Game pages are static and indexable; interactive modes remain client-side.
 - Real-world inspiration is labelled as photography, not GTA artwork.
 - No proprietary assets, fonts, or copied text.
+- The archive is explicitly partial; it is not a complete lore database.
+- Changelog uses versions only, not dates.
+- GTA Wiki is used for outbound links and optional attributed summaries, not wholesale import.
 
 ## Milestones
 
@@ -32,8 +36,14 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 - [x] CC/PD imagery with credits
 - [x] PWA and service worker
 - [x] Regression, transition, and header tests
+- [x] Universal header, footer, breadcrumbs, and theme tuner on static pages
+- [x] Version-only public changelog
+- [x] Partial-archive and Brynsites identity copy
+- [x] Related-entry links, GTA Wiki links, and attributed summaries
+- [x] Contact page and image-credits page
+- [x] Fuzzy static-page search and global error boundary
 - [ ] Final production domain
-- [ ] Final umbrella branding and project rename
+- [ ] Final project rename
 
 ## Decisions
 
@@ -46,8 +56,9 @@ Working notes for CHANNEL SURF. Public changelog: [CHANGELOG.md](CHANGELOG.md).
 
 ## Next
 
-1. Decide official project name and umbrella URL.
-2. Set `site.config.json`.
+1. Decide the final project name.
+2. Set the production subdomain in `site.config.json`.
 3. Run `npm run build:static`.
 4. Deploy to Cloudflare Pages.
 5. Re-run Lighthouse and PWA installability checks on production.
+6. Consider share buttons, positive-only reactions, and reading progress as later enhancements.

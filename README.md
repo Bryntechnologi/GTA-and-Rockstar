@@ -1,12 +1,15 @@
 # CHANNEL SURF
 
-**An unofficial Rockstar-universe arcade and portfolio piece.**
-An unofficial Rockstar archive.
+**An unofficial Rockstar archive, arcade, and portfolio piece.**
 
 CHANNEL SURF is a 100% client-side, zero-backend web app built as a playable tribute to the
 cities, crews, frontiers, and radio static of the Rockstar universe. The entire interface morphs
 to match the selected era — from modern Leonida neon to 1979 New York grit — using CSS custom
 properties, inline SVG ambience, and synthesized Web Audio sound effects.
+
+It is a **partial archive**, not a complete lore database, and it is updated when time allows. It is
+also a [Brynsites](https://brynsites.com/) miscellany project, made for fun. Contact, corrections,
+and permissions go through the [Brynsites contact page](https://brynsites.com/contact).
 
 > **Disclaimer:** This is an independent, non-commercial fan project and portfolio piece. It is
 > not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games or Take-Two
@@ -25,12 +28,15 @@ The site leads with the archive, not the arcade:
 - **Home** — a signature home-only theme, featured lore, a story preview, a signal radio, the era rack, and clear atlas/arcade CTAs.
 - **Games** - a hub of static, theme-per-game dossier pages in release order. Each page has its own metadata, canonical URL, era theme, characters, locations, lore, and story beats.
 - **Rockstar Elsewhere** - a static dossier page covering Max Payne, Manhunt, Midnight Club, and L.A. Noire without adding new global theme eras.
-- **Lore** - curated entries across locations, characters, factions, and franchise history, with era/type filters, search, sources, and optional live Wikipedia summaries.
+- **Lore** - curated entries across locations, characters, factions, and franchise history, with era/type filters, search, sources, and optional live Wikipedia and GTA Wiki summaries. The archive is explicitly partial.
 - **Story Timeline** - in-universe story beats from 1961 London to 2026 Leonida, presented as a horizontal, theme-morphing carousel. Full spoilers are available behind a persisted toggle. A static **reading mode** at `story.html` presents the same chronology as a scroll-driven, theme-shifting page.
 - **Atlas** — the fictional map, Leaflet mode, and Geo-Guess, with Real vs Reel as a sub-tab.
 - **Real vs Reel** — MapLibre + OpenFreeMap comparisons, now grouped under Atlas.
 - **Arcade** — trivia, vault, heat grid, clue dossier, heist splitter, and badges.
-- **Global search** — `Ctrl/Cmd + K` or the header search button. Search lore, story beats, games, eras, and views.
+- **Global search** — `Ctrl/Cmd + K` or the header search button. The SPA search covers lore, story beats, games, eras, and views; static pages get a fuzzy search overlay over the full site index.
+- **Universal chrome** — the same header, footer, breadcrumbs, theme tuner, and mobile navigation on the SPA and every static page.
+- **Project pages** — a version-only [changelog](changelog.html), [image credits](credits.html), and a [contact page](contact.html) that routes through Brynsites.
+- **Share and reactions** — Web Share API with a copy-link fallback, plus positive-only localStorage reactions. Long pages show a reading-progress bar.
 
 ### Theme behaviour
 The era theme is stable by default and changes with the content you open. Lore filters and lore detail use that entry’s era; trivia uses the selected era filter; the story timeline follows the active beat; atlas chips switch the era. Exiting a content view restores the previous theme, and manual tuning wins. “Follow trivia era” only lets trivia questions change the signal, and Channel Surf still does it by design. Registered CSS custom properties crossfade the palette over ~0.55s, so theme changes are smooth rather than snapping. Static game pages bake their theme into the HTML, so there is no flicker or global theme drift.
@@ -57,15 +63,15 @@ All fonts are self-hosted open-licence alternatives — no proprietary GTA font 
 
 | Era | Display | Body |
 | --- | --- | --- |
-| Home | Titan One | Barlow |
+| Home | Bowlby One SC | Barlow |
 | GTA VI | Syne | Barlow |
 | Vice City | Yellowtail | Barlow Condensed |
-| San Andreas | Pirata One | Barlow Condensed |
+| San Andreas | Pirata One / UnifrakturMaguntia | Barlow Condensed |
 | GTA V | Bebas Neue | Montserrat |
 | GTA IV | Oswald | Inter |
-| The Warriors | Black Ops One | Special Elite |
+| The Warriors | Bangers / Permanent Marker | Comic Neue |
 | Red Dead | Rye | Crimson Text |
-| Bully | Graduate | Special Elite |
+| Bully | Graduate | Comic Neue |
 | Classic GTA | Orbitron | Michroma |
 
 Elsewhere cards also get their own display faces: Anton for Max Payne, Rubik Glitch for Manhunt, Russo One for Midnight Club, and Poiret One for L.A. Noire.
@@ -117,20 +123,27 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 ├── archive.html            # Static, JavaScript-free full-text lore + story archive
 ├── story.html              # Static graphical story timeline (scroll-driven themes)
 ├── elsewhere.html          # Static dossier: Max Payne, Manhunt, Midnight Club, L.A. Noire
+├── changelog.html          # Public, version-only changelog
+├── contact.html            # Contact route through the Brynsites umbrella
+├── credits.html            # Indexable image-credit gallery
+├── CHANGELOG.md            # Generated changelog source
+├── PROJECT_LOG.md          # Working project log
 ├── games/                  # Generated static game dossier pages
 │   ├── gta-vi/
 │   ├── vice-city/
 │   └── ...
 ├── manifest.webmanifest    # PWA manifest
 ├── sw.js                   # App-shell service worker
+├── _headers                # Cloudflare Pages security headers
 ├── robots.txt              # Crawler policy + sitemap
-├── sitemap.xml             # Root + archive + story + game page URLs
+├── sitemap.xml             # Root + archive + story + project + game page URLs
 ├── llms.txt                # AI-readable site and content summary
-├── site.config.json        # Production SITE_URL for static/SEO generation
+├── site.config.json        # Production SITE_URL, umbrella, and archive note
 ├── TESTING.md              # Smoke-test checklist
 ├── tests/                  # Node/jsdom + browser regression tests
 ├── scripts/
-│   └── build-static.mjs    # Regenerates archive, game pages, sitemap, robots, llms.txt
+│   ├── build-static.mjs    # Regenerates static pages, changelog, search index, sitemap, llms.txt
+│   └── site-chrome.mjs     # Shared header/footer/breadcrumb markup for static pages
 ├── assets/
 │   ├── favicon.svg
 │   ├── icons/              # 192 / 512 / maskable PNG icons
@@ -142,14 +155,17 @@ Switch manually with the radio tuner, or enable **Follow trivia era** so the who
 │   │   ├── leaflet/        # Self-hosted, lazy-loaded
 │   │   └── maplibre/       # Self-hosted, lazy-loaded
 │   └── js/
-│       ├── services.js     # Cached fetch + Wikipedia + local JSON loaders
+│       ├── services.js     # Cached fetch + Wikipedia + GTA Wiki + local JSON loaders
 │       ├── data.js         # Core eras, questions, fake facts, atlas, timeline, badges
-│       └── app.js          # State, routing, themes, games, maps, radio, sharing
+│       ├── app.js          # State, routing, themes, games, maps, radio, sharing
+│       ├── chrome.js       # Universal static-page header/footer, tuner, search
+│       └── search-index.js # Generated static-page search index
 ├── data/
 │   ├── lore.json           # Curated lore summaries + types + wiki titles + sources
 │   ├── story-timeline.json # 35 in-universe GTA story beats
 │   ├── games.json          # Game pages: slugs, themes, lore/story mappings
 │   ├── image-credits.json  # Author/licence/source for every local photo
+│   ├── changelog.json      # Version-only release data
 │   ├── elsewhere.json      # Max Payne, Manhunt, Midnight Club, L.A. Noire dossiers
 │   ├── real-world.json     # Real city ↔ fictional location pairs
 │   └── streams.json        # Curated, licence-labelled streams
@@ -206,15 +222,17 @@ Browser-level fallback tests:
 npm run test:browser
 npm run test:transitions
 npm run test:header
+npm run test:static
 ```
 
 - `test:browser` verifies blocked Wikipedia, blocked map tiles, and the offline app shell.
 - `test:transitions` verifies registered-token crossfades and content-era restoration in Chromium.
-- `test:header` snapshots and asserts header layout at 360–1440px (images go to `tests/snapshots/`).
+- `test:header` snapshots and asserts header layout at 360-1440px (images go to `tests/snapshots/`).
+- `test:static` checks universal chrome, the version-only changelog, the contact and credits pages, and the static theme tuner.
 
 ### Static archive / SEO regeneration
 
-After editing `data/lore.json`, `data/story-timeline.json`, or `data/games.json`, regenerate the static indexable files:
+After editing `data/lore.json`, `data/story-timeline.json`, `data/games.json`, `data/changelog.json`, or `data/image-credits.json`, regenerate the static indexable files:
 
 ```bash
 npm run build:static
