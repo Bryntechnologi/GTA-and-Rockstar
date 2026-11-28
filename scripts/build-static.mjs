@@ -245,7 +245,7 @@ function gamePage(game) {
   <style>
     .game-page { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
     .game-hero { padding: 1.5rem 0 2rem; border-bottom: 2px solid var(--accent); }
-    .game-hero h1 { font-size: clamp(2rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 0.8rem; }
+    .game-hero h1 { font-size: clamp(2rem, 6vw, 3.8rem); line-height: 1.1; margin: 0.4rem 0 0.8rem; }
     .game-hero .lede { font-size: 1.15rem; color: var(--muted); max-width: 70ch; }
     .game-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
     .game-page section { margin-top: 2.4rem; }
@@ -280,7 +280,7 @@ function gamePage(game) {
     <header class="game-hero">
       <p class="game-breadcrumb">FIVE STAR WANTED // GAME DOSSIER</p>
       <h1>${esc(game.name)}</h1>
-      <p class="lede">${md(game.description, relative)}</p>
+      <div class="lede">${md(game.description, relative)}</div>
       <div class="game-meta">
         <span class="tag">${esc(game.year)}</span>
         <span class="tag">${esc(eraNames[game.era] || game.era)}</span>
@@ -288,7 +288,7 @@ function gamePage(game) {
       </div>
       <div class="game-links">
         <a class="btn btn-ghost btn-sm" href="${relative}#story">Open the story timeline</a>
-        <a class="btn btn-ghost btn-sm" href="${relative}#atlas">Open the GTA map</a>
+        ${atlas[game.theme] ? `<a class="btn btn-ghost btn-sm" href="${relative}?era=${esc(game.theme)}#atlas">Open the map</a>` : `<a class="btn btn-ghost btn-sm" href="${relative}#atlas">Open the map</a>`}
         <a class="btn btn-quiet btn-sm" href="${relative}arcade/">Play the arcade</a>
         <a class="btn btn-quiet btn-sm" href="${relative}archive.html">Full-text archive</a>
       </div>
@@ -357,7 +357,7 @@ function elsewherePage() {
   <link rel="stylesheet" href="assets/styles.css">
   <style>
     .elsewhere-main { max-width: 1000px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .elsewhere-main h1 { font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .elsewhere-main h1 { font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .elsewhere-main .lede { color: var(--muted); font-size: 1.08rem; max-width: 72ch; }
     .elsewhere-grid { display: grid; gap: 1rem; margin-top: 2rem; }
     .elsewhere-card { padding: 1.2rem; border: 1px solid var(--line); border-left: 4px solid var(--elsewhere-accent, var(--accent)); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
@@ -552,7 +552,7 @@ function changelogPage() {
   <link rel="stylesheet" href="assets/styles.css">
   <style>
     .changelog-main { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .changelog-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .changelog-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .changelog-main .lede { color: var(--muted); font-size: 1.05rem; max-width: 68ch; }
     .changelog-release { margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
     .changelog-release h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 0.3rem; }
@@ -600,7 +600,7 @@ function contactPage() {
   <link rel="stylesheet" href="assets/styles.css">
   <style>
     .contact-main { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .contact-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .contact-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .contact-main p { line-height: 1.7; }
     .contact-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
     .contact-card { margin-top: 2rem; padding: 1.3rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
@@ -654,7 +654,7 @@ function creditsPage() {
   <link rel="stylesheet" href="assets/styles.css">
   <style>
     .credits-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .credits-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .credits-main h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .credits-main .lede { color: var(--muted); max-width: 72ch; }
     .credit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 2rem; }
     .credit-card { margin: 0; border: 1px solid var(--line); border-radius: calc(var(--radius) * 0.8); overflow: hidden; background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
@@ -683,7 +683,7 @@ function creditsPage() {
   <main class="credits-main">
     <nav class="credits-breadcrumb" aria-label="Breadcrumb"><a href="./">Home</a> / Credits &amp; licences</nav>
     <h1>Credits, sources &amp; licences</h1>
-    <p class="lede">These are real-world photos used as mood and place references, plus the text sources behind adapted lore entries. Images are not GTA screenshots, official artwork, or game assets.</p>
+    <p class="lede">These are real-world photos used as mood and place references, plus the text sources behind adapted lore entries. Some atlas pages include credited in-game map artwork; no other game assets are used.</p>
     <div class="credit-grid">${cards}</div>
     <section class="panel prose credits-sources" aria-labelledby="text-sources-title">
       <h2 id="text-sources-title">Text sources and licences</h2>
@@ -726,7 +726,7 @@ function arcadePage() {
   <link rel="stylesheet" href="../assets/styles.css">
   <style>
     .arcade-main { max-width: 1040px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .arcade-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .arcade-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .arcade-main .lede { color: var(--muted); font-size: 1.1rem; max-width: 72ch; line-height: 1.7; }
     .arcade-main h2 { margin: 2.6rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--accent); }
     .arcade-main h3 { margin: 0.2rem 0 0.6rem; font-size: clamp(1.25rem, 3vw, 1.6rem); }
@@ -874,7 +874,8 @@ function atlasPage() {
     const image = entry.map && entry.map.src
       ? `<figure class="map-shot"><img src="../${esc(entry.map.src)}" alt="${esc(entry.title)} map with fan-annotated districts and landmarks" loading="lazy" decoding="async"><figcaption>${esc(entry.map.credit)} · <a href="${esc(entry.map.source)}" rel="noopener noreferrer" target="_blank">map source</a></figcaption></figure>`
       : `<p class="arcade-note">No official world map for this entry - a fan-made theme postcard and district dossier instead.</p>`;
-    return `<article class="map-card" id="map-${esc(era)}">
+    const wide = Boolean(entry.map && entry.map.width / entry.map.height > 2);
+    return `<article class="map-card${wide ? " map-card--wide" : ""}" id="map-${esc(era)}">
       ${image}
       <div class="map-copy">
         <p class="eyebrow">${esc(eraNames[era] || era)}</p>
@@ -882,7 +883,7 @@ function atlasPage() {
         <p>${esc(entry.subtitle)}</p>
         <ul>${locations}</ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=${esc(era)}#atlas">Open this map interactively</a>
           ${game ? `<a class="btn btn-quiet btn-sm" href="../games/${esc(game.slug)}/">${esc(game.name)} dossier</a>` : ""}
         </p>
       </div>
@@ -910,15 +911,17 @@ function atlasPage() {
   <link rel="stylesheet" href="../assets/styles.css">
   <style>
     .maps-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .maps-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .maps-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .maps-main .lede { color: var(--muted); font-size: 1.1rem; max-width: 72ch; line-height: 1.7; }
     .maps-main h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0.2rem 0 0.4rem; }
     .maps-main p, .maps-main li { line-height: 1.7; }
     .maps-main a { color: var(--accent-2); }
     .maps-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
     .maps-list { display: grid; gap: 1.4rem; margin-top: 2rem; }
-    .map-card { display: grid; gap: 1.2rem; padding: 1.2rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+    .map-card { display: grid; gap: 1.2rem; padding: 1.2rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); scroll-margin-top: 7rem; }
     @media (min-width: 820px) { .map-card { grid-template-columns: 300px minmax(0, 1fr); } }
+    @media (min-width: 820px) { .map-card--wide { grid-template-columns: minmax(0, 1fr); } }
+    .map-card--wide .map-shot img { max-height: none; }
     .map-shot { margin: 0; }
     .map-shot img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) * 0.6); }
     .map-shot figcaption { margin-top: 0.4rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }
@@ -1005,7 +1008,7 @@ function realWorldPage() {
   <link rel="stylesheet" href="../assets/styles.css">
   <style>
     .places-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .places-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .places-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .places-main .lede { color: var(--muted); font-size: 1.1rem; max-width: 72ch; line-height: 1.7; }
     .places-main h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0.2rem 0 0.4rem; }
     .places-main p { line-height: 1.7; }
@@ -1088,7 +1091,7 @@ const archive = decoratePage(`<!DOCTYPE html>
   <style>
     body { background: var(--bg); color: var(--ink); }
     .archive-main { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .archive-main h1 { font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .archive-main h1 { font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .archive-main h2 { margin: 2.5rem 0 0.8rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--accent); }
     .archive-main h3 { margin: 1.6rem 0 0.3rem; }
     .archive-main article { padding: 0.8rem 0; border-bottom: 1px solid var(--line); }

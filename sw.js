@@ -3,7 +3,7 @@
    App-shell offline support. External APIs, map tiles, and audio streams are
    deliberately network-only so they never go stale silently.
    ------------------------------------------------------------------------- */
-const VERSION = "fivestarwanted-v25";
+const VERSION = "fivestarwanted-v26";
 const CORE = [
   "./",
   "index.html",
@@ -40,6 +40,7 @@ const CORE = [
   "assets/maps/liberty-city.jpg",
   "assets/maps/frontier.jpg",
   "assets/maps/bullworth.jpg",
+  "assets/maps/warriors-subway.svg",
   "assets/maps/world.svg",
   "data/lore.json",
   "data/real-world.json",

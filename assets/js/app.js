@@ -2765,7 +2765,9 @@
     ensureStreams();
     ensureImageCredits();
 
-    setEra(state.settings.era, { persist: false, flash: false, track: true, silent: true });
+    const eraParam = new URLSearchParams(window.location.search).get("era");
+    const initialEra = eras[eraParam] ? eraParam : state.settings.era;
+    setEra(initialEra, { persist: false, flash: false, track: true, silent: true });
     renderHome();
 
     const hashView = window.location.hash.replace("#", "");
@@ -4032,8 +4034,8 @@
   function atlasImageMapHTML(data, selectedId) {
     const map = data.map;
     return `<div class="atlas-map atlas-image-map" id="atlasMapWrap">
-      <div class="atlas-image" style="--map-aspect:${map.width} / ${map.height}">
-        <img src="${escapeHTML(map.src)}" width="${map.width}" height="${map.height}" alt="${escapeHTML(data.title)} — in-game map" decoding="async">
+      <div class="atlas-image ${map.compactPins ? "atlas-image--compact" : ""}" style="--map-aspect:${map.width} / ${map.height}">
+        <img src="${escapeHTML(map.src)}" width="${map.width}" height="${map.height}" alt="${escapeHTML(data.title)} map" decoding="async">
         ${data.locations.map((location) => atlasPinHTML(location, selectedId)).join("")}
       </div>
     </div>`;
@@ -4157,13 +4159,14 @@
 
   function atlasDetailHTML(era, selected) {
     const hasMap = Boolean(atlas[era]?.map);
+    const mapLabel = atlas[era]?.map?.label || (hasMap ? "Official map · fan notes" : "Fan atlas");
     return `<span class="detail-kicker">${escapeHTML(eras[era].name)} // ${escapeHTML(selected.kind)}</span>
       <h3>${escapeHTML(selected.name)}</h3>
       <p>${escapeHTML(selected.note)}</p>
       <div class="detail-tags">
         <span class="tag">${escapeHTML(eras[era].year)}</span>
         <span class="tag">${escapeHTML(eras[era].name)}</span>
-        <span class="tag">${hasMap ? "Official map · fan notes" : "Fan atlas"}</span>
+        <span class="tag">${escapeHTML(mapLabel)}</span>
       </div>
       ${atlasLoreHTML(era)}
       <button class="btn btn-ghost btn-sm" type="button" data-atlas-start="${era}" style="margin-top:1rem">
@@ -4222,7 +4225,7 @@
     }
 
     const mapTag = data.map
-      ? (state.atlasInteractive ? "Official map · pan & zoom" : "Official map")
+      ? (data.map.label || (state.atlasInteractive ? "Official map · pan & zoom" : "Official map"))
       : "District dossier";
 
     container.innerHTML = `

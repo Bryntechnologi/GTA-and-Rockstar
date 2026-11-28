@@ -1,6 +1,6 @@
 /* ==========================================================================
    FIVE STAR WANTED — data.js
-   Original fan-written content. No game assets, audio, or copied text.
+   Original fan-written content. No game audio or copied text; credited map references only.
    Edit this file to add eras, questions, fake facts, atlas entries, or events.
    ========================================================================== */
 
@@ -1161,16 +1161,29 @@ window.CS_DATA = (() => {
     },
     warriors: {
       title: "New York, 1979",
-      subtitle: "No official world map — a fan-made theme postcard and district dossier.",
+      subtitle: "Fan-drawn subway route of the game's twelve stops, from Coney Island to Van Cortlandt Park.",
+      map: {
+        src: "assets/maps/warriors-subway.svg",
+        width: 1400,
+        height: 520,
+        label: "Fan map · official route",
+        compactPins: true,
+        credit: "Route and stations: The Warriors official site (Rockstar Games, 2005), via thewarriorsgame.com. Map redrawn as original fan vector art",
+        source: "https://thewarriorsgame.com/"
+      },
       locations: [
-        { id: "coney-island", name: "Coney Island", kind: "Home turf", note: "Boardwalk rides and the long way home. The Warriors' entire night is measured by the distance back to this place." },
-        { id: "riverside-park", name: "Riverside Park", kind: "Park", note: "Trees, benches, and the kind of shadows that make a shortcut look like a mistake." },
-        { id: "union-square", name: "Union Square", kind: "Crossroads", note: "Crowds, transit, and too many exits. Good for disappearing; bad for being followed." },
-        { id: "soho", name: "SoHo", kind: "Nightlife", note: "Club lines, fire escapes, and a scene that stays open later than good judgment." },
-        { id: "bowery", name: "The Bowery", kind: "Grit", note: "Flophouses, neon signs, and alleys that know more than they say." },
-        { id: "96th-street", name: "96th Street", kind: "Uptown", note: "A line in the sand, a transfer point, and a reminder that the city belongs to whoever is standing there." },
-        { id: "grand-central", name: "Grand Central", kind: "Terminal", note: "Hundreds of departures and one very bad time to be recognized." },
-        { id: "tremont", name: "Tremont", kind: "Bronx turf", note: "Tenements, fire escapes, and a neighborhood where every wrong turn has a name." }
+        { id: "coney-island", name: "Coney Island", kind: "Home turf", x: 6, y: 50, note: "The boardwalk base and the last stop of the night. Everything the Warriors do is measured by the distance back to this platform." },
+        { id: "east-broadway", name: "East Broadway", kind: "Savage Huns", x: 14, y: 50, note: "Chinatown turf and the Huns' dojo. A detour that turns into a lesson about whose streets these are." },
+        { id: "prince-st", name: "Prince St", kind: "Hi-Hats", x: 22, y: 50, note: "SoHo rooftops and a gang that treats paint, mime, and territory as the same discipline." },
+        { id: "union-square", name: "Union Square", kind: "Lizzies & Punks", x: 30, y: 50, note: "A transfer maze of tunnels, trains, and too many exits. The Lizzies and the Punks both claim a piece of it." },
+        { id: "23rd-st", name: "23rd St", kind: "Gramercy Riffs", x: 38, y: 50, note: "Riffs country. Cyrus's network reaches every borough, and this is where the city starts listening." },
+        { id: "central-park", name: "Central Park", kind: "Neutral ground", x: 46, y: 50, note: "A dark cut across the middle of Manhattan where the only advantage is knowing which path is shorter." },
+        { id: "96th-st", name: "96th St", kind: "Baseball Furies", x: 54, y: 50, note: "Riverside Park and the Furies. Bats, face paint, and a chase that keeps moving uptown." },
+        { id: "e-110th-st", name: "E 110th St", kind: "Hurricanes", x: 62, y: 50, note: "Spanish Harlem turf, where the Hurricanes treat every block like family property." },
+        { id: "125th-st", name: "125th St", kind: "Boppers", x: 70, y: 50, note: "Harlem and Club 45. Style, music, and a crew that keeps the neighbourhood smooth." },
+        { id: "tremont-ave", name: "Tremont Ave", kind: "Orphans", x: 78, y: 50, note: "The Bronx tenements and Sully's small-time crew, still trying to talk their way into a bigger reputation." },
+        { id: "gun-hill-rd", name: "Gun Hill Rd", kind: "Turnbull AC's", x: 86, y: 50, note: "The bus, the yard, and the Turnbulls. A stop best made at a run." },
+        { id: "van-cortlandt-park", name: "Van Cortlandt Park", kind: "The meeting", x: 94, y: 50, note: "Cyrus calls the city's gangs together here. The truce speech ends in gunfire, and the long night home begins." }
       ]
     },
     reddead: {
@@ -1312,7 +1325,7 @@ window.CS_DATA = (() => {
     name: "FIVE STAR WANTED",
     fullName: "FIVE STAR WANTED — Unofficial Rockstar Lore Archive & Arcade",
     tagline: "An unofficial Rockstar archive.",
-    disclaimer: "FIVE STAR WANTED is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games, Take-Two Interactive, or any of their subsidiaries. I do not own, operate, or claim any rights to Grand Theft Auto, Red Dead, The Warriors, Bully, Max Payne, L.A. Noire, Midnight Club, or any related games, characters, locations, logos, trademarks, or other intellectual property. All such rights belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. All quizzes, puzzle logic, original code, CSS, and vector art on this site were created for this project. References to games, lore, characters, and settings are included for commentary, criticism, education, and entertainment only. No game assets, audio, models, textures, screenshots, or copied dialogue are included. This site is a personal hobby/portfolio showcase, not a commercial product. If a rights holder believes anything here oversteps, contact me and I will remove or change it promptly."
+    disclaimer: "FIVE STAR WANTED is an independent, non-commercial fan project and front-end portfolio piece. It is not affiliated with, endorsed by, sponsored by, or approved by Rockstar Games, Take-Two Interactive, or any of their subsidiaries. I do not own, operate, or claim any rights to Grand Theft Auto, Red Dead, The Warriors, Bully, Max Payne, L.A. Noire, Midnight Club, or any related games, characters, locations, logos, trademarks, or other intellectual property. All such rights belong to their respective owners. The games and their lore are not my work and are not part of any project I own or claim. All quizzes, puzzle logic, original code, CSS, and vector art on this site were created for this project. References to games, lore, characters, and settings are included for commentary, criticism, education, and entertainment only. No game audio, models, textures, screenshots, or copied dialogue are included. Some atlas pages reference credited in-game map artwork and map routes for identification and commentary; that artwork remains the property of its owner. This site is a personal hobby/portfolio showcase, not a commercial product. If a rights holder believes anything here oversteps, contact me and I will remove or change it promptly."
   };
 
   const featuredLore = [

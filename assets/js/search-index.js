@@ -669,7 +669,7 @@ window.CS_SEARCH_INDEX = [
     "subtitle": "A long, dangerous night across a stylized 1979 New York.",
     "href": "/games/the-warriors/",
     "type": "Game",
-    "keywords": "1979 warriors The Warriors The Rogues Coney Island Union Square Grand Central Tremont"
+    "keywords": "1979 warriors The Warriors The Rogues Coney Island East Broadway Prince St Union Square 96th St Tremont Ave Gun Hill Rd Van Cortlandt Park"
   },
   {
     "title": "Bully",

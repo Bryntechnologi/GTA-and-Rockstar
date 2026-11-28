@@ -20,15 +20,17 @@
   <link rel="stylesheet" href="../assets/styles.css">
   <style>
     .maps-main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .maps-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 1rem; }
+    .maps-main h1 { font-size: clamp(2.1rem, 6vw, 3.8rem); line-height: 1.1; margin: 0.4rem 0 1rem; }
     .maps-main .lede { color: var(--muted); font-size: 1.1rem; max-width: 72ch; line-height: 1.7; }
     .maps-main h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0.2rem 0 0.4rem; }
     .maps-main p, .maps-main li { line-height: 1.7; }
     .maps-main a { color: var(--accent-2); }
     .maps-breadcrumb { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
     .maps-list { display: grid; gap: 1.4rem; margin-top: 2rem; }
-    .map-card { display: grid; gap: 1.2rem; padding: 1.2rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); }
+    .map-card { display: grid; gap: 1.2rem; padding: 1.2rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: calc(var(--radius) * 0.8); background: color-mix(in srgb, var(--surface-solid) 82%, transparent); scroll-margin-top: 7rem; }
     @media (min-width: 820px) { .map-card { grid-template-columns: 300px minmax(0, 1fr); } }
+    @media (min-width: 820px) { .map-card--wide { grid-template-columns: minmax(0, 1fr); } }
+    .map-card--wide .map-shot img { max-height: none; }
     .map-shot { margin: 0; }
     .map-shot img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) * 0.6); }
     .map-shot figcaption { margin-top: 0.4rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }
@@ -80,11 +82,8 @@
   <header class="site-header">
     <div class="container header-bar">
       <a class="brand" href="./" aria-label="FIVE STAR WANTED home">
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44" fill="none">
-    <circle cx="22" cy="22" r="18.5" stroke="currentColor" stroke-width="1.4"/>
-    <path d="M12 22h4.5M27.5 22H32" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-    <path d="M17 18.5v7l6-3.5-6-3.5Z" fill="currentColor"/>
-    <path d="M16 10.5c3.8-2.4 8.2-2.4 12 0M9.5 14.5c6.9-4.7 15.1-4.7 22 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44">
+    <path d="M22 6 26 16.5 37.22 17.06 28.47 24.1 31.41 34.94 22 28.8 12.59 34.94 15.53 24.1 6.78 17.06 18 16.5Z" fill="currentColor"/>
   </svg></span>
         <span class="brand-copy">
           <span class="brand-name"><span class="brand-long">FIVE STAR <em>WANTED</em></span><span class="brand-short">5★ <em>WANTED</em></span></span>
@@ -151,7 +150,7 @@
         <p>Official GTA VI map · fan annotations, not to scale.</p>
         <ul><li><strong>Vice City</strong> — Neon capital. The main stage. Causeways, condo towers, club queues, and a skyline that treats every sunset like a premiere.</li><li><strong>Vice Beach</strong> — Barrier island. Sand, rollerblades, and oceanfront trouble. The postcard version of Leonida is always hiding a second story.</li><li><strong>Leonida Keys</strong> — Island chain. A string of causeways and small islands where the mainland feels very far away — until someone recognizes your car.</li><li><strong>Grassrivers</strong> — Wetland maze. Airboats, alligators, and water roads. A place where the map ends and the local knowledge begins.</li><li><strong>Port Gellhorn</strong> — Salt-worn docks. Working docks, cheap motels, and a gulf-coast rhythm that does not care about your schedule.</li><li><strong>Ambrosia</strong> — Industrial edge. Refineries and freight by day; long shadows and side deals after dark. The state&#39;s unglamorous engine room.</li><li><strong>Mount Kalaga</strong> — National park. Pine ridges, switchbacks, and the kind of quiet that makes every distant engine sound suspicious.</li><li><strong>Lake Leonida</strong> — Inland water. A dark blue lung in the middle of the state, ringed by small towns and very specific local rumors.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=gta6#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/gta-vi/">Grand Theft Auto VI dossier</a>
         </p>
       </div>
@@ -163,7 +162,7 @@
         <p>Official GTA: Vice City map · fan annotations.</p>
         <ul><li><strong>Ocean Beach</strong> — Beachfront strip. Neon hotels, rented convertibles, and the feeling that everyone is either somebody or about to pretend to be.</li><li><strong>Starfish Island</strong> — Gated wealth. Mansions behind gates and palms. The shortest route between two crimes is often a driveway.</li><li><strong>Little Havana</strong> — Cuban quarter. Coffee, cigars, car culture, and a community with its own rules about who gets respect.</li><li><strong>Little Haiti</strong> — Northern district. A neighborhood under pressure, with turf lines drawn in paint, money, and mutual distrust.</li><li><strong>Downtown</strong> — Glass and ambition. Office towers, construction cranes, and a skyline that looks best through the windshield of a stolen car.</li><li><strong>Malibu Club</strong> — Nightlife. A neon landmark where the music is loud enough to drown out at least three ongoing conspiracies.</li><li><strong>Escobar International</strong> — Airport. Arrivals, departures, and the occasional package that never appears on a manifest.</li><li><strong>Vice Port</strong> — Docks. Containers, forklifts, and the kind of quiet that gets interrupted by a car chase.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=vicecity#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/vice-city/">Grand Theft Auto: Vice City dossier</a>
         </p>
       </div>
@@ -175,7 +174,7 @@
         <p>Official GTA: San Andreas map · fan annotations.</p>
         <ul><li><strong>Los Santos</strong> — Sprawl. Freeways, palms, and neighborhoods where history is measured in blocks.</li><li><strong>Grove Street</strong> — Home turf. Green paint, cul-de-sacs, and a family name that carries weight both inside and outside the block.</li><li><strong>San Fierro</strong> — Coastal city. Hills, bridges, fog, and a colder social climate than Los Santos.</li><li><strong>Las Venturas</strong> — Casino strip. Neon carpet, all-night buffets, and the house always having a plan.</li><li><strong>Red County</strong> — Rural. Orchards, dirt roads, and small-town deputies with very long memories.</li><li><strong>Bone County</strong> — Desert. Heat shimmer, abandoned mines, and a military installation nobody is supposed to discuss.</li><li><strong>Mount Chiliad</strong> — Peak. The state&#39;s high point and a favorite finish line for bad ideas.</li><li><strong>Area 69</strong> — Restricted. Fences, guard towers, and enough secrecy to make a conspiracy theorist feel seen.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=sanandreas#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/san-andreas/">Grand Theft Auto: San Andreas dossier</a>
         </p>
       </div>
@@ -187,7 +186,7 @@
         <p>Official GTA V map · fan annotations.</p>
         <ul><li><strong>Downtown Los Santos</strong> — Skyscrapers. Glass towers, construction sites, and enough traffic to make a helicopter feel reasonable.</li><li><strong>Vinewood Hills</strong> — Celebrity. Hillside mansions and billboard smiles. The view is expensive; the neighbors are worse.</li><li><strong>Vespucci Beach</strong> — Boardwalk. Muscle beach, skate parks, and a boardwalk economy built on sunglasses and optimism.</li><li><strong>Del Perro Pier</strong> — Coastline. Ferris wheel lights, tourist crowds, and the Pacific doing its best to look peaceful.</li><li><strong>Sandy Shores</strong> — Desert town. Dust, dive bars, and a lake that is more of a rumor than a resort.</li><li><strong>Paleto Bay</strong> — Small town. A sleepy northern town where a bank job feels like the biggest event of the decade.</li><li><strong>Grapeseed</strong> — Farmland. Fields, barns, and a lot of open space for things to go wrong.</li><li><strong>Fort Zancudo</strong> — Military base. Restricted airspace, armed guards, and a standing invitation to leave immediately.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=gta5#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/gta-v/">Grand Theft Auto V dossier</a>
         </p>
       </div>
@@ -199,19 +198,19 @@
         <p>Official GTA IV map · fan annotations.</p>
         <ul><li><strong>Broker</strong> — Borough. Niko and Roman&#39;s first neighborhood: tight streets, louder arguments, and rent that is always due.</li><li><strong>Dukes</strong> — Borough. Industrial edges and residential pockets, with a skyline that never lets you forget where you are.</li><li><strong>Bohan</strong> — Borough. Crowded blocks and a hard-won sense of community. Also a very good place not to owe someone money.</li><li><strong>Algonquin</strong> — Manhattan stand-in. Vertical city: media towers, museums, and a million windows into other people&#39;s business.</li><li><strong>Alderney</strong> — Industrial. Factories, highways, and the kind of gray that settles into your jacket.</li><li><strong>Hove Beach</strong> — Immigrant quarter. Russian storefronts, boardwalk air, and the first taste of Liberty City&#39;s promise for Niko.</li><li><strong>Middle Park</strong> — Green space. A rare patch of quiet in a city that rarely rewards stillness.</li><li><strong>Star Junction</strong> — Neon crossing. Billboards, crowds, and the feeling of being a very small story in a very large city.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=gta4#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/gta-iv/">Grand Theft Auto IV dossier</a>
         </p>
       </div>
-    </article><article class="map-card" id="map-warriors">
-      <p class="arcade-note">No official world map for this entry - a fan-made theme postcard and district dossier instead.</p>
+    </article><article class="map-card map-card--wide" id="map-warriors">
+      <figure class="map-shot"><img src="../assets/maps/warriors-subway.svg" alt="New York, 1979 map with fan-annotated districts and landmarks" loading="lazy" decoding="async"><figcaption>Route and stations: The Warriors official site (Rockstar Games, 2005), via thewarriorsgame.com. Map redrawn as original fan vector art · <a href="https://thewarriorsgame.com/" rel="noopener noreferrer" target="_blank">map source</a></figcaption></figure>
       <div class="map-copy">
         <p class="eyebrow">The Warriors</p>
         <h2>New York, 1979</h2>
-        <p>No official world map — a fan-made theme postcard and district dossier.</p>
-        <ul><li><strong>Coney Island</strong> — Home turf. Boardwalk rides and the long way home. The Warriors&#39; entire night is measured by the distance back to this place.</li><li><strong>Riverside Park</strong> — Park. Trees, benches, and the kind of shadows that make a shortcut look like a mistake.</li><li><strong>Union Square</strong> — Crossroads. Crowds, transit, and too many exits. Good for disappearing; bad for being followed.</li><li><strong>SoHo</strong> — Nightlife. Club lines, fire escapes, and a scene that stays open later than good judgment.</li><li><strong>The Bowery</strong> — Grit. Flophouses, neon signs, and alleys that know more than they say.</li><li><strong>96th Street</strong> — Uptown. A line in the sand, a transfer point, and a reminder that the city belongs to whoever is standing there.</li><li><strong>Grand Central</strong> — Terminal. Hundreds of departures and one very bad time to be recognized.</li><li><strong>Tremont</strong> — Bronx turf. Tenements, fire escapes, and a neighborhood where every wrong turn has a name.</li></ul>
+        <p>Fan-drawn subway route of the game&#39;s twelve stops, from Coney Island to Van Cortlandt Park.</p>
+        <ul><li><strong>Coney Island</strong> — Home turf. The boardwalk base and the last stop of the night. Everything the Warriors do is measured by the distance back to this platform.</li><li><strong>East Broadway</strong> — Savage Huns. Chinatown turf and the Huns&#39; dojo. A detour that turns into a lesson about whose streets these are.</li><li><strong>Prince St</strong> — Hi-Hats. SoHo rooftops and a gang that treats paint, mime, and territory as the same discipline.</li><li><strong>Union Square</strong> — Lizzies &amp; Punks. A transfer maze of tunnels, trains, and too many exits. The Lizzies and the Punks both claim a piece of it.</li><li><strong>23rd St</strong> — Gramercy Riffs. Riffs country. Cyrus&#39;s network reaches every borough, and this is where the city starts listening.</li><li><strong>Central Park</strong> — Neutral ground. A dark cut across the middle of Manhattan where the only advantage is knowing which path is shorter.</li><li><strong>96th St</strong> — Baseball Furies. Riverside Park and the Furies. Bats, face paint, and a chase that keeps moving uptown.</li><li><strong>E 110th St</strong> — Hurricanes. Spanish Harlem turf, where the Hurricanes treat every block like family property.</li><li><strong>125th St</strong> — Boppers. Harlem and Club 45. Style, music, and a crew that keeps the neighbourhood smooth.</li><li><strong>Tremont Ave</strong> — Orphans. The Bronx tenements and Sully&#39;s small-time crew, still trying to talk their way into a bigger reputation.</li><li><strong>Gun Hill Rd</strong> — Turnbull AC&#39;s. The bus, the yard, and the Turnbulls. A stop best made at a run.</li><li><strong>Van Cortlandt Park</strong> — The meeting. Cyrus calls the city&#39;s gangs together here. The truce speech ends in gunfire, and the long night home begins.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=warriors#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/the-warriors/">The Warriors dossier</a>
         </p>
       </div>
@@ -223,7 +222,7 @@
         <p>Official Red Dead Redemption 2 map · fan annotations.</p>
         <ul><li><strong>Valentine</strong> — Frontier town. Muddy streets, cattle auctions, and a saloon that has seen better men and worse decisions.</li><li><strong>Rhodes</strong> — Southern town. Sun-bleached storefronts and old grudges wearing their Sunday best.</li><li><strong>Saint Denis</strong> — Industrial city. Electric light, streetcars, and the uncomfortable future arriving ahead of schedule.</li><li><strong>Blackwater</strong> — Town. A prosperous waterfront with a short memory and a long list of people who want something from you.</li><li><strong>Armadillo</strong> — Desert town. Heat, dust, and the kind of silence that suggests everyone is armed.</li><li><strong>Emerald Ranch</strong> — Ranchland. Open fields and honest work, at least until somebody brings a problem through the gate.</li><li><strong>Annesburg</strong> — Mining town. Coal dust, company housing, and a town built around someone else&#39;s profit.</li><li><strong>Tall Trees</strong> — Wilderness. Old forest and older violence. The law is a rumor out here.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=reddead#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/red-dead/">Red Dead Redemption II dossier</a>
         </p>
       </div>
@@ -235,7 +234,7 @@
         <p>Official Bully map · fan annotations.</p>
         <ul><li><strong>Bullworth Academy</strong> — Boarding school. Gothic halls, detention slips, and a hierarchy more complicated than most governments.</li><li><strong>Bullworth Town</strong> — Town center. A quiet main street, a comic shop, and the occasional perfectly ordinary errand that goes sideways.</li><li><strong>Old Bullworth Vale</strong> — Affluent district. Manicured lawns and old money, where a PTA meeting can feel like a border dispute.</li><li><strong>New Coventry</strong> — Greaser turf. Garages, chain-link fences, and a neighborhood that does not hand out trust for free.</li><li><strong>Blue Skies Industrial Park</strong> — Industry. Warehouses, fumes, and enough empty space for a very bad plan to find room to grow.</li><li><strong>Harrington House</strong> — Old estate. Portraits, polished wood, and family secrets with excellent posture.</li><li><strong>Bullworth Carnival</strong> — Fairground. Lights, games, and the strange freedom of a fairground after dark.</li><li><strong>Happy Volts Asylum</strong> — Institution. A hulking building on the edge of town that everyone mentions and nobody wants to visit.</li></ul>
         <p class="map-links">
-          <a class="btn btn-ghost btn-sm" href="../#atlas">Open this map interactively</a>
+          <a class="btn btn-ghost btn-sm" href="../?era=bully#atlas">Open this map interactively</a>
           <a class="btn btn-quiet btn-sm" href="../games/bully/">Bully dossier</a>
         </p>
       </div>

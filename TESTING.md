@@ -66,7 +66,7 @@ Then open <http://localhost:4173>.
 ## Content and IP
 
 41. Disclaimer is visible in the banner, About page, and footer.
-42. No extracted game assets, audio, screenshots, or copied dialogue are present.
+42. No extracted game audio, models, textures, screenshots, or copied dialogue are present; credited map artwork/routes are the only referenced game visuals.
 43. Every live wiki card shows CC BY-SA attribution and a source link.
 44. Every stream entry has `license`, `attribution`, and `homepage`; re-verify embedding terms before launch.
 

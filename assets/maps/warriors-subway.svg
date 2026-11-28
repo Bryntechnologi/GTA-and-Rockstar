@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 520" role="img" aria-labelledby="warriors-map-title">
+  <title id="warriors-map-title">The Warriors 1979 subway route: Coney Island to Van Cortlandt Park</title>
+  <defs>
+    <radialGradient id="routeGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#d23b2f" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#d23b2f" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mapGrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".09"/></feComponentTransfer>
+    </filter>
+    <pattern id="mapGrid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#f0eade" stroke-opacity=".035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1400" height="520" fill="#0b0b0a"/>
+  <rect width="1400" height="520" fill="url(#mapGrid)"/>
+  <circle cx="700" cy="250" r="360" fill="url(#routeGlow)"/>
+
+  <!-- Borough bands -->
+  <rect x="0" y="0" width="170" height="520" fill="#f0eade" opacity=".018"/>
+  <rect x="170" y="0" width="840" height="520" fill="#f97316" opacity=".022"/>
+  <rect x="1010" y="0" width="390" height="520" fill="#d23b2f" opacity=".03"/>
+  <path d="M170 0V520" stroke="#8fa4ad" stroke-opacity=".28" stroke-width="2" stroke-dasharray="10 12"/>
+  <path d="M1010 0V520" stroke="#8fa4ad" stroke-opacity=".28" stroke-width="2" stroke-dasharray="10 12"/>
+  <text x="14" y="466" font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="7" fill="#f0eade" opacity=".075">BROOKLYN</text>
+  <text x="590" y="466" text-anchor="middle" font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="7" fill="#f0eade" opacity=".075">MANHATTAN</text>
+  <text x="1205" y="466" text-anchor="middle" font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="7" fill="#f0eade" opacity=".075">THE BRONX</text>
+
+  <!-- Other lines running through the city -->
+  <g fill="none" stroke-linecap="round" stroke-width="6" opacity=".18">
+    <path d="M0 108H160l55 44h255l70-32h360l60 38h440" stroke="#d23b2f"/>
+    <path d="M0 392h250l50-42h320l80 30h700" stroke="#f97316"/>
+    <path d="M0 200h360l60 40h340l60-34h580" stroke="#5c9ca6"/>
+    <path d="M0 330h120l60-30h340l60 32h400l60-32h360" stroke="#d9d3c7"/>
+  </g>
+
+  <!-- The long night home -->
+  <path d="M84 260H1316" stroke="#0b0b0a" stroke-width="26" stroke-linecap="round"/>
+  <path d="M84 260H1316" stroke="#d23b2f" stroke-width="10" stroke-linecap="round"/>
+  <path d="M84 260H1316" stroke="#f0eade" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round" opacity=".55"/>
+  <path d="M1334 260l-20-11v22Z" fill="#d23b2f"/>
+
+  <g font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif">
+    <!-- Coney Island -->
+    <path d="M84 244V232" stroke="#aba396" stroke-width="1.5"/>
+    <text x="84" y="200" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">THE WARRIORS</text>
+    <text x="84" y="222" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">CONEY ISLAND</text>
+
+    <!-- East Broadway -->
+    <path d="M196 276V288" stroke="#aba396" stroke-width="1.5"/>
+    <text x="196" y="308" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">EAST BROADWAY</text>
+    <text x="196" y="330" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">SAVAGE HUNS</text>
+
+    <!-- Prince St -->
+    <path d="M308 244V232" stroke="#aba396" stroke-width="1.5"/>
+    <text x="308" y="200" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">HI-HATS</text>
+    <text x="308" y="222" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">PRINCE ST</text>
+
+    <!-- Union Square -->
+    <path d="M420 276V288" stroke="#aba396" stroke-width="1.5"/>
+    <text x="420" y="308" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">UNION SQUARE</text>
+    <text x="420" y="330" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">LIZZIES &amp; PUNKS</text>
+
+    <!-- 23rd St -->
+    <path d="M532 244V232" stroke="#aba396" stroke-width="1.5"/>
+    <text x="532" y="200" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">GRAMERCY RIFFS</text>
+    <text x="532" y="222" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">23RD ST</text>
+
+    <!-- Central Park -->
+    <path d="M644 276V288" stroke="#aba396" stroke-width="1.5"/>
+    <text x="644" y="308" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">CENTRAL PARK</text>
+    <text x="644" y="330" text-anchor="middle" font-size="12" letter-spacing="2" fill="#aba396">NEUTRAL GROUND</text>
+
+    <!-- 96th St -->
+    <path d="M756 244V232" stroke="#aba396" stroke-width="1.5"/>
+    <text x="756" y="200" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">BASEBALL FURIES</text>
+    <text x="756" y="222" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">96TH ST</text>
+
+    <!-- E 110th St -->
+    <path d="M868 276V288" stroke="#aba396" stroke-width="1.5"/>
+    <text x="868" y="308" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">E 110TH ST</text>
+    <text x="868" y="330" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">HURRICANES</text>
+
+    <!-- 125th St -->
+    <path d="M980 244V232" stroke="#aba396" stroke-width="1.5"/>
+    <text x="980" y="200" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">BOPPERS</text>
+    <text x="980" y="222" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">125TH ST</text>
+
+    <!-- Tremont Ave -->
+    <path d="M1092 276V288" stroke="#aba396" stroke-width="1.5"/>
+    <text x="1092" y="308" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">TREMONT AVE</text>
+    <text x="1092" y="330" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">ORPHANS</text>
+
+    <!-- Gun Hill Rd -->
+    <path d="M1204 244V232" stroke="#aba396" stroke-width="1.5"/>
+    <text x="1204" y="200" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">TURNBULL AC'S</text>
+    <text x="1204" y="222" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">GUN HILL RD</text>
+
+    <!-- Van Cortlandt Park -->
+    <path d="M1316 276V288" stroke="#aba396" stroke-width="1.5"/>
+    <text x="1316" y="306" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">VAN CORTLANDT</text>
+    <text x="1316" y="326" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1.6" fill="#f0eade">PARK</text>
+    <text x="1316" y="348" text-anchor="middle" font-size="12" letter-spacing="2" fill="#f97316">THE MEETING</text>
+  </g>
+
+  <!-- Stations sit above the route labels so every stop stays clickable -->
+  <g>
+    <circle cx="84" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="84" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="196" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="196" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="308" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="308" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="420" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="420" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="532" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="532" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="644" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="644" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="756" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="756" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="868" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="868" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="980" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="980" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="1092" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="1092" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="1204" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="1204" cy="260" r="6" fill="#d23b2f"/>
+    <circle cx="1316" cy="260" r="16" fill="#0b0b0a" stroke="#f0eade" stroke-width="3"/>
+    <circle cx="1316" cy="260" r="6" fill="#d23b2f"/>
+  </g>
+
+  <g font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif">
+    <text x="60" y="62" font-size="30" font-weight="700" letter-spacing="4.5" fill="#f0eade">THE LONG NIGHT HOME</text>
+    <text x="60" y="90" font-size="13" letter-spacing="3.4" fill="#aba396">CONEY ISLAND &#8594; VAN CORTLANDT PARK &#183; 1979</text>
+    <text x="1340" y="492" text-anchor="end" font-size="11" letter-spacing="2.4" fill="#aba396" opacity=".8">FAN MAP &#183; OFFICIAL GAME ROUTE &#183; NOT TO SCALE</text>
+  </g>
+
+  <rect width="1400" height="520" filter="url(#mapGrain)" opacity=".5" fill="#000"/>
+</svg>

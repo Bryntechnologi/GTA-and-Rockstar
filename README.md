@@ -16,7 +16,9 @@ and permissions go through the [Brynsites contact page](https://brynsites.com/co
 > Interactive. I do not own or claim any rights to the games, characters, locations, logos, or
 > trademarks referenced here; all such rights belong to their respective owners. The games and
 > their lore are not my work and are not part of any project I own or claim. Quizzes, code, CSS,
-> and vector art are original. No extracted game assets, audio, or copied dialogue are included.
+> and vector art are original. No extracted game audio, models, textures, screenshots,
+> or copied dialogue are included. Some atlas pages reference credited in-game map
+> artwork and map routes for commentary; that artwork remains the property of its owner.
 
 ---
 

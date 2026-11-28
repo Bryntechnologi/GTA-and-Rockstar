@@ -31,11 +31,8 @@ export function sprite() {
 
 export function header({ prefix = "", active = "", site = {} } = {}) {
   const home = prefix || "./";
-  const brandMark = `<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44" fill="none">
-    <circle cx="22" cy="22" r="18.5" stroke="currentColor" stroke-width="1.4"/>
-    <path d="M12 22h4.5M27.5 22H32" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-    <path d="M17 18.5v7l6-3.5-6-3.5Z" fill="currentColor"/>
-    <path d="M16 10.5c3.8-2.4 8.2-2.4 12 0M9.5 14.5c6.9-4.7 15.1-4.7 22 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+  const brandMark = `<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44">
+    <path d="M22 6 26 16.5 37.22 17.06 28.47 24.1 31.41 34.94 22 28.8 12.59 34.94 15.53 24.1 6.78 17.06 18 16.5Z" fill="currentColor"/>
   </svg></span>`;
   const nav = NAV.map((item) => {
     const isActive = item.key === active || (active === "changelog" && item.key === "about") || (active === "credits" && item.key === "about");

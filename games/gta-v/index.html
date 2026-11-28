@@ -21,7 +21,7 @@
   <style>
     .game-page { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
     .game-hero { padding: 1.5rem 0 2rem; border-bottom: 2px solid var(--accent); }
-    .game-hero h1 { font-size: clamp(2rem, 6vw, 3.8rem); line-height: 1.05; margin: 0.4rem 0 0.8rem; }
+    .game-hero h1 { font-size: clamp(2rem, 6vw, 3.8rem); line-height: 1.1; margin: 0.4rem 0 0.8rem; }
     .game-hero .lede { font-size: 1.15rem; color: var(--muted); max-width: 70ch; }
     .game-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
     .game-page section { margin-top: 2.4rem; }
@@ -67,11 +67,8 @@
   <header class="site-header">
     <div class="container header-bar">
       <a class="brand" href="../../" aria-label="FIVE STAR WANTED home">
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44" fill="none">
-    <circle cx="22" cy="22" r="18.5" stroke="currentColor" stroke-width="1.4"/>
-    <path d="M12 22h4.5M27.5 22H32" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-    <path d="M17 18.5v7l6-3.5-6-3.5Z" fill="currentColor"/>
-    <path d="M16 10.5c3.8-2.4 8.2-2.4 12 0M9.5 14.5c6.9-4.7 15.1-4.7 22 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44">
+    <path d="M22 6 26 16.5 37.22 17.06 28.47 24.1 31.41 34.94 22 28.8 12.59 34.94 15.53 24.1 6.78 17.06 18 16.5Z" fill="currentColor"/>
   </svg></span>
         <span class="brand-copy">
           <span class="brand-name"><span class="brand-long">FIVE STAR <em>WANTED</em></span><span class="brand-short">5★ <em>WANTED</em></span></span>
@@ -131,7 +128,7 @@
     <header class="game-hero">
       <p class="game-breadcrumb">FIVE STAR WANTED // GAME DOSSIER</p>
       <h1>Grand Theft Auto V</h1>
-      <p class="lede"><p>Michael, Franklin, and Trevor move through Los Santos and Blaine County in a story about ambition, reinvention, and the entertainment industry&#39;s appetite for spectacle. The heist structure turns preparation and improvisation into the main event.</p></p>
+      <div class="lede"><p>Michael, Franklin, and Trevor move through Los Santos and Blaine County in a story about ambition, reinvention, and the entertainment industry&#39;s appetite for spectacle. The heist structure turns preparation and improvisation into the main event.</p></div>
       <div class="game-meta">
         <span class="tag">2013</span>
         <span class="tag">GTA V / Los Santos</span>
@@ -139,7 +136,7 @@
       </div>
       <div class="game-links">
         <a class="btn btn-ghost btn-sm" href="../../#story">Open the story timeline</a>
-        <a class="btn btn-ghost btn-sm" href="../../#atlas">Open the GTA map</a>
+        <a class="btn btn-ghost btn-sm" href="../../?era=gta5#atlas">Open the map</a>
         <a class="btn btn-quiet btn-sm" href="../../arcade/">Play the arcade</a>
         <a class="btn btn-quiet btn-sm" href="../../archive.html">Full-text archive</a>
       </div>
