@@ -48,10 +48,11 @@
   const DEFAULT_SETTINGS = {
     era: "gta6",
     sound: true,
-    autoMorph: false,
+    autoMorph: true,
     storySpoilers: false,
     storyFollowEra: true,
-    contrast: "normal"
+    contrast: "normal",
+    prefsVersion: 2
   };
 
   const DEFAULT_STATS = {
@@ -338,6 +339,11 @@
     const loaded = loadJSON(STORAGE.settings, {});
     const settings = { ...DEFAULT_SETTINGS, ...(loaded && typeof loaded === "object" ? loaded : {}) };
     if (!eras[settings.era]) settings.era = DEFAULT_SETTINGS.era;
+    if (!loaded || loaded.prefsVersion !== 2) {
+      settings.autoMorph = true;
+      settings.prefsVersion = 2;
+      saveJSON(STORAGE.settings, settings);
+    }
     return settings;
   }
 

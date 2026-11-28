@@ -152,7 +152,7 @@ export function footer({ prefix = "", site = {} } = {}) {
             <p class="footer-heading">Elsewhere</p>
             <a href="${esc(umbrella.url || "https://brynsites.com/")}" rel="noopener">${esc(umbrella.name || "Brynsites")} <span class="external-mark" aria-hidden="true">↗</span></a>
             <a href="${esc(umbrella.contactUrl || "https://brynsites.com/contact")}" rel="noopener">Contact <span class="external-mark" aria-hidden="true">↗</span></a>
-            <a href="https://github.com/Bryntechnologi/GTA-and-Rockstar" rel="noopener">GitHub <span class="external-mark" aria-hidden="true">↗</span></a>
+            <a href="https://github.com/Bryntechnologi/FiveStarWanted" rel="noopener">GitHub <span class="external-mark" aria-hidden="true">↗</span></a>
             <a href="${prefix}llms.txt">llms.txt</a>
           </div>
         </nav>

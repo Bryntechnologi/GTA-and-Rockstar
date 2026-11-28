@@ -19,6 +19,8 @@ Version-only release history for FIVE STAR WANTED.
 - Original-writing claims now distinguish original copy from CC BY-SA adaptations.
 - Theme changes now use a whole-page crossfade with a slower palette transition instead of an abrupt snap.
 - Rockstar Beyond GTA is now part of the main games hub rather than a separate afterthought.
+- Follow trivia era now defaults on, including for existing saved settings.
+- GitHub links and the local remote point at the renamed FiveStarWanted repository.
 
 ### Fixed
 
