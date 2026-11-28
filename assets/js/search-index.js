@@ -28,18 +28,18 @@ window.CS_SEARCH_INDEX = [
     "keywords": "story timeline chronology"
   },
   {
-    "title": "GTA map atlas",
-    "subtitle": "Leonida, Vice City, San Andreas, Los Santos, and Liberty City",
+    "title": "Rockstar map atlas",
+    "subtitle": "GTA, Red Dead, Bully, and The Warriors maps",
     "href": "/atlas/",
     "type": "Page",
-    "keywords": "GTA map GTA maps Vice City map San Andreas map Los Santos map Liberty City map Leonida map locations atlas"
+    "keywords": "Rockstar map atlas GTA map GTA maps Vice City map San Andreas map Los Santos map Liberty City map Leonida map Red Dead map Bully map Warriors map locations atlas"
   },
   {
-    "title": "GTA vs real life",
-    "subtitle": "Real cities behind Vice City, Liberty City, and Los Santos",
+    "title": "GTA and Rockstar vs real life",
+    "subtitle": "Real places behind Vice City, Liberty City, Los Santos, Saint Denis, Bullworth, and The Warriors",
     "href": "/real-vs-reel/",
     "type": "Page",
-    "keywords": "GTA vs real life Vice City Miami Liberty City New York Los Santos Los Angeles comparisons"
+    "keywords": "GTA vs real life Rockstar vs real life Vice City Miami Liberty City New York Los Santos Los Angeles Saint Denis New Orleans Bullworth Warriors comparisons"
   },
   {
     "title": "Arcade",

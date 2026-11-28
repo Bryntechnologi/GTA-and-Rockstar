@@ -1,4 +1,7 @@
-/* Self-hosted open-licence fonts (Google Fonts / SIL OFL). */
+/* Self-hosted open-licence fonts (Google Fonts / SIL OFL).
+   Pricedown is referenced first in the brand stack. Drop a licensed
+   Pricedown-400.woff2 in this folder and add its @font-face here to
+   activate it; Bowlby One SC is the bundled fallback. */
 @font-face {
   font-family: "Anton";
   font-style: normal;

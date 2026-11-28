@@ -1013,7 +1013,7 @@ window.CS_DATA = (() => {
           id: "vice-city",
           name: "Vice City",
           kind: "Neon capital",
-          x: 62,
+          x: 64,
           y: 52,
           note: "The main stage. Causeways, condo towers, club queues, and a skyline that treats every sunset like a premiere."
         },
@@ -1021,7 +1021,7 @@ window.CS_DATA = (() => {
           id: "vice-beach",
           name: "Vice Beach",
           kind: "Barrier island",
-          x: 80,
+          x: 83,
           y: 49,
           note: "Sand, rollerblades, and oceanfront trouble. The postcard version of Leonida is always hiding a second story."
         },
@@ -1086,14 +1086,14 @@ window.CS_DATA = (() => {
         source: "https://gta.fandom.com/wiki/File:ViceCity-GTAVC-MapHD.jpg"
       },
       locations: [
-        { id: "ocean-beach", name: "Ocean Beach", kind: "Beachfront strip", x: 75, y: 68, note: "Neon hotels, rented convertibles, and the feeling that everyone is either somebody or about to pretend to be." },
-        { id: "starfish-island", name: "Starfish Island", kind: "Gated wealth", x: 50, y: 57, note: "Mansions behind gates and palms. The shortest route between two crimes is often a driveway." },
-        { id: "little-havana", name: "Little Havana", kind: "Cuban quarter", x: 25, y: 68, note: "Coffee, cigars, car culture, and a community with its own rules about who gets respect." },
-        { id: "little-haiti", name: "Little Haiti", kind: "Northern district", x: 29, y: 32, note: "A neighborhood under pressure, with turf lines drawn in paint, money, and mutual distrust." },
-        { id: "downtown", name: "Downtown", kind: "Glass and ambition", x: 62, y: 45, note: "Office towers, construction cranes, and a skyline that looks best through the windshield of a stolen car." },
+        { id: "ocean-beach", name: "Ocean Beach", kind: "Beachfront strip", x: 67, y: 80, note: "Neon hotels, rented convertibles, and the feeling that everyone is either somebody or about to pretend to be." },
+        { id: "starfish-island", name: "Starfish Island", kind: "Gated wealth", x: 49, y: 59, note: "Mansions behind gates and palms. The shortest route between two crimes is often a driveway." },
+        { id: "little-havana", name: "Little Havana", kind: "Cuban quarter", x: 31, y: 64, note: "Coffee, cigars, car culture, and a community with its own rules about who gets respect." },
+        { id: "little-haiti", name: "Little Haiti", kind: "Northern district", x: 34, y: 45, note: "A neighborhood under pressure, with turf lines drawn in paint, money, and mutual distrust." },
+        { id: "downtown", name: "Downtown", kind: "Glass and ambition", x: 37, y: 18, note: "Office towers, construction cranes, and a skyline that looks best through the windshield of a stolen car." },
         { id: "malibu-club", name: "Malibu Club", kind: "Nightlife", x: 70, y: 21, note: "A neon landmark where the music is loud enough to drown out at least three ongoing conspiracies." },
-        { id: "escobar-airport", name: "Escobar International", kind: "Airport", x: 21, y: 82, note: "Arrivals, departures, and the occasional package that never appears on a manifest." },
-        { id: "vice-port", name: "Vice Port", kind: "Docks", x: 32, y: 89, note: "Containers, forklifts, and the kind of quiet that gets interrupted by a car chase." }
+        { id: "escobar-airport", name: "Escobar International", kind: "Airport", x: 20, y: 75, note: "Arrivals, departures, and the occasional package that never appears on a manifest." },
+        { id: "vice-port", name: "Vice Port", kind: "Docks", x: 34, y: 84, note: "Containers, forklifts, and the kind of quiet that gets interrupted by a car chase." }
       ]
     },
     sanandreas: {
@@ -1107,14 +1107,14 @@ window.CS_DATA = (() => {
         source: "https://gta.fandom.com/wiki/File:StateofSanAndreas-GTASA-StreetMap.png"
       },
       locations: [
-        { id: "los-santos", name: "Los Santos", kind: "Sprawl", x: 76, y: 75, note: "Freeways, palms, and neighborhoods where history is measured in blocks." },
-        { id: "grove-street", name: "Grove Street", kind: "Home turf", x: 78, y: 82, note: "Green paint, cul-de-sacs, and a family name that carries weight both inside and outside the block." },
-        { id: "san-fierro", name: "San Fierro", kind: "Coastal city", x: 13, y: 37, note: "Hills, bridges, fog, and a colder social climate than Los Santos." },
-        { id: "las-venturas", name: "Las Venturas", kind: "Casino strip", x: 80, y: 21, note: "Neon carpet, all-night buffets, and the house always having a plan." },
-        { id: "red-county", name: "Red County", kind: "Rural", x: 54, y: 57, note: "Orchards, dirt roads, and small-town deputies with very long memories." },
-        { id: "bone-county", name: "Bone County", kind: "Desert", x: 54, y: 29, note: "Heat shimmer, abandoned mines, and a military installation nobody is supposed to discuss." },
-        { id: "mount-chiliad", name: "Mount Chiliad", kind: "Peak", x: 32, y: 77, note: "The state's high point and a favorite finish line for bad ideas." },
-        { id: "area-69", name: "Area 69", kind: "Restricted", x: 59, y: 35, note: "Fences, guard towers, and enough secrecy to make a conspiracy theorist feel seen." }
+        { id: "los-santos", name: "Los Santos", kind: "Sprawl", x: 77, y: 73, note: "Freeways, palms, and neighborhoods where history is measured in blocks." },
+        { id: "grove-street", name: "Grove Street", kind: "Home turf", x: 91, y: 78, note: "Green paint, cul-de-sacs, and a family name that carries weight both inside and outside the block." },
+        { id: "san-fierro", name: "San Fierro", kind: "Coastal city", x: 13, y: 35, note: "Hills, bridges, fog, and a colder social climate than Los Santos." },
+        { id: "las-venturas", name: "Las Venturas", kind: "Casino strip", x: 80, y: 19, note: "Neon carpet, all-night buffets, and the house always having a plan." },
+        { id: "red-county", name: "Red County", kind: "Rural", x: 55, y: 54, note: "Orchards, dirt roads, and small-town deputies with very long memories." },
+        { id: "bone-county", name: "Bone County", kind: "Desert", x: 50, y: 27, note: "Heat shimmer, abandoned mines, and a military installation nobody is supposed to discuss." },
+        { id: "mount-chiliad", name: "Mount Chiliad", kind: "Peak", x: 12, y: 77, note: "The state's high point and a favorite finish line for bad ideas." },
+        { id: "area-69", name: "Area 69", kind: "Restricted", x: 53, y: 18, note: "Fences, guard towers, and enough secrecy to make a conspiracy theorist feel seen." }
       ]
     },
     gta5: {
@@ -1128,14 +1128,14 @@ window.CS_DATA = (() => {
         source: "https://gta.fandom.com/wiki/File:SouthernSanAndreas-GTAV-Map.jpg"
       },
       locations: [
-        { id: "downtown-ls", name: "Downtown Los Santos", kind: "Skyscrapers", x: 40, y: 76, note: "Glass towers, construction sites, and enough traffic to make a helicopter feel reasonable." },
-        { id: "vinewood", name: "Vinewood Hills", kind: "Celebrity", x: 36, y: 66, note: "Hillside mansions and billboard smiles. The view is expensive; the neighbors are worse." },
-        { id: "vespucci", name: "Vespucci Beach", kind: "Boardwalk", x: 28, y: 79, note: "Muscle beach, skate parks, and a boardwalk economy built on sunglasses and optimism." },
-        { id: "del-perro", name: "Del Perro Pier", kind: "Coastline", x: 31, y: 84, note: "Ferris wheel lights, tourist crowds, and the Pacific doing its best to look peaceful." },
-        { id: "sandy-shores", name: "Sandy Shores", kind: "Desert town", x: 59, y: 41, note: "Dust, dive bars, and a lake that is more of a rumor than a resort." },
-        { id: "paleto-bay", name: "Paleto Bay", kind: "Small town", x: 41, y: 15, note: "A sleepy northern town where a bank job feels like the biggest event of the decade." },
-        { id: "grapeseed", name: "Grapeseed", kind: "Farmland", x: 66, y: 18, note: "Fields, barns, and a lot of open space for things to go wrong." },
-        { id: "fort-zancudo", name: "Fort Zancudo", kind: "Military base", x: 25, y: 43, note: "Restricted airspace, armed guards, and a standing invitation to leave immediately." }
+        { id: "downtown-ls", name: "Downtown Los Santos", kind: "Skyscrapers", x: 42, y: 75, note: "Glass towers, construction sites, and enough traffic to make a helicopter feel reasonable." },
+        { id: "vinewood", name: "Vinewood Hills", kind: "Celebrity", x: 39, y: 66, note: "Hillside mansions and billboard smiles. The view is expensive; the neighbors are worse." },
+        { id: "vespucci", name: "Vespucci Beach", kind: "Boardwalk", x: 34, y: 79, note: "Muscle beach, skate parks, and a boardwalk economy built on sunglasses and optimism." },
+        { id: "del-perro", name: "Del Perro Pier", kind: "Coastline", x: 33, y: 77, note: "Ferris wheel lights, tourist crowds, and the Pacific doing its best to look peaceful." },
+        { id: "sandy-shores", name: "Sandy Shores", kind: "Desert town", x: 56, y: 39, note: "Dust, dive bars, and a lake that is more of a rumor than a resort." },
+        { id: "paleto-bay", name: "Paleto Bay", kind: "Small town", x: 42, y: 15, note: "A sleepy northern town where a bank job feels like the biggest event of the decade." },
+        { id: "grapeseed", name: "Grapeseed", kind: "Farmland", x: 64, y: 29, note: "Fields, barns, and a lot of open space for things to go wrong." },
+        { id: "fort-zancudo", name: "Fort Zancudo", kind: "Military base", x: 32, y: 43, note: "Restricted airspace, armed guards, and a standing invitation to leave immediately." }
       ]
     },
     gta4: {
@@ -1149,14 +1149,14 @@ window.CS_DATA = (() => {
         source: "https://gta.fandom.com/wiki/File:LibertyCity-GTAIV-Map2008.jpg"
       },
       locations: [
-        { id: "broker", name: "Broker", kind: "Borough", x: 70, y: 63, note: "Niko and Roman's first neighborhood: tight streets, louder arguments, and rent that is always due." },
-        { id: "dukes", name: "Dukes", kind: "Borough", x: 75, y: 41, note: "Industrial edges and residential pockets, with a skyline that never lets you forget where you are." },
+        { id: "broker", name: "Broker", kind: "Borough", x: 71, y: 60, note: "Niko and Roman's first neighborhood: tight streets, louder arguments, and rent that is always due." },
+        { id: "dukes", name: "Dukes", kind: "Borough", x: 74, y: 42, note: "Industrial edges and residential pockets, with a skyline that never lets you forget where you are." },
         { id: "bohan", name: "Bohan", kind: "Borough", x: 56, y: 21, note: "Crowded blocks and a hard-won sense of community. Also a very good place not to owe someone money." },
         { id: "algonquin", name: "Algonquin", kind: "Manhattan stand-in", x: 41, y: 47, note: "Vertical city: media towers, museums, and a million windows into other people's business." },
         { id: "alderney", name: "Alderney", kind: "Industrial", x: 18, y: 47, note: "Factories, highways, and the kind of gray that settles into your jacket." },
-        { id: "hove-beach", name: "Hove Beach", kind: "Immigrant quarter", x: 64, y: 59, note: "Russian storefronts, boardwalk air, and the first taste of Liberty City's promise for Niko." },
+        { id: "hove-beach", name: "Hove Beach", kind: "Immigrant quarter", x: 66, y: 58, note: "Russian storefronts, boardwalk air, and the first taste of Liberty City's promise for Niko." },
         { id: "middle-park", name: "Middle Park", kind: "Green space", x: 42, y: 34, note: "A rare patch of quiet in a city that rarely rewards stillness." },
-        { id: "star-junction", name: "Star Junction", kind: "Neon crossing", x: 41, y: 51, note: "Billboards, crowds, and the feeling of being a very small story in a very large city." }
+        { id: "star-junction", name: "Star Junction", kind: "Neon crossing", x: 42, y: 49, note: "Billboards, crowds, and the feeling of being a very small story in a very large city." }
       ]
     },
     warriors: {
@@ -1201,7 +1201,7 @@ window.CS_DATA = (() => {
         { id: "rhodes", name: "Rhodes", kind: "Southern town", x: 74, y: 56, note: "Sun-bleached storefronts and old grudges wearing their Sunday best." },
         { id: "saint-denis", name: "Saint Denis", kind: "Industrial city", x: 86, y: 54, note: "Electric light, streetcars, and the uncomfortable future arriving ahead of schedule." },
         { id: "blackwater", name: "Blackwater", kind: "Town", x: 52, y: 55, note: "A prosperous waterfront with a short memory and a long list of people who want something from you." },
-        { id: "armadillo", name: "Armadillo", kind: "Desert town", x: 37, y: 70, note: "Heat, dust, and the kind of silence that suggests everyone is armed." },
+        { id: "armadillo", name: "Armadillo", kind: "Desert town", x: 35, y: 68, note: "Heat, dust, and the kind of silence that suggests everyone is armed." },
         { id: "emerald-ranch", name: "Emerald Ranch", kind: "Ranchland", x: 68, y: 41, note: "Open fields and honest work, at least until somebody brings a problem through the gate." },
         { id: "annesburg", name: "Annesburg", kind: "Mining town", x: 85, y: 25, note: "Coal dust, company housing, and a town built around someone else's profit." },
         { id: "tall-trees", name: "Tall Trees", kind: "Wilderness", x: 49, y: 45, note: "Old forest and older violence. The law is a rumor out here." }

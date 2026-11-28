@@ -87,6 +87,8 @@
     });
   }
 
+  let eraTransition = null;
+
   function applyEra(key, options = {}) {
     if (!eras[key]) return;
     const changed = root.dataset.era !== key;
@@ -96,8 +98,10 @@
       if (options.persist !== false) saveSettings({ era: key });
     };
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (changed && !reduced && typeof document.startViewTransition === "function") {
-      document.startViewTransition(apply);
+    if (changed && !reduced && !eraTransition && typeof document.startViewTransition === "function") {
+      const transition = document.startViewTransition(apply);
+      eraTransition = transition;
+      transition.finished.catch(() => {}).finally(() => { eraTransition = null; });
     } else {
       apply();
     }

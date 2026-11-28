@@ -12,6 +12,8 @@ const root = process.cwd();
 const configPath = path.join(root, "site.config.json");
 const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, "utf8")) : {};
 const siteUrl = (process.env.SITE_URL || config.siteUrl || "https://fivestarwanted.pages.dev/").replace(/\/?$/, "/");
+const SITE_NAME = "FIVE STAR WANTED";
+const withSiteTitle = (title) => `${title} | ${SITE_NAME}`;
 const site = {
   siteUrl,
   umbrella: config.umbrella || { name: "Brynsites", url: "https://brynsites.com/", contactUrl: "https://brynsites.com/contact" },
@@ -227,12 +229,12 @@ function gamePage(game) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${esc(seo.title)}</title>
+  <title>${esc(withSiteTitle(seo.title))}</title>
   <meta name="description" content="${esc(seo.description)}">
   <meta name="keywords" content="${esc(`${game.name} story, ${game.name} characters, ${game.name} map, ${game.name} locations, GTA lore`)}">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="${esc(seo.title)}">
+  <meta property="og:title" content="${esc(withSiteTitle(seo.title))}">
   <meta property="og:description" content="${esc(seo.description)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
@@ -340,12 +342,12 @@ function elsewherePage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rockstar Beyond GTA: Max Payne, Manhunt, Midnight Club &amp; L.A. Noire</title>
+  <title>Rockstar Beyond GTA: Max Payne, Manhunt, Midnight Club &amp; L.A. Noire | FIVE STAR WANTED</title>
   <meta name="description" content="Explore Rockstar games beyond GTA: Max Payne's noir, Manhunt's stealth horror, Midnight Club street racing, and L.A. Noire's detective work, with sources and context.">
   <meta name="keywords" content="Max Payne, Manhunt, Midnight Club, L.A. Noire, Rockstar games, Rockstar beyond GTA">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Rockstar Beyond GTA: Max Payne, Manhunt, Midnight Club &amp; L.A. Noire">
+  <meta property="og:title" content="Rockstar Beyond GTA: Max Payne, Manhunt, Midnight Club &amp; L.A. Noire | FIVE STAR WANTED">
   <meta property="og:description" content="Four Rockstar series outside GTA: Max Payne, Manhunt, Midnight Club, and L.A. Noire.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
@@ -418,12 +420,12 @@ function storyPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GTA Story Timeline: Every Game in Order (1961–2026)</title>
+  <title>GTA Story Timeline: Every Game in Order (1961–2026) | FIVE STAR WANTED</title>
   <meta name="description" content="A complete chronological GTA story timeline from 1961 London to 2026 Leonida, covering Vice City, San Andreas, Liberty City, and Los Santos. Full spoilers.">
   <meta name="keywords" content="GTA story timeline, GTA games in order, GTA lore, Vice City story, San Andreas story, GTA IV story, GTA V story, GTA VI Leonida">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="GTA Story Timeline: Every Game in Order (1961–2026)">
+  <meta property="og:title" content="GTA Story Timeline: Every Game in Order (1961–2026) | FIVE STAR WANTED">
   <meta property="og:description" content="Every major GTA story era in order, from 1961 London to 2026 Leonida, with full spoilers.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
@@ -535,13 +537,13 @@ function changelogPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Site Changelog: GTA Lore, Maps, Trivia &amp; Puzzle Updates</title>
-  <meta name="description" content="Version-only release history for the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle games, with every change documented.">
-  <meta name="keywords" content="GTA fan site changelog, site updates, GTA lore archive updates">
+  <title>Site Changelog: GTA &amp; Rockstar Lore, Maps &amp; Puzzle Updates | FIVE STAR WANTED</title>
+  <meta name="description" content="Version-only release history for the GTA and Rockstar lore archive, map atlas, trivia quiz, and puzzle games, with every change documented.">
+  <meta name="keywords" content="GTA fan site changelog, Rockstar fan site updates, GTA lore archive updates">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Site Changelog: GTA Lore, Maps, Trivia &amp; Puzzle Updates">
-  <meta property="og:description" content="Release history for the GTA lore archive, map atlas, trivia quiz, and Rockstar puzzle games.">
+  <meta property="og:title" content="Site Changelog: GTA &amp; Rockstar Lore, Maps &amp; Puzzle Updates | FIVE STAR WANTED">
+  <meta property="og:description" content="Release history for the GTA and Rockstar lore archive, map atlas, trivia quiz, and puzzle games.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -583,13 +585,13 @@ function contactPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact the GTA Fan Archive: Corrections &amp; Takedowns</title>
-  <meta name="description" content="Contact the GTA fan archive about corrections, permissions, or takedown requests through the Brynsites umbrella site. No email is published here.">
-  <meta name="keywords" content="GTA fan archive contact, corrections, takedown request, Brynsites contact">
+  <title>Contact the Rockstar Fan Archive: Corrections &amp; Takedowns | FIVE STAR WANTED</title>
+  <meta name="description" content="Contact the GTA and Rockstar fan archive about corrections, permissions, or takedown requests through the Brynsites umbrella site. No email is published here.">
+  <meta name="keywords" content="GTA fan archive contact, Rockstar fan archive contact, corrections, takedown request, Brynsites contact">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Contact the GTA Fan Archive: Corrections &amp; Takedowns">
-  <meta property="og:description" content="Corrections, permissions, and takedowns for the GTA fan archive are handled through the Brynsites umbrella site.">
+  <meta property="og:title" content="Contact the Rockstar Fan Archive: Corrections &amp; Takedowns | FIVE STAR WANTED">
+  <meta property="og:description" content="Corrections, permissions, and takedowns for the GTA and Rockstar fan archive are handled through the Brynsites umbrella site.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -637,13 +639,13 @@ function creditsPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Credits, Sources &amp; Licences</title>
-  <meta name="description" content="Image credits plus text-source and licence details for the GTA lore archive: Wikimedia Commons photos, Wikipedia CC BY-SA 4.0, and GTA Wiki CC BY-SA 3.0.">
-  <meta name="keywords" content="GTA fan archive credits, image licences, Wikipedia CC BY-SA, GTA Wiki CC BY-SA, content sources">
+  <title>Credits, Sources &amp; Licences | FIVE STAR WANTED</title>
+  <meta name="description" content="Image credits plus text-source and licence details for the GTA and Rockstar lore archive: Wikimedia Commons photos, Wikipedia CC BY-SA 4.0, and GTA Wiki CC BY-SA 3.0.">
+  <meta name="keywords" content="GTA fan archive credits, Rockstar fan archive credits, image licences, Wikipedia CC BY-SA, GTA Wiki CC BY-SA, content sources">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Credits, Sources &amp; Licences">
-  <meta property="og:description" content="Image credits plus text-source and licence details for the GTA lore archive.">
+  <meta property="og:title" content="Credits, Sources &amp; Licences | FIVE STAR WANTED">
+  <meta property="og:description" content="Image credits plus text-source and licence details for the GTA and Rockstar lore archive.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -709,13 +711,13 @@ function arcadePage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Play Free GTA Trivia Quiz &amp; Rockstar Puzzle Games Online</title>
-  <meta name="description" content="Play free GTA trivia quizzes and Rockstar puzzle games. Test your knowledge across every era, crack vaults, plot heat-grid routes, and solve clue dossiers.">
+  <title>Free GTA Trivia Quiz &amp; Rockstar Puzzle Games Online | FIVE STAR WANTED</title>
+  <meta name="description" content="Play free GTA and Rockstar trivia quizzes plus puzzle games. Test your knowledge across every era, crack vaults, plot heat-grid routes, and solve clue dossiers.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <meta name="keywords" content="GTA trivia quiz, GTA trivia questions and answers, Rockstar trivia, Rockstar puzzle games, GTA puzzle games, free online trivia, GTA quiz game">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="Play Free GTA Trivia Quiz &amp; Rockstar Puzzle Games Online">
-  <meta property="og:description" content="Play free GTA trivia quizzes and Rockstar puzzle games: daily trivia, vault cracking, heat-grid routes, and clue dossiers. No account needed.">
+  <meta property="og:title" content="Free GTA Trivia Quiz &amp; Rockstar Puzzle Games Online | FIVE STAR WANTED">
+  <meta property="og:description" content="Play free GTA and Rockstar trivia quizzes and puzzle games: daily trivia, vault cracking, heat-grid routes, and clue dossiers. No account needed.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -863,7 +865,7 @@ function arcadePage() {
     <p class="arcade-disclaimer">Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All game names, characters, locations, and trademarks belong to their respective owners. Trivia, puzzle logic, and all original copy on this page were written for this project.</p>
   </main>
 </body>
-</html>`, { prefix: "", active: "play", site });
+</html>`, { prefix: "../", active: "play", site });
 }
 
 function atlasPage() {
@@ -894,13 +896,13 @@ function atlasPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GTA Maps: Leonida, Vice City, San Andreas &amp; Los Santos</title>
-  <meta name="description" content="Browse GTA maps for Leonida, Vice City, San Andreas, Los Santos, and Liberty City with fan-annotated districts, landmarks, and links to their real-world cities.">
+  <title>Rockstar Maps: GTA, Red Dead, Bully &amp; The Warriors | FIVE STAR WANTED</title>
+  <meta name="description" content="Browse fan-annotated Rockstar maps: GTA's Leonida, Vice City, San Andreas, Los Santos, and Liberty City, plus the Red Dead frontier, Bullworth, and The Warriors' New York.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-  <meta name="keywords" content="GTA map, GTA maps, GTA VI Leonida map, Vice City map, San Andreas map, Los Santos map, Liberty City map, GTA locations, GTA atlas">
+  <meta name="keywords" content="Rockstar map atlas, GTA map, GTA maps, GTA VI Leonida map, Vice City map, San Andreas map, Los Santos map, Liberty City map, Red Dead map, Bully map, The Warriors map, GTA locations">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="GTA Maps: Leonida, Vice City, San Andreas &amp; Los Santos">
-  <meta property="og:description" content="Fan-annotated GTA maps for every game, from Leonida and Vice City to San Andreas, Los Santos, and Liberty City.">
+  <meta property="og:title" content="Rockstar Maps: GTA, Red Dead, Bully &amp; The Warriors | FIVE STAR WANTED">
+  <meta property="og:description" content="Fan-annotated maps for GTA, Red Dead, Bully, and The Warriors, from Leonida and Vice City to the frontier, Bullworth, and 1979 New York.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -924,7 +926,7 @@ function atlasPage() {
     .map-card--wide .map-shot img { max-height: none; }
     .map-shot { margin: 0; }
     .map-shot img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) * 0.6); }
-    .map-shot figcaption { margin-top: 0.4rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }
+    .map-shot figcaption { margin-top: 0.4rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; }
     .map-copy ul { padding-left: 1.1rem; margin: 0.8rem 0 1rem; }
     .map-copy li { margin-bottom: 0.35rem; }
     .map-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
@@ -938,8 +940,8 @@ function atlasPage() {
         "@type": "CollectionPage",
         "@id": "${canonical}#webpage",
         "url": "${canonical}",
-        "name": "GTA Maps: Leonida, Vice City, San Andreas, Los Santos & Liberty City",
-        "description": "Fan-annotated maps for every GTA era, with districts, landmarks, and links to the real-world cities that inspired them.",
+        "name": "Rockstar Maps: GTA, Red Dead, Bully, The Warriors & Liberty City",
+        "description": "Fan-annotated Rockstar maps, from GTA's Leonida, Vice City, San Andreas, Los Santos, and Liberty City to the Red Dead frontier, Bullworth, and The Warriors' New York.",
         "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
         "inLanguage": "en"
       },
@@ -947,7 +949,7 @@ function atlasPage() {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "${siteUrl}" },
-          { "@type": "ListItem", "position": 2, "name": "GTA maps", "item": "${canonical}" }
+          { "@type": "ListItem", "position": 2, "name": "Rockstar maps", "item": "${canonical}" }
         ]
       }
     ]
@@ -956,18 +958,18 @@ function atlasPage() {
 </head>
 <body>
   <main class="maps-main">
-    <nav class="maps-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / GTA maps</nav>
-    <p class="maps-breadcrumb" style="margin-top:1.2rem">GTA MAP ATLAS</p>
-    <h1>GTA maps, district by district.</h1>
-    <p class="lede">Every major GTA map in one place: Leonida and Vice City, San Andreas and Los Santos, Liberty City, the Red Dead frontier, Bullworth, and The Warriors' New York. Each entry lists fan-annotated districts and landmarks, with a link to the interactive version and the game dossier. None of the annotations are official cartography.</p>
-    <p><a class="btn btn-primary btn-sm" href="../#atlas">Open the interactive GTA map</a> <a class="btn btn-ghost btn-sm" href="../real-vs-reel/">Compare GTA cities with real life</a></p>
+    <nav class="maps-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / Rockstar maps</nav>
+    <p class="maps-breadcrumb" style="margin-top:1.2rem">ROCKSTAR MAP ATLAS</p>
+    <h1>Rockstar maps, district by district.</h1>
+    <p class="lede">Every major Rockstar map in one place: GTA's Leonida and Vice City, San Andreas and Los Santos, Liberty City, plus the Red Dead frontier, Bullworth, and The Warriors' New York. Each entry lists fan-annotated districts and landmarks, with a link to the interactive version and the game dossier. None of the annotations are official cartography.</p>
+    <p><a class="btn btn-primary btn-sm" href="../#atlas">Open the interactive map atlas</a> <a class="btn btn-ghost btn-sm" href="../real-vs-reel/">Compare GTA and Rockstar places with real life</a></p>
     <div class="maps-list">${maps}</div>
-    <h2 style="margin-top:2.6rem">Which real city is each GTA map based on?</h2>
-    <p>Vice City and Leonida echo Miami and Florida, Liberty City echoes New York, Los Santos echoes Los Angeles, San Fierro echoes San Francisco, Las Venturas echoes Las Vegas, and Saint Denis echoes New Orleans. The <a href="../real-vs-reel/">GTA vs real life comparison</a> puts each pair side by side.</p>
+    <h2 style="margin-top:2.6rem">Which real place is each Rockstar map based on?</h2>
+    <p>Vice City and Leonida echo Miami and Florida, Liberty City echoes New York, Los Santos echoes Los Angeles, San Fierro echoes San Francisco, Las Venturas echoes Las Vegas, Saint Denis echoes New Orleans, Bullworth echoes New England college towns, and The Warriors' New York is drawn from the real city. The <a href="../real-vs-reel/">GTA and Rockstar vs real life comparison</a> puts each pair side by side.</p>
     <p class="maps-note">Unofficial fan project. Map artwork belongs to Rockstar Games and is credited with each image. Annotations are fan-made and not official cartography. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive.</p>
   </main>
 </body>
-</html>`, { prefix: "", active: "atlas", site });
+</html>`, { prefix: "../", active: "atlas", site });
 }
 
 function realWorldPage() {
@@ -991,13 +993,13 @@ function realWorldPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GTA vs Real Life: Miami, New York &amp; LA Behind the Games</title>
-  <meta name="description" content="See the real cities behind Vice City, Liberty City, and Los Santos: Miami, New York, Los Angeles, New Orleans, and more compared with the fiction.">
+  <title>GTA &amp; Rockstar vs Real Life: Miami, New York, LA &amp; More | FIVE STAR WANTED</title>
+  <meta name="description" content="See the real places behind Vice City, Liberty City, Los Santos, Saint Denis, Bullworth, and The Warriors' New York: Miami, New York, Los Angeles, New Orleans, London, and more compared with the fiction.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-  <meta name="keywords" content="GTA vs real life, Vice City Miami, Liberty City New York, Los Santos Los Angeles, GTA real world locations, GTA map comparisons">
+  <meta name="keywords" content="GTA vs real life, Rockstar vs real life, Vice City Miami, Liberty City New York, Los Santos Los Angeles, Red Dead Saint Denis New Orleans, Bully Bullworth, The Warriors New York, GTA real world locations, Rockstar map comparisons">
   <link rel="canonical" href="${canonical}">
-  <meta property="og:title" content="GTA vs Real Life: Miami, New York &amp; LA Behind the Games">
-  <meta property="og:description" content="Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, and London compared with their GTA counterparts.">
+  <meta property="og:title" content="GTA &amp; Rockstar vs Real Life: Miami, New York, LA &amp; More | FIVE STAR WANTED">
+  <meta property="og:description" content="Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, London, and Coney Island compared with their GTA, Red Dead, Bully, and Warriors counterparts.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -1031,8 +1033,8 @@ function realWorldPage() {
         "@type": "CollectionPage",
         "@id": "${canonical}#webpage",
         "url": "${canonical}",
-        "name": "GTA vs Real Life: the cities behind Vice City, Liberty City, and Los Santos",
-        "description": "A side-by-side comparison of real cities and their GTA counterparts, with photos, notes, and map links.",
+        "name": "GTA & Rockstar vs Real Life: the places behind Vice City, Liberty City, Los Santos, Saint Denis, Bullworth, and The Warriors' New York",
+        "description": "A side-by-side comparison of real places and their GTA, Red Dead, Bully, and Warriors counterparts, with photos, notes, and map links.",
         "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
         "inLanguage": "en"
       },
@@ -1040,12 +1042,12 @@ function realWorldPage() {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "${siteUrl}" },
-          { "@type": "ListItem", "position": 2, "name": "GTA vs real life", "item": "${canonical}" }
+          { "@type": "ListItem", "position": 2, "name": "GTA and Rockstar vs real life", "item": "${canonical}" }
         ]
       },
       {
         "@type": "ItemList",
-        "name": "Real cities behind GTA locations",
+        "name": "Real places behind GTA and Rockstar locations",
         "itemListElement": [${realWorld.map((place, index) => `
           { "@type": "ListItem", "position": ${index + 1}, "name": ${JSON.stringify(`${place.realName} / ${place.fictionalName}`)}, "url": "${canonical}#${esc(place.id)}" }`).join(",")}
         ]
@@ -1056,16 +1058,16 @@ function realWorldPage() {
 </head>
 <body>
   <main class="places-main">
-    <nav class="places-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / GTA vs real life</nav>
+    <nav class="places-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> / GTA &amp; Rockstar vs real life</nav>
     <p class="places-breadcrumb" style="margin-top:1.2rem">REAL WORLD / REEL WORLD</p>
-    <h1>GTA vs real life: the cities behind the games.</h1>
-    <p class="lede">Vice City is Miami. Liberty City is New York. Los Santos is Los Angeles. This page pairs each fictional GTA location with the real city that inspired it, with photos, notes, and links to the matching map. These are real-world photographs, not game artwork.</p>
-    <p><a class="btn btn-primary btn-sm" href="../atlas/">Browse the GTA map atlas</a> <a class="btn btn-ghost btn-sm" href="../#reel">Open the interactive comparison map</a></p>
+    <h1>GTA &amp; Rockstar vs real life: the places behind the games.</h1>
+    <p class="lede">Vice City is Miami. Liberty City is New York. Los Santos is Los Angeles. Saint Denis is New Orleans. Bullworth echoes New England, and The Warriors' New York is the real city after dark. This page pairs each fictional Rockstar location with the real place that inspired it, with photos, notes, and links to the matching map. These are real-world photographs, not game artwork.</p>
+    <p><a class="btn btn-primary btn-sm" href="../atlas/">Browse the Rockstar map atlas</a> <a class="btn btn-ghost btn-sm" href="../#reel">Open the interactive comparison map</a></p>
     <div class="places-grid">${cards}</div>
     <p class="places-note">Fan-made comparisons for commentary and context. Photos are credited to their photographers and licences. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive.</p>
   </main>
 </body>
-</html>`, { prefix: "", active: "reel", site });
+</html>`, { prefix: "../", active: "reel", site });
 }
 
 const archive = decoratePage(`<!DOCTYPE html>
@@ -1073,13 +1075,13 @@ const archive = decoratePage(`<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GTA Lore Archive: Characters, Locations &amp; Story (1961–2026)</title>
-  <meta name="description" content="Full-text GTA lore archive: characters, locations, factions, and story beats from 1961 London to 2026 Leonida, plus links to the trivia quiz and puzzles.">
-  <meta name="keywords" content="GTA lore, GTA characters, GTA locations, GTA factions, GTA story, GTA archive, Rockstar lore">
+  <title>GTA &amp; Rockstar Lore Archive: Characters, Locations &amp; Story | FIVE STAR WANTED</title>
+  <meta name="description" content="Full-text GTA and Rockstar lore archive: characters, locations, factions, and story beats from GTA, Red Dead, Bully, and The Warriors, with links to the trivia quiz and puzzles.">
+  <meta name="keywords" content="GTA lore, GTA characters, GTA locations, GTA factions, GTA story, GTA archive, Rockstar lore, Red Dead lore, Bully characters, The Warriors lore">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <link rel="canonical" href="${siteUrl}archive.html">
-  <meta property="og:title" content="GTA Lore Archive: Characters, Locations &amp; Story (1961–2026)">
-  <meta property="og:description" content="All GTA lore entries, characters, locations, and the full story timeline in one static, readable archive.">
+  <meta property="og:title" content="GTA &amp; Rockstar Lore Archive: Characters, Locations &amp; Story | FIVE STAR WANTED">
+  <meta property="og:description" content="All GTA and Rockstar lore entries, characters, locations, and the full story timeline in one static, readable archive.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${siteUrl}archive.html">
   <meta property="og:image" content="${siteUrl}assets/og-cover.png">
@@ -1109,7 +1111,7 @@ const archive = decoratePage(`<!DOCTYPE html>
     "@type": "CollectionPage",
     "name": "FIVE STAR WANTED - Full Text Archive",
     "url": "${siteUrl}archive.html",
-    "description": "All curated lore entries and the full in-universe GTA story timeline from FIVE STAR WANTED.",
+    "description": "All curated GTA and Rockstar lore entries and the full in-universe GTA story timeline from FIVE STAR WANTED.",
     "isPartOf": { "@type": "WebSite", "name": "FIVE STAR WANTED", "url": "${siteUrl}" },
     "inLanguage": "en",
     "about": ["Grand Theft Auto", "Rockstar Games", "video game lore"]
@@ -1176,11 +1178,11 @@ Sitemap: ${siteUrl}sitemap.xml
 
 const llms = `# FIVE STAR WANTED
 
-> FIVE STAR WANTED is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a GTA map atlas of Leonida, Vice City, San Andreas, Los Santos, and Liberty City, GTA vs real life city comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
+> FIVE STAR WANTED is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated GTA and Rockstar lore entries, in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a Rockstar map atlas covering GTA, Red Dead, Bully, and The Warriors, GTA and Rockstar vs real life comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: ${siteUrl}
-GTA map atlas: ${siteUrl}atlas/
-GTA vs real life: ${siteUrl}real-vs-reel/
+GTA and Rockstar map atlas: ${siteUrl}atlas/
+GTA and Rockstar vs real life: ${siteUrl}real-vs-reel/
 Arcade (GTA trivia quiz and puzzle games): ${siteUrl}arcade/
 Full text archive: ${siteUrl}archive.html
 
@@ -1189,12 +1191,12 @@ Full text archive: ${siteUrl}archive.html
 - [Lore archive](${siteUrl}archive.html#lore): locations, characters, factions, and franchise history, with sources.
 - [Story timeline](${siteUrl}archive.html#story): chronological GTA story beats, including full spoiler details.
 - [Story reading mode](${siteUrl}story.html): a graphical scroll-driven timeline page.
-- [GTA map atlas](${siteUrl}atlas/): maps of Leonida, Vice City, San Andreas, Los Santos, Liberty City, the Red Dead frontier, Bullworth, and The Warriors' New York, with fan annotations.
-- [GTA vs real life](${siteUrl}real-vs-reel/): Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, and London compared with their GTA counterparts.
+- [Rockstar map atlas](${siteUrl}atlas/): maps of GTA's Leonida, Vice City, San Andreas, Los Santos, and Liberty City, plus the Red Dead frontier, Bullworth, and The Warriors' New York, with fan annotations.
+- [GTA and Rockstar vs real life](${siteUrl}real-vs-reel/): Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, London, and Coney Island compared with their GTA, Red Dead, Bully, and Warriors counterparts.
 - [Arcade](${siteUrl}arcade/): play a free GTA trivia quiz and Rockstar puzzle games, including daily challenges.
 - [Games](${siteUrl}#games): theme-per-game dossiers.
 - [Rockstar Beyond GTA](${siteUrl}elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
-- [Interactive site](${siteUrl}): theme-morphing lore hub, horizontal story timeline, GTA map atlas, GTA vs real life map, trivia quiz, and puzzle games.
+- [Interactive site](${siteUrl}): theme-morphing lore hub, horizontal story timeline, Rockstar map atlas, GTA and Rockstar vs real life map, trivia quiz, and puzzle games.
 - [Changelog](${siteUrl}changelog.html): public release history.
 - [Credits and licences](${siteUrl}credits.html): image credits, text sources, and CC BY-SA licence terms.
 - [Contact](${siteUrl}contact.html): corrections and permissions via ${site.umbrella.name}.
@@ -1247,8 +1249,8 @@ const searchIndex = [
   { title: "Games", subtitle: "Theme-per-game dossiers", href: `${searchBase}#games`, type: "Page", keywords: "games dossiers" },
   { title: "Lore", subtitle: "Locations, characters, factions", href: `${searchBase}#lore`, type: "Page", keywords: "lore archive characters locations" },
   { title: "Story timeline", subtitle: "In-universe chronology", href: `${searchBase}#story`, type: "Page", keywords: "story timeline chronology" },
-  { title: "GTA map atlas", subtitle: "Leonida, Vice City, San Andreas, Los Santos, and Liberty City", href: `${searchBase}atlas/`, type: "Page", keywords: "GTA map GTA maps Vice City map San Andreas map Los Santos map Liberty City map Leonida map locations atlas" },
-  { title: "GTA vs real life", subtitle: "Real cities behind Vice City, Liberty City, and Los Santos", href: `${searchBase}real-vs-reel/`, type: "Page", keywords: "GTA vs real life Vice City Miami Liberty City New York Los Santos Los Angeles comparisons" },
+  { title: "Rockstar map atlas", subtitle: "GTA, Red Dead, Bully, and The Warriors maps", href: `${searchBase}atlas/`, type: "Page", keywords: "Rockstar map atlas GTA map GTA maps Vice City map San Andreas map Los Santos map Liberty City map Leonida map Red Dead map Bully map Warriors map locations atlas" },
+  { title: "GTA and Rockstar vs real life", subtitle: "Real places behind Vice City, Liberty City, Los Santos, Saint Denis, Bullworth, and The Warriors", href: `${searchBase}real-vs-reel/`, type: "Page", keywords: "GTA vs real life Rockstar vs real life Vice City Miami Liberty City New York Los Santos Los Angeles Saint Denis New Orleans Bullworth Warriors comparisons" },
   { title: "Arcade", subtitle: "Trivia and puzzles", href: `${searchBase}#play`, type: "Page", keywords: "arcade trivia puzzles" },
   { title: "GTA trivia quiz and Rockstar puzzle games", subtitle: "Free browser arcade guide", href: `${searchBase}arcade/`, type: "Page", keywords: "GTA trivia quiz Rockstar trivia puzzle games vault cracker heat grid clue dossier daily quiz" },
   { title: "About", subtitle: "Project and IP notes", href: `${searchBase}#about`, type: "Page", keywords: "about disclaimer" },

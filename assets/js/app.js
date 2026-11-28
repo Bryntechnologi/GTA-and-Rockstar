@@ -150,18 +150,18 @@
   };
 
   const ROUTE_TITLES = {
-    home: "GTA Lore, Story Timeline, Maps, Trivia Quiz & Puzzles",
-    games: "GTA Game Pages: Story, Characters & Maps",
-    lore: "GTA Lore Archive: Characters, Locations & Factions",
+    home: "GTA & Rockstar Lore, Maps, Story Timeline & Trivia",
+    games: "Rockstar Game Pages: GTA, Red Dead, Bully & The Warriors",
+    lore: "GTA & Rockstar Lore Archive: Characters, Locations & Factions",
     story: "GTA Story Timeline: Every Game in Order",
-    reel: "GTA vs Real Life: The Cities Behind the Games",
-    play: "GTA Trivia Quiz & Rockstar Puzzle Games",
+    reel: "GTA & Rockstar vs Real Life: The Places Behind the Games",
+    play: "Free GTA Trivia Quiz & Rockstar Puzzle Games",
     trivia: "GTA Trivia Quiz: Play Free Online",
     puzzles: "Rockstar Puzzle Games: Vault, Heat Grid & Dossier",
-    atlas: "GTA Maps: Leonida, Vice City, San Andreas & Los Santos",
+    atlas: "Rockstar Maps: GTA, Red Dead, Bully & The Warriors",
     timeline: "GTA Timeline: Every Game in Order",
     toolkit: "GTA Heist Splitter & Crew Toolkit",
-    about: "About This GTA Fan Archive"
+    about: "About This Rockstar Fan Archive"
   };
 
   const GRID_LEVELS = {
@@ -1046,6 +1046,8 @@
   /* ---------------------------------------------------------------------
      THEME ENGINE
      --------------------------------------------------------------------- */
+  let eraTransition = null;
+
   function setEra(era, options = {}) {
     const { persist = true, track = true, silent = false } = options;
     if (!eras[era]) return;
@@ -1095,8 +1097,10 @@
     };
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (changed && !reduced && typeof document.startViewTransition === "function") {
-      document.startViewTransition(apply);
+    if (changed && !reduced && !eraTransition && typeof document.startViewTransition === "function") {
+      const transition = document.startViewTransition(apply);
+      eraTransition = transition;
+      transition.finished.catch(() => {}).finally(() => { eraTransition = null; });
     } else {
       apply();
     }
@@ -1479,7 +1483,7 @@
           <button class="btn btn-quiet btn-sm" type="button" data-lore-fandom="${escapeHTML(item.fandomTitle || item.wikiTitle || item.title)}">GTA Wiki summary</button>
           <a class="text-link" href="${escapeHTML(item.source || fandomHref(item.title))}" target="_blank" rel="noopener noreferrer">Open source ↗</a>
           <button class="btn btn-ghost btn-sm" type="button" data-route="games">Browse all game dossiers</button>
-          <button class="btn btn-ghost btn-sm" type="button" data-route="atlas">Open the GTA map</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-route="atlas">Open the map atlas</button>
           <button class="btn btn-ghost btn-sm" type="button" data-route="play">Play the arcade</button>
         </aside>
       </div>
@@ -2018,7 +2022,7 @@
       else link.removeAttribute("aria-current");
     });
 
-    document.title = ROUTE_TITLES[view] || ROUTE_TITLES.home;
+    document.title = `${ROUTE_TITLES[view] || ROUTE_TITLES.home} | FIVE STAR WANTED`;
 
     if (!options.fromHash && window.location.hash !== "#" + view) {
       try {
@@ -5047,18 +5051,19 @@
      GLOBAL ERROR BOUNDARY
      --------------------------------------------------------------------- */
   function installErrorBoundary() {
-    const show = () => {
-      if ($("#globalErrorNotice")) return;
-      const notice = document.createElement("div");
-      notice.id = "globalErrorNotice";
-      notice.className = "chrome-error";
-      notice.setAttribute("role", "status");
-      notice.innerHTML = '<span>A background feature failed, but the archive is still usable.</span><button type="button" aria-label="Dismiss">Dismiss</button>';
-      notice.querySelector("button").addEventListener("click", () => notice.remove());
-      document.body.appendChild(notice);
+    const report = (label, detail) => {
+      if (typeof console !== "undefined" && console.warn) {
+        console.warn(`[FIVE STAR WANTED] ${label}`, detail);
+      }
     };
-    window.addEventListener("error", show);
-    window.addEventListener("unhandledrejection", show);
+    window.addEventListener("error", (event) => {
+      if (event.target && event.target !== window) return;
+      report("Unhandled error", event.error || event.message);
+    });
+    window.addEventListener("unhandledrejection", (event) => {
+      report("Background task failed", event.reason);
+      event.preventDefault();
+    });
   }
 
   /* ---------------------------------------------------------------------

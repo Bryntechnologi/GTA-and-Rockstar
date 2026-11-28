@@ -1,10 +1,10 @@
 # FIVE STAR WANTED
 
-> FIVE STAR WANTED is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated lore entries and in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a GTA map atlas of Leonida, Vice City, San Andreas, Los Santos, and Liberty City, GTA vs real life city comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
+> FIVE STAR WANTED is an independent, non-commercial fan archive and browser arcade for the Rockstar universe. It is a partial archive, not a complete lore database. It contains curated GTA and Rockstar lore entries, in-universe Grand Theft Auto story beats from 1961 London to 2026 Leonida, a Rockstar map atlas covering GTA, Red Dead, Bully, and The Warriors, GTA and Rockstar vs real life comparisons, a free GTA trivia quiz, and Rockstar puzzle games. It is a Brynsites miscellany project and is not affiliated with Rockstar Games or Take-Two Interactive.
 
 Canonical site: https://fivestarwanted.pages.dev/
-GTA map atlas: https://fivestarwanted.pages.dev/atlas/
-GTA vs real life: https://fivestarwanted.pages.dev/real-vs-reel/
+GTA and Rockstar map atlas: https://fivestarwanted.pages.dev/atlas/
+GTA and Rockstar vs real life: https://fivestarwanted.pages.dev/real-vs-reel/
 Arcade (GTA trivia quiz and puzzle games): https://fivestarwanted.pages.dev/arcade/
 Full text archive: https://fivestarwanted.pages.dev/archive.html
 
@@ -13,12 +13,12 @@ Full text archive: https://fivestarwanted.pages.dev/archive.html
 - [Lore archive](https://fivestarwanted.pages.dev/archive.html#lore): locations, characters, factions, and franchise history, with sources.
 - [Story timeline](https://fivestarwanted.pages.dev/archive.html#story): chronological GTA story beats, including full spoiler details.
 - [Story reading mode](https://fivestarwanted.pages.dev/story.html): a graphical scroll-driven timeline page.
-- [GTA map atlas](https://fivestarwanted.pages.dev/atlas/): maps of Leonida, Vice City, San Andreas, Los Santos, Liberty City, the Red Dead frontier, Bullworth, and The Warriors' New York, with fan annotations.
-- [GTA vs real life](https://fivestarwanted.pages.dev/real-vs-reel/): Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, and London compared with their GTA counterparts.
+- [Rockstar map atlas](https://fivestarwanted.pages.dev/atlas/): maps of GTA's Leonida, Vice City, San Andreas, Los Santos, and Liberty City, plus the Red Dead frontier, Bullworth, and The Warriors' New York, with fan annotations.
+- [GTA and Rockstar vs real life](https://fivestarwanted.pages.dev/real-vs-reel/): Miami, New York, Los Angeles, San Francisco, Las Vegas, New Orleans, London, and Coney Island compared with their GTA, Red Dead, Bully, and Warriors counterparts.
 - [Arcade](https://fivestarwanted.pages.dev/arcade/): play a free GTA trivia quiz and Rockstar puzzle games, including daily challenges.
 - [Games](https://fivestarwanted.pages.dev/#games): theme-per-game dossiers.
 - [Rockstar Beyond GTA](https://fivestarwanted.pages.dev/elsewhere.html): Max Payne, Manhunt, Midnight Club, and L.A. Noire.
-- [Interactive site](https://fivestarwanted.pages.dev/): theme-morphing lore hub, horizontal story timeline, GTA map atlas, GTA vs real life map, trivia quiz, and puzzle games.
+- [Interactive site](https://fivestarwanted.pages.dev/): theme-morphing lore hub, horizontal story timeline, Rockstar map atlas, GTA and Rockstar vs real life map, trivia quiz, and puzzle games.
 - [Changelog](https://fivestarwanted.pages.dev/changelog.html): public release history.
 - [Credits and licences](https://fivestarwanted.pages.dev/credits.html): image credits, text sources, and CC BY-SA licence terms.
 - [Contact](https://fivestarwanted.pages.dev/contact.html): corrections and permissions via Brynsites.

@@ -8,9 +8,12 @@
    1. THEME TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  --font-ui: "Trebuchet MS", "Segoe UI", sans-serif;
-  --font-mono: "Cascadia Code", "Consolas", "Courier New", monospace;
-  --font-display: "Arial Black", "Impact", var(--font-ui);
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", "Arial Black", sans-serif;
+  --font-ui: "Barlow", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-mono: "Chakra Petch", "Cascadia Code", "Consolas", "Courier New", monospace;
+  --font-display: "Bowlby One SC", "Anton", "Arial Black", sans-serif;
+  --font-accent: "Barlow Condensed", "Barlow", sans-serif;
+  --brand-spacing: 0.05em;
   --radius: 12px;
   --radius-sm: 7px;
   --radius-pill: 999px;
@@ -23,9 +26,9 @@
   --header-bg: rgba(7, 11, 22, 0.78);
   --on-accent: #170810;
   --body-art: linear-gradient(180deg, #070b16, #050914);
-  --display-spacing: -0.03em;
-  --display-weight: 900;
-  --display-transform: none;
+  --display-spacing: 0.025em;
+  --display-weight: 400;
+  --display-transform: uppercase;
   --panel-blur: blur(18px);
 }
 
@@ -330,6 +333,7 @@ h1, h2, h3, h4 {
   line-height: 1.1;
   text-transform: var(--display-transform);
   text-wrap: balance;
+  font-synthesis: none;
 }
 
 h1 {
@@ -590,13 +594,14 @@ svg {
 }
 
 .brand-name {
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
   font-size: 1.06rem;
-  font-weight: var(--display-weight);
-  letter-spacing: 0.05em;
+  font-weight: 400;
+  letter-spacing: var(--brand-spacing);
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
+  font-synthesis: none;
 }
 
 .brand-name em {
@@ -604,15 +609,11 @@ svg {
   font-style: normal;
 }
 
-.brand-short {
-  display: none;
-}
-
 .brand-sub {
   margin-top: 0.3rem;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   line-height: 1;
   text-transform: uppercase;
@@ -930,15 +931,16 @@ svg {
   position: relative;
   flex: 0 0 auto;
   min-height: 39px;
-  padding: 0.6rem 0.85rem;
+  padding: 0.6rem 0.62rem;
   color: var(--muted);
   background: transparent;
   border: 0;
   border-bottom: 2px solid transparent;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
@@ -997,11 +999,15 @@ main {
   gap: 0.55rem;
   margin-bottom: 0.8rem;
   color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-family: var(--font-accent, var(--font-mono));
+  font-size: 0.78rem;
   letter-spacing: 0.14em;
   line-height: 1.3;
   text-transform: uppercase;
+}
+
+html[data-era="sanandreas"] .eyebrow {
+  font-family: var(--font-mono);
 }
 
 .eyebrow .live-dot {
@@ -1202,7 +1208,7 @@ main {
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: 0.68rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -1212,7 +1218,7 @@ main {
 }
 
 .small {
-  font-size: 0.78rem;
+  font-size: 0.86rem;
 }
 
 .mono {
@@ -1323,7 +1329,7 @@ main {
 .hero-meta span {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.57rem;
+  font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1372,7 +1378,7 @@ main {
   align-items: center;
   gap: 0.55rem;
   font-family: var(--font-mono);
-  font-size: 0.57rem;
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1423,7 +1429,7 @@ main {
   font-family: var(--font-display);
   font-size: clamp(3.2rem, 7vw, 5.2rem);
   font-weight: var(--display-weight);
-  letter-spacing: -0.055em;
+  letter-spacing: var(--display-spacing);
   line-height: 0.9;
 }
 
@@ -1730,7 +1736,7 @@ main {
   padding-top: 0.85rem;
   border-top: 1px solid var(--line);
   font-family: var(--font-mono);
-  font-size: 0.57rem;
+  font-size: 0.7rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -1854,7 +1860,7 @@ main {
   left: 0.7rem;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.48rem;
+  font-size: 0.6rem;
   letter-spacing: 0.1em;
 }
 
@@ -1870,7 +1876,7 @@ main {
   margin-top: 0.28rem;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: 0.68rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -2242,7 +2248,7 @@ main {
   margin-bottom: 1.1rem;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -2396,7 +2402,7 @@ main {
 .feedback-source {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: 0.7rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -3033,7 +3039,7 @@ main {
 .atlas-map-head p {
   margin-bottom: 0;
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -3150,8 +3156,8 @@ main {
 
 .atlas-map-credit {
   margin: 0.55rem 0 0;
-  font-size: 0.56rem;
-  line-height: 1.5;
+  font-size: 0.72rem;
+  line-height: 1.55;
 }
 
 @media (max-width: 640px) {
@@ -3284,7 +3290,7 @@ main {
 .atlas-detail .detail-kicker {
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -3373,7 +3379,7 @@ main {
 .district-card .district-index {
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: 0.68rem;
   letter-spacing: 0.06em;
 }
 
@@ -3477,7 +3483,7 @@ main {
   margin-top: 0.32rem;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.49rem;
+  font-size: 0.66rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -3507,7 +3513,7 @@ main {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.8rem);
   line-height: 0.9;
-  letter-spacing: -0.05em;
+  letter-spacing: var(--display-spacing);
 }
 
 .timeline-copy h3 {
@@ -3526,7 +3532,7 @@ main {
   margin-bottom: 0.28rem;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -3966,23 +3972,25 @@ main {
 }
 
 .footer-brand {
-  max-width: 42ch;
+  max-width: 46ch;
 }
 
 .footer-brand strong {
   display: block;
   color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 1rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-brand);
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: var(--brand-spacing);
 }
 
 .footer-brand p {
   margin: 0.35rem 0 0;
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  line-height: 1.6;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  line-height: 1.65;
   letter-spacing: 0.02em;
 }
 
@@ -4000,7 +4008,7 @@ main {
   background: transparent;
   border: 0;
   font-family: var(--font-mono);
-  font-size: 0.57rem;
+  font-size: 0.78rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
@@ -4021,7 +4029,7 @@ main {
   border-top: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.51rem;
+  font-size: 0.74rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -4167,7 +4175,7 @@ html[data-era="bully"] .brand-mark {
     padding-top: 0.65rem;
   }
   .brand-sub {
-    font-size: 0.52rem;
+    font-size: 0.66rem;
   }
   .brand-mark {
     width: 38px;
@@ -5636,7 +5644,7 @@ html[data-era="bully"] .brand-mark {
 }
 .nav-link {
   min-height: 34px;
-  padding: 0.42rem 0.8rem;
+  padding: 0.42rem 0.55rem;
   border: 0;
   border-radius: 999px;
 }
@@ -5718,10 +5726,12 @@ html[data-era="bully"] .brand-mark {
     min-height: 44px;
     padding: 0.55rem 0.7rem;
     text-align: left;
+    text-decoration: none;
+    border-left: 2px solid transparent;
     border-radius: var(--radius-sm);
   }
   .primary-nav.is-open .nav-link[aria-current="page"] {
-    border-left: 2px solid var(--accent);
+    border-left-color: var(--accent);
   }
 }
 
@@ -6265,80 +6275,169 @@ html[data-era="classic"] {
 
 /* Canonical era typography: one source of truth for every theme. */
 html[data-era="home"] {
-  --font-display: "Bowlby One SC", "Titan One", "Arial Black", sans-serif;
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", "Arial Black", sans-serif;
+  --font-display: "Bowlby One SC", "Anton", "Arial Black", sans-serif;
+  --font-accent: "Barlow Condensed", "Barlow", sans-serif;
   --font-ui: "Barlow", "Segoe UI", sans-serif;
   --font-mono: "Chakra Petch", "Consolas", monospace;
   --display-weight: 400;
-  --display-spacing: 0.01em;
+  --display-spacing: 0.03em;
+  --display-transform: uppercase;
+}
+html[data-era="classic"] {
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", "Arial Black", sans-serif;
+  --font-display: "Bowlby One SC", "Anton", "Arial Black", sans-serif;
+  --font-accent: "Barlow Condensed", "Barlow", sans-serif;
+  --font-ui: "Barlow", "Segoe UI", sans-serif;
+  --font-mono: "Chakra Petch", "Consolas", monospace;
+  --display-weight: 400;
+  --display-spacing: 0.03em;
+  --display-transform: uppercase;
 }
 html[data-era="gta6"] {
-  --font-display: "Space Grotesk", "Arial Black", sans-serif;
-  --font-ui: "Barlow", "Segoe UI", sans-serif;
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", sans-serif;
+  --font-display: "Syne", "Space Grotesk", sans-serif;
+  --font-accent: "Space Grotesk", "Barlow", sans-serif;
+  --font-ui: "Space Grotesk", "Barlow", sans-serif;
   --font-mono: "Chakra Petch", "Consolas", monospace;
-  --display-weight: 700;
-  --display-spacing: 0.01em;
+  --display-weight: 600;
+  --display-spacing: 0.015em;
+  --display-transform: none;
 }
 html[data-era="vicecity"] {
-  --font-display: "Monoton", "Arial Black", cursive;
-  --font-ui: "Barlow Condensed", "Segoe UI", sans-serif;
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", sans-serif;
+  --font-display: "Rage Italic", "Yellowtail", "Brush Script MT", cursive;
+  --font-accent: "Barlow Condensed", "Barlow", sans-serif;
+  --font-ui: "Barlow", "Segoe UI", sans-serif;
   --font-mono: "Chakra Petch", "Consolas", monospace;
   --display-weight: 400;
-  --display-spacing: 0.03em;
+  --display-spacing: 0.015em;
+  --display-transform: none;
 }
 html[data-era="sanandreas"] {
-  --font-display: "Anton", "Arial Black", Impact, sans-serif;
-  --font-ui: "Barlow Condensed", "Segoe UI", sans-serif;
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", sans-serif;
+  --font-display: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", sans-serif;
+  --font-accent: "Old English Text MT", "Diploma", "Beckett", "UnifrakturMaguntia", "Pirata One", Georgia, serif;
+  --font-ui: "Barlow Condensed", "Barlow", sans-serif;
   --font-mono: "Chakra Petch", "Consolas", monospace;
   --display-weight: 400;
-  --display-spacing: 0.03em;
+  --display-spacing: 0.035em;
+  --display-transform: uppercase;
 }
 html[data-era="gta5"] {
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", sans-serif;
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-accent: "Barlow Condensed", "Barlow", sans-serif;
   --font-ui: "Archivo", "Segoe UI", sans-serif;
   --font-mono: "Chakra Petch", "Consolas", monospace;
   --display-weight: 400;
-  --display-spacing: 0.05em;
+  --display-spacing: 0.045em;
+  --display-transform: uppercase;
 }
 html[data-era="gta4"] {
+  --font-brand: "Pricedown", "Pricedown Bl", "Bowlby One SC", "Anton", sans-serif;
   --font-display: "Oswald", "Arial Narrow", sans-serif;
-  --font-ui: "Inter", "Segoe UI", sans-serif;
+  --font-accent: "Barlow Condensed", "Barlow", sans-serif;
+  --font-ui: "Barlow", "Segoe UI", sans-serif;
   --font-mono: "Chakra Petch", "Consolas", monospace;
   --display-weight: 600;
-  --display-spacing: 0.02em;
+  --display-spacing: 0.035em;
+  --display-transform: uppercase;
 }
 html[data-era="warriors"] {
-  --font-display: "Oswald", "Arial Narrow", sans-serif;
-  --font-ui: "Barlow", "Segoe UI", sans-serif;
+  --font-brand: "Permanent Marker", "Bangers", cursive;
+  --font-display: "Permanent Marker", "Bangers", cursive;
+  --font-accent: "Bangers", "Permanent Marker", cursive;
+  --font-ui: "Comic Neue", "Comic Sans MS", "Segoe UI", cursive;
+  --font-mono: "Comic Neue", "Segoe UI", sans-serif;
+  --display-weight: 400;
+  --display-spacing: 0.035em;
+  --display-transform: uppercase;
+  --brand-spacing: 0.03em;
+}
+html[data-era="reddead"] {
+  --font-brand: "Rye", Georgia, serif;
+  --font-display: "Rye", Georgia, serif;
+  --font-accent: "Special Elite", "Courier New", monospace;
+  --font-ui: "Crimson Text", Georgia, serif;
   --font-mono: "Special Elite", "Courier New", monospace;
+  --display-weight: 400;
+  --display-spacing: 0.025em;
+  --display-transform: uppercase;
+}
+html[data-era="bully"] {
+  --font-brand: "Cinzel Decorative", "Cinzel", Georgia, serif;
+  --font-display: "Cinzel", Georgia, serif;
+  --font-accent: "Cinzel Decorative", "Cinzel", Georgia, serif;
+  --font-ui: "Barlow", "Segoe UI", sans-serif;
+  --font-mono: "Chakra Petch", "Consolas", monospace;
   --display-weight: 600;
   --display-spacing: 0.04em;
   --display-transform: uppercase;
 }
-html[data-era="reddead"] {
-  --font-display: "Cinzel", Georgia, serif;
-  --font-ui: "Crimson Text", Georgia, serif;
-  --font-mono: "Courier Prime", "Courier New", monospace;
-  --display-weight: 600;
-  --display-spacing: 0.04em;
+
+/* Era-specific heading personalities: keep decorative faces on headings,
+   not body copy or small labels. */
+html[data-era="sanandreas"] h2 {
+  font-family: var(--font-accent);
+  text-transform: none;
+  letter-spacing: 0.025em;
 }
-html[data-era="bully"] {
-  --font-display: "Graduate", Georgia, serif;
-  --font-ui: "Special Elite", "Courier New", monospace;
-  --font-mono: "Courier Prime", "Courier New", monospace;
-  --display-weight: 400;
-  --display-spacing: 0.02em;
+html[data-era="sanandreas"] h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
 }
-html[data-era="gta5"] .hero h1 em {
-  font-family: "Cinzel Decorative", Georgia, serif;
+html[data-era="vicecity"] h3 {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
 }
+html[data-era="reddead"] h3 {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+html[data-era="warriors"] h3 {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+html[data-era="bully"] h3 {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  letter-spacing: 0.045em;
+}
+
+html[data-era="home"] .hero h1 em,
+html[data-era="gta5"] .hero h1 em,
 html[data-era="gta4"] .hero h1 em {
-  font-family: "Alfa Slab One", Georgia, serif;
+  font-family: var(--font-brand);
+  font-weight: 400;
 }
-html[data-era="warriors"] .hero h1 em {
-  font-family: "Permanent Marker", "Oswald", cursive;
+html[data-era="gta6"] .hero h1 em {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+html[data-era="vicecity"] .hero h1 em {
+  font-family: var(--font-display);
+}
+html[data-era="warriors"] .hero h1 em,
+html[data-era="reddead"] .hero h1 em {
+  font-family: var(--font-display);
+  letter-spacing: var(--display-spacing);
 }
 html[data-era="sanandreas"] .hero h1 em {
-  font-family: "UnifrakturMaguntia", "Pirata One", Georgia, serif;
+  font-family: var(--font-accent);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+html[data-era="bully"] .hero h1 em {
+  font-family: var(--font-accent);
 }
 
 /* --------------------------------------------------------------------------
@@ -6360,7 +6459,7 @@ html[data-era="sanandreas"] .hero h1 em {
   margin: 0 0 0.25rem;
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -6370,8 +6469,8 @@ html[data-era="sanandreas"] .hero h1 em {
   margin: 0.65rem 0 0;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
-  line-height: 1.55;
+  font-size: 0.78rem;
+  line-height: 1.6;
 }
 .footer-umbrella a,
 .footer-note a {
@@ -6393,10 +6492,11 @@ html[data-era="sanandreas"] .hero h1 em {
 }
 .footer-umbrella a {
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
   font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: var(--brand-spacing);
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -6407,7 +6507,7 @@ html[data-era="sanandreas"] .hero h1 em {
 .umbrella-label {
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -6416,7 +6516,7 @@ html[data-era="sanandreas"] .hero h1 em {
   margin-left: auto;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.78rem;
   letter-spacing: 0.02em;
 }
 .external-mark {
@@ -6668,15 +6768,6 @@ html[data-contrast="high"] :focus-visible {
   }
   .site-header .brand-sub {
     display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .site-header .brand-long {
-    display: none;
-  }
-  .site-header .brand-short {
-    display: inline;
   }
 }
 

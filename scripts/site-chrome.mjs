@@ -11,7 +11,7 @@ const NAV = [
   { key: "games", label: "Games" },
   { key: "lore", label: "Lore" },
   { key: "story", label: "Story" },
-  { key: "atlas", label: "GTA Maps" },
+  { key: "atlas", label: "Maps" },
   { key: "reel", label: "GTA vs Real Life" },
   { key: "play", label: "Arcade" },
   { key: "about", label: "About" }
@@ -46,8 +46,8 @@ export function header({ prefix = "", active = "", site = {} } = {}) {
       <a class="brand" href="${home}" aria-label="FIVE STAR WANTED home">
         ${brandMark}
         <span class="brand-copy">
-          <span class="brand-name"><span class="brand-long">FIVE STAR <em>WANTED</em></span><span class="brand-short">5★ <em>WANTED</em></span></span>
-          <span class="brand-sub">GTA lore, maps, trivia &amp; puzzles</span>
+          <span class="brand-name">FIVE STAR <em>WANTED</em></span>
+          <span class="brand-sub">GTA &amp; Rockstar lore, maps, trivia &amp; puzzles</span>
         </span>
       </a>
       <nav class="primary-nav" id="primaryNav" aria-label="Primary">
@@ -131,8 +131,8 @@ export function footer({ prefix = "", site = {} } = {}) {
             <a href="${home}#games">Games</a>
             <a href="${home}#lore">Lore</a>
             <a href="${home}#story">Story</a>
-            <a href="${prefix}atlas/">GTA maps</a>
-            <a href="${prefix}real-vs-reel/">GTA vs real life</a>
+            <a href="${prefix}atlas/">Map atlas</a>
+            <a href="${prefix}real-vs-reel/">GTA &amp; Rockstar vs real life</a>
             <a href="${prefix}arcade/">Arcade</a>
           </div>
           <div class="footer-col">
